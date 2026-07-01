@@ -1,6 +1,3 @@
-{% if shop.permanent_domain == 'uk-2xu.myshopify.com' %}
-  {% include 'shogun-content-handler' %}
-{% endif %}
 <!DOCTYPE html>
 <html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
   <head>
@@ -14,9 +11,6 @@
     <link rel="stylesheet" href="{{ 'checkout.scss.css' | asset_url }}">
     {{ checkout_scripts }}
 
-    {%- if settings.enable_shogun -%}
-      {% render 'shogun-head' %}
-    {%- endif -%}
     
     {% if shop.permanent_domain == '2xu-australia.myshopify.com' %}
       {% render 'VWO-script' %}
