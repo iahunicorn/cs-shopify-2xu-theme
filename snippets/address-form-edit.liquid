@@ -1,0 +1,78 @@
+{%- paginate customer.addresses by 9 -%}
+  {%- for address in customer.addresses -%}
+    <div id="modal-{{ address.id }}" class="d-none" aria-hidden="true" role="dialog" >
+      <div class="Modal__Content address-form">
+        {% form 'customer_address', address, class: 'Form Form--spacingTight' %}
+          {%- if request.locale.iso_code == 'ja' -%}
+            <div class="Form__Item">
+              <input type="text" class="Form__Input" name="address[last_name]" value="{{ form.last_name }}" placeholder="{{ 'customer.addresses.last_name' | t }}" aria-label="{{ 'customer.addresses.last_name' | t }}">
+              <label class="Form__FloatingLabel">{{ 'customer.addresses.last_name' | t }}</label>
+            </div>
+
+            <div class="Form__Item">
+              <input type="text" class="Form__Input" name="address[first_name]" value="{{ form.first_name }}" placeholder="{{ 'customer.addresses.first_name' | t }}" aria-label="{{ 'customer.addresses.first_name' | t }}" autofocus>
+              <label class="Form__FloatingLabel">{{ 'customer.addresses.first_name' | t }}</label>
+            </div>
+          {%- else -%}
+            <div class="Form__Group">
+              <div class="Form__Item">
+                <input type="text" class="Form__Input" name="address[first_name]" value="{{ form.first_name }}" placeholder="{{ 'customer.addresses.first_name' | t }}" aria-label="{{ 'customer.addresses.first_name' | t }}" autofocus>
+                <label class="Form__FloatingLabel">{{ 'customer.addresses.first_name' | t }}</label>
+              </div>
+
+              <div class="Form__Item">
+                <input type="text" class="Form__Input" name="address[last_name]" value="{{ form.last_name }}" placeholder="{{ 'customer.addresses.last_name' | t }}" aria-label="{{ 'customer.addresses.last_name' | t }}">
+                <label class="Form__FloatingLabel">{{ 'customer.addresses.last_name' | t }}</label>
+              </div>
+            </div>
+          {%- endif -%}
+          <div class="Form__Item">
+            <input type="text" class="Form__Input" name="address[company]" value="{{ form.company }}" placeholder="{{ 'customer.addresses.company' | t }}" aria-label="{{ 'customer.addresses.company' | t }}">
+            <label class="Form__FloatingLabel">{{ 'customer.addresses.company' | t }}</label>
+          </div>
+          <div class="Form__Item">
+            <input type="text" class="Form__Input" name="address[address1]" value="{{ form.address1 }}" placeholder="{{ 'customer.addresses.address1' | t }}" aria-label="{{ 'customer.addresses.address1' | t }}">
+            <label class="Form__FloatingLabel">{{ 'customer.addresses.address1' | t }}</label>
+          </div>
+          <div class="Form__Item">
+            <input type="text" class="Form__Input" name="address[address2]" value="{{ form.address2 }}" placeholder="{{ 'customer.addresses.address2' | t }}" aria-label="{{ 'customer.addresses.address2' | t }}">
+            <label class="Form__FloatingLabel">{{ 'customer.addresses.address2' | t }}</label>
+          </div>
+          <div class="Form__Group">
+            <div class="Form__Item">
+              <input type="text" class="Form__Input" name="address[city]" value="{{ form.city }}" placeholder="{{ 'customer.addresses.city' | t }}" aria-label="{{ 'customer.addresses.city' | t }}">
+              <label class="Form__FloatingLabel">{{ 'customer.addresses.city' | t }}</label>
+            </div>
+            <div class="Form__Item Form__Select Select Select--primary" style="display: none">
+              {%- render 'icon' with 'select-arrow' -%}
+              <select name="address[province]" title="{{ 'customer.addresses.province' | t }}" data-default="{{ form.province }}"></select>
+            </div>
+          </div>
+          <div class="Form__Group">
+            <div class="Form__Item">
+              <div class="Form__Select Select Select--primary">
+                {%- render 'icon' with 'select-arrow' -%}
+                <select name="address[country]" title="{{ 'customer.addresses.country' | t }}" data-default="{{ form.country }}">{{ all_country_option_tags }}</select>
+              </div>
+            </div>
+            <div class="Form__Item">
+              <input type="text" class="Form__Input" name="address[zip]" value="{{ form.zip }}" placeholder="{{ 'customer.addresses.zip' | t }}" aria-label="{{ 'customer.addresses.zip' | t }}">
+              <label class="Form__FloatingLabel">{{ 'customer.addresses.zip' | t }}</label>
+            </div>
+          </div>
+          <div class="Form__Item half-width">
+            <input type="text" class="Form__Input" name="address[phone]" value="{{ form.phone }}" placeholder="{{ 'customer.addresses.phone' | t }}" aria-label="{{ 'customer.addresses.phone' | t }}">
+            <label class="Form__FloatingLabel">{{ 'customer.addresses.phone' | t }}</label>
+          </div>
+          <div class="Form__Item">
+            <div class="address-checkbox">
+              <input type="checkbox" id="address-{{ address.id }}[default]" name="address[default]" {% if address.id == customer.default_address.id %}value="1" checked{% endif %}>
+              <label for="address-{{ address.id }}[default]">{{ 'customer.addresses.set_default' | t }}</label>
+            </div>
+          </div>
+          <button class="address-form-submit">{{ 'customer.addresses.edit_address' | t }}</button>
+        {% endform %}
+      </div>
+    </div>
+  {%- endfor -%}
+{%- endpaginate -%}

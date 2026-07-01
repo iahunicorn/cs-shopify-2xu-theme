@@ -1,0 +1,483 @@
+.fa-ss-custom-liquid .ss__recommendation__header h5.ss__title {
+  text-transform: uppercase;
+  color: #1c1714;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+  text-align: left;
+  font-style: normal;
+  font-family: 'Sweet Sans Pro', sans-serif !important;
+}
+
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel {
+  padding: 0;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .card.card--media,
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .card.card--media
+  .card__inner,
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .card.card--media
+  .card__inner
+  .media {
+  border: none;
+  background: none;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ss__carousel__prev-wrapper {
+  top: 0;
+  right: 32px;
+  left: auto;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ss__carousel__next-wrapper
+  .ss__icon,
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ss__carousel__prev-wrapper
+  .ss__icon {
+  background: url('https://cdn.shopify.com/s/files/1/0657/6921/0088/files/chevron-forward-outline.svg?v=1709628293')
+    no-repeat center center;
+  background-size: 24px;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ss__carousel__prev-wrapper
+  .ss__icon {
+  transform: rotate(180deg);
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ss__carousel__prev-wrapper
+  .ss__icon
+  path,
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ss__carousel__next-wrapper
+  .ss__icon
+  path {
+  display: none;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ss__carousel__next-wrapper {
+  top: 0;
+  right: 0;
+  left: auto;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ss__results
+  .ProductItem__ColorSwatchList {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ss__results
+  .ProductItem__ColorSwatchItem {
+  margin-right: 10px;
+}
+.page-index .ss__theme.ss__recommendation--carousel {
+  padding: 0;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ProductItem__ColorSwatchItem
+  .ColorSwatch--small,
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ProductItem__ColorSwatchItem
+  .ColorSwatch--small
+  .ss-swatch {
+  width: 18px;
+  height: 18px;
+  outline: none;
+  border: none;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px #353332;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ProductItem__ColorSwatchItem
+  .ColorSwatch--small.hasHex.hexCount-2
+  .ss-swatch {
+  width: 9px;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ProductItem__ColorSwatchItem
+  .ColorSwatch--small.hasHex.hexCount-2
+  .ss-swatch:nth-child(2) {
+  top: 3px;
+  left: 7px;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ProductItem__ColorSwatchItem
+  .ColorSwatch--small.is-selected {
+  margin-top: -2px;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ProductItem__ColorSwatchItem
+  .ColorSwatch--small.is-selected:before {
+  content: '';
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  border: 1px solid #fff;
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ProductItem__ColorSwatchItem
+  .ColorSwatch--small.is-selected,
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ProductItem__ColorSwatchItem
+  .ColorSwatch.is-selected
+  .ss-swatch {
+  outline: none;
+  box-shadow: 0 0 0 1px #1c1714;
+  width: 22px;
+  height: 22px;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ColorSwatch--small.hasHex.hexCount-2.is-selected
+  .ss-swatch {
+  width: 11px;
+  margin-left: 2px;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ColorSwatch--small.hasHex.hexCount-2.is-selected
+  .ss-swatch:nth-child(2) {
+  top: 4px;
+  left: 8px;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .price--on-sale
+  .price__sale
+  .price-item--sale {
+  color: #ef0c0c;
+  font-weight: 400;
+  order: 1;
+}
+.product__info-container
+  .ss__theme.ss__recommendation--carousel
+  .ss__recommendation__header
+  .ss__title
+  a {
+  text-decoration: none;
+}
+.product__info-container
+  .ss__theme.ss__recommendation--carousel
+  .ss__recommendation__header
+  .ss__title {
+  margin-top: 20px;
+}
+.product__info-container
+  .ss__theme.ss__recommendation--carousel
+  .card--product
+  .card__inner {
+  width: 128px;
+}
+.product__info-container
+  .ss__theme.ss__recommendation--carousel
+  .card--product
+  .card__inner
+  + .card__content {
+  width: calc(100% - 128px);
+}
+.product__info-container
+  .ss__theme.ss__recommendation--carousel
+  .card--product
+  .card__inner
+  + .card__content
+  .ProductItem__ColorSwatchItem {
+  margin: 0 6px 6px 2px;
+}
+.product__info-container
+  .ss__theme.ss__recommendation--carousel
+  .card--product
+  .card--media {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+}
+.product__info-wrapper
+  .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .price__regular
+  .price-item.price-item--regular,
+.product__info-wrapper
+  .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .price--on-sale
+  .price__sale
+  .price-item--sale,
+.product__info-container
+  .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .price--on-sale
+  .price__container
+  .price-item--regular {
+  font-size: 15px;
+  line-height: 22px;
+}
+.product__info-container
+  .ss__theme.ss__recommendation--carousel
+  .ss__recommendation
+  .ss__carousel
+  .swiper-container
+  .swiper-wrapper
+  .swiper-slide {
+  margin-bottom: 16px;
+}
+.page-product
+  .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ss__carousel__prev-wrapper
+  div
+  svg,
+.page-product
+  .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ss__carousel__next-wrapper
+  div
+  svg {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+}
+.page-product
+  .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ShopTheLook__ViewButton.Button--full {
+  background: #1c1714;
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+  padding: 9px 18px 8px;
+  box-sizing: border-box;
+  display: inline-block;
+}
+.page-index
+  .ss__theme.ss__recommendation--carousel
+  .ss__recommendation
+  .ss__carousel
+  .ss__carousel__next-wrapper,
+.page-index
+  .ss__theme.ss__recommendation--carousel
+  .ss__recommendation
+  .ss__carousel
+  .ss__carousel__prev-wrapper,
+.page-index
+  .ss__theme.ss__recommendation--carousel
+  .ss__recommendation
+  .ss__carousel
+  .ss__carousel__next-wrapper
+  div
+  svg,
+.page-index
+  .ss__theme.ss__recommendation--carousel
+  .ss__recommendation
+  .ss__carousel
+  .ss__carousel__prev-wrapper
+  div
+  svg {
+  padding: 0;
+  width: 24px;
+  height: 24px;
+}
+.page-product
+  .product__info-wrapper
+  .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini) {
+  max-width: 100%;
+}
+.ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+  .ss__recommendation
+  .ss__carousel
+  .ProductItem__ColorSwatchItem {
+  margin: 0 6px 6px 2px;
+}
+.ss__theme.ss__recommendation--carousel {
+  margin: 0px;
+}
+.card--standard > .card__content .card__information {
+  padding-bottom: 0;
+}
+@media screen and (max-width: 1199px) {
+  .page-index .ss__theme.ss__recommendation--carousel {
+    padding: 0 16px;
+  }
+  .page-index
+    .ss__theme.ss__recommendation--carousel
+    .ss__recommendation
+    .ss__carousel
+    .ss__carousel__next-wrapper {
+    right: 16px;
+  }
+  .page-index
+    .ss__theme.ss__recommendation--carousel
+    .ss__recommendation
+    .ss__carousel
+    .ss__carousel__prev-wrapper {
+    right: 48px;
+  }
+  .page-product
+    .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini) {
+    padding: 0 16px;
+  }
+  .page-product
+    .ss__theme.ss__recommendation--carousel
+    .ss__recommendation
+    .ss__carousel
+    .ss__carousel__next-wrapper {
+    right: 16px;
+  }
+  .page-product
+    .ss__theme.ss__recommendation--carousel
+    .ss__recommendation
+    .ss__carousel
+    .ss__carousel__prev-wrapper {
+    right: 48px;
+  }
+  .page-product
+    .product__info-wrapper
+    .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini) {
+    padding: 0;
+  }
+}
+@media screen and (max-width: 767px) {
+  .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini) {
+    padding-right: 0;
+  }
+  .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+    .ss__recommendation__header
+    .ss__title.ss__title--recommendation {
+    font-size: 16px;
+    line-height: 26px;
+  }
+  .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+    .ss__results
+    .ProductItem__ColorSwatchList {
+    margin: 0 0 10px 1px;
+  }
+  .product__info-container
+    .ss__theme.ss__recommendation--carousel
+    .card--product
+    .card__inner
+    + .card__content {
+    padding-left: 16px;
+  }
+  .page-product
+    .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini) {
+    padding-right: 0;
+  }
+}
+@media screen and (min-width: 768px) {
+  .page-index
+    .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+    .ss__recommendation__header
+    .ss__title.ss__title--recommendation {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.25px;
+  }
+  .page-product
+    .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+    .ss__recommendation__header
+    .ss__title.ss__title--recommendation {
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: unset;
+  }
+  .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini)
+    .ss__results
+    .ProductItem__ColorSwatchList {
+    margin: 0 0 13px 1px;
+  }
+  .page-product .searchspring-custom__container {
+    padding-top: 44px;
+  }
+  .page-index .container-full.recommended-list {
+    padding-top: 56px;
+  }
+  .product__info-container
+    .ss__theme.ss__recommendation--carousel
+    .card--product
+    .card__inner
+    + .card__content {
+    padding-left: 24px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .page-index .ss__theme.ss__recommendation--carousel {
+    padding: 0 100px;
+  }
+  .page-index
+    .ss__theme.ss__recommendation--carousel
+    .ss__recommendation
+    .ss__carousel
+    .ss__carousel__next-wrapper {
+    right: 100px;
+  }
+  .page-index
+    .ss__theme.ss__recommendation--carousel
+    .ss__recommendation
+    .ss__carousel
+    .ss__carousel__prev-wrapper {
+    right: 132px;
+  }
+  /* .page-product
+    .ss__theme.ss__recommendation--carousel:not(.ss__recommendation--mini) {
+    max-width: calc(100% - 200px);
+  } */
+}

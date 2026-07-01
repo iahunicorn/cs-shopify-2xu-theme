@@ -1,0 +1,443 @@
+<section class="Section Section--spacingNormal shop-the-look" data-section-id="{{ section.id }}" data-section-type="shop-the-look" style="background: {{section.settings.background_stl}} ;">
+    <div class="page-width">
+        {%- if section.settings.subheading != blank or section.settings.title != blank -%}
+        <header class="SectionHeader SectionHeader--center">
+        <div class="Container">
+            {%- if section.settings.subheading != blank -%}
+            <h3 class="SectionHeader__SubHeading Heading u-h6">{{ section.settings.subheading | escape }}</h3>
+            {%- endif -%}
+
+            {%- if section.settings.title != blank -%}
+            <h2 class="SectionHeader__Heading Heading u-h1">{{ section.settings.title | escape }}</h2>
+            {%- endif -%}
+        </div>
+        </header>
+    {%- endif -%}
+
+    <div class="shop-the-look-box">
+        {%- if block.settings.image == blank and block.settings.product_1 == blank and block.settings.product_2 == blank and block.settings.product_3 == blank -%}
+        {%- assign show_on_boarding = true -%}
+        {%- else -%}
+        {%- assign show_on_boarding = false -%}
+        {%- endif -%}
+        <slider-component class="slider-mobile-gutter">
+            <div class="content-box slider slider--mobile " id="Slider-template--{{ section.id }}" role="list">
+                {%- if section.blocks.size > 0 -%}
+                    {%- for block in section.blocks -%}
+                    <div id="Slide-{{ section.id }}-{{ forloop.index }}" class="ShopTheLook__ImageWrapper item " data-slide-target="#block-{{ block.id }}">
+                        <div class="image-box {% if block.settings.image_mobile != blank %} has-image-mobile {% endif %} ">
+                        <img class="image"
+                            {% if block.settings.image.presentation.focal_point %}style="object-position:{{ block.settings.image.presentation.focal_point }};"{% endif %}
+                            srcset="{%- if block.settings.image.width >= 165 -%}{{ block.settings.image | image_url: width: 165 }} 165w,{%- endif -%}
+                                        {%- if block.settings.image.width >= 360 -%}{{ block.settings.image | image_url: width: 360 }} 360w,{%- endif -%}
+                                        {%- if block.settings.image.width >= 535 -%}{{ block.settings.image | image_url: width: 535 }} 535w,{%- endif -%}
+                                        {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | image_url: width: 750 }} 750w,{%- endif -%}
+                                        {%- if block.settings.image.width >= 1070 -%}{{ block.settings.image | image_url: width: 1070 }} 1070w,{%- endif -%}
+                                        {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                                        {{ block.settings.image | image_url }} {{ block.settings.image.width }}w"
+                            src="{{ block.settings.image | image_url: width: 1500 }}"
+                            sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                            alt="{{ block.settings.image.alt | escape }}" loading="lazy"
+                            width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}"/>
+
+                        {% if block.settings.image_mobile != blank %}
+                            <img class="image"
+                            {% if block.settings.image_mobile.presentation.focal_point %}style="object-position:{{ block.settings.image_mobile.presentation.focal_point }};"{% endif %}
+                                srcset="{%- if block.settings.image_mobile.width >= 165 -%}{{ block.settings.image_mobile | image_url: width: 165 }} 165w,{%- endif -%}
+                                        {%- if block.settings.image_mobile.width >= 360 -%}{{ block.settings.image_mobile | image_url: width: 360 }} 360w,{%- endif -%}
+                                        {%- if block.settings.image_mobile.width >= 535 -%}{{ block.settings.image_mobile | image_url: width: 535 }} 535w,{%- endif -%}
+                                        {%- if block.settings.image_mobile.width >= 750 -%}{{ block.settings.image_mobile | image_url: width: 750 }} 750w,{%- endif -%}
+                                        {%- if block.settings.image_mobile.width >= 1070 -%}{{ block.settings.image_mobile | image_url: width: 1070 }} 1070w,{%- endif -%}
+                                        {%- if block.settings.image_mobile.width >= 1500 -%}{{ block.settings.image_mobile | image_url: width: 1500 }} 1500w,{%- endif -%}
+                                        {{ block.settings.image_mobile | image_url }} {{ block.settings.image_mobile.width }}w"
+                                src="{{ block.settings.image_mobile | image_url: width: 1500 }}"
+                                sizes="(min-width: {{ settings.page_width }}px) {{
+                                settings.page_width | minus: 100 | divided_by: 2
+                                }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                                alt="{{ block.settings.image_mobile.alt | escape }}" loading="lazy"
+                                width="{{ block.settings.image_mobile.width }}"
+                                height="{{ block.settings.image_mobile.height }}"/>
+                        {% endif %}
+                        </div>
+
+                        {% if block.settings.product_1 != blank %}
+
+                        {%- assign product_horizontal_position_setting = 'product_1' | append: '_horizontal_position' -%}
+                        {%- assign product_vertical_position_setting = 'product_1'  | append: '_vertical_position' -%}
+                        {%- assign product_horizontal_position = block.settings[product_horizontal_position_setting] -%}
+                        {%- assign product_vertical_position = block.settings[product_vertical_position_setting] -%}
+
+                        <span data-product-target="#product-first" class="ShopTheLook__Dot ShopTheLook__Dot--{{ block.settings.dot_style }}" data-product-index="product-first" style="left: {{ product_horizontal_position }}%; top: {{ product_vertical_position }}%"></span>
+
+
+                        {% endif %}
+
+                        {% if block.settings.product_2 != blank %}
+
+                        {%- assign product_horizontal_position_setting = 'product_2' | append: '_horizontal_position' -%}
+                        {%- assign product_vertical_position_setting = 'product_2'  | append: '_vertical_position' -%}
+                        {%- assign product_horizontal_position = block.settings[product_horizontal_position_setting] -%}
+                        {%- assign product_vertical_position = block.settings[product_vertical_position_setting] -%}
+
+                        <span data-product-target="#product-second" class="ShopTheLook__Dot ShopTheLook__Dot--{{ block.settings.dot_style }}" data-product-index="product-second" style="left: {{ product_horizontal_position }}%; top: {{ product_vertical_position }}%"></span>
+
+
+                        {% endif %}
+
+                        {% if block.settings.product_3  != blank %}
+
+                        {%- assign product_horizontal_position_setting = 'product_3' | append: '_horizontal_position' -%}
+                        {%- assign product_vertical_position_setting = 'product_3'  | append: '_vertical_position' -%}
+                        {%- assign product_horizontal_position = block.settings[product_horizontal_position_setting] -%}
+                        {%- assign product_vertical_position = block.settings[product_vertical_position_setting] -%}
+
+                        <span data-product-target="#product-third" class="ShopTheLook__Dot ShopTheLook__Dot--{{ block.settings.dot_style }} " data-product-index="product-third" style="left: {{ product_horizontal_position }}%; top: {{ product_vertical_position }}%"></span>
+
+
+                        {% endif %}
+
+                    </div>
+                    {%- endfor -%}
+                {%- endif -%}
+            </div>
+
+            <div class="slider-buttons no-js-hidden medium-hide">
+                <button type="button" class="slider-button slider-button--prev" name="previous"
+                    aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
+                <div class="slider-counter caption">
+                    <span class="slider-counter--current">1</span>
+                    <span aria-hidden="true"> / </span>
+                    <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
+                    <span class="slider-counter--total">{{ section.blocks.size }}</span>
+                </div>
+                <button type="button" class="slider-button slider-button--next" name="next"
+                    aria-label="{{ 'general.slider.next_slide' | t }}">{% render 'icon-caret' %}</button>
+            </div>
+        </slider-component>
+
+
+
+        <div class=" slide-box shop-the-look-slide">
+            {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+                <div id="block-{{ block.id }}" class="hidden content-slide" data-slide-content>
+
+                    <div class="item-slide">
+                        <div class="close">
+                            {% render 'icon-close' %}
+                        </div>
+                    <div class="left-block">
+                        <div class="ShopTheLook__ImageWrapper item {{ block.id }} ">
+                        <div class="image-box {% if block.settings.image_mobile != blank %} has-image-mobile {% endif %} ">
+                            <img class="image"
+                              {% if block.settings.image.presentation.focal_point %}style="object-position:{{ block.settings.image.presentation.focal_point }};"{% endif %}
+                                srcset="{%- if block.settings.image.width >= 165 -%}{{ block.settings.image | image_url: width: 165 }} 165w,{%- endif -%}
+                                                    {%- if block.settings.image.width >= 360 -%}{{ block.settings.image | image_url: width: 360 }} 360w,{%- endif -%}
+                                                    {%- if block.settings.image.width >= 535 -%}{{ block.settings.image | image_url: width: 535 }} 535w,{%- endif -%}
+                                                    {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | image_url: width: 750 }} 750w,{%- endif -%}
+                                                    {%- if block.settings.image.width >= 1070 -%}{{ block.settings.image | image_url: width: 1070 }} 1070w,{%- endif -%}
+                                                    {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                                                    {{ block.settings.image | image_url }} {{ block.settings.image.width }}w"
+                                src="{{ block.settings.image | image_url: width: 1500 }}"
+                                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                                alt="{{ block.settings.image.alt | escape }}" loading="lazy"
+                                width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}"/>
+
+                            {% if block.settings.image_mobile != blank %}
+                            <img class="image"
+                            {% if block.settings.image_mobile.presentation.focal_point %}style="object-position:{{ block.settings.image_mobile.presentation.focal_point }};"{% endif %}
+                                srcset="{%- if block.settings.image_mobile.width >= 165 -%}{{ block.settings.image_mobile | image_url: width: 165 }} 165w,{%- endif -%}
+                                                    {%- if block.settings.image_mobile.width >= 360 -%}{{ block.settings.image_mobile | image_url: width: 360 }} 360w,{%- endif -%}
+                                                    {%- if block.settings.image_mobile.width >= 535 -%}{{ block.settings.image_mobile | image_url: width: 535 }} 535w,{%- endif -%}
+                                                    {%- if block.settings.image_mobile.width >= 750 -%}{{ block.settings.image_mobile | image_url: width: 750 }} 750w,{%- endif -%}
+                                                    {%- if block.settings.image_mobile.width >= 1070 -%}{{ block.settings.image_mobile | image_url: width: 1070 }} 1070w,{%- endif -%}
+                                                    {%- if block.settings.image_mobile.width >= 1500 -%}{{ block.settings.image_mobile | image_url: width: 1500 }} 1500w,{%- endif -%}
+                                                    {{ block.settings.image_mobile | image_url }} {{ block.settings.image_mobile.width }}w"
+                                src="{{ block.settings.image_mobile | image_url: width: 1500 }}"
+                                sizes="(min-width: {{ settings.page_width }}px) {{
+                                settings.page_width | minus: 100 | divided_by: 2
+                                }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                                alt="{{ block.settings.image_mobile.alt | escape }}" loading="lazy"
+                                width="{{ block.settings.image_mobile.width }}"
+                                height="{{ block.settings.image_mobile.height }}"/>
+                            {% endif %}
+                        </div>
+
+                        {% if block.settings.product_1 != blank %}
+
+                            {%- assign product_horizontal_position_setting = 'product_1' | append: '_horizontal_position' -%}
+                            {%- assign product_vertical_position_setting = 'product_1'  | append: '_vertical_position' -%}
+                            {%- assign product_horizontal_position = block.settings[product_horizontal_position_setting] -%}
+                            {%- assign product_vertical_position = block.settings[product_vertical_position_setting] -%}
+
+                            <span data-product-target="#product-first-{{ block.id }}" class="active ShopTheLook__Dot ShopTheLook__Dot--{{ block.settings.dot_style }}" data-product-index="product-first" style="left: {{ product_horizontal_position }}%; top: {{ product_vertical_position }}%"></span>
+
+
+                        {% endif %}
+
+                        {% if block.settings.product_2 != blank %}
+
+                            {%- assign product_horizontal_position_setting = 'product_2' | append: '_horizontal_position' -%}
+                            {%- assign product_vertical_position_setting = 'product_2'  | append: '_vertical_position' -%}
+                            {%- assign product_horizontal_position = block.settings[product_horizontal_position_setting] -%}
+                            {%- assign product_vertical_position = block.settings[product_vertical_position_setting] -%}
+
+                            <span data-product-target="#product-second-{{ block.id }}"  class="ShopTheLook__Dot ShopTheLook__Dot--{{ block.settings.dot_style }} " data-product-index="product-second" style="left: {{ product_horizontal_position }}%; top: {{ product_vertical_position }}%"></span>
+
+
+                        {% endif %}
+
+                        {% if block.settings.product_3  != blank %}
+
+                            {%- assign product_horizontal_position_setting = 'product_3' | append: '_horizontal_position' -%}
+                            {%- assign product_vertical_position_setting = 'product_3'  | append: '_vertical_position' -%}
+                            {%- assign product_horizontal_position = block.settings[product_horizontal_position_setting] -%}
+                            {%- assign product_vertical_position = block.settings[product_vertical_position_setting] -%}
+
+                            <span data-product-target="#product-third-{{ block.id }}"  class="ShopTheLook__Dot ShopTheLook__Dot--{{ block.settings.dot_style }}" data-product-index="product-third" style="left: {{ product_horizontal_position }}%; top: {{ product_vertical_position }}%"></span>
+
+
+                        {% endif %}
+
+                        </div>
+                    </div>
+
+                    <div class="right-block">
+
+                            {% if block.settings.product_1 != blank %}
+                            <div data-product-content id="product-first-{{ block.id }}" class=" ShopTheLook__ProductItem {% unless section.settings.show_mobile_product_info %}ShopTheLook__ProductItem--withHiddenInfo{% endunless %} Carousel__Cell {% if forloop.first %}is-selected{% endif %}" data-product-url="{{ product.url | escape }}">
+                                {% render 'card-product',
+                                    card_product: block.settings.product_1,
+                                    media_aspect_ratio: section.settings.image_ratio,
+                                    show_secondary_image: block.settings.show_secondary_image,
+                                    show_vendor: false,
+                                    show_rating: false
+                                %}
+                            </div>
+                            {% endif %}
+
+                            {% if block.settings.product_2 != blank %}
+                            <div data-product-content id="product-second-{{ block.id }}" class=" ShopTheLook__ProductItem {% unless section.settings.show_mobile_product_info %}ShopTheLook__ProductItem--withHiddenInfo{% endunless %} Carousel__Cell {% if forloop.first %}is-selected{% endif %}" data-product-url="{{ product.url | escape }}">
+                                {% render 'card-product',
+                                    card_product: block.settings.product_2,
+                                    media_aspect_ratio: section.settings.image_ratio,
+                                    show_secondary_image: block.settings.show_secondary_image,
+                                    show_vendor: false,
+                                    show_rating: false
+                                %}
+                            </div>
+                            {% endif %}
+
+                            {% if block.settings.product_3 != blank %}
+                            <div data-product-content id="product-third-{{ block.id }}" class="{{ product }} ShopTheLook__ProductItem {% unless section.settings.show_mobile_product_info %}ShopTheLook__ProductItem--withHiddenInfo{% endunless %} Carousel__Cell {% if forloop.first %}is-selected{% endif %}" data-product-url="{{ product.url | escape }}">
+                                {% render 'card-product',
+                                    card_product: block.settings.product_3,
+                                    media_aspect_ratio: section.settings.image_ratio,
+                                    show_secondary_image: block.settings.show_secondary_image,
+                                    show_vendor: false,
+                                    show_rating: false
+                                %}
+                            </div>
+                            {% endif %}
+                    </div>
+                    </div>
+                </div>
+            {%- endfor -%}
+        {%- endif -%}
+        </div>
+    </div>
+
+        <div class="ShopTheLook__DiscoverButtonWrapper hidden-lap-and-up">
+            <a href="{{ section.settings.footer_button_link }}" class="ShopTheLook__ViewButton Button Button--primary" aria-haspopup="true" aria-expanded="false" aria-controls="block-{{ section.blocks.first.id }}-popover" data-action="open-look">
+              {{ section.settings.footer_button }}
+            </a>
+        </div>
+    </div>
+</section>
+
+<script src="{{ 'section-shop-the-look.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Shop the look",
+  "class": "shopify-section--bordered",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "For best results (especially on mobile), we recommend using images with the same dimensions."
+    },
+    {
+        "type": "color",
+        "label": "Backgound Section",
+        "id": "background_stl",
+        "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub-heading",
+      "default": "Shop"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Our looks"
+    },
+    {
+      "type": "text",
+      "id": "footer_button",
+      "label": "View more label",
+      "default": "Explore more looks"
+    },
+    {
+      "type": "url",
+      "id": "footer_button_link",
+      "label": "View more link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_product_info",
+      "label": "Show product info on mobile",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "look",
+      "name": "Look",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "975 x 1185px .jpg recommended (vertical image) or 1200 x 1200px .jpg recommended (square image)."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image for Mobile",
+          "info": "975 x 1185px .jpg recommended (vertical image) or 1200 x 1200px .jpg recommended (square image)."
+        },
+        {
+          "type": "header",
+          "content": "Product 1"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Product",
+          "info": "Product not showing correctly? [Learn more](http://support.maestrooo.com/article/153-home-page-shop-the-look-section-is-displaying-incorrect-products)."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_secondary_image",
+          "default": true,
+          "label": "t:sections.featured-collection.settings.show_secondary_image.label"
+        },
+        {
+          "type": "range",
+          "id": "product_1_horizontal_position",
+          "label": "Horizontal position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "product_1_vertical_position",
+          "label": "Vertical position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "default": 15
+        },
+        {
+          "type": "header",
+          "content": "Product 2"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Product",
+          "info": "Product not showing correctly? [Learn more](http://support.maestrooo.com/article/153-home-page-shop-the-look-section-is-displaying-incorrect-products)."
+        },
+        {
+          "type": "range",
+          "id": "product_2_horizontal_position",
+          "label": "Horizontal position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "product_2_vertical_position",
+          "label": "Vertical position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "header",
+          "content": "Product 3"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Product",
+          "info": "Product not showing correctly? [Learn more](http://support.maestrooo.com/article/153-home-page-shop-the-look-section-is-displaying-incorrect-products)."
+        },
+        {
+          "type": "range",
+          "id": "product_3_horizontal_position",
+          "label": "Horizontal position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "default": 85
+        },
+        {
+          "type": "range",
+          "id": "product_3_vertical_position",
+          "label": "Vertical position",
+          "min": 10,
+          "max": 90,
+          "step": 1,
+          "unit": "%",
+          "default": 85
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Product",
+      "name": "Shop the look",
+      "settings": {
+      },
+      "blocks": [
+        {
+          "type": "look",
+          "settings": {
+            "product_1_horizontal_position": 30,
+            "product_1_vertical_position": 40,
+            "product_2_horizontal_position": 45,
+            "product_2_vertical_position": 65,
+            "product_3_horizontal_position": 70,
+            "product_3_vertical_position": 50
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

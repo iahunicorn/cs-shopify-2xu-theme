@@ -1,0 +1,218 @@
+{% comment %}
+	GEMPAGES BUILDER (https://apps.shopify.com/gempages)
+
+	You SHOULD NOT modify source code in this file because
+	It is automatically generated from GEMPAGES BUILDER
+	Try to edit page with the live editor.
+{% endcomment %}
+{% if shop.permanent_domain == 'uk-2xu.myshopify.com' %}
+  {% include 'shogun-content-handler' %}
+{% endif %}
+<!doctype html>
+<html class='no-js' lang='{{ request.locale.iso_code }}'>
+  <head>
+    {% if shop.permanent_domain == '2xu-australia.myshopify.com' %}
+      <script src="https://cdn.logr-in.com/LogRocket.min.js" crossorigin="anonymous"></script>
+      <script>window.LogRocket && window.LogRocket.init('m1ds3j/2xu');</script>
+    {% endif %}
+    {% if shop.permanent_domain == 'uk-2xu.myshopify.com' %}
+      {% render 'pandectes-rules' %}
+    {% endif %}
+    {% if shop.permanent_domain == '2xu-australia.myshopify.com' %}
+      {%- render 'ecom_header' -%}
+    {% endif %}
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta
+      name='viewport'
+      content='width=device-width,initial-scale=1,maximum-scale=1'
+    >
+    <meta name='theme-color' content=''>
+    <script
+      type='text/javascript'
+      src='https://preeziecdn.azureedge.net/production/preguide.min.js'
+    ></script>
+    <link rel='canonical' href='{{ canonical_url }}'>
+    <link rel='preconnect' href='https://cdn.shopify.com' crossorigin>
+    {%- if settings.favicon != blank -%}
+      <link
+        rel='icon'
+        type='image/png'
+        href='{{ settings.favicon | image_url: width: 32, height: 32 }}'
+      >
+    {%- endif -%}
+
+    {%- unless settings.type_header_font.system?
+      and settings.type_body_font.system?
+    -%}
+      <link rel='preconnect' href='https://fonts.shopifycdn.com' crossorigin>
+    {%- endunless -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %}
+        &ndash; tagged "{{ current_tags | join: ', ' }}"
+      {%- endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %}
+        &ndash; {{ shop.name -}}
+      {%- endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name='description' content='{{ page_description | escape }}'>
+    {% endif %}
+
+    {% render 'meta-tags' %}
+    {% if shop.permanent_domain == '2xu-australia.myshopify.com' %}
+      {% render 'VWO-script' %}
+      {% comment %} Zipy g4a {% endcomment %}
+      {% render 'zipy-script' %}
+    {% endif %}
+    {% if shop.permanent_domain == '2xu-us.myshopify.com' %}
+      {% render 'VWO-script-US' %}
+    {% endif %}
+
+    <script src='{{ 'global.js' | asset_url }}' defer='defer'></script>
+    {% capture CFH %}{{ content_for_header  }}{% endcapture %}
+    {{ CFH }}
+    {% assign isAdmin = false %}
+    {% if CFH contains 'adminBarInjector' or CFH contains 'admin_bar_iframe' %}
+      {% assign isAdmin = true %}
+    {% endif %}
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'template-index.css' | asset_url | stylesheet_tag }}
+    {{ 'section-card.css' | asset_url | stylesheet_tag }}
+    {% if request.page_type == 'collection'
+      or request.page_type == 'product'
+      or request.page_type == 'index'
+    %}
+      <link rel='stylesheet' href='{{ 'swatches.scss.css' | asset_url }}'>
+    {% endif %}
+
+    {%- render 'theme-settings' -%}
+
+    {%- render 'theme-styles' -%}
+
+    {%- if template contains 'account' -%}
+      {{ 'account.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
+    {%- if page.template_suffix == 'prismic' -%}
+      {{ 'page.prismic.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
+    {%- if settings.predictive_search_enabled -%}
+      <link
+        rel='stylesheet'
+        href='{{ 'component-predictive-search.css' | asset_url }}'
+        media='print'
+        onload="this.media='all'"
+      >
+    {%- endif -%}
+
+    <script>
+      document.documentElement.className =
+        document.documentElement.className.replace('no-js', 'js');
+      if (Shopify.designMode) {
+        document.documentElement.classList.add('shopify-design-mode');
+      }
+    </script>
+    {% comment %} {%- render 'regionalisation', isAdmin: isAdmin -%} {% endcomment %}
+    {% if settings.ss_enable %}
+      {% render 'ss-script' %}
+    {% endif %}
+    {% if shop.permanent_domain == '2xu-australia.myshopify.com' %}
+      
+      {% render 'shogun-head' %}
+    {% endif %}
+
+    {% render 'wunderkind' %}
+    {{ 'tailwind.css' | asset_url | stylesheet_tag }}
+    {% liquid
+      # Relative to entrypointsDir
+      render 'vite-tag' with 'theme.css'
+      render 'vite-tag' with 'theme.js'
+      if template.name == 'index' or template.name == 'page'
+        render 'vite-tag' with 'page.js'
+      endif
+    %}
+    <script>
+      window.markerConfig = {
+        project: '67186d1a9a04f3051106d712',
+        source: 'snippet',
+      };
+
+      !(function (e, r, a) {
+        if (!e.__Marker) {
+          e.__Marker = {};
+          var t = [],
+            n = { __cs: t };
+          [
+            'show',
+            'hide',
+            'isVisible',
+            'capture',
+            'cancelCapture',
+            'unload',
+            'reload',
+            'isExtensionInstalled',
+            'setReporter',
+            'clearReporter',
+            'setCustomData',
+            'on',
+            'off',
+          ].forEach(function (e) {
+            n[e] = function () {
+              var r = Array.prototype.slice.call(arguments);
+              r.unshift(e), t.push(r);
+            };
+          }),
+            (e.Marker = n);
+          var s = r.createElement('script');
+          (s.async = 1), (s.src = 'https://edge.marker.io/latest/shim.js');
+          var i = r.getElementsByTagName('script')[0];
+          i.parentNode.insertBefore(s, i);
+        }
+      })(window, document);
+    </script>
+    {% comment %}
+      {% for language in localization.available_languages %}
+        <link
+          rel='alternate'
+          hreflang='{{ language.iso_code }}'
+          href='{{ canonical_url }}'
+        >
+      {% endfor %}
+    {% endcomment %}
+    {% render 'hreflang' %}
+  </head>
+
+  {% if shop.permanent_domain == '2xu-jp.myshopify.com' %}
+    {% assign isJapanStore = 'is-jp' %}
+  {% endif %}
+
+  <body>
+<div class="gem-container">
+	{{ content_for_layout }}
+</div><!-- end .gem-container --></body>
+
+  <script>
+    (function () {
+      var REDIRECT_PATH = '/pages/preferences';
+
+      var selector =
+          '#create_customer, form[action$="/account"][method="post"]',
+        $form = document.querySelectorAll(selector)[0];
+
+      if ($form) {
+        $redirect = document.createElement('input');
+        $redirect.setAttribute('name', 'return_to');
+        $redirect.setAttribute('type', 'hidden');
+        $redirect.value = REDIRECT_PATH;
+        $form.appendChild($redirect);
+      }
+    })();
+  </script>
+</html>

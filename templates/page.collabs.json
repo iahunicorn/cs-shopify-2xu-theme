@@ -1,0 +1,62 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collabs": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "dc98ba96-5e8b-4db5-ab2f-92e38053a520": {
+      "type": "rich-text",
+      "blocks": {
+        "template--15895974052023__dc98ba96-5e8b-4db5-ab2f-92e38053a520-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Join our Global 2XU Community</p>",
+            "heading_size": "h1"
+          }
+        },
+        "template--15895974052023__dc98ba96-5e8b-4db5-ab2f-92e38053a520-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Explore our curated gallery, click on any image to shop the products featured.<br/>Tag @2XU on Instagram for the chance to be featured.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--15895974052023__dc98ba96-5e8b-4db5-ab2f-92e38053a520-heading-1",
+        "template--15895974052023__dc98ba96-5e8b-4db5-ab2f-92e38053a520-text-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "16956127134aba93c8": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "collabs",
+    "dc98ba96-5e8b-4db5-ab2f-92e38053a520",
+    "16956127134aba93c8"
+  ]
+}

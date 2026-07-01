@@ -1,0 +1,47 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner_EmhFJB": {
+      "type": "banner",
+      "name": "Banner",
+      "settings": {
+        "image": "shopify://shop_images/57cecfe9-4c7b-4082-ab2c-d523314fa2e1_our-story-d-1.jpg",
+        "mobile_image": "shopify://shop_images/57cecfe9-4c7b-4082-ab2c-d523314fa2e1_our-story-d-1.jpg",
+        "link": "",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "custom_liquid_HmdaTP": {
+      "type": "custom-liquid",
+      "custom_css": [
+        "h1 {font-size: 2.8em; font-weight: bold; color: #000000; padding: 8px 0;}"
+      ],
+      "name": "Page Content",
+      "settings": {
+        "custom_liquid": "<div class=\"page-content page-width section\">\n\n  {% if page.content != blank %}\n    <div class=\"rte\">\n      {{ page.content }}\n    </div>\n  {% else %}\n    <p class=\"rte\">No content available.</p>\n  {% endif %}\n</div>",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "main": {
+      "type": "page",
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "banner_EmhFJB",
+    "custom_liquid_HmdaTP",
+    "main"
+  ]
+}

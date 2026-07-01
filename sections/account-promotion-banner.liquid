@@ -1,0 +1,67 @@
+{% if section.settings.visible %}
+	{% if section.settings.link != blank %}
+		<a href="{{ section.settings.link }}">
+			{% render 'account-promotion-banner', settings: section.settings %}
+		</a>
+	{% else %}
+		{% render 'account-promotion-banner', settings: section.settings %}
+	{% endif %}
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Account Promotion Banner",
+		"settings": [
+			{
+				"type": "checkbox",
+				"id": "visible",
+				"label": "Enable banner",
+				"default": true
+			},
+			{
+				"type": "text",
+				"id": "title",
+				"label": "Title"
+			},
+			{
+				"type": "text",
+				"id": "subttitle",
+				"label": "Sub Title"
+			},
+			{
+				"type": "color",
+				"id": "color_title",
+				"label": "Title colour"
+			},
+			{
+				"type": "image_picker",
+				"id": "image_desktop",
+				"label": "Desktop image",
+				"info": "If this image is not set, the background colour will display instead."
+			},
+			{
+				"type": "image_picker",
+				"id": "image_mobile",
+				"label": "Mobile image",
+				"info": "If this image is not set, the desktop image will display instead."
+			},
+			{
+				"type": "url",
+				"id": "link_banner",
+				"label": "Banner link"
+			},
+			{
+				"type": "color",
+				"id": "color_background",
+				"label": "Background colour",
+				"info": "If neither image is set, the background color will display instead."
+			}
+
+		],
+		"presets": [
+			{
+				"name": "Account Promotion Banner"
+			}
+		]
+	}
+{% endschema %}

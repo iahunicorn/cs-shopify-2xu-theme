@@ -1,0 +1,62 @@
+<article class="ArticleItem" {% if block %}{{ block.shopify_attributes }}{% endif %}>
+    {%- if article.image != blank -%}
+      {%- capture supported_sizes -%}{%- render 'image-size', sizes: '200,400,600,700,800,900,1000,1200', image: article.image -%}{%- endcapture -%}
+      {%- assign image_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+  
+      <a class="ArticleItem__ImageWrapper AspectRatio AspectRatio--withFallback" style="background: url({{ article.image | img_url: 'master', format: 'jpg' }}); padding-bottom: 58%; --aspect-ratio: 1.7" href="{{ article.url }}">
+        <img class="ArticleItem__Image Image--lazyLoad Image--fadeIn"
+            data-src="{{ image_url }}"
+            data-widths="[{{ supported_sizes }}]"
+            data-sizes="auto"
+            alt="{{ article.image.alt | escape }}">
+        <noscript>
+          <img class="ArticleItem__Image" src="{{ article.image | img_url: '600x' }}" alt="{{ article.image.alt | escape }}">
+        </noscript>
+      </a>
+    {%- endif -%}
+  
+    <div class="ArticleItem__Content">
+      {%- if section.settings.show_category -%}
+        <span class="ArticleItem__Category Heading u-h6 Text--subdued">{{ article.tags.first }}</span>
+      {%- endif -%}
+  
+      <h2 class="ArticleItem__Title Heading u-h2">
+        <a href="{{ article.url }}">{{ article.title }}</a>
+      </h2>
+  
+      {%- unless template.name == 'article' and template != 'article.athlete' -%}
+        <p class="ArticleItem__Excerpt">{{ article.excerpt_or_content | strip_html | truncate: 150 }}</p>
+        <a href="{{ article.url }}" class="ArticleItem__Link Link Link--underline">{{ 'blog.article.read_more' | t }}</a>
+      {%- endunless -%}
+    </div>
+  </article>
+
+  <style>
+    /*! CSS Used from: https://cdn.shopify.com/s/files/1/0518/4087/6699/t/231/assets/theme.css?v=162209299165979781391664237723 */
+*,*:before,*:after{box-sizing:border-box!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+article{display:block;}
+:active{outline:none;}
+a{color:inherit;background-color:transparent;text-decoration:none;cursor:pointer;}
+a:active,a:hover{outline:0;}
+h2{margin-top:0;font-size:inherit;font-weight:inherit;}
+h2:last-child{margin-bottom:0;}
+img{max-width:100%;height:auto;border-style:none;vertical-align:top;--aspect-ratio:attr(width) / attr(height);}
+.Heading{font-family:var(--heading-font-family);font-weight:var(--heading-font-weight);font-style:var(--heading-font-style);color:var(--heading-color);transition:color .2s ease-in-out;}
+.features--heading-large .u-h2{font-size:22px;}
+@media screen and (min-width: 641px){
+.features--heading-large .u-h2{font-size:22px;}
+}
+.Image--fadeIn{opacity:0;transition:opacity .3s ease;}
+.Image--lazyLoaded.Image--fadeIn{opacity:1;}
+.AspectRatio{position:relative;margin-left:auto;margin-right:auto;}
+.AspectRatio:before{content:"";display:block;}
+.AspectRatio>img{max-height:100%;max-width:100%;}
+.AspectRatio--withFallback>img{position:absolute;top:0;left:0;height:100%;width:100%;}
+.ArticleNav .Heading{color:inherit;}
+.ArticleItem__ImageWrapper{display:block;margin-bottom:22px;background-size:cover;overflow:hidden;}
+.ArticleItem__Image{display:block;-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center;font-family:"object-fit: cover; object-position: center;";}
+.ArticleItem__Content{margin:0 8px;}
+@media screen and (min-width: 641px){
+.ArticleItem__Content{margin:0 18px;}
+}
+  </style>

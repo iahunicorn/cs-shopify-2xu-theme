@@ -1,0 +1,1146 @@
+/*
+  ########################3
+  Local variables
+    Mobile max width: 576px
+    Tablet max width: 1024px;
+  ########################
+*/
+
+.register-container * {
+  font-family: var(--text-font-family);
+}
+
+.d-block {
+  display: block !important;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.Container--account-dashboard {
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.PageLayout--sidebar {
+  flex: 0 0 20%;
+  width: 100%;
+  margin-right: 82px;
+  flex-direction: column;
+  margin-top: 48px;
+}
+
+.PageLayout--breakLap {
+  flex: 0 0 75%;
+}
+
+.account-navigation {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  border-right: 1px solid #e4e4e4;
+}
+
+.account-navigation-link.last {
+  margin-bottom: 48px;
+}
+
+/* Account Promotion Banner Styles */
+.account-promo-background {
+  position: relative;
+  width: 100%;
+  height: 197px;
+}
+
+@media screen and (max-width: 576px) {
+  .account-promo-background {
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .account-promo-background {
+    margin-bottom: 52px;
+  }
+}
+
+.account-promo-background a {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 197px;
+}
+
+.account-promo-background img {
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: cover;
+}
+
+.account-promo-background .account-promo-content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.account-promo-background .account-promo-content-wrapper h2 {
+  font-size: 3em;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+/*|| Registration Page ||*/
+.PageContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#shopify-section-footer {
+  margin-top: auto;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.PageContent {
+  max-width: 541px;
+}
+
+/* Register Section Styles */
+.register-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.register-section .PageContent {
+  margin-top: 0;
+}
+
+.register-container {
+  padding: 0;
+}
+
+.register-container .flex-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+/* Registration Form Styles */
+
+.register-container .Form__Title {
+  margin-bottom: 0.33em;
+  font-size: 25px;
+  letter-spacing: 2px;
+}
+
+.register-container .Form__Legend {
+  letter-spacing: 0.48px;
+}
+
+.register-container .Form__Input,
+.register-container .Form__Item select {
+  min-height: 56px;
+}
+
+.register-container .Form__Item--gender {
+  margin-bottom: 30px;
+}
+
+.register-container .Form__Item--tncs {
+  margin-bottom: 28px;
+}
+
+.register-container .Form__CheckboxWrapper {
+  display: flex;
+}
+
+.register-container input[type="checkbox"] {
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.register-container .label-terms {
+  font-size: 16px;
+}
+
+.register-container .label-terms a {
+  text-decoration: underline;
+}
+
+.register-container .Form__Submit {
+  min-height: 56px;
+  font-size: 25px;
+}
+
+.gender__icon {
+  position: absolute;
+  bottom: 15px;
+  right: 18px;
+}
+
+/* .register-container .Form__Submit:hover {
+  background-color: #222;
+} */
+
+/*|| Registration Page Mobile Styles ||*/
+@media screen and (max-width: 576px) {
+  .register-container .Form__Title {
+    letter-spacing: 2.8px;
+  }
+  .gender__icon {
+    bottom: 11px;
+  }
+  .gender__icon svg {
+    height: 13px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .PageContent {
+    max-width: none;
+  }
+
+  .register-container {
+    padding: 0 16px;
+  }
+
+  .flex-wrapper {
+    flex-flow: column nowrap;
+  }
+
+  .register-container .Form__Legend {
+    font-size: 16px;
+  }
+
+  .register-container .Form__Item {
+    margin-bottom: 24px;
+  }
+
+  .register-container .Form__Item input:not([type="checkbox"]),
+  .register-container .Form__Item select {
+    -webkit-appearance: none;
+    display: block;
+    padding: 12px 14px;
+    border-radius: 0;
+    border: 1px solid var(--border-color);
+    width: 100%;
+    line-height: normal;
+    resize: none;
+    transition: border-color 0.1s ease-in-out;
+    background: 0 0;
+    min-height: 0;
+  }
+
+  .register-container .Form__Item input::placeholder,
+  .register-container .Form__Item {
+    font-size: 16px;
+  }
+
+  .register-container .Form__Item--firstName,
+  .register-container .Form__Item--lastName {
+    flex: 0 0 100%;
+  }
+
+  .register-container .Form__Item--gender {
+    margin-bottom: 40px;
+  }
+
+  .register-container .Form__Item--tncs {
+    margin-bottom: 30px;
+  }
+
+  .register-container .label-terms {
+    font-size: 16px;
+  }
+
+  .register-container .Form__Submit {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    min-height: 0;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .register-container .PageContent {
+    min-width: 541px;
+  }
+  .register-container .Form__Item--firstName,
+  .register-container .Form__Item--lastName {
+    flex: 0 0 50%;
+  }
+
+  .register-container .Form__Item--firstName {
+    padding-right: 8px;
+  }
+
+  .register-container .Form__Item--lastName {
+    padding-left: 8px;
+  }
+}
+
+/* || Account Dashboard Page */
+.PageLayout--dashboard {
+  display: flex;
+  flex-direction: column;
+  padding-inline-end: 1em;
+  overflow: hidden;
+}
+
+.image-grid {
+  width: 100%;
+}
+
+.image-grid img {
+  width: 100%;
+}
+
+.bottom-wrapper {
+  display: flex;
+  gap: 1.625em;
+  width: 100%;
+}
+
+.text-banner {
+  background: #ffbf1f7b;
+  min-height: 57px;
+  padding-inline: 1.75em;
+  padding-block: 1.125em;
+  margin-bottom: 1.625em;
+  font-size: 1rem;
+  overflow: hidden;
+}
+
+.first-image {
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 1;
+  margin-bottom: 24px;
+}
+
+/*|| Account Dashboard Page Mobile Styles */
+@media screen and (max-width: 767px) {
+  .desktop-dashboard {
+    display: none;
+  }
+  .mobile-dashboard h1 {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .PageLayout--dashboard {
+    padding-inline-end: 0;
+  }
+  .mobile-dashboard-links a {
+    display: block;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    padding-left: 18px;
+    height: 66px;
+    border-bottom: solid 1px #d8d8d8;
+    line-height: 66px;
+    position: relative;
+  }
+  .text-banner {
+    margin-bottom: 0;
+    padding: 18px 28px;
+  }
+  .mobile-logout-button {
+    text-align: center;
+    display: block;
+    font-size: 15px;
+    font-weight: 400;
+    border: solid 1px black;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 38px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .mobile-dashboard-links svg {
+    position: absolute;
+    right: 14px;
+    top: 27px;
+    height: 15px;
+  }
+  .mobile-last {
+    margin-bottom: 24px;
+  }
+  .mobile-dashboard-links .u-h6 {
+    line-height: 66px;
+  }
+  .mobile-dashboard-links {
+    margin-bottom: 24px;
+  }
+  .Footer--withMargin {
+    margin-top: 23px;
+  }
+}
+
+/** Preferences Page **/
+.title-preferences-page {
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: black;
+  font-weight: 400;
+}
+
+.subtitle-preferences-page {
+  font-size: 16px;
+  letter-spacing: 0.48px;
+  color: #000000;
+  margin-bottom: 38px;
+}
+
+.cf-field legend {
+  margin-bottom: 18px;
+}
+
+.cf-form-inner legend,
+.cf-form-inner span {
+  letter-spacing: 0.96px;
+}
+
+.container-preferences-form .cf-form-inner .cf-fields-container {
+  margin: 0;
+}
+
+.register-container input[type="checkbox"],
+.address-form input[type="checkbox"],
+.container-preferences-form .cf-form-inner input[type="radio"],
+.container-preferences-form .cf-form-inner input[type="checkbox"] {
+  appearance: none;
+  height: 22px;
+  width: 22px;
+  border: 1px solid #000;
+  margin-right: 19px;
+}
+
+.register-container input[type="checkbox"]:checked,
+.address-form input[type="checkbox"]:checked,
+.container-preferences-form .cf-form-inner input[type="radio"]:checked,
+.container-preferences-form .cf-form-inner input[type="checkbox"]:checked {
+  background: #000 0% 0% no-repeat padding-box;
+  background-clip: content-box;
+  padding: 2px;
+}
+
+.cf-form-inner .cf-field {
+  padding: 0;
+  margin: 0;
+}
+
+.cf-field.what-sports {
+  margin-bottom: 38px; /* designs are 58, this takes into account the last item mb: 20px */
+}
+
+.cf-field.local-store {
+  margin-bottom: 58px;
+}
+
+.container-preferences-form .cf-field.local-store select {
+  border: 1px solid #000;
+  min-height: 56px;
+}
+
+.container-preferences-form .cf-field.local-store select:first-child {
+  color: #707070;
+  letter-spacing: 0.48px;
+}
+
+label.cf-enum-field__choice {
+  margin: 0 0 20px 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+label.cf-enum-field__choice span {
+  line-height: 1.2;
+}
+
+.container-preferences-form span.cf-down-arrow {
+  border-left: 1px solid black !important;
+  border-bottom: 1px solid black !important;
+  border: 0;
+  height: 10px;
+  width: 10px;
+  transform: rotate(-45deg) translateY(calc(-50% - 5px));
+}
+
+.local-store label {
+  margin-bottom: 20px;
+  letter-spacing: 0.96px;
+  font-size: 16px;
+}
+
+.cf-submit-form {
+  background-color: black !important;
+  color: white !important;
+  width: 373px;
+  height: 56px;
+}
+
+.cf-cancel {
+  display: none !important;
+}
+
+.container-preferences-form {
+  font-family: var(--text-font-family) !important;
+}
+
+@media (max-width: 767px) {
+  .container-preferences-form {
+    margin: 0 23px;
+  }
+  .container-preferences-form .cf-form-inner legend {
+    font-size: 16px;
+  }
+  .container-preferences-form .cf-form-actions .cf-submit-form {
+    margin-bottom: 80px;
+  }
+}
+
+.account-title {
+  font-size: 25px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: black;
+  font-weight: 400;
+  margin-bottom: 25px;
+  text-align: left;
+  padding-top: 35px;
+}
+
+/** Addresses Page **/
+.container-address-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-address-actions .Grid__Cell {
+  margin-bottom: 42px;
+}
+
+.container-address-actions .container-address-list,
+.container-address-actions .container-address-add,
+.container-address-actions .container-address-edit {
+  display: none;
+}
+
+.address-row {
+  display: flex;
+  padding: 23px 0;
+  border-top: solid 1px #d9d9d9;
+}
+
+.address-col,
+.btns-col {
+  flex: 0 1 50%;
+}
+
+.btns-col {
+  display: flex;
+  justify-content: flex-end;
+  margin: unset;
+  width: 100%;
+  align-items: flex-end;
+}
+
+.address-form input.Form__Input {
+  padding: 18px;
+}
+
+.address-form .address-checkbox {
+  display: flex;
+  align-content: center;
+}
+
+.address-form .address-checkbox label {
+  line-height: 1.3;
+}
+
+.address-form-header {
+  margin-bottom: 30px;
+}
+
+.address-form {
+  max-width: 539px;
+}
+
+.address-form select {
+  height: 56px;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.new-address-btn {
+  display: flex;
+  margin-bottom: 41px;
+  letter-spacing: 1.28px;
+}
+
+.new-address-btn button {
+  width: 280px;
+  background: #fff;
+  color: #000;
+  height: 50px;
+  text-transform: uppercase;
+  border: solid 1px black;
+  font-weight: 400;
+}
+
+.address-edit-button {
+  width: 148px;
+  height: 50px;
+  text-transform: uppercase;
+  background: #fff;
+  color: #000;
+  border: solid 1px black;
+  font-weight: 400;
+  margin-left: 20px;
+}
+
+.address-form-submit {
+  width: 200px;
+  height: 50px;
+  text-transform: uppercase;
+  background: #fff;
+  color: #000;
+  border: solid 1px black;
+  font-weight: 400;
+}
+
+.AccountAddress br {
+  display: block;
+}
+
+.AccountAddress {
+  margin-bottom: 0;
+  line-height: 1.3;
+  letter-spacing: 0.64px;
+  text-transform: capitalize;
+}
+
+.address-col h2 {
+  text-transform: none;
+  color: #707070;
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+.AccountAddress span {
+  font-weight: bold;
+}
+
+.bottom-address-section {
+  display: flex;
+}
+
+.bottom-address-row {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bottom-address-row .address-col {
+  flex: 0 0 33%;
+  margin-bottom: 30px;
+}
+
+.bottom-address-btns {
+  text-align: left;
+  margin-top: 15px;
+}
+
+.bottom-address-btns button {
+  text-decoration: underline;
+}
+
+/** Mobile Address Page Styling **/
+@media screen and (max-width: 767px) {
+  .new-address-btn button {
+    width: 100%;
+    margin: 0 23px;
+  }
+  .address-row {
+    display: block;
+  }
+  .address-col {
+    margin-bottom: 20px;
+    padding: 0 23px;
+  }
+  .address-edit-button {
+    width: 40%;
+    margin-left: 0;
+    flex: 0 1 48%;
+    margin: 0;
+  }
+  .btns-col {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 23px;
+  }
+  .first-address-btn {
+    margin-right: 10px;
+  }
+  .bottom-address-row {
+    display: none;
+  }
+  .address-form-header {
+    margin: 0 23px 30px;
+  }
+  .address-form {
+    max-width: 100%;
+    padding: 0 23px;
+  }
+}
+
+/* Special styling for the sidebar nav on mobile address page, since its very big and not well optimised for tablets */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .Container--addresses .account-sidebar {
+    margin-right: 32px;
+  }
+  .Container--addresses .account-navigation {
+    padding-right: 16px;
+  }
+  .Container--addresses .account-navigation-link {
+    font-size: 16px;
+  }
+}
+
+/** Sidebar nav and mobile header styling **/
+@media screen and (max-width: 767px) {
+  .account-sidebar {
+    display: none;
+  }
+  .account-mobile-top {
+    display: flex;
+    background: #f5f5f5;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border-bottom: #d8d8d8 1px solid;
+    height: 84px;
+  }
+  .account-mobile-top.banner-wishlist,
+  .account-mobile-top.banner-orders {
+    margin-bottom: 34px;
+  }
+  .account-mobile-top.banner-preferences,
+  .account-mobile-top.banner-password {
+    margin-bottom: 48px;
+  }
+  .account-mobile-top.banner-addresses {
+    margin-bottom: 25px;
+    border-bottom: 1px solid #d8d8d8;
+  }
+  .account-title {
+    display: none;
+  }
+  .account-title-mobile {
+    font-size: 35px;
+    text-transform: uppercase;
+    letter-spacing: 2.8px;
+    color: #000;
+    text-align: center;
+  }
+  .Container--account-dashboard {
+    flex-direction: column;
+    padding-inline: 0;
+  }
+  .account-arrow {
+    width: 35px;
+    height: 18px;
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-100%);
+  }
+  .new-address-btn {
+    margin-bottom: 25px;
+  }
+  .container-address-actions .Grid__Cell {
+    margin-bottom: 0;
+  }
+}
+@media screen and (max-width: 576px) {
+  .account-title-mobile {
+    font-size: 25px;
+  }
+  .account-arrow {
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%);
+  }
+}
+
+.account-navigation-link {
+  margin-bottom: 18px;
+  color: #a7a7a7;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.active-nav {
+  color: #000;
+}
+
+/** Password Reset Page **/
+.password-reset-button {
+  width: 100%;
+  height: 56px;
+  text-transform: uppercase;
+  background: #000;
+  color: #fff;
+  border: solid 1px black;
+  font-weight: 400;
+}
+
+.account-password-parra {
+  text-align: left;
+}
+
+.reset-password-label {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.reset-password-btn {
+  width: 375px;
+}
+
+.reset-password-btn input {
+  height: 56px;
+}
+
+.container-password-page {
+  max-width: 375px;
+}
+
+/** Mobile Password Styling **/
+@media (max-width: 767px) {
+  .account-password-parra {
+    text-align: center;
+  }
+  .container-password-page {
+    padding: 0 46px;
+    margin-inline: auto;
+  }
+  .reset-password-btn {
+    width: 100%;
+  }
+}
+
+/** Mobile Preferences Page **/
+@media screen and (max-width: 767px) {
+  .subtitle-preferences-page {
+    text-align: center;
+    max-width: 250px;
+    margin: 0 auto 46px auto;
+  }
+  .cf-submit-form {
+    width: 100%;
+  }
+  .PageLayout--breakLap {
+    flex: none;
+    max-width: 100%;
+    width: 100vw;
+  }
+}
+
+@media (min-width: 833px) {
+  .cf-down-arrow {
+    left: 521px;
+  }
+  .cf-select-wrap select {
+    max-width: 541px;
+  }
+}
+
+/** Mobile Top Banner **/
+@media (min-width: 768px) {
+  .account-mobile-top {
+    display: none;
+  }
+  .account-mobile-top {
+    display: none !important;
+  }
+  .mobile-dashboard {
+    display: none;
+  }
+}
+
+/** Wishlist Styling **/
+.container-wishlist-cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px; /* this is how bootstrap makes the first and last items in the row fit in line with the edge of the container */
+}
+
+.container-wishlist-cards .product-card {
+  flex: 0 1 25%;
+  min-height: 372px;
+  position: relative;
+  padding: 0 10px;
+  margin-bottom: 36px;
+}
+
+.container-wishlist-cards .product-card-image {
+  margin-bottom: 18px;
+}
+
+.container-wishlist-cards .product-card-image img {
+  width: 100%;
+}
+
+.container-wishlist-cards .remover {
+  position: absolute;
+  right: 18px;
+  top: 8px;
+  height: 10px;
+  width: 10px;
+  background-color: #fff;
+  z-index: 9999;
+  background: url("https://cdn.shopify.com/s/files/1/0588/3409/2237/files/cancel.png?v=1627626080");
+  background-size: cover;
+}
+
+.container-wishlist-cards .product-title {
+  justify-content: flex-start;
+  font-weight: 400;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 174px;
+}
+
+.container-wishlist-cards .product-title {
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.64px;
+}
+
+.container-wishlist-cards .price-block {
+  margin-bottom: 18px;
+}
+
+.container-wishlist-cards .compare-at-price {
+  text-decoration: line-through;
+  font-weight: 200;
+  line-height: 20px;
+  letter-spacing: 0.64px;
+  line-height: 1.4em;
+  font-size: 14px;
+}
+
+.container-wishlist-cards .atc-wishlist-button {
+  width: 100%;
+  height: 48px;
+  letter-spacing: 1.28px;
+  text-transform: uppercase;
+  background: #000;
+  color: #fff;
+  border: solid 1px black;
+}
+
+.wishlist-page {
+  width: 100%;
+}
+
+.container-wishlist-cards .sold-out {
+  background: white;
+  color: black;
+  cursor: not-allowed;
+}
+
+.container-wishlist-cards .variant-info {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 174px;
+  font-size: 14px;
+  line-height: 16px;
+  color: #6a6a6a;
+  line-height: 20px;
+  letter-spacing: 0.64px;
+}
+
+.container-wishlist-cards .price {
+  line-height: 20px;
+  letter-spacing: 0.64px;
+  color: #333;
+  line-height: 1.4em;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/** Mobile Wishlist Styling **/
+
+@media screen and (max-width: 403px) {
+  .container-wishlist-cards .product-card {
+    flex: 0 1 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container-wishlist-cards {
+    margin: 0;
+  }
+
+  .container-wishlist-cards .product-card {
+    flex: 0 1 50%;
+    justify-content: center;
+    margin: 0;
+    padding: 0 14px;
+    margin-bottom: 42px;
+  }
+
+  .container-wishlist-cards .remover {
+    right: 22px;
+  }
+
+  .container-wishlist-cards .product-title,
+  .container-wishlist-cards .variant-info {
+    max-width: 132px;
+  }
+
+  .container-wishlist-cards .atc-wishlist-button {
+    height: 50px;
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1024px) {
+  .container-wishlist-cards .product-card {
+    flex: 0 1 50%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container-wishlist-cards .product-title {
+    min-height: 60px;
+  }
+}
+
+/** Orders Styling **/
+@media (max-width: 769px) {
+  .desktop-orders-table {
+    display: none;
+  }
+  .mobile-orders-table {
+    text-align: left;
+    width: 100%;
+  }
+  .mobile-orders-table tr {
+    height: 20px;
+    margin-bottom: 10px;
+  }
+  .mobile-orders-line-1 {
+    display: none;
+  }
+  .mobile-orders hr {
+    border-top: solid 1px #d8d8d8;
+    margin: 20px 0;
+  }
+  .mobile-orders-table td {
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    color: #6a696a;
+    width: 50%;
+  }
+  .header-orders {
+    font-weight: 800;
+  }
+}
+
+.desktop-orders-table a {
+  font-size: 14px;
+}
+
+.desktop-orders-table td {
+  font-size: 14px;
+  color: #2c2c2c;
+  border-top: 1px solid #d8d8d8;
+  border-bottom: none;
+}
+
+.desktop-orders-table th {
+  border-bottom: none;
+}
+
+.desktop-orders-table tr {
+  height: 96px;
+}
+
+.desktop-orders-table thead tr {
+  height: auto;
+}
+
+.desktop-orders-table thead th {
+  padding-bottom: 14px;
+}
+
+.returns-banner {
+  height: 57px;
+  padding-inline: 1.75em;
+  margin-bottom: 34px;
+  font-size: 1rem;
+  overflow: hidden;
+  text-align: center;
+  line-height: 57px;
+}
+
+.returns-link {
+  text-decoration: underline;
+}
+
+.Page--orders {
+  padding: 0 30px;
+}
+
+@media (min-width: 769px) {
+  .mobile-orders {
+    display: none;
+  }
+  .container-orders-page {
+    margin-left: 24px;
+  }
+  .returns-banner,
+  .Page--orders {
+    padding-left: 0;
+  }
+}
+
+/** Switch on Preferences Page **/
+.cf-react-target .accepts-switch input[type="checkbox"]:checked {
+  background: url("https://cdn.shopify.com/s/files/1/0588/3409/2237/files/check-icon.svg?v=1628835279")
+    no-repeat;
+  background-size: 16px;
+  background-position: center;
+}

@@ -1,0 +1,752 @@
+{% comment %}
+  Renders a product card
+
+  Accepts:
+  - card_product: {Object} Product Liquid object (optional)
+  - media_aspect_ratio: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
+  - show_secondary_image: {Boolean} Show the secondary image on hover. Default: false (optional)
+  - show_vendor: {Boolean} Show the product vendor. Default: false
+  - show_rating: {Boolean} Show the product rating. Default: false
+  - extend_height: {Boolean} Card height extends to available container space. Default: true (optional)
+  - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
+  - show_quick_add: {Boolean} Show the quick add button.
+  - section_id: {String} The ID of the section that contains this card.
+
+  Usage:
+  {% render 'card-product', show_vendor: section.settings.show_vendor %}
+{% endcomment %}
+{%- assign stitchedProducts = null -%}
+{%- for collection in card_product.collections -%}
+  {%- assign collectionHandleParts = collection.handle | split: '-' -%}
+  {%- if collectionHandleParts[0] == 'stitch' -%}
+    {%- assign stitchedProducts = collection.products -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- assign divisor = 5 -%}
+{%- if desktop_columns -%}
+  {%- assign divisor = desktop_columns -%}
+{%- endif -%}
+{{ 'component-rating.css' | asset_url | stylesheet_tag }}
+{%- if card_product and card_product != empty -%}
+  {%- assign products_linked = card_product.metafields.product_linked.product -%}
+  {%- assign product_label = card_product.metafields.product_label.label -%}
+  {%- liquid
+    assign ratio = 1
+    if card_product.featured_media and media_aspect_ratio == 'portrait'
+      assign ratio = 0.8
+    elsif card_product.featured_media and media_aspect_ratio == 'adapt'
+      assign ratio = card_product.featured_media.aspect_ratio
+    endif
+    if ratio == 0 or ratio == null
+      assign ratio = 1
+    endif
+  -%}
+  <div class='card-wrapper product-card-wrapper card--product'>
+    <div
+      class='
+        card
+        card--{{ settings.card_style }}
+        {% if card_product.featured_media %} card--media{% else %} card--text{% endif %}
+        {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}
+        {% if extend_height %} card--extend-height{% endif %}
+        {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}
+      '
+      style='--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;'
+    >
+      <div
+        class='card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}'
+        style='--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;'
+      >
+        <a href='{{ card_product.url | within: collection }}'>
+          {%- if card_product.featured_media -%}
+            <div class='card__media'>
+              <div class='media media--transparent media--hover-effect '>
+                {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+                <img
+                  srcset='
+                    {%- if card_product.featured_media.width >= 165 -%}{{ card_product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+                    {%- if card_product.featured_media.width >= 360 -%}{{ card_product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+                    {%- if card_product.featured_media.width >= 450 -%}{{ card_product.featured_media | image_url: width: 450 }} 450w,{%- endif -%}
+                    {%- if card_product.featured_media.width >= 533 -%}{{ card_product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+                    {%- if card_product.featured_media.width >= 600 -%}{{ card_product.featured_media | image_url: width: 600 }} 600w,{%- endif -%}
+                    {%- if card_product.featured_media.width >= 720 -%}{{ card_product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
+                    {%- if card_product.featured_media.width >= 800 -%}{{ card_product.featured_media | image_url: width: 800 }} 800w,{%- endif -%}
+                    {%- if card_product.featured_media.width >= 940 -%}{{ card_product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
+                    {%- if card_product.featured_media.width >= 1066 -%}{{ card_product.featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}
+                    {{ card_product.featured_media | image_url }} {{ card_product.featured_media.width }}w
+                  '
+                  src='{{ card_product.featured_media | image_url: width: 720 }}'
+                  sizes='(min-width: 990px) calc((100vw - 130px) / {{ divisor }}), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 50px) / 2)'
+                  alt='{{ card_product.featured_media.alt | escape }}'
+                  class='motion-reduce'
+                  {% unless lazy_load == false %}
+                    loading='lazy'
+                  {% endunless %}
+                  width='{{ card_product.featured_media.width }}'
+                  height='{{ card_product.featured_media.height }}'
+                >
+                {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
+
+                {%- if card_product.media[1] != null
+                  and show_secondary_image
+                -%}
+                  <img
+                    srcset='
+                      {%- if card_product.media[1].width >= 165 -%}{{ card_product.media[1] | image_url: width: 165 }} 165w,{%- endif -%}
+                      {%- if card_product.media[1].width >= 360 -%}{{ card_product.media[1] | image_url: width: 360 }} 360w,{%- endif -%}
+                      {%- if card_product.media[1].width >= 533 -%}{{ card_product.media[1] | image_url: width: 533 }} 533w,{%- endif -%}
+                      {%- if card_product.media[1].width >= 600 -%}{{ card_product.media[1] | image_url: width: 600 }} 600w,{%- endif -%}
+                      {%- if card_product.media[1].width >= 720 -%}{{ card_product.media[1] | image_url: width: 720 }} 720w,{%- endif -%}
+                      {%- if card_product.media[1].width >= 800 -%}{{ card_product.media[1] | image_url: width: 800 }} 800w,{%- endif -%}
+                      {%- if card_product.media[1].width >= 940 -%}{{ card_product.media[1] | image_url: width: 940 }} 940w,{%- endif -%}
+                      {%- if card_product.media[1].width >= 1066 -%}{{ card_product.media[1] | image_url: width: 1066 }} 1066w,{%- endif -%}
+                      {{ card_product.media[1] | image_url }} {{ card_product.media[1].width }}w
+                    '
+                    src='{{ card_product.media[1] | image_url: width: 533 }}'
+                    sizes='(min-width: 990px) calc((100vw - 130px) / {{ divisor }}), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 50px) / 2)'
+                    alt=''
+                    class='motion-reduce'
+                    loading='lazy'
+                    width='{{ card_product.media[1].width }}'
+                    height='{{ card_product.media[1].height }}'
+                  >
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+          <div class='card__content'>
+            <a href='{{ card_product.url | within: collection }}'></a>
+            <div class='card__information'>
+              <h3
+                class='card__heading'
+                {% if card_product.featured_media == null
+                  and settings.card_style == 'standard'
+                %}
+                  id='title-{{ section_id }}-{{ card_product.id }}'
+                {% endif %}
+              >
+                <a
+                  href='{{ card_product.url | within: collection }}'
+                  id='StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }}'
+                  class='full-unstyled-link'
+                  aria-labelledby='StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}'
+                >
+                  {{ card_product.title | escape }}
+                </a>
+              </h3>
+            </div>
+            <div class='card__badge {{ settings.badge_position }}'>
+              {% for tag in card_product.tags %}
+                {% assign sale_tag = tag | split: ':' %}
+                {% assign downcased_tag = sale_tag[1] | downcase %}
+                {% if downcased_tag == 'new' %}
+                  <div class='tag tag--new'>{{ sale_tag[1] }}</div>
+                {%- endif -%}
+              {% endfor %}
+              {%- if card_product.compare_at_price > card_product.price -%}
+                <div class='tag tag--sale'>
+                  {% liquid
+                    assign percent_sale = 0
+                    assign sale_price = card_product.compare_at_price
+                    assign old_price = card_product.price
+                    assign percent_sale = sale_price | minus: old_price | times: 100 | divided_by: sale_price
+                    assign percent_sale_custom = percent_sale | modulo: 5
+                    assign percent_sale_final = percent_sale | minus: percent_sale_custom
+                  %}
+                  -{{ percent_sale_final | append: '%' }}
+                </div>
+              {%- endif -%}
+
+              {%- for tag in card_product.tags -%}
+                {%- if tag contains 'label-' -%}
+                  <div class='tag'>
+                    {{ tag | split: 'label-' | last | capitalize }}
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class='card__content'>
+        <div class='card__information'>
+          {%- assign products_linked = products_linked
+            | prepend: '|'
+            | prepend: card_product.handle
+          -%}
+
+          <product-linked class='product-linked'>
+            {%- assign products_linked_handle = products_linked | split: '|' -%}
+            <div class='product-linked--desktop'>
+              <div class='swiper swiper--product-linked js-swiper-linked'>
+                <div class='swiper-wrapper product-linked__items'>
+                  {% for stiched_product in stitchedProducts %}
+                    {%- for tag in stiched_product.tags -%}
+                      {%- if tag contains 'Colour:'
+                        or tag contains 'colour:'
+                      -%}
+                        {%- assign _color = tag | split: ':' | last -%}
+                        {% if _color contains '|' %}
+                          {% assign _color = tag
+                            | split: '|'
+                            | first
+                            | split: ':'
+                            | last
+                          %}
+                          {% assign _color_two = tag
+                            | split: '|'
+                            | last
+                            | split: ':'
+                            | last
+                          %}
+                        {% else %}
+                          {% assign _color_two = null %}
+                        {% endif %}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    <a
+                      href='{{ stiched_product.url }}'
+                      class='product-linked__item {% if _color_two %} two-color {% endif %}'
+                    >
+                      {% if _color_two %}
+                        <span
+                          class='product-linked__color'
+                          style='background-color: {{ _color }};'
+                        ></span>
+                        <span
+                          class='product-linked__color'
+                          style='background-color: {{ _color_two }};'
+                        ></span>
+                      {% else %}
+                        <span
+                          class='product-linked__color'
+                          style='background-color: {{ _color }};'
+                        ></span>
+                      {% endif %}
+                    </a>
+                  {% endfor %}
+                </div>
+              </div>
+
+              {% comment %}
+                <div class='swiper swiper--product-linked js-swiper-linked'>
+                  <div class='swiper-wrapper'>
+                    {%- for handle in products_linked_handle -%}
+                      {%- assign product = all_products[handle] -%}
+                      <div class='swiper-slide'>
+                        {%- for tag in product.tags -%}
+                          {%- if tag contains 'Colour:' -%}
+                            {%- assign _color = tag | split: ':' | last -%}
+                            {% if _color contains '|' %}
+                              {% assign _color = tag
+                                | split: '|'
+                                | first
+                                | split: ':'
+                                | last
+                              %}
+                              {% assign _color_two = tag
+                                | split: '|'
+                                | last
+                                | split: ':'
+                                | last
+                              %}
+                            {% endif %}
+                          {%- endif -%}
+                        {%- endfor -%}
+                        <a
+                          href='{{ product.url }}'
+                          class='product-linked__item {% if _color_two %} two-color {% endif %}'
+                        >
+                          {% if _color_two %}
+                            <span
+                              class='product-linked__color'
+                              style='background-color: {{ _color }};'
+                            ></span>
+                            <span
+                              class='product-linked__color'
+                              style='background-color: {{ _color_two }};'
+                            ></span>
+                          {% else %}
+                            <span
+                              class='product-linked__color'
+                              style='background-color: {{ _color }};'
+                            ></span>
+                          {% endif %}
+                        </a>
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {% endcomment %}
+              <div class='swiper-button-prev'>
+                {%- render 'icon' with 'chevron-back' -%}
+              </div>
+              <div class='swiper-button-next'>
+                {%- render 'icon' with 'chevron-forward-thin' -%}
+              </div>
+            </div>
+            <div class='product-linked--mobile'>
+              <div class='product-linked__inner'>
+                <div class='product-linked__items'>
+                  {% for stiched_product in stitchedProducts %}
+                    {%- for tag in stiched_product.tags -%}
+                      {%- if tag contains 'Colour:'
+                        or tag contains 'colour:'
+                      -%}
+                        {%- assign _color = tag | split: ':' | last -%}
+                        {% if _color contains '|' %}
+                          {% assign _color = tag
+                            | split: '|'
+                            | first
+                            | split: ':'
+                            | last
+                          %}
+                          {% assign _color_two = tag
+                            | split: '|'
+                            | last
+                            | split: ':'
+                            | last
+                          %}
+                        {% else %}
+                          {% assign _color_two = null %}
+                        {% endif %}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    <a
+                      href='{{ stiched_product.url }}'
+                      class='product-linked__item {% if _color_two %} two-color {% endif %}'
+                    >
+                      {% if _color_two %}
+                        <span
+                          class='product-linked__color'
+                          style='background-color: {{ _color }};'
+                        ></span>
+                        <span
+                          class='product-linked__color'
+                          style='background-color: {{ _color_two }};'
+                        ></span>
+                      {% else %}
+                        <span
+                          class='product-linked__color'
+                          style='background-color: {{ _color }};'
+                        ></span>
+                      {% endif %}
+                    </a>
+                  {% endfor %}
+                  {% comment %}
+                    {%- for handle in products_linked_handle limit: 5 -%}
+                      {%- assign product = all_products[handle] -%}
+                      {% comment %}
+                        <script>
+                          console.log('handle', '{{ handle }}');
+                        </script>
+                      {% endcomment %}
+                      <a
+                        href='{{ product.url }}'
+                        class='product-linked__item {% if forloop.first %}product-linked__item--active{% endif %}'
+                      >
+                        {%- for tag in product.tags -%}
+                          {%- if tag contains 'Colour:' -%}
+                            {%- assign _color = tag | split: ':' | last -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                        <span
+                          class='product-linked__color'
+                          style='background-color: {{ _color }};'
+                        ></span>
+                      </a>
+                    {%- endfor -%}
+                  {% endcomment %}
+                </div>
+              </div>
+              {%- if products_linked_handle.size > 5 -%}
+                <a
+                  class='product-linked__link-more'
+                  href='{{ card_product.url }}'
+                >
+                  {%- render 'icon' with 'plus',
+                    class: 'product-linked__link-more-icon'
+                  -%}
+                </a>
+              {%- endif -%}
+            </div>
+          </product-linked>
+
+          {% comment %}
+            {%- comment -%}new swatch{%- endcomment -%}
+            {%- comment -%}
+              Others swatches
+            {%- endcomment -%}
+            {% assign stitchedProducts = nil %}
+            {% for collection in card_product.collections %}
+              {% assign collectionHandleParts = collection.handle | split: '-' %}
+              {% if collectionHandleParts[0] == 'stitch' %}
+                {% assign stitchedProducts = collection.products %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+            {% assign single = single | default: false %}
+            {% if stitchedProducts and single == false %}
+            {% assign currentProductArr = stitchedProducts | where: "handle", product.handle %}
+            {% assign currentProduct = currentProductArr[0] %}
+            <product-linked class="product-linked">
+              <div class="product-linked--desktop">
+                <div class="swiper swiper--product-linked js-swiper-linked">
+                  <div class="swiper-wrapper">
+                    {% for stitchedProduct in stitchedProducts %}
+                      <div class="swiper-slide">
+                        <div class="product-colors__item {% if stitchedProduct == currentProduct %}product-colors__item--selected{% endif %}">
+                        {%- capture linkTitle -%}
+                        {%- for option in stitchedProduct.options_with_values -%}
+                          {%- if option.name == 'Color' or option.name == 'Colour' -%}
+                          {{- option.values[0] -}}
+                          {%- endif -%}
+                        {%- endfor -%}
+                        {%- endcapture -%}
+                        {% if stitchedProduct == currentProduct %}
+                          <a href="{{ product.url }}" class="{% if forloop.first %}product-linked__item--active{% endif %}">
+                            <span title="{{ linkTitle }}" data-tooltip="{{ linkTitle }}" class="active">
+                                <img src="{{ stitchedProduct.featured_image | img_url: '100x' }}" alt="{{ stitchedProduct.title }} - {{ linkTitle }}" class="lazyload is-lazy" />
+                              </span>
+                          </a>
+                          {% else %}
+                            <a href="{{ stitchedProduct.url }}" title="{{ linkTitle }}" data-tooltip="{{ linkTitle }}">
+                              <img src="{{ stitchedProduct.featured_image | img_url: '100x' }}" alt="{{ stitchedProduct.title }} - {{ linkTitle }}" class="lazyload is-lazy" />
+                            </a>
+                          {% endif %}
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="swiper-button-prev">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.375 5.25L8.625 12L15.375 18.75" stroke="#242424" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="swiper-button-next">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.46875 3.9375L11.5312 9L6.46875 14.0625" stroke="#242424" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="product-linked--mobile">
+                <div class="product-linked__inner">
+                  <div class="product-linked__items">
+                    {% for stitchedProduct in stitchedProducts limit: 5 %}
+                        <div class="product-colors__item {% if stitchedProduct == currentProduct %}product-colors__item--selected{% endif %}">
+                        {%- capture linkTitle -%}
+                        {%- for option in stitchedProduct.options_with_values -%}
+                          {%- if option.name == 'Color' or option.name == 'Colour' -%}
+                          {{- option.values[0] -}}
+                          {%- endif -%}
+                        {%- endfor -%}
+                        {%- endcapture -%}
+                        {% if stitchedProduct == currentProduct %}
+                          <a href="{{ product.url }}" class="{% if forloop.first %}product-linked__item--active{% endif %}">
+                            <span title="{{ linkTitle }}" data-tooltip="{{ linkTitle }}" class="active">
+                                <img src="{{ stitchedProduct.featured_image | img_url: '100x' }}" alt="{{ stitchedProduct.title }} - {{ linkTitle }}" class="lazyload is-lazy" />
+                              </span>
+                          </a>
+                          {% else %}
+                            <a href="{{ stitchedProduct.url }}" title="{{ linkTitle }}" data-tooltip="{{ linkTitle }}">
+                              <img src="{{ stitchedProduct.featured_image | img_url: '100x' }}" alt="{{ stitchedProduct.title }} - {{ linkTitle }}" class="lazyload is-lazy" />
+                            </a>
+                          {% endif %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                {%- if stitchedProducts.size > 5 -%}
+                  <a class="product-linked__link-more" href="{{ card_product.url }}">
+                    <svg class="product-linked__link-more-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9 3.9375V14.0625" stroke="#242424" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M14.0625 9H3.9375" stroke="#242424" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                {%- endif -%}
+              </div>
+            </product-linked>
+            {% endif %}
+          {% endcomment %}
+          {%- comment -%}
+            End others swatches
+          {%- endcomment -%}
+          {%- comment -%}new swatch{%- endcomment -%}
+          <h3
+            class='card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}'
+            {% if card_product.featured_media
+              or settings.card_style == 'card'
+            %}
+              id='title-{{ section_id }}-{{ card_product.id }}'
+            {% endif %}
+          >
+            <a
+              href='{{ card_product.url | within: collection }}'
+              id='CardLink-{{ section_id }}-{{ card_product.id }}'
+              class='full-unstyled-link'
+              aria-labelledby='CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}'
+            >
+              {{ card_product.title | escape }}
+            </a>
+          </h3>
+          <div class='card-information'>
+            {%- if show_vendor -%}
+              <span class='visually-hidden'>
+                {{- 'accessibility.vendor' | t -}}
+              </span>
+              <div class='caption-with-letter-spacing light'>
+                {{ card_product.vendor }}
+              </div>
+            {%- endif -%}
+
+            <span class='caption-large light'>
+              {{- block.settings.description | escape -}}
+            </span>
+
+            {%- if show_rating
+              and card_product.metafields.reviews.rating.value != blank
+            -%}
+              {% liquid
+                assign rating_decimal = 0
+                assign decimal = card_product.metafields.reviews.rating.value.rating | modulo: 1
+                if decimal >= 0.3 and decimal <= 0.7
+                  assign rating_decimal = 0.5
+                elsif decimal > 0.7
+                  assign rating_decimal = 1
+                endif
+              %}
+              <div
+                class='rating'
+                role='img'
+                aria-label='{{ 'accessibility.star_reviews_info' | t: rating_value: card_product.metafields.reviews.rating.value, rating_max: card_product.metafields.reviews.rating.value.scale_max }}'
+              >
+                <span
+                  aria-hidden='true'
+                  class='rating-star color-icon-{{ settings.accent_icons }}'
+                  style='--rating: {{ card_product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ card_product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};'
+                ></span>
+              </div>
+              <p class='rating-text caption'>
+                <span aria-hidden='true'>
+                  {{- card_product.metafields.reviews.rating.value }} /
+                  {{ card_product.metafields.reviews.rating.value.scale_max -}}
+                </span>
+              </p>
+              <p class='rating-count caption'>
+                <span aria-hidden='true'
+                  >({{ card_product.metafields.reviews.rating_count }})</span
+                >
+                <span class='visually-hidden'>
+                  {{- card_product.metafields.reviews.rating_count }}
+                  {{ 'accessibility.total_reviews' | t -}}
+                </span>
+              </p>
+            {%- endif -%}
+
+            {% render 'price',
+              product: card_product,
+              price_class: 'price--card-product'
+            %}
+            <div class='card__label'>
+              {{- product_label -}}
+            </div>
+          </div>
+        </div>
+        {%- if show_quick_add -%}
+          <div class='quick-add no-js-hidden'>
+            {%- assign product_form_id = 'quick-add-'
+              | append: section_id
+              | append: card_product.id
+            -%}
+            {%- if card_product.variants.size == 1 -%}
+              <product-form>
+                {%- form 'product',
+                  card_product,
+                  id: product_form_id,
+                  class: 'form',
+                  novalidate: 'novalidate',
+                  data-type: 'add-to-cart-form'
+                -%}
+                  <input
+                    type='hidden'
+                    name='id'
+                    value='{{ card_product.selected_or_first_available_variant.id }}'
+                    disabled
+                  >
+                  <button
+                    id='{{ product_form_id }}-submit'
+                    type='submit'
+                    name='add'
+                    class='quick-add__submit button button--full-width button--secondary'
+                    aria-haspopup='dialog'
+                    aria-labelledby='{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}'
+                    aria-live='polite'
+                    data-sold-out-message='true'
+                    {% if card_product.selected_or_first_available_variant.available
+                        == false
+                    %}
+                      disabled
+                    {% endif %}
+                  >
+                    <span>
+                      {%- if card_product.selected_or_first_available_variant.available -%}
+                        {{ 'products.product.add_to_cart' | t }}
+                      {%- else -%}
+                        {{ 'products.product.sold_out' | t }}
+                      {%- endif -%}
+                    </span>
+                    <span class='sold-out-message hidden'>
+                      {{ 'products.product.sold_out' | t }}
+                    </span>
+                    <div class='loading-overlay__spinner hidden'>
+                      <svg
+                        aria-hidden='true'
+                        focusable='false'
+                        role='presentation'
+                        class='spinner'
+                        viewBox='0 0 66 66'
+                        xmlns='http://www.w3.org/2000/svg'
+                      >
+                        <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                      </svg>
+                    </div>
+                  </button>
+                {%- endform -%}
+              </product-form>
+            {%- else -%}
+              <modal-opener data-modal='#QuickAdd-{{ card_product.id }}'>
+                <button
+                  id='{{ product_form_id }}-submit'
+                  type='submit'
+                  name='add'
+                  class='quick-add__submit button button--full-width button--secondary'
+                  aria-haspopup='dialog'
+                  aria-labelledby='{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}'
+                  data-product-url='{{ card_product.url }}'
+                >
+                  {{ 'products.product.choose_options' | t }}
+                  <div class='loading-overlay__spinner hidden'>
+                    <svg
+                      aria-hidden='true'
+                      focusable='false'
+                      role='presentation'
+                      class='spinner'
+                      viewBox='0 0 66 66'
+                      xmlns='http://www.w3.org/2000/svg'
+                    >
+                      <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                    </svg>
+                  </div>
+                </button>
+              </modal-opener>
+              <quick-add-modal
+                id='QuickAdd-{{ card_product.id }}'
+                class='quick-add-modal'
+              >
+                <div
+                  role='dialog'
+                  aria-label='{{ 'products.product.choose_product_options' | t: product_name: card_product.title | escape }}'
+                  aria-modal='true'
+                  class='quick-add-modal__content global-settings-popup'
+                  tabindex='-1'
+                >
+                  <button
+                    id='ModalClose-{{ card_product.id }}'
+                    type='button'
+                    class='quick-add-modal__toggle'
+                    aria-label='{{ 'accessibility.close' | t }}'
+                  >
+                    {% render 'icon-close' %}
+                  </button>
+                  <div
+                    id='QuickAddInfo-{{ card_product.id }}'
+                    class='quick-add-modal__content-info'
+                  ></div>
+                </div>
+              </quick-add-modal>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        <div class='card__badge {{ settings.badge_position }}'>
+          {%- if card_product.available == false -%}
+            <span
+              id='Badge-{{ section_id }}-{{ card_product.id }}'
+              class='badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}'
+            >
+              {{- 'products.product.sold_out' | t -}}
+            </span>
+          {%- elsif card_product.compare_at_price > card_product.price
+            and card_product.available
+          -%}
+            <span
+              id='Badge-{{ section_id }}-{{ card_product.id }}'
+              class='badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}'
+            >
+              {{- 'products.product.on_sale' | t -}}
+            </span>
+          {%- endif -%}
+        </div>
+      </div>
+      <div class='ShopTheLook__ProductList Carousel Carousel--fadeIn hidden-pocket hidden'>
+        <a
+          href='{{ card_product.url | within: collection }}'
+          class='ShopTheLook__ViewButton Button Button--primary Button--full'
+        >
+          {{- 'home_page.shop_the_look.view_product' | t -}}
+        </a>
+      </div>
+    </div>
+  </div>
+{%- else -%}
+  <div class='product-card-wrapper card-wrapper underline-links-hover'>
+    <div
+      class='
+        card
+        card--{{ settings.card_style }}
+        card--text
+        {% if extend_height %} card--extend-height{% endif %}
+        {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}
+        {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}
+      '
+      style='--ratio-percent: 100%;'
+    >
+      <div
+        class='card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if settings.card_style == 'standard' %} ratio{% endif %}'
+        style='--ratio-percent: 100%;'
+      >
+        <div class='card__content'>
+          <div class='card__information'>
+            <h3 class='card__heading'>
+              <a role='link' aria-disabled='true' class='full-unstyled-link'>
+                {{ 'onboarding.product_title' | t }}
+              </a>
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class='card__content'>
+        <div class='card__information'>
+          <h3 class='card__heading{% if settings.card_style == 'standard' %} h5{% endif %}'>
+            <a role='link' aria-disabled='true' class='full-unstyled-link'>
+              {{ 'onboarding.product_title' | t }}
+            </a>
+          </h3>
+          <div class='card-information'>
+            {%- if show_vendor -%}
+              <span class='visually-hidden'>
+                {{- 'accessibility.vendor' | t -}}
+              </span>
+              <div class='caption-with-letter-spacing light'>
+                {{ 'products.product.vendor' | t }}
+              </div>
+            {%- endif -%}
+            {% render 'price' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

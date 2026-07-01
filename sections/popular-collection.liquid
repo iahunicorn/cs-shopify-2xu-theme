@@ -1,0 +1,68 @@
+<div
+  class='ss__autocomplete__terms ss__auto complete__terms-trending popular-category'
+  style='display: none;'
+>
+  <div class='ss__autocomplete__terms__trending'>
+    <div class='ss__autocomplete__title ss__autocomplete__title--trending'>
+      <h5>{{ section.settings.title }}</h5>
+    </div>
+    <div
+      class='ss__autocomplete__terms__options'
+      role='list'
+      aria-label='Popular Searches'
+    >
+      {%- for block in section.blocks -%}
+        <div class='ss__autocomplete__terms__option'>
+          <a href='/collections/{{ block.settings.collection }}' role='link'>
+            <em>{{ block.settings.collection }}</em>
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+<script>
+  let showSearch = document.querySelector('.search-desktop');
+  let boxWrapper = document.querySelector(
+    '.ss__autocomplete--target .ss__autocomplete ss__theme'
+  );
+  let PopularCat = document.querySelector(
+    '#shopify-section-popular-collection .ss__autocomplete__terms'
+  );
+  if (showSearch) {
+    boxWrapper.append(PopularCat);
+  }
+</script>
+{% schema %}
+{
+  "name": "Instant Search - Popular",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Instant Search - Popular Categories"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Collection",
+      "type": "popular_collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "popular_collection"
+      }
+    ]
+  }
+}
+{% endschema %}

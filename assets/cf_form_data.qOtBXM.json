@@ -1,0 +1,286 @@
+{
+	"form": {
+	  "id": "qOtBXM",
+	  "name": "Manage preferences",
+	  "handle": "manage-preferences-2",
+	  "theme_id": "124833169613",
+	  "settings": {
+		"locales": {
+		  "back": "Back",
+		  "next": "Next",
+		  "cancel": "Cancel",
+		  "edit_link": "Edit account",
+		  "fix_errors": "Please fix errors before continuing",
+		  "is_invalid": "{{label}} is invalid",
+		  "email_taken": "Email has already been taken",
+		  "phone_taken": "Phone number has already been taken",
+		  "server_error": "Could not save form, please try again later",
+		  "step_counter": "Step {{current}} of {{total}}",
+		  "verify_email": "Check your email for a verification link to activate your account.",
+		  "not_available": "An error occurred while saving your account, please try again in a few minutes.",
+		  "create_account": "Create account",
+		  "update_account": "Save Changes",
+		  "recaptcha_error": "Challenge verification failed, please try again",
+		  "creating_account": "Creating account...",
+		  "updating_account": "Updating account...",
+		  "invalid_email_domain": "Email contains an invalid domain name"
+		},
+		"enableRecaptcha": false,
+		"whitelistedTags": "",
+		"recaptchaSiteKey": "",
+		"markRequiredFields": false,
+		"displayCancelButton": true,
+		"goBackAfterSubmission": false,
+		"cancelButtonRedirectUrl": "\/account\/login",
+		"postSubmissionRedirectUrl": "\/account",
+		"goBackAfterCancelButtonClick": false
+	  },
+	  "install_locations": [
+		"manual"
+	  ],
+	  "created_at": "2021-07-25T04:00:43Z",
+	  "updated_at": "2021-07-26T06:10:43Z",
+	  "revision_ids": [
+		"MDTlwr9",
+		"rATyd8A",
+		"LbTox42",
+		"2ETzVAL",
+		"X1TkX0a",
+		"vbT0b37",
+		"p4TZ49l",
+		"58T74Mp",
+		"RxToxDd",
+		"orTYw7e",
+		"7kTpvXv",
+		"GYT50bd",
+		"vbT0bLO",
+		"7kTpvya"
+	  ]
+	},
+	"revision": {
+	  "id": "MDTlwr9",
+	  "created_at": "2021-07-30T07:01:48Z",
+	  "updated_at": "2021-07-30T07:01:48Z",
+	  "embed_version": "4.5.9",
+	  "published_at": null,
+	  "fields": [
+		{
+		  "id": 638845,
+		  "dataColumn": {
+			"key": "preferences_sport",
+			"label": "What sports are you interested in? ",
+			"dataType": "list"
+		  },
+		  "parentId": null,
+		  "position": 0,
+		  "type": "checkbox_list",
+		  "stepId": 660375,
+		  "default": "",
+		  "label": "WHAT SPORTS ARE YOU INTERESTED IN?",
+		  "placeholder": null,
+		  "description": "",
+		  "enum": [
+			{
+			  "value": "preference~gym",
+			  "label": "Training (gym)"
+			},
+			{
+			  "value": "preference~triathlon",
+			  "label": "Triathlon"
+			},
+			{
+			  "value": "preference~cycling",
+			  "label": "Cycling"
+			},
+			{
+			  "value": "preference~swimming",
+			  "label": "Swimming"
+			},
+			{
+			  "value": "preference~running",
+			  "label": "Running"
+			},
+			{
+			  "value": "preference~other",
+			  "label": "Other"
+			}
+		  ],
+		  "appearance": {
+			"width": 12,
+			"cssClass": "what-sports"
+		  },
+		  "settings": {
+			"end": 10,
+			"start": 1,
+			"enumType": "list",
+			"direction": "column",
+			"separateValues": true
+		  },
+		  "validations": [
+  
+		  ],
+		  "sensitive": null,
+		  "preset": null,
+		  "autotag": true
+		},
+		{
+		  "id": 435564,
+		  "dataColumn": {
+			"key": "local_store",
+			"label": "Please select your local store",
+			"dataType": "text"
+		  },
+		  "parentId": null,
+		  "position": 1,
+		  "type": "dropdown",
+		  "stepId": 660375,
+		  "default": "",
+		  "label": "PLEASE SELECT YOUR LOCAL STORE",
+		  "placeholder": "Store Selection",
+		  "description": "",
+		  "enum": [
+			{
+			  "value": "store-store-id-Brighton",
+			  "label": "Brighton"
+			},
+			{
+			  "value": "store-store-id-Camberwell",
+			  "label": "Camberwell"
+			},
+			{
+			  "value": "store-store-id-Castle Towers",
+			  "label": "Castle Towers"
+			},
+			{
+			  "value": "store-store-id-Chadstone",
+			  "label": "Chadstone"
+			},
+			{
+			  "value": "store-store-id-Chermside",
+			  "label": "Chermside"
+			},
+			{
+			  "value": "store-store-id-Doncaster",
+			  "label": "Doncaster"
+			},
+			{
+			  "value": "store-store-id-Gold Coast Harbour Town",
+			  "label": "Gold Coast Harbour Town"
+			},
+			{
+			  "value": "store-store-id-Malvern",
+			  "label": "Malvern"
+			},
+			{
+			  "value": "store-store-id-Southland",
+			  "label": "Southland"
+			},
+			{
+			  "value": "store-store-id-Paddington",
+			  "label": "Paddington"
+			},
+			{
+			  "value": "store-store-id-Manly",
+			  "label": "Manly"
+			},
+			{
+			  "value": "store-store-id-Watertown",
+			  "label": "Watertown"
+			},
+			{
+			  "value": "store-store-id- DFO South Wharf",
+			  "label": "DFO South Wharf"
+			},
+			{
+			  "value": "store-store-id-DFO Spencer St",
+			  "label": "DFO Spencer St"
+			},
+			{
+			  "value": "store-store-id-DFO Essendon",
+			  "label": "DFO Essendon"
+			},
+			{
+			  "value": "store-store-id-DFO Moorabbin",
+			  "label": "DFO Moorabbin"
+			},
+			{
+			  "value": "store-store-id-DFO Homebush",
+			  "label": "DFO Homebush"
+			},
+			{
+			  "value": "store-store-id-DFO Brisbane Airport",
+			  "label": "DFO Brisbane Airport"
+			}
+		  ],
+		  "appearance": {
+			"width": 12,
+			"cssClass": "local-store"
+		  },
+		  "settings": {
+			"end": 10,
+			"start": 1,
+			"enumType": "list",
+			"separateValues": true
+		  },
+		  "validations": [
+  
+		  ],
+		  "sensitive": null,
+		  "preset": null,
+		  "autotag": true
+		},
+		{
+		  "id": 546276,
+		  "dataColumn": {
+			"key": "accepts_marketing",
+			"label": "Email Opt in",
+			"dataType": "boolean"
+		  },
+		  "parentId": null,
+		  "position": 2,
+		  "type": "radio",
+		  "stepId": 660375,
+		  "default": "",
+		  "label": "RECEIVE MARKETING COMMUNICATIONS?",
+		  "placeholder": null,
+		  "description": "",
+		  "enum": [
+			{
+			  "value": "Yes",
+			  "label": "Yes"
+			},
+			{
+			  "value": "No",
+			  "label": "No"
+			}
+		  ],
+		  "appearance": {
+			"width": 12
+		  },
+		  "settings": {
+			"end": 10,
+			"start": 1,
+			"enumType": "list",
+			"direction": "column",
+			"separateValues": true
+		  },
+		  "validations": [
+  
+		  ],
+		  "sensitive": null,
+		  "preset": null,
+		  "autotag": false
+		}
+	  ],
+	  "steps": [
+		{
+		  "id": 660375,
+		  "title": "Step 1",
+		  "description": ""
+		}
+	  ],
+	  "rules": [
+  
+	  ]
+	}
+  }

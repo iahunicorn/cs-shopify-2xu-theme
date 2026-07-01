@@ -1,0 +1,622 @@
+<style>
+  /* ── Hero ── */
+  .bp-hero {
+    padding: 40px 24px 36px 24px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .bp-hero__eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 8px;
+  }
+  .bp-hero__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    font-weight: 400;
+    color: #111;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+  .bp-hero__copy {
+    font-size: 13px;
+    color: #555;
+    max-width: 480px;
+    margin: 0 0 16px 0;
+    line-height: 1.7;
+  }
+  .bp-hero__badge {
+    display: inline-block;
+    background: #111;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 2px;
+  }
+  @media (max-width: 700px) {
+    .bp-hero { padding: 28px 16px; }
+    .bp-hero__title { font-size: 32px; }
+  }
+
+  /* ── Wrapper ── */
+  .sp-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    min-height: 80vh;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  /* ── LEFT: product grid ── */
+  .sp-left {
+    border-right: 1px solid #e0e0e0;
+    padding: 24px 20px;
+  }
+  .sp-progress {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 16px;
+  }
+  .sp-progress strong {
+    color: #111;
+  }
+  .sp-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+  }
+  .sp-thumb {
+    aspect-ratio: 1 / 1;
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    background: #f5f5f5;
+    transition: border-color 0.12s;
+    position: relative;
+  }
+  .sp-thumb:hover { border-color: #888; }
+  .sp-thumb.is-selected { border-color: #111; }
+  .sp-thumb.is-maxed:not(.is-selected) {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .sp-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .sp-thumb__count {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #111;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .sp-thumb.is-selected .sp-thumb__count { display: flex; }
+
+  /* ── RIGHT: info panel ── */
+  .sp-info {
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+  .sp-info__name {
+    font-size: 14px;
+    font-weight: 400;
+    color: #111;
+    line-height: 1.4;
+  }
+  .sp-info__link {
+    font-size: 13px;
+    color: #111;
+    text-decoration: underline;
+  }
+  .sp-divider {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 0;
+  }
+  .sp-info__price { font-size: 14px; color: #111; }
+  .sp-info__label { font-size: 12px; color: #888; margin-bottom: 8px; }
+  .sp-sizes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .sp-size {
+    height: 38px;
+    border: 1px solid #d0d0d0;
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: inherit;
+    background: #fff;
+    cursor: pointer;
+    color: #111;
+    transition: background 0.1s;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 6px;
+  }
+  .sp-size:hover:not(.is-sold-out) { background: #f5f5f5; }
+  .sp-size.is-active {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+  }
+  .sp-size.is-sold-out {
+    color: #ccc;
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+  .sp-info__stock { font-size: 12px; color: #888; }
+
+  .sp-add-btn {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #d0d0d0;
+    border-radius: 3px;
+    font-size: 11px;
+    font-family: inherit;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    background: #fff;
+    cursor: pointer;
+    color: #111;
+    transition: background 0.1s, color 0.1s;
+  }
+  .sp-add-btn:hover { background: #f5f5f5; }
+  .sp-add-btn:disabled { background: #f5f5f5; color: #bbb; cursor: not-allowed; }
+
+  /* ── Summary ── */
+  .sp-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .sp-summary__label {
+    font-size: 11px;
+    color: #bbb;
+    font-style: italic;
+    margin-bottom: 2px;
+  }
+  .sp-summary-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    background: #fafafa;
+    transition: opacity 0.2s;
+  }
+  .sp-summary-item.is-empty { opacity: 0.4; }
+  .sp-summary-item__img-placeholder {
+    width: 48px;
+    height: 48px;
+    border-radius: 2px;
+    background: #ebebeb;
+    flex-shrink: 0;
+  }
+  .sp-summary-item__img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 2px;
+    flex-shrink: 0;
+    display: none;
+  }
+  .sp-summary-item__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+  }
+  .sp-summary-item__name {
+    font-size: 12px;
+    color: #111;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sp-summary-item__size { font-size: 11px; color: #888; }
+  .sp-summary-item__remove {
+    font-size: 16px;
+    color: #bbb;
+    cursor: pointer;
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    line-height: 1;
+    padding: 0;
+  }
+  .sp-summary-item__remove:hover { color: #111; }
+
+  /* ── ATC ── */
+  .sp-atc-btn {
+    width: 100%;
+    height: 54px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: inherit;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    background: #111;
+    cursor: pointer;
+    color: #fff;
+    transition: background 0.15s;
+    display: none;
+  }
+  .sp-atc-btn.is-visible { display: block; }
+  .sp-atc-btn:hover { background: #333; }
+  .sp-atc-btn:disabled { background: #999; cursor: not-allowed; }
+  .sp-atc-error {
+    font-size: 11px;
+    color: #c00;
+    display: none;
+  }
+  .sp-atc-error.is-visible { display: block; }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .sp-wrapper { grid-template-columns: 1fr; }
+    .sp-info { max-height: none; border-top: 1px solid #e0e0e0; }
+    .sp-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 500px) {
+    .sp-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+
+<!-- ── Hero ── -->
+<div class="bp-hero">
+  <p class="bp-hero__eyebrow">Vectr Socks</p>
+  <h2 class="bp-hero__title">3 Pairs for $80.</h2>
+  <p class="bp-hero__copy">
+    Pick any three pairs from our Vectr sock range and pay just $80. Mix styles, mix colours - find your perfect trio for running, training or everyday wear.
+  </p>
+  <span class="bp-hero__badge">3 for $80</span>
+</div>
+
+{%- assign sock_collection = collections['3-for-80-vectr-socks-29-99-styles-only'] -%}
+{%- assign first_sock      = sock_collection.products.first -%}
+
+<div class="sp-wrapper">
+
+  <!-- LEFT: product thumbnails -->
+  <div class="sp-left">
+    <p class="sp-progress" id="sp-progress">Select <strong>3</strong> pairs — <strong>0</strong> of 3 chosen</p>
+    <div class="sp-grid">
+      {%- for product in sock_collection.products -%}
+        <div class="sp-thumb"
+             data-handle="{{ product.handle }}"
+             data-title="{{ product.title | escape }}"
+             data-price="{{ product.price | money }}"
+             data-image="{{ product.featured_image | image_url: width: 900 }}"
+             data-thumb="{{ product.featured_image | image_url: width: 400, height: 400, crop: 'center' }}"
+             data-count="{{ product.images.size }}"
+             data-available="{{ product.available }}">
+          <img src="{{ product.featured_image | image_url: width: 400, height: 400, crop: 'center' }}"
+               alt="{{ product.title | escape }}" loading="lazy" width="400" height="400">
+          <span class="sp-thumb__count">1</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <!-- RIGHT: info + size + summary -->
+  <div class="sp-info">
+    <p class="sp-info__name" id="sp-name">{{ first_sock.title }}</p>
+    <a class="sp-info__link" id="sp-link" href="/products/{{ first_sock.handle }}">View product</a>
+    <hr class="sp-divider">
+    <p class="sp-info__price" id="sp-price">{{ first_sock.price | money }} AUD</p>
+
+    <div>
+      <p class="sp-info__label">Size</p>
+      <div class="sp-sizes" id="sp-sizes">
+        {%- for variant in first_sock.variants -%}
+          <button
+            class="sp-size{% if forloop.first %} is-active{% endif %}{% unless variant.available %} is-sold-out{% endunless %}"
+            data-variant-id="{{ variant.id }}"
+            {% unless variant.available %}disabled{% endunless %}>
+            {{ variant.title | split: ' / ' | last }}
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <p class="sp-info__stock" id="sp-stock">
+      {%- if first_sock.available -%}In Stock{%- else -%}Out of Stock{%- endif -%}
+    </p>
+
+    <button class="sp-add-btn" id="sp-add-btn">ADD TO BUNDLE</button>
+
+    <div class="sp-summary">
+      <p class="sp-summary__label">Your bundle — 3 for $80</p>
+
+      <div class="sp-summary-item is-empty" id="sp-slot-0">
+        <div class="sp-summary-item__img-placeholder" id="sp-slot-0-placeholder"></div>
+        <img class="sp-summary-item__img" id="sp-slot-0-img" src="" alt="">
+        <div class="sp-summary-item__text">
+          <span class="sp-summary-item__name" id="sp-slot-0-name">Pair 1</span>
+          <span class="sp-summary-item__size" id="sp-slot-0-size">Not yet selected</span>
+        </div>
+        <button class="sp-summary-item__remove" id="sp-slot-0-remove" style="display:none">&#215;</button>
+      </div>
+
+      <div class="sp-summary-item is-empty" id="sp-slot-1">
+        <div class="sp-summary-item__img-placeholder" id="sp-slot-1-placeholder"></div>
+        <img class="sp-summary-item__img" id="sp-slot-1-img" src="" alt="">
+        <div class="sp-summary-item__text">
+          <span class="sp-summary-item__name" id="sp-slot-1-name">Pair 2</span>
+          <span class="sp-summary-item__size" id="sp-slot-1-size">Not yet selected</span>
+        </div>
+        <button class="sp-summary-item__remove" id="sp-slot-1-remove" style="display:none">&#215;</button>
+      </div>
+
+      <div class="sp-summary-item is-empty" id="sp-slot-2">
+        <div class="sp-summary-item__img-placeholder" id="sp-slot-2-placeholder"></div>
+        <img class="sp-summary-item__img" id="sp-slot-2-img" src="" alt="">
+        <div class="sp-summary-item__text">
+          <span class="sp-summary-item__name" id="sp-slot-2-name">Pair 3</span>
+          <span class="sp-summary-item__size" id="sp-slot-2-size">Not yet selected</span>
+        </div>
+        <button class="sp-summary-item__remove" id="sp-slot-2-remove" style="display:none">&#215;</button>
+      </div>
+    </div>
+
+    <button class="sp-atc-btn" id="sp-atc-btn">ADD BUNDLE TO CART</button>
+    <p class="sp-atc-error" id="sp-atc-error">Something went wrong. Please try again.</p>
+  </div>
+
+</div>
+
+<script>
+(function () {
+
+  var nameEl     = document.getElementById('sp-name');
+  var linkEl     = document.getElementById('sp-link');
+  var priceEl    = document.getElementById('sp-price');
+  var sizesEl    = document.getElementById('sp-sizes');
+  var stockEl    = document.getElementById('sp-stock');
+  var addBtn     = document.getElementById('sp-add-btn');
+  var atcBtn     = document.getElementById('sp-atc-btn');
+  var atcError   = document.getElementById('sp-atc-error');
+  var progressEl = document.getElementById('sp-progress');
+
+  var BUNDLE_SIZE       = 3;
+  var selectedVariantId = null;
+  var activeThumb       = null;
+  var slots             = [null, null, null];
+
+  /* ── Thumbnail click ── */
+  document.querySelectorAll('.sp-thumb').forEach(function(thumb) {
+    thumb.addEventListener('click', function() {
+      if (thumb.classList.contains('is-maxed')) return;
+
+      document.querySelectorAll('.sp-thumb').forEach(function(t) {
+        t.classList.remove('is-active-preview');
+      });
+      thumb.classList.add('is-active-preview');
+      activeThumb = thumb;
+
+      nameEl.textContent  = thumb.dataset.title;
+      priceEl.textContent = thumb.dataset.price + ' AUD';
+      linkEl.href         = '/products/' + thumb.dataset.handle;
+      stockEl.textContent = thumb.dataset.available === 'true' ? 'In Stock' : 'Out of Stock';
+
+      fetch('/products/' + thumb.dataset.handle + '.js')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          sizesEl.innerHTML = data.variants.map(function(v, i) {
+            var label = v.title.split(' / ').pop();
+            return '<button class="sp-size' +
+              (i === 0 ? ' is-active' : '') +
+              (!v.available ? ' is-sold-out' : '') + '"' +
+              ' data-variant-id="' + v.id + '"' +
+              (!v.available ? ' disabled' : '') + '>' +
+              label + '</button>';
+          }).join('');
+          var first = data.variants.find(function(v) { return v.available; }) || data.variants[0];
+          selectedVariantId = first ? String(first.id) : null;
+        })
+        .catch(function(err) { console.error('Sock picker:', err); });
+    });
+  });
+
+  /* ── Size buttons ── */
+  sizesEl.addEventListener('click', function(e) {
+    var btn = e.target.closest('.sp-size');
+    if (!btn || btn.disabled) return;
+    sizesEl.querySelectorAll('.sp-size').forEach(function(b) { b.classList.remove('is-active'); });
+    btn.classList.add('is-active');
+    selectedVariantId = btn.dataset.variantId;
+  });
+
+  /* ── ADD TO BUNDLE ── */
+  addBtn.addEventListener('click', function() {
+    if (!selectedVariantId || !activeThumb) {
+      alert('Please select a sock style and size first.');
+      return;
+    }
+
+    var emptySlot = slots.indexOf(null);
+    if (emptySlot === -1) return;
+
+    var activeSize = sizesEl.querySelector('.sp-size.is-active');
+    var sizeLabel  = activeSize ? activeSize.textContent.trim() : '';
+
+    slots[emptySlot] = {
+      variantId: selectedVariantId,
+      name:      activeThumb.dataset.title,
+      size:      sizeLabel,
+      thumb:     activeThumb.dataset.thumb
+    };
+
+    updateSlotUI(emptySlot);
+    updateProgress();
+    updateThumbCounts();
+    updateAddBtn();
+    checkAllSelected();
+  });
+
+  function updateSlotUI(index) {
+    var slot        = slots[index];
+    var row         = document.getElementById('sp-slot-' + index);
+    var img         = document.getElementById('sp-slot-' + index + '-img');
+    var placeholder = document.getElementById('sp-slot-' + index + '-placeholder');
+    var nameSpan    = document.getElementById('sp-slot-' + index + '-name');
+    var sizeSpan    = document.getElementById('sp-slot-' + index + '-size');
+    var removeBtn   = document.getElementById('sp-slot-' + index + '-remove');
+
+    if (slot) {
+      row.classList.remove('is-empty');
+      placeholder.style.display = 'none';
+      img.src = slot.thumb;
+      img.style.display = 'block';
+      nameSpan.textContent = slot.name;
+      sizeSpan.textContent = 'Size \u2014 ' + slot.size;
+      removeBtn.style.display = 'block';
+    } else {
+      row.classList.add('is-empty');
+      placeholder.style.display = 'block';
+      img.style.display = 'none';
+      img.src = '';
+      nameSpan.textContent = 'Pair ' + (index + 1);
+      sizeSpan.textContent = 'Not yet selected';
+      removeBtn.style.display = 'none';
+    }
+  }
+
+  function updateProgress() {
+    var filled = slots.filter(function(s) { return s !== null; }).length;
+    progressEl.innerHTML = 'Select <strong>3</strong> pairs \u2014 <strong>' + filled + '</strong> of 3 chosen';
+  }
+
+  function updateThumbCounts() {
+    var thumbCountMap = {};
+    slots.forEach(function(slot) {
+      if (!slot) return;
+      document.querySelectorAll('.sp-thumb').forEach(function(thumb) {
+        if (thumb.dataset.thumb === slot.thumb) {
+          thumbCountMap[thumb.dataset.handle] = (thumbCountMap[thumb.dataset.handle] || 0) + 1;
+        }
+      });
+    });
+
+    var totalFilled = slots.filter(function(s) { return s !== null; }).length;
+
+    document.querySelectorAll('.sp-thumb').forEach(function(thumb) {
+      thumb.classList.remove('is-selected', 'is-maxed');
+      var countEl = thumb.querySelector('.sp-thumb__count');
+      var count   = thumbCountMap[thumb.dataset.handle] || 0;
+      if (count > 0) {
+        thumb.classList.add('is-selected');
+        if (countEl) countEl.textContent = count;
+      } else {
+        if (countEl) countEl.textContent = '0';
+      }
+      if (totalFilled >= BUNDLE_SIZE && count === 0) {
+        thumb.classList.add('is-maxed');
+      }
+    });
+  }
+
+  function updateAddBtn() {
+    var filled = slots.filter(function(s) { return s !== null; }).length;
+    addBtn.disabled    = filled >= BUNDLE_SIZE;
+    addBtn.textContent = filled >= BUNDLE_SIZE ? 'BUNDLE COMPLETE' : 'ADD TO BUNDLE';
+  }
+
+  function checkAllSelected() {
+    var filled = slots.filter(function(s) { return s !== null; }).length;
+    if (filled === BUNDLE_SIZE) {
+      atcBtn.classList.add('is-visible');
+    } else {
+      atcBtn.classList.remove('is-visible');
+      atcError.classList.remove('is-visible');
+    }
+  }
+
+  /* ── Remove slot ── */
+  [0, 1, 2].forEach(function(index) {
+    var removeBtn = document.getElementById('sp-slot-' + index + '-remove');
+    if (!removeBtn) return;
+    removeBtn.addEventListener('click', function() {
+      slots[index] = null;
+      updateSlotUI(index);
+      updateProgress();
+      updateThumbCounts();
+      updateAddBtn();
+      checkAllSelected();
+    });
+  });
+
+  /* ── ADD TO CART ── */
+  atcBtn.addEventListener('click', function() {
+    var filled = slots.filter(function(s) { return s !== null; }).length;
+    if (filled < BUNDLE_SIZE) return;
+
+    atcBtn.disabled    = true;
+    atcBtn.textContent = 'ADDING...';
+    atcError.classList.remove('is-visible');
+
+    var items = slots.map(function(slot) {
+      return { id: Number(slot.variantId), quantity: 1 };
+    });
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ items: items })
+    })
+    .then(function(r) { if (!r.ok) throw new Error('Cart error'); return r.json(); })
+    .then(function() {
+      atcBtn.textContent = 'ADDED \u2713';
+      setTimeout(function() { window.location.href = '/cart'; }, 600);
+    })
+    .catch(function(err) {
+      console.error('ATC error:', err);
+      atcBtn.disabled    = false;
+      atcBtn.textContent = 'ADD BUNDLE TO CART';
+      atcError.classList.add('is-visible');
+    });
+  });
+
+  /* ── Load first thumb on page load ── */
+  var firstThumb = document.querySelector('.sp-thumb');
+  if (firstThumb) firstThumb.click();
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Bundle Picker — Socks",
+  "settings": [],
+  "presets": [{ "name": "Bundle Picker — Socks" }]
+}
+{% endschema %}

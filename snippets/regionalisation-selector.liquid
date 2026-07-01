@@ -1,0 +1,34 @@
+{% comment %} Parameters
+- selectorId
+{% endcomment %}
+<modal-dialog id="region-modal-popup" class="color-background-1 region-modal-popup">
+    <div class="modal-region" role="dialog" aria-label="test" aria-modal="true" tabindex="-1">
+        <button id="ModalClose-{{ block.id }}" type="button" class="region-popup-modal__toggle"
+            aria-label="{{ 'accessibility.close' | t }}">
+            {% render 'icon-close' %}
+        </button>
+        <div class="region-popup-modal__content-info">
+            <div class="region-popup-modal__content-inner">
+                <h4 class="">{{ 'general.regionalisation.region_select_label' | t }}</h4>
+                <ul id="{{ selectorId }}" class="region-selector Linklist">
+                    <li class="region-group region-group-us">
+                        <h5><span>{{ 'general.regionalisation.americas' | t }}</span>{% render 'icon-caret' %}</h5>
+                        <ul></ul>
+                    </li>
+                    <li class="region-group region-group-asia">
+                        <h5><span>{{ 'general.regionalisation.asia_pacific' | t }}</span>{% render 'icon-caret' %}</h5>
+                        <ul></ul>
+                    </li>
+                    <li class="region-group region-group-eu">
+                        <h5><span>{{ 'general.regionalisation.europe' | t }}</span>{% render 'icon-caret' %}</h5>
+                        <ul></ul>
+                    </li>
+                    <li class="region-group region-group-africa">
+                        <h5><span>{{ 'general.regionalisation.middle_east_africa' | t }}</span>{% render 'icon-caret' %}</h5>
+                        <ul></ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</modal-dialog>

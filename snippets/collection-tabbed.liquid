@@ -1,0 +1,14 @@
+{%- assign mod_sub_collections = collection.metafields.tabbed.sub_collection | split: '|' -%}
+
+{%- if mod_sub_collections != blank -%}
+  {{ 'section-collection-tabbed.css' | asset_url | stylesheet_tag }}
+  <div class="collection-tabbed container">
+    <div class="collection-tabbed__inner">
+      <a class="collection-tabbed__item is-active" href="{{ collection.url }}">{{ collection.title }}</a>
+      {%- for handle in mod_sub_collections -%}
+        {%- assign sub_collection = collections[handle] -%}
+        <a href="{{ sub_collection.url }}" class="collection-tabbed__item">{{ sub_collection.title }}</a>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

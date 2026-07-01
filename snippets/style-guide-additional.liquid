@@ -1,0 +1,84 @@
+<section class='style-guide__section'>
+  <div class='style-guide__section-header'>
+    <div class='container'>
+      <h3 class='style-guide__section-header-title'>
+        {{ 'style_guide.additional' | t }}
+      </h3>
+    </div>
+  </div>
+  <div class='style-guide__section-content'>
+    <div class='container'>
+      <div class='grid grid--2 style-guide__additional-elements'>
+        <div class='grid__item'>
+          <h5 class='style-guide__section-title'>
+            {{ 'style_guide.tags' | t }}
+          </h5>
+          <div class='style-guide__tags'>
+            <span class='tag tag--sale'>-30%</span>
+            <span class='tag tag--new'>{{ 'style_guide.new' | t }}</span>
+          </div>
+
+          <h5 class='style-guide__section-title'>
+            {{ 'style_guide.quantity_counter' | t }}
+          </h5>
+          <div class='style-guide__quantity-counter'>
+            <quantity-input class='quantity'>
+              <button
+                class='quantity__button no-js-hidden'
+                name='minus'
+                type='button'
+              >
+                <span class='visually-hidden'>
+                  {{- 'style_guide.decrease_quantity_for_active_trisuit' | t -}}
+                </span>
+                {% render 'icon' with 'minus', class: 'quantity__icon' %}
+              </button>
+              <input
+                class='quantity__input'
+                type='number'
+                name='quantity'
+                id='Quantity-template--16394572628200__main'
+                min='1'
+                value='1'
+                form='product-form-template--16394572628200__main'
+              >
+              <button
+                class='quantity__button no-js-hidden'
+                name='plus'
+                type='button'
+              >
+                <span class='visually-hidden'>
+                  {{- 'style_guide.increase_quantity_for_active_trisuit' | t -}}
+                </span>
+                {%- render 'icon' with 'plus', class: 'quantity__icon' -%}
+              </button>
+            </quantity-input>
+          </div>
+        </div>
+        <div class='grid__item'>
+          <h5 class='style-guide__section-title'>
+            {{ 'style_guide.notifications' | t }}
+          </h5>
+          <div class='style-guide__notifications'>
+            <div class='notification' style='margin-bottom: 10px;'>
+              <span class='notification__text'>
+                {{- 'style_guide.standard_notification' | t -}}
+              </span>
+              <span class='notification__close'>
+                {%- render 'icon' with 'close-outline' -%}
+              </span>
+            </div>
+            <div class='notification notification--error'>
+              <span class='notification__text'>
+                {{- 'style_guide.error_notification' | t -}}
+              </span>
+              <span class='notification__close'>
+                {%- render 'icon' with 'close-outline' -%}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

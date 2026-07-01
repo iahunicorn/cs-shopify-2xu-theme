@@ -1,0 +1,45 @@
+
+<script>
+  window.colorSwatches = {
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        {% assign swatch = block.settings.title | downcase %}
+        {% if block.settings.pattern != blank or block.settings.color != blank %}
+          '{{ swatch }}': {
+            pattern: {% if block.settings.pattern != blank %}'{{ block.settings.pattern | image_url: width: 100}}'{% else %} null{% endif %},
+            color: '{{ block.settings.color }}'
+          }{% unless forloop.last %},{% endunless %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  };
+</script>
+
+{% schema %}
+  {
+    "name": "Color Swatches",
+    "blocks": [
+      {
+        "type": "swatch",
+        "name": "Swatch",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "image_picker",
+            "id": "pattern",
+            "label": "Pattern"
+          },
+          {
+            "type": "color_background",
+            "id": "color",
+            "label": "Color or Gradient"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,87 @@
+{%- liquid
+  # Initialize variables
+  assign breadcrumb_collections = ''
+  assign current_collection = collection
+  assign max_depth = 10
+  assign depth = 0
+
+  # Build breadcrumbs from current collection up to root
+  for i in (1..max_depth)
+    assign depth = depth | plus: 1
+
+    if current_collection.metafields.custom.breadcrumb_parent_collection
+      assign parent_handle = current_collection.metafields.custom.breadcrumb_parent_collection
+      assign parent_collection = collections[parent_handle]
+
+      if parent_collection
+        # Prepend parent to breadcrumbs (since we're going backwards)
+        if breadcrumb_collections == blank
+          assign breadcrumb_collections = parent_collection.handle
+        else
+          assign breadcrumb_collections = parent_collection.handle | append: ',' | append: breadcrumb_collections
+        endif
+
+        # Move up to the parent for next iteration
+        assign current_collection = parent_collection
+      else
+        # Parent handle exists but collection not found, break loop
+        break
+      endif
+    else
+      # No more parents, break loop
+      break
+    endif
+
+    # Safety check to prevent infinite loops
+    if depth >= max_depth
+      break
+    endif
+  endfor
+
+  # Add current collection to end of breadcrumbs
+  if breadcrumb_collections != blank
+    assign breadcrumb_collections = breadcrumb_collections | append: ',' | append: collection.handle
+  else
+    assign breadcrumb_collections = collection.handle
+  endif
+
+  # Split into array for rendering
+  assign breadcrumb_array = breadcrumb_collections | split: ','
+-%}
+
+{%- comment -%} JSON-LD Structured Data for Breadcrumbs {%- endcomment -%}
+<script type='application/ld+json'>
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {%- for breadcrumb_handle in breadcrumb_array -%}
+        {%- assign breadcrumb_collection = collections[breadcrumb_handle] -%}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "name": {{ breadcrumb_collection.title | json }},
+          "item": "{{ shop.secure_url }}{{ breadcrumb_collection.url }}"
+        }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  }
+</script>
+
+<nav class='tw-flex tw-flex-wrap tw-items-center tw-gap-2 tw-font-input-mono tw-px-4 lg:tw-px-12 tw-mb-3'>
+  {%- for breadcrumb_handle in breadcrumb_array -%}
+    {%- assign breadcrumb_collection = collections[breadcrumb_handle] -%}
+    <span class='tw-flex tw-items-center tw-gap-2 tw-whitespace-nowrap'>
+      {%- unless forloop.first -%}
+        <span class='tw-text-xs'>•</span>
+      {%- endunless -%}
+      {%- assign breadcrumb_label = breadcrumb_collection.metafields.custom.breadcrumb_label.value -%}
+      <a
+        href='{{ breadcrumb_collection.url }}'
+        class='tw-text-xs md:tw-text-2xs tw-uppercase'
+      >
+        {{ breadcrumb_label | default: breadcrumb_collection.title }}
+      </a>
+    </span>
+  {%- endfor -%}
+</nav>

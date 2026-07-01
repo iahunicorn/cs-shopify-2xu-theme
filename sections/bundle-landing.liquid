@@ -1,0 +1,248 @@
+<style>
+  /* ── Hero ── */
+  .bl-hero {
+    padding: 48px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #fff;
+  }
+  .bl-hero__left {}
+  .bl-hero__eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 12px;
+  }
+  .bl-hero__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    font-weight: 400;
+    color: #111;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 0;
+  }
+  .bl-hero__right {}
+  .bl-hero__copy {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .bl-hero__badge {
+    display: inline-block;
+    background: #111;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 9px 20px;
+    border-radius: 2px;
+  }
+
+  /* ── Grid ── */
+  .bl-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: #e0e0e0;
+    margin: 0;
+  }
+  .bl-tile {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    display: block;
+    text-decoration: none;
+    background: #111;
+  }
+  .bl-tile--full {
+    grid-column: 1 / 3;
+    aspect-ratio: 21 / 9;
+  }
+  .bl-tile__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .bl-tile:hover .bl-tile__img {
+    transform: scale(1.03);
+  }
+  .bl-tile__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);
+  }
+  .bl-tile__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 24px 28px;
+  }
+  .bl-tile__label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 5px;
+  }
+  .bl-tile__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: #fff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .bl-tile--full .bl-tile__title {
+    font-size: 38px;
+  }
+  .bl-tile__cta {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.55);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 9px 18px;
+    border-radius: 2px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .bl-tile:hover .bl-tile__cta {
+    background: rgba(255,255,255,0.22);
+    border-color: #fff;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .bl-hero {
+      grid-template-columns: 1fr;
+      padding: 36px 24px;
+      gap: 20px;
+    }
+    .bl-hero__title { font-size: 44px; }
+    .bl-grid { grid-template-columns: 1fr; }
+    .bl-tile--full { grid-column: 1; aspect-ratio: 16 / 9; }
+    .bl-tile { aspect-ratio: 4 / 3; }
+  }
+  @media (max-width: 600px) {
+    .bl-hero__title { font-size: 36px; }
+    .bl-tile__title { font-size: 26px; }
+    .bl-tile--full .bl-tile__title { font-size: 26px; }
+    .bl-tile__content { padding: 18px 20px; }
+  }
+</style>
+
+<!-- ── Hero ── -->
+<div class="bl-hero">
+  <div class="bl-hero__left">
+    <p class="bl-hero__eyebrow">2XU Bundles</p>
+    <h1 class="bl-hero__title">Build Your Bundle and Save 20%.</h1>
+  </div>
+  <div class="bl-hero__left">
+    <p class="bl-hero__copy">
+      Get more from every session. Choose from our Run, Train, Triathlon, Sportswear and Sock bundles - select your products, pick your sizes, and save 20% automatically when you complete the kit. No codes. No fuss. Just performance gear built for you. <br> Online Exclusive
+    </p>
+  </div>
+</div>
+
+<!-- ── Bundle grid ── -->
+<!-- ── Bundle grid ── -->
+<div class="bl-grid">
+
+  <a class="bl-tile" href="/pages/run-bundle">
+    <img class="bl-tile__img"
+         src="https://cdn.shopify.com/s/files/1/0518/4087/6699/files/2XU_SeasonalCampaign_Run_13_OUTFIT07_MENS_2220.jpg?v=1776048451"
+         alt="Run Bundle">
+    <div class="bl-tile__overlay"></div>
+    <div class="bl-tile__content">
+      <p class="bl-tile__label">Top + Shorts + Socks</p>
+      <h2 class="bl-tile__title">Run Bundle</h2>
+      <span class="bl-tile__cta">Shop Now</span>
+    </div>
+  </a>
+
+  <a class="bl-tile" href="/pages/train-bundle">
+    <img class="bl-tile__img"
+         src="https://cdn.shopify.com/s/files/1/0518/4087/6699/files/2XU_Train_14_OUTFIT04_WOMENS_2581_1.jpg?v=1776048555"
+         alt="Train Bundle">
+    <div class="bl-tile__overlay"></div>
+    <div class="bl-tile__content">
+      <p class="bl-tile__label">Top + Shorts + Socks</p>
+      <h2 class="bl-tile__title">Train Bundle</h2>
+      <span class="bl-tile__cta">Shop Now</span>
+    </div>
+  </a>
+
+  <a class="bl-tile" href="/pages/triathlon-bundle">
+    <img class="bl-tile__img"
+         src="https://cdn.shopify.com/s/files/1/0518/4087/6699/files/2XU_SeasonalCampaign_Try_14_OUTFIT06_MENS_3963.jpg?v=1776048681"
+         alt="Triathlon Bundle">
+    <div class="bl-tile__overlay"></div>
+    <div class="bl-tile__content">
+      <p class="bl-tile__label">Wetsuit + Trisuit</p>
+      <h2 class="bl-tile__title">Triathlon Bundle</h2>
+      <span class="bl-tile__cta">Shop Now</span>
+    </div>
+  </a>
+
+  <a class="bl-tile" href="/pages/sportswear-bundle">
+    <img class="bl-tile__img"
+         src="https://cdn.shopify.com/s/files/1/0518/4087/6699/files/2XU_Train_13_OUTFIT03_WOMENS_2487_1.jpg?v=1776048926"
+         alt="Sportswear Bundle">
+    <div class="bl-tile__overlay"></div>
+    <div class="bl-tile__content">
+      <p class="bl-tile__label">Top + Bottoms</p>
+      <h2 class="bl-tile__title">Sportswear Bundle</h2>
+      <span class="bl-tile__cta">Shop Now</span>
+    </div>
+  </a>
+
+  <a class="bl-tile" href="/pages/compression-bundle">
+    <img class="bl-tile__img"
+         src="https://cdn.shopify.com/s/files/1/0518/4087/6699/files/2XU_SeasonalCampaign_Run_09_OUTFIT05_WOMENS_1640.jpg?v=1776051476"
+         alt="Core Compression Bundle">
+    <div class="bl-tile__overlay"></div>
+    <div class="bl-tile__content">
+      <p class="bl-tile__label">Top + Bottoms</p>
+      <h2 class="bl-tile__title">Core Compression Bundle</h2>
+      <span class="bl-tile__cta">Shop Now</span>
+    </div>
+  </a>
+
+  <a class="bl-tile" href="/pages/socks-bundle">
+    <img class="bl-tile__img"
+         src="https://cdn.shopify.com/s/files/1/0518/4087/6699/files/image_1.jpg?v=1776236320"
+         alt="Socks Bundle"
+         style="object-position: center bottom;">
+    <div class="bl-tile__overlay"></div>
+    <div class="bl-tile__content">
+      <p class="bl-tile__label">Any 3 pairs</p>
+      <h2 class="bl-tile__title">Socks Bundle - 3 for $80</h2>
+      <span class="bl-tile__cta">Shop Now</span>
+    </div>
+  </a>
+
+</div>
+
+{% schema %}
+{
+  "name": "Bundle Landing",
+  "settings": [],
+  "presets": [{ "name": "Bundle Landing" }],
+  "class": "section-full-width"
+}
+{% endschema %}

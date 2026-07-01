@@ -1,0 +1,57 @@
+{% liquid
+  # Relative to entrypointsDir
+  render 'vite-tag' with 'plp.js'
+%}
+<div class='tw-min-h-96 tw-py-5 lg:tw-py-6'>
+  <search-results
+    spell-checked-title='{{ section.settings.spell_checked_title }}'
+    search-results-title='{{ section.settings.title }}'
+    search-query='{{ search.terms }}'
+    no-results-text='{{ section.settings.no_results_text }}'
+    no-results-recommendation-id='{{ settings.tagalys_no_results_recommendation_id }}'
+  >
+    <div class='tw-px-4 lg:tw-px-12 tw-flex tw-flex-col tw-gap-3 lg:tw-gap-6 tw-border-b tw-border-2xu-light-grey tw-w-full tw-pb-4 lg:tw-pb-6'>
+      <h2 class='tw-text-2xs tw-font-input-mono tw-uppercase'>
+        {{ section.settings.title }}
+      </h2>
+      <h3 class='tw-text-xl lg:tw-text-5xl tw-font-sweet-sans tw-uppercase'>
+        ‘{{ search.terms }}’
+      </h3>
+    </div>
+    <div class='tw-px-4 lg:tw-px-12 tw-py-4 tw-border-t tw-border-2xu-light-grey'>
+      <div class='tw-pb-4'>
+        {% render 'html-filters' %}
+      </div>
+      <div class='tw-py-4'>
+        {% render 'html-products' %}
+      </div>
+    </div>
+  </search-results>
+</div>
+{% schema %}
+{
+  "name": "t:sections.main-search.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Showing results for:"
+    },
+    {
+      "type": "text",
+      "id": "spell_checked_title",
+      "label": "Spell checked title",
+      "default": "No results for $original_query. Showing $number results for $spell_checked_query instead"
+    },
+    {
+      "type": "text",
+      "id": "no_results_text",
+      "label": "No results text",
+      "default": "No results found"
+    }
+  ]
+}
+{% endschema %}

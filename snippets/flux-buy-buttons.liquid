@@ -1,0 +1,62 @@
+{%- for option in product.options_with_values -%}
+    {%- assign option_name = option.name | downcase -%}
+    {%- if option_name == "size" -%}
+      {%- assign size_option = option -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+<div class='tw-z-40 tw-flex-[2_2_0%]'>
+  {% comment %}
+    <buy-buttons-provider
+      x-size-option='{{ size_option | json | escape }}'
+      x-product='{{ product | json | escape }}'
+    >
+      <div className='tw-relative tw-flex'>
+        <size-option-selector></size-option-selector>
+        {% comment %} <size-option-selector-trigger></size-option-selector-trigger> {% endcomment %}
+        <add-to-cart-button></add-to-cart-button>
+      </div>
+    </buy-buttons-provider>
+  {% endcomment %}
+  {% comment %}
+    {%- form 'product',
+      product,
+      id: product_form_id,
+      class: 'form flux-ATC-form',
+      novalidate: 'novalidate',
+      data-type: 'add-to-cart-form'
+    -%}
+  {% endcomment %}
+  {% comment %} <div id='BIS_trigger'></div> {% endcomment %}
+  <buy-buttons
+    x-size-option='{{ size_option | json | escape }}'
+    x-product='{{ product | json | escape }}'
+    x-model-wear-size='{{product.metafields.custom.models_wears_size}}'
+    x-model='{{ product.metafields.custom.model_name.value | json | escape }}'
+    x-show-size-guide-link='{{ show_size_guide_link }}'
+    x-variants-inventory='
+      {
+        {% for variant in product.variants %}
+        "{{ variant.id }}": {
+          "inventory_quantity": "{{ variant.inventory_quantity }}"
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      }
+    '
+    only-x-units='{{ settings.only_x_units }}'
+    x-shop-url='{{ shop.secure_url }}{{ product.url }}'
+    x-product-price='{{ product.price|money }}'
+    x-product-compare-at-price='{{ product.compare_at_price_max|money }}'
+    x-product-collections='{{ product.collections|map:'title'|json|escape }}'
+    x-add-to-cart-text='{{ settings.add_to_cart_label }}'
+    x-out-of-stock-text='{{ settings.out_of_stock_label }}'
+    x-size-selector-label='{{ block.settings.size_selector_label }}'
+    x-size-selector-size-label='{{ block.settings.size_selector_size_label }}'
+    x-size-selector-size-guide-label='{{ block.settings.size_selector_size_guide_label }}'
+    x-size-selector-modal-heading='{{ block.settings.size_selector_modal_heading }}'
+    x-size-selector-low-inventory-message='{{ block.settings.size_selector_low_inventory_message }}'
+    x-model-wears-size-text='{{ block.settings.model_wears_size_text }}'
+  >
+  </buy-buttons>
+  {% comment %} {%- endform -%} {% endcomment %}
+</div>

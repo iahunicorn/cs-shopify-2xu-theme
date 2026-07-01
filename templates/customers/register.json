@@ -1,0 +1,37 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "24968c8c-4d44-43b8-9ae5-0241f9806689": {
+      "type": "account-promotion-banner",
+      "settings": {
+        "visible": true,
+        "title": "",
+        "subttitle": "",
+        "color_title": "",
+        "image_desktop": "shopify://shop_images/WK27-account_banners_update_5b3ee87d-d82c-4b62-abe1-4db126a962d7.jpg",
+        "image_mobile": "shopify://shop_images/WK27-account_banners_update_5b3ee87d-d82c-4b62-abe1-4db126a962d7.jpg",
+        "link_banner": "",
+        "color_background": ""
+      }
+    },
+    "main": {
+      "type": "main-register",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "24968c8c-4d44-43b8-9ae5-0241f9806689",
+    "main"
+  ]
+}

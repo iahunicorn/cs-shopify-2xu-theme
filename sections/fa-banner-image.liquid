@@ -1,0 +1,164 @@
+{% if section.settings.content_position == 'centered' %}
+  {% assign is_centered = true %}
+{% else %}
+  {% assign is_centered = false %}
+{% endif %}
+<section class="md:tw-pb-12 {% if section.settings.contained %} tw-px-4 lg:tw-px-12{% endif %}">
+  {% comment %} Server render first slide for performance {% endcomment %}
+  <div class="tw-aspect-[397/424] md:tw-aspect-[808/608] lg:tw-aspect-[1480/608] tw-relative{% if section.settings.contained %} tw-overflow-hidden tw-rounded-2xl{% endif %}">
+    {% assign mobile_img = section.settings.mobile_image | default: section.settings.image %}
+    <picture>
+      <source
+        media="(max-width: 767px)"
+        srcset="
+          {{ mobile_img | image_url: width: 400 }} 400w,
+          {{ mobile_img | image_url: width: 800 }} 800w
+        "
+        sizes="100vw"
+      />
+      <source
+        media="(min-width: 768px)"
+        srcset="
+          {{ section.settings.image | image_url: width: 1200 }} 1200w,
+          {{ section.settings.image | image_url: width: 1600 }} 1600w,
+          {{ section.settings.image | image_url: width: 2400 }} 2400w
+        "
+        sizes="100vw"
+      />
+      <img
+        loading="lazy"
+        src="{{ section.settings.image | image_url: width: 1200 }}"
+        alt="{{ section.settings.heading }}"
+        class="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover tw-object-center"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+      />
+    </picture>
+    <div class="tw-absolute tw-inset-0 tw-flex {% if is_centered %}tw-items-center tw-justify-center{% else %}tw-items-end tw-justify-start{% endif %}">
+      <div class="tw-px-4 lg:tw-px-12 tw-w-full">
+        <div class="tw-flex {% if is_centered %}tw-flex-col tw-items-center tw-text-center{% else %}tw-flex-col md:tw-flex-row md:tw-justify-between{% endif %} tw-pb-12">
+          <div class="show-empty tw-flex tw-flex-col tw-text-2xu-white {% if is_centered %}  {% else %}lg:tw-mb-0{% endif %} tw-mb-6">
+            {% if section.settings.heading != blank %}
+              <h2 class="tw-text-xl md:tw-text-7xl tw-font-sweet-sans {% if section.settings.content_position == 'centered' %}md:tw-mb-6{% else %}lg:tw-mb-4{% endif %}">
+                {{ section.settings.heading }}
+              </h2>
+            {% endif %}
+            {% if section.settings.subheading != blank %}
+              <p class="tw-text-xs md:tw-text-xl tw-text-2xu-white tw-font-sweet-sans tw-text-shadow-flux">{{ section.settings.subheading }}</p>
+            {% endif %}
+          </div>
+          <div class="tw-flex tw-gap-2 tw-items-end md:tw-justify-end tw-shrink">
+            {% if section.settings.button_1_text != blank and section.settings.button_1_link != blank %}
+              <a
+                href="{{ section.settings.button_1_link }}"
+                class="tw-bg-2xu-white tw-text-2xu-black tw-px-5 md:tw-px-10 tw-py-2 md:tw-py-3 tw-rounded md:tw-font-medium tw-text-xs md:tw-text-sm tw-font-euclid tw-whitespace-nowrap tw-transition-colors hover:tw-bg-2xu-black hover:tw-text-2xu-white"
+              >
+                {{ section.settings.button_1_text }}
+              </a>
+            {% endif %}
+            {% if section.settings.button_2_text != blank and section.settings.button_2_link != blank %}
+              <a
+                href="{{ section.settings.button_2_link }}"
+                class="tw-bg-2xu-white/50 tw-text-2xu-white tw-px-5 md:tw-px-10 tw-py-2 md:tw-py-3 tw-rounded md:tw-font-medium tw-text-xs md:tw-text-sm tw-font-euclid tw-whitespace-nowrap tw-transition-colors hover:tw-bg-2xu-black hover:tw-text-2xu-white"
+              >
+                {{ section.settings.button_2_text }}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+{% schema %}
+{
+  "name": "F.A. Image Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image",
+      "info": "Optional mobile-specific image, falls back to desktop image if not set"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "header",
+      "content": "Button 1"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Button 1 Text"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "header",
+      "content": "Button 2"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Button 2 Text"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button 2 Link"
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content Position",
+      "options": [
+        {
+          "value": "centered",
+          "label": "Centered"
+        },
+        {
+          "value": "left",
+          "label": "Bottom Left"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "contained",
+      "label": "Contain content within max width",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "category": "Homepage Section",
+      "name": "F.A. Image Banner"
+    }
+  ]
+}
+{% endschema %}

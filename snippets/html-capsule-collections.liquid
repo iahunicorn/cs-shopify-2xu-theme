@@ -1,0 +1,83 @@
+{%- liquid
+  assign current_collection = collection
+  assign capsule_items = current_collection.metafields.custom.capsule_collections_items.value
+  assign aspect_ratio = current_collection.metafields.custom.capsule_collections_aspect_ratio | default: 'Landscape'
+  assign section_title = current_collection.metafields.custom.capsule_collections_title
+-%}
+{{ count }}
+
+{%- if capsule_items | size > 0 -%}
+  <div class='tw-bg-2xu-light-grey tw-py-4 md:tw-py-6'>
+    <!-- Header -->
+    <div class='tw-flex tw-items-center tw-justify-between tw-mb-4 tw-px-4 lg:tw-px-12'>
+      <h4 class='text-sm lg:tw-text-xl tw-font-sweet-sans'>
+        {{ section_title }}
+      </h4>
+
+      <!-- Navigation Arrows Placeholder (static, non-functional) -->
+      <div class='tw-flex tw-gap-2'>
+        <button
+          class='tw-p-2 tw-rounded-full tw-text-2xu-mid-grey tw-cursor-not-allowed'
+          disabled
+        >
+          {% render 'icon-left-chevron' %}
+        </button>
+        <button class='tw-p-2 tw-rounded-full tw-text-2xu-black tw-bg-2xu-white'>
+          {% render 'icon-right-chevron' %}
+        </button>
+      </div>
+    </div>
+
+    <!-- Collections Container -->
+    <div
+      class='tw-flex tw-gap-2 tw-px-4 lg:tw-px-12 tw-overflow-x-auto tw-scrollbar-hide'
+    >
+      {%- for item in capsule_items -%}
+        {%- assign capsule_collection = collections[item.collection] -%}
+
+        <!-- Collection Item -->
+        <a
+          href='{{ capsule_collection.url }}'
+          class='tw-block tw-group tw-cursor-pointer tw-transition-all tw-duration-300 tw-flex-shrink-0 {%- if aspect_ratio == 'Landscape' -%}tw-w-[292px] md:tw-w-[345px]{%- else -%}tw-w-[176px] md:tw-w-[330px]{%- endif -%}'
+        >
+          <!-- Image Container -->
+          <div class='{%- if aspect_ratio == 'Landscape' -%}tw-aspect-[443/250]{%- else -%}tw-aspect-[330/412]{%- endif %} tw-rounded-lg tw-overflow-hidden tw-mb-4'>
+            {%- if item.image != blank -%}
+              <img
+                class='tw-w-full tw-h-full tw-object-cover tw-transition-transform tw-duration-300 group-hover:tw-scale-105'
+                src='{{ item.image | image_url }}'
+                alt='{{ item.title }}'
+                width='{{ item.image.width }}'
+                height='{{ item.image.height }}'
+              >
+            {%- endif -%}
+          </div>
+
+          <!-- Content -->
+          <div class='tw-px-2 lg:tw-px-0'>
+            <h5 class='tw-flex tw-items-center tw-gap-2 tw-font-input-mono tw-font-normal tw-tracking-tight tw-text-sm tw-transition-colors tw-duration-200 group-hover:tw-text-gray-600'>
+              {{ item.title }}
+              <span>
+                <!-- Up Chevron -->
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  viewBox='0 0 16 14'
+                  fill='none'
+                  class='tw--rotate-45 tw-w-4 lg:tw-h-4'
+                >
+                  <path fill="currentColor" d="M16 7 9.333 0l-.94.987L13.447 6.3H0v1.4h13.447l-5.054 5.313.94.987L16 7Z"/>
+                </svg>
+              </span>
+            </h5>
+
+            {%- if item.additional_content != blank -%}
+              <p class='tw-text-2xu-dark-grey tw-text-xs tw-font-euclid tw-mt-1 tw-whitespace-pre-line'>
+                {{ item.additional_content }}
+              </p>
+            {%- endif -%}
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

@@ -1,0 +1,46 @@
+{{ 'basic-form.css' | asset_url | stylesheet_tag }}
+{{ 'account.css' | asset_url | stylesheet_tag }}
+{{ 'accounts.css' | asset_url | stylesheet_tag }}
+{% assign form_id = section.settings.form_id %}
+
+{% if customer %}
+  {% render 'account-mobile-top', account_header_title: page.title, margin_bottom: 'banner-preferences' %}
+
+  <div class="Container Container--narrow Container--account-dashboard page-preferences">
+    {% render 'account-navigation' %}
+    <div class="PageLayout PageLayout--breakLap">
+      <div class="container-preferences-page">
+        <div class="container-preferences-page-title">
+          <h1 class="account-title">{{ section.settings.title }}</h1>
+        </div>
+        <div class="container-preferences-form">
+          {% unless shop.permanent_domain == 'uk-2xu.myshopify.com' %}
+          {% if form_id != blank %}
+            {% render "customer-fields", form_id: form_id %}
+          {% endif %}
+          {% endunless %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Preferences Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Preferences"
+    },
+    {
+      "type": "text",
+      "id": "form_id",
+      "label": "Customr Form Id",
+      "info": "This field can be found from the Customr app, under Forms > Manage > Installation > Other location"
+    }
+  ]
+}
+{% endschema %}

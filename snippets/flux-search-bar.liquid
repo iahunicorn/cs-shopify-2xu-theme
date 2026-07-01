@@ -1,0 +1,135 @@
+<script
+  src='https://storage.googleapis.com/tagalys-public-assets/api-connector-3.0.6.min.js'
+  defer
+></script>
+
+<script>
+  function setTagalysConfiguration() {
+    Tagalys.setConfiguration({
+      api: {
+        serverUrl: '{{ settings.tagalys_api_server }}',
+        apiKey: '{{ settings.tagalys_api_key }}', //
+      },
+      analyticsStorageConsentProvided: function () {
+        // return true/false based on user's consent settings
+        return true;
+      },
+      track: true,
+    });
+  }
+
+  function setPlatformConfigurationForTagalys() {
+    Tagalys.setPlatformConfiguration({
+      platform: 'shopify',
+      waitForStorefrontAPI: true,
+      countryCode: '{{ shop.country_code }}',
+      baseCountryCode: '{{ shop.country_code }}',
+      useStorefrontAPIForSecondaryMarkets: true,
+      storefrontAPI: {
+        accessToken: '{{ settings.tagalys_storefront_access_token }}',
+        myShopifyDomain: '{{ settings.tagalys_my_shopify_domain }}',
+      },
+      metafields: {
+        products: [
+          {
+            namespace: 'custom',
+            key: 'sale_badge',
+          },
+          {
+            namespace: 'custom',
+            key: 'secondary_sale_badge',
+          },
+          {
+            namespace: 'custom',
+            key: 'short_description',
+          },
+        ],
+      },
+    });
+  }
+
+  function onTagalysReady(callback) {
+    if (window.Tagalys) {
+      window.setTagalysConfiguration();
+      window.setPlatformConfigurationForTagalys();
+      callback();
+    } else {
+      window.addEventListener('DOMContentLoaded', function () {
+        window.setTagalysConfiguration();
+        window.setPlatformConfigurationForTagalys();
+        callback();
+      });
+    }
+  }
+  if (!window.onTagalysReady) {
+    window.onTagalysReady = onTagalysReady;
+  }
+  if (!window.setTagalysConfiguration) {
+    window.setTagalysConfiguration = setTagalysConfiguration;
+  }
+  if (!window.setPlatformConfigurationForTagalys) {
+    window.setPlatformConfigurationForTagalys =
+      setPlatformConfigurationForTagalys;
+  }
+</script>
+
+{% assign default_collection_handle = settings.default_collection %}
+{% assign default_collection = collections[default_collection_handle] %}
+
+{% capture collection_data %}
+  {
+    "title": {{ default_collection.title | json }},
+    "handle": {{ default_collection.handle | json }},
+    "description": {{ default_collection.description | json }},
+    "products": [
+      {% for product in default_collection.products limit: 4 %}
+        {
+          "id": {{ product.id | json }},
+          "title": {{ product.title | json }},
+          "url": {{ product.handle | json }},
+          "handle": {{ product.handle | json }},
+          "price": {{ product.price | money_without_trailing_zeros | json }},
+          "featuredImage": {{ product.featured_image | json }},
+          "secondaryImage": {{ product.images[1] | json }},
+          "available": {{ product.available | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+{% endcapture %}
+
+{% capture suggestion_collections_json %}
+  [
+    {% for collection in settings.suggestion_collections %}
+      {
+        "id": {{ collection.id | json }},
+        "title": {{ collection.title | json }},
+        "handle": {{ collection.handle | json }},
+        "number_of_products": {{ collection.all_products_count | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+{% endcapture %}
+
+<search-bar
+  default-collection='{{ collection_data }}'
+  search-placeholder='{{ 'general.search.placeholder' | t }}'
+  no-results-text='{{ 'general.search.no_results_text' | t }}'
+  initial-suggestions-query='{{ settings.tagalys_initial_suggestions_query }}'
+  suggestion-collections='{{ suggestion_collections_json | escape_once }}'
+  no-results-recommendation-id='{{ settings.tagalys_no_results_recommendation_id }}'
+>
+  <button
+    id='placeholder-search-button'
+    class='tw-size-6 tw-flex tw-items-center tw-justify-center'
+  >
+    <svg
+      class='icon icon-search'
+      aria-hidden='true'
+      focusable='false'
+      role='presentation'
+    >
+      <use href="#icon-search"></use>
+    </svg>
+  </button>
+</search-bar>

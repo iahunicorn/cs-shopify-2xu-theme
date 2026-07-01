@@ -1,0 +1,16 @@
+<div class="Grid__Cell">
+	<div class="Segment">
+		<div class="Segment__Content address-row">
+			<div class="address-col">
+				{{ address | format_address | replace: '<p>', '<p class="AccountAddress"><span>' | replace_first: '<br>', '</span><br>' | replace: '</p>', '<br>' | append: address.phone | append: '</p>' }}
+				{%- if address == customer.default_address -%}
+					<h2>{{ 'customer.addresses.default_address_label' | t }}</h2>
+				{%- endif -%}
+			</div>
+			<div class="btns-col">
+				<button class="address-edit-button first-address-btn" onclick="editAddress({{ address.id }})" >{{ 'customer.addresses.edit' | t }}</button>
+				<button class="address-edit-button" onclick="Shopify.CustomerAddress.destroy({{ address.id }}); return false">{{ 'customer.addresses.delete' | t }}</button>
+			</div>
+		</div>
+	</div>
+</div>

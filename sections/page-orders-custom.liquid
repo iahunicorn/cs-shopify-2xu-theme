@@ -1,0 +1,56 @@
+{{ 'account.css' | asset_url | stylesheet_tag }}
+{{ 'accounts.css' | asset_url | stylesheet_tag }}
+
+{% if customer %}
+  {% render 'account-mobile-top',
+    account_header_title: page.title,
+    margin_bottom: 'banner-orders'
+  %}
+
+  <div class='Container Container--narrow Container--account-order'>
+    <div class='PageLayout PageLayout--sidebar account-sidebar'>
+      {% render 'account-navigation' %}
+    </div>
+    <div class='PageLayout--breakLap'>
+      <div class='container-orders-page'>
+        <h1 class='account-title'>{{ page.title }}</h1>
+        <div class='returns-banner'>
+          <div style='background: {{ section.settings.top_color }}'>
+            {{ section.settings.top_text }}
+            <a
+              class='returns-link'
+              href='{{ section.settings.top_link }}'
+              target='_blank'
+            >
+              {{- 'customer.orders.click_here' | t -}}
+            </a>
+          </div>
+        </div>
+        {% render 'account-order-summary-table' %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Orders Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "top_text",
+      "label": "Return Text"
+    },
+    {
+      "type": "color",
+      "id": "top_color",
+      "label": "Return Background Colour"
+    },
+    {
+      "type": "url",
+      "id": "top_link",
+      "label": "Returns Link"
+    }
+  ]
+}
+{% endschema %}

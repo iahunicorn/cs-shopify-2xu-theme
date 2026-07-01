@@ -1,0 +1,44 @@
+{%- assign description = product.metafields.custom.short_description -%}
+{%- assign product_video = product.media | where: "media_type", "video" | first -%}
+
+{ 
+  "id": {{ product.id | json }},
+  "title": {{ product.title | json }},
+  "handle": {{ product.handle | json }},
+  "price": {{ product.price | money | json }},
+  "compare_at_price": {{ product.compare_at_price | money | json }},
+  "available": {{ product.available | json }},
+  "description": {{ description | escape | json }},
+  "url": {{ product.url | json }},
+  "rating": {{ product.metafields.reviews.rating.value | append: '' | json }},
+  "page": {{ paginate.current_page | json }},
+  "swatches": {% render 'json-swatches', product: product %},
+  "sizes": {% render 'json-sizes', product: product %},
+  "featuredImage": {% if product.featured_image %}{{ product.featured_image | image_url: width: 600 | json }}{% else %}null{% endif %},
+  "productVideo":
+  {%- if product_video -%}
+    {
+      "imageUrl": {{ product_video.preview_image | image_url: width: 600 | json }},
+      "sources": [
+        {%- for video_source in product_video.sources -%}
+          {
+            "url": {{ video_source.url | json }},
+            
+            "format": {{ video_source.format | json }},
+            "height": {{ video_source.height | json }},
+            "width": {{ video_source.width | json }}
+          }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+    }
+  {%- else -%}
+    null
+  {%- endif -%}
+  ,
+  "secondaryImage":
+{%- if product.images.size > 1 -%}
+  {{ product.images[1] | image_url: width: 600 | json -}}
+{%- else -%}
+  null
+{%- endif -%}
+, "badges": {% render 'json-product-badges', product: product %} }

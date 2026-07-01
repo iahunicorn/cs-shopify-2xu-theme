@@ -1,0 +1,123 @@
+{%- layout none -%}
+
+{%- comment -%}
+  Parameters
+  product: product - the product object
+  type: 'swatch' or 'image' - either displays swatches as colour swatches ('swatch') or product thumbnails ('image')
+  single: boolean - used on collection pages when they click see other colours. Outputs only the single colour, and ignores stitched products. Defaults to false below if not defined.
+{%- endcomment -%}
+{%- assign stitchedProducts = null -%}
+{%- for collection in product.collections -%}
+  {%- assign collectionHandleParts = collection.handle | split: '-' -%}
+  {%- if collectionHandleParts[0] == 'stitch' -%}
+    {%- assign stitchedProducts = collection.products -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%}
+  Default the single parameter to false if it is undefined.
+{%- endcomment -%}
+{%- assign single = single | default: false -%}
+
+<ul class='ProductItem__ColorSwatchList'>
+  {%- if stitchedProducts and single == false -%}
+    {%- comment -%} Find current product in stitched products array {%- endcomment -%}
+    {%- assign currentProductArr = stitchedProducts
+      | where: 'handle', product.handle
+    -%}
+    {%- assign currentProduct = currentProductArr[0] -%}
+
+    {%- for stitchedProduct in stitchedProducts -%}
+      {%- assign currentSKU = stitchedProduct.selected_or_first_available_variant.sku -%}
+      {%- if currentSKU contains '2XU-' -%}
+        {%- assign currentSKU = currentSKU | remove: '2XU-' -%}
+      {%- endif -%}
+      {%- assign colours = currentSKU | split: '-' -%}
+      {%- assign currentColour = colours[1]
+        | handleize
+        | upcase
+        | replace: '-', '_'
+      -%}
+      {%- capture linkTitle -%}
+      {%- for option in stitchedProduct.options_with_values -%}
+        {%- if option.name == 'Color' or option.name == 'Colour' -%}
+        {{- option.values[0] -}}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+
+      {%- assign color = linkTitle -%}
+      {%- assign colorHandle = color | handleize -%}
+
+      {%- assign hex = '' -%}
+      {%- for tag in stitchedProduct.tags -%}
+        {%- if tag contains 'Colour: ' or tag contains 'colour:' -%}
+          {%- assign hex = tag
+            | remove: 'Colour: '
+            | remove: 'colour:'
+            | split: '|'
+          -%}
+        {%- endif -%}
+      {%- endfor -%}
+      <li class='ProductItem__ColorSwatchItem'>
+        <a
+          data-product-swatch
+          data-product='{{ stitchedProduct.handle }}'
+          class='{% if hex != '' %}hasHex hexCount-{{ hex.size }} {% endif %}ColorSwatch ColorSwatch--small ColorSwatch--{{currentColour}} {%- if product.handle == stitchedProduct.handle -%} is-selected{%- endif -%}'
+          href='{{ stitchedProduct.url | within: collection }}'
+          data-tooltip='{{ linkTitle }}'
+        >
+          {%- for c in hex -%}
+            <span class='ss-swatch' style='background-color: {{ c }}'></span>
+          {%- endfor -%}
+        </a>
+      </li>
+    {%- endfor -%}
+  {%- else -%}
+    {%- assign currentSKU = product.selected_or_first_available_variant.sku -%}
+    {%- if currentSKU contains '2XU-' -%}
+      {%- assign currentSKU = currentSKU | remove: '2XU-' -%}
+    {%- endif -%}
+    {%- assign colours = currentSKU | split: '-' -%}
+    {%- assign currentColour = colours[1]
+      | handleize
+      | upcase
+      | replace: '-', '_'
+    -%}
+    {%- capture linkTitle -%}
+        {%- for option in product.options_with_values -%}
+        {%- if option.name == 'Color' or option.name == 'Colour' -%}
+        {{- option.values[0] -}}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- endcapture -%}
+
+    {%- assign color = linkTitle | split: '-' | last -%}
+    {%- assign colorHandle = color | handleize -%}
+
+    {%- assign hex = '' -%}
+    {%- for tag in product.tags -%}
+      {%- if tag contains 'Colour: ' or tag contains 'colour:' -%}
+        {%- assign hex = tag
+          | remove: 'Colour: '
+          | remove: 'colour:'
+          | split: '|'
+        -%}
+      {%- endif -%}
+    {%- endfor -%}
+    <li class='ProductItem__ColorSwatchItem'>
+      <a
+        data-product-swatch
+        data-product='{{ stitchedProduct.handle }}'
+        class='{% if hex != '' %}hasHex hexCount-{{ hex.size }} {% endif %}ColorSwatch ColorSwatch--small ColorSwatch--{{currentColour}} {%- if stitchedProduct == currentProduct -%}is-selected{%- endif -%}'
+        href='{{ stitchedProduct.url | within: collection }}'
+        data-tooltip='{{ linkTitle }}'
+      >
+        {%- for c in hex -%}
+          <span class='ss-swatch' style='background-color: {{ c }}'></span>
+        {%- endfor -%}
+      </a>
+    </li>
+  {%- endif -%}
+</ul>

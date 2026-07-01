@@ -1,0 +1,115 @@
+<section class="tw-px-4 lg:tw-px-12 md:tw-pb-14">
+  <div class='tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-2'>
+    {% for block in section.blocks %}
+      {% assign aspect_ratio = 'tw-aspect-[676/416] lg:tw-aspect-[555/576]' %}
+      {% if section.blocks.size > 2 %}{% assign aspect_ratio = 'tw-aspect-[670/416]' %}{% endif %}
+      {% assign class_name = 'tw-w-full' | append: ' ' | append: aspect_ratio %}
+      {% comment %} If there is an odd number of blocks, do not render the last one {% endcomment %}
+      {% assign url_arr = block.settings.content_link | split: '/' %}
+      {% assign resource_type = url_arr[1] %}
+      {% assign resource_handle = url_arr[2] %}
+      
+      {% if resource_type == 'collections' %}
+        {% assign resource = collections[resource_handle] %}
+        {% assign image = resource.featured_image %}
+      {% elsif resource_type == 'products' %}
+        {% assign resource = all_products[resource_handle] %}
+        {% assign image = resource.featured_image %}
+      {% elsif resource_type == 'blogs' %}
+        {% assign article_handle = resource_handle | append: '/' | append: url_arr[3] %}
+        {% assign resource = articles[article_handle] %}
+        {% assign image = resource.image %}
+      {% elsif resource_type == 'pages' %}
+        {% assign resource = pages[resource_handle] %}
+      {% endif %}
+      
+      <script>console.log('{{ block.settings.content_link }}, {{ resource_type }}, {{ resource_handle }}, {{ article_handle }}, {{ image | json }}');</script>
+      
+      {% assign image = block.settings.image %}
+      {% assign title = block.settings.title %}
+      {% assign url = block.settings.content_link %}
+      {% assign button_text = block.settings.button_text | default: 'Shop Now' %}
+      {% render 'collection-card',
+        url: url,
+        image: image,
+        mobile_image: block.settings.mobile_image,
+        title: title,
+        button_text: button_text,
+        class_name: class_name,
+        attributes: block.shopify_attributes
+        view: 'grid'
+        count: section.blocks.size
+      %}
+    {% endfor %}
+  </div>
+</section>
+
+
+
+{% schema %}
+{
+  "name": "F.A. Collection Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Shop by Category"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content source"
+        },
+        {
+          "type": "url",
+          "id": "content_link",
+          "label": "Resource"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "Deprecated: Use Resource field instead"
+        },
+        {
+          "type": "header",
+          "content": "Card Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Image",
+          "info": "Optional mobile-specific image, falls back to desktop image if not set"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Homepage Section",
+      "name": "F.A. Collection Grid"
+    }
+  ]
+}
+{% endschema %}

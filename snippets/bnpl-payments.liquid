@@ -1,0 +1,35 @@
+{% comment %} TODO: This file is no longer needed {% endcomment %}
+{% assign currencySymbol = '$' %}
+{% if shop.permanent_domain == 'uk-2xu.myshopify.com' %}
+  {% assign currencySymbol = '£' %}
+{% endif %}
+<p>
+  <span>
+    {% assign bnpl_cost = product.selected_or_first_available_variant.price
+      | divided_by: settings.bnpl_number_of_installments
+      | round
+      | money
+    %}
+    {{
+      'general.bnpl.number_of_payments_text'
+      | t
+      | replace: '$cost', bnpl_cost
+    }}
+  </span>
+  {% if shop.permanent_domain == '2xu-australia.myshopify.com' %}
+    {% render 'afterpay-logo-black' %}
+    <span class='bnpl-text'>or</span>
+    <img src='{{ 'paypal-logo.png' | asset_img_url: 'master' }}'>
+  {% elsif shop.permanent_domain == '2xu-us.myshopify.com' %}
+    <img src='{{ 'shoppay-logo.png' | asset_img_url: 'master' }}'>
+    <span class='bnpl-text'>or</span>
+    <img src='{{ 'paypal-logo.png' | asset_img_url: 'master' }}'>
+  {% elsif shop.permanent_domain == '2xu-ca.myshopify.com' %}
+    <img src='{{ 'paypal-logo.png' | asset_img_url: 'master' }}'>
+  {% elsif shop.permanent_domain == 'uk-2xu.myshopify.com' %}
+    <img
+      class='payment-content__logo'
+      src='{{ 'klarna-logo.png' | asset_img_url: 'master' }}'
+    >
+  {% endif %}
+</p>

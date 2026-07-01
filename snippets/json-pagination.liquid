@@ -1,0 +1,10 @@
+{
+  "currentPage": {{ paginate.current_page | json }},
+  "totalPages": {{ paginate.pages | json }},
+  "totalProducts": {{ paginate.items | json }},
+  "perPage": {{ paginate.page_size | json }},
+  "hasNext": {{ paginate.next | json }},
+  "hasPrevious": {{ paginate.previous | json }},
+  "nextUrl": {{ paginate.next.url | json }},
+  "previousUrl": {{ paginate.previous.url | json }}
+}

@@ -1,0 +1,46 @@
+{% if collection %}
+  {% assign collection_handle = collection.handle %}
+  {% assign product_ids = "" %}
+  
+  {% for product in collections[collection_handle].products %}
+    {% capture product_id %}{{ product.id }}{% endcapture %}
+    {% assign product_ids = product_ids | append: product_id | append: ',' %}
+  {% endfor %}
+  
+  {% assign product_ids = product_ids | split: ',' | join: "','" %}
+{% endif %}
+
+<script>
+  window.wunderkind = {
+    {%  if customer %}
+    "user": {
+      "email": btoa("{{ customer.email }}")
+    },
+    {%  endif %}
+    {% if cart %}
+    "cart": {
+      "quantity": {{ cart.item_count }},
+      "value": "{{ cart.total_price | money_without_currency }}"
+    },
+    {% endif %}
+    {% if template contains 'product' %}
+    "product": {
+      "exclusion": false,
+      "id": "{{ product.id }}",
+      "sku": "{{ product.selected_or_first_available_variant.sku }}",
+      "name": "{{ product.first_available_variant.title }}",
+      "url": "{{ product.url | within: shop }}",
+      "imgUrl": "https:{{ product | image_url }}",
+      "price": {{ product.price_min | money_without_currency }},
+      "inStock": {{ product.available }},
+      "itemCategory": "{{ product.type }}"
+    }
+    {% endif %}
+    {% if template contains 'collection' %}
+    "category": {
+      "itemCategory": "{{ collection.title }}",
+      "categoryIds": ['{{ product_ids }}']
+    }
+    {% endif %}
+  };
+</script>

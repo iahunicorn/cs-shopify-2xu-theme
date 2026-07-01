@@ -1,0 +1,256 @@
+<div id="section-{{ section.id }}" class="Section" data-section-id="{{ section.id }}" data-section-type="article-list">
+  {%- if blog.articles_count == 0 -%}
+    <div class="EmptyState">
+      <div class="Container">
+        <h1 class="EmptyState__Title Heading u-h5">{{ 'blog.general.no_articles' | t: blog_title: blog.title }}</h1>
+        <a href="{{ routes.root_url }}" class="EmptyState__Action Button Button--primary">{{ 'blog.general.empty_button' | t }}</a>
+      </div>
+    </div>
+  {%- else -%}
+    <div class="Blog">
+      <div class="Container">
+        <header class="PageHeader">
+          <div class="SectionHeader SectionHeader--center">
+            <h1 class="SectionHeader__Heading Heading u-h1">
+              {{- blog.title -}}
+
+              {%- if section.settings.show_rss -%}
+                <a href="{{ blog.url }}.atom" target="_blank" class="Blog__RssLink Link Link--secondary">{% render 'icon' with 'rss' %}</a>
+              {%- endif -%}
+            </h1>
+
+            {%- if section.settings.show_tags and blog.all_tags.size > 0 -%}
+              <ul class="Blog__TagList HorizontalList HorizontalList--spacingExtraLoose">
+                <li class="HorizontalList__Item">
+                  <a href="/blogs/{{ blog.handle }}" class="Heading Link Link--primary Text--subdued u-h8 {% if current_tags == blank %}is-active{% endif %}">{{ 'blog.general.all_tag' | t }}</a>
+                </li>
+
+                {%- for tag in blog.all_tags -%}
+                  <li class="HorizontalList__Item">
+                    <a href="/blogs/{{ blog.handle }}/tagged/{{ tag | handle }}" class="Heading Link Link--primary Text--subdued u-h8 {% if current_tags contains tag %}is-active{% endif %}">{{ tag }}</a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        </header>
+
+        {%- if section.settings.show_featured_article and current_tags == blank -%}
+          {%- assign articles_per_page = 13 -%}
+        {%- else -%}
+          {%- assign articles_per_page = 12 -%}
+        {%- endif -%}
+
+        {%- paginate blog.articles by articles_per_page -%}
+          {% assign is_first_article_featured = false %}
+
+          {%- if section.settings.show_featured_article and current_tags == blank and blog.articles.first.image -%}
+            {%- assign is_first_article_featured = true -%}
+          {%- endif -%}
+
+          <div class="ArticleListWrapper">
+            <div class="ArticleList {% if is_first_article_featured %}ArticleList--withFeatured{% endif %} Grid Grid--m">
+              {%- for article in blog.articles -%}
+                {%- if is_first_article_featured and forloop.first -%}
+                  <div class="Grid__Cell hidden-phone">
+                    <div class="FlexboxIeFix">
+                      <div class="ImageHero ImageHero--small" style="background: url({{ article.image | img_url: '1x1', format: 'jpg' }})">
+                        <div class="ImageHero__ImageWrapper">
+                          <div class="ImageHero__Image Image--lazyLoad Image--zoomOut"
+                               data-optimumx="1.4"
+                               data-bgset="{{ article.image | img_url: mobile_size, crop: 'center' }} 750w, {{ article.image | img_url: '1000x' }} 1000w, {{ article.image | img_url: '1500x' }} 1500w">
+                          </div>
+
+                          <noscript>
+                            <div class="ImageHero__Image" style="background-image: url({{ article.image | img_url: '1000x' }})"></div>
+                          </noscript>
+                        </div>
+
+                        <div class="ImageHero__TextContent">
+                          <header class="SectionHeader">
+                            {%- if section.settings.show_category and article.tags != empty -%}
+                              <span class="SectionHeader__SubHeading Heading u-h6">{{ article.tags.first }}</span>
+                            {%- endif -%}
+
+                            <h2 class="SectionHeader__Heading Heading u-h1">
+                              <a href="{{ article.url }}">{{ article.title }}</a>
+                            </h2>
+
+                            <div class="SectionHeader__ButtonWrapper">
+                              <a href="{{ article.url }}" class="Button Button--primary">{{ 'blog.article.read_more' | t }}</a>
+                            </div>
+                          </header>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {%- endif -%}
+
+                <div class="Grid__Cell {% if is_first_article_featured and forloop.first %}hidden-tablet-and-up{% else %}1/2--tablet 1/3--lap-and-up{% endif %}">
+                  {%- render 'article-item', article: article -%}
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+
+          {%- render 'pagination', paginate: paginate -%}
+        {%- endpaginate -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<style>
+  #section-{{ section.id }} .ImageHero,
+  #section-{{ section.id }} .ImageHero .Heading {
+    color: #ffffff;
+  }
+
+  #section-{{ section.id }} .ImageHero .Button {
+    color: #1c1c1c;
+    border-color: #ffffff;
+  }
+
+  #section-{{ section.id }} .ImageHero .Button::before {
+    background-color: #ffffff;
+  }
+
+  {%- if settings.show_button_transition -%}
+    @media (-moz-touch-enabled: 0), (hover: hover) {
+      #section-{{ section.id }} .ImageHero .Button:hover {
+        color: #ffffff;
+      }
+    }
+  {%- endif -%}
+</style>
+
+{% schema %}
+{
+  "name": "Blog page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_rss",
+      "label": "Show RSS",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show filters",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured_article",
+      "label": "Show featured article",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_category",
+      "label": "Show article category",
+      "info": "The first article's tag is used as the main category.",
+      "default": false
+    }
+  ],
+  "presets": [
+{
+  "name": "shop-now"
+}
+]
+}
+{% endschema %}
+
+<style>
+/*! CSS Used from: https://cdn.shopify.com/s/files/1/0518/4087/6699/t/231/assets/theme.css?v=162209299165979781391664237723 */
+*,*:before,*:after{box-sizing:border-box!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+article,header{display:block;}
+:active{outline:none;}
+a{color:inherit;background-color:transparent;text-decoration:none;cursor:pointer;}
+a:active,a:hover{outline:0;}
+p,h1,h2{margin-top:0;font-size:inherit;font-weight:inherit;}
+h1:last-child{margin-bottom:0;}
+img{max-width:100%;height:auto;border-style:none;vertical-align:top;--aspect-ratio:attr(width) / attr(height);}
+svg:not(:root){overflow:hidden;}
+.Grid{display:block;list-style:none;padding:0;margin:0 0 0 -24px;font-size:0;}
+.Grid__Cell{box-sizing:border-box;display:inline-block;width:100%;margin:0;vertical-align:top;font-size:1rem;}
+.Grid--m{margin-left:-30px;}
+.Grid--m>.Grid__Cell{padding-left:30px;}
+@media screen and (min-width: 1140px){
+.Grid--m{margin-left:-60px;}
+.Grid--m>.Grid__Cell{padding-left:60px;}
+}
+@media screen and (min-width: 641px) and (max-width: 1007px){
+.\31\/2--tablet{width:50%;}
+}
+@media screen and (min-width: 1008px){
+.\31\/3--lap-and-up{width:33.33333%;}
+}
+.Container{margin:0 auto;padding:0 24px;}
+@media screen and (min-width: 641px){
+.Container{padding:0 50px;}
+}
+@media screen and (min-width: 1140px){
+.Container{padding:0 80px;}
+}
+.Link{transition:color .2s ease-in-out,opacity .2s ease-in-out;}
+.supports-hover .Link--primary:hover{color:var(--text-color);}
+.Link--underline{position:relative;display:inline-block;color:var(--link-color);}
+.Link--underline:before{content:"";position:absolute;width:100%;height:1px;left:0;bottom:0;background:currentColor;transform:scale(1);transform-origin:left center;transition:transform .2s ease-in-out;}
+@media (-moz-touch-enabled: 0),(hover: hover){
+.Link--underline:hover:before{transform:scaleX(0);}
+}
+.Heading{font-family:var(--heading-font-family);font-weight:var(--heading-font-weight);font-style:var(--heading-font-style);color:var(--heading-color);transition:color .2s ease-in-out;}
+.Text--subdued{color:var(--text-color-light);}
+.Icon{display:inline-block;height:1em;width:1em;fill:currentColor;vertical-align:middle;stroke-width:1px;background:none;pointer-events:none;}
+.features--heading-large .u-h1{font-size:24px;}
+.features--heading-large .u-h2{font-size:22px;}
+@media screen and (min-width: 641px){
+.features--heading-large .u-h1{font-size:24px;}
+.features--heading-large .u-h2{font-size:22px;}
+}
+.Image--fadeIn{opacity:0;transition:opacity .3s ease;}
+.Image--lazyLoaded.Image--fadeIn{opacity:1;}
+.AspectRatio{position:relative;margin-left:auto;margin-right:auto;}
+.AspectRatio:before{content:"";display:block;}
+.AspectRatio>img{max-height:100%;max-width:100%;}
+.AspectRatio--withFallback>img{position:absolute;top:0;left:0;height:100%;width:100%;}
+.PageHeader{position:relative;margin:35px 0;}
+.PageHeader .SectionHeader__Heading{margin-top:0!important;}
+@media screen and (max-width: 640px){
+.PageHeader .SectionHeader__Heading{margin-bottom:10px;}
+}
+@media screen and (min-width: 641px){
+.PageHeader{margin:50px 0;}
+}
+.Pagination{margin:60px 0;text-align:center;font-family:var(--heading-font-family);font-weight:var(--heading-font-weight);font-style:var(--heading-font-style);font-size:calc(var(--base-text-font-size) - (var(--default-text-font-size) - 12px));line-height:1;}
+.Pagination__Nav{display:inline-block;list-style:none;}
+.Pagination__NavItem{display:inline-block;padding:16px 20px;border-bottom:1px solid var(--border-color);}
+.Pagination__NavItem svg{width:6px;height:10px;vertical-align:-1px;}
+.Pagination__NavItem.is-active{color:var(--text-color);border-bottom-color:var(--text-color);box-shadow:0 -2px var(--text-color) inset;}
+@media screen and (min-width: 641px){
+.Pagination{margin:80px 0;}
+.Pagination__NavItem{padding-left:28px;padding-right:28px;}
+}
+@media screen and (min-width: 1140px){
+.Pagination{margin:120px 0;}
+}
+.SectionHeader--center{text-align:center;}
+.SectionHeader__Heading.SectionHeader__Heading{margin-bottom:.5em;}
+.ArticleListWrapper{max-width:1260px;margin:0 auto 60px;}
+.ArticleList{margin-bottom:-60px;}
+.ArticleList .Grid__Cell{margin-bottom:60px;}
+.ArticleItem__ImageWrapper{display:block;margin-bottom:22px;background-size:cover;overflow:hidden;}
+.ArticleItem__Image{display:block;-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center;font-family:"object-fit: cover; object-position: center;";}
+.ArticleItem__Content{margin:0 8px;}
+.ArticleItem__Excerpt{margin-bottom:20px;}
+@media screen and (min-width: 641px){
+.ArticleItem__Content{margin:0 18px;}
+}
+@media screen and (min-width: 1008px){
+.ArticleListWrapper{margin-bottom:100px;}
+.ArticleList{margin-bottom:-100px;}
+.ArticleList .Grid__Cell{margin-bottom:100px;}
+}
+</style>

@@ -1,0 +1,69 @@
+{%- assign products_linked = products_linked
+  | prepend: '|'
+  | prepend: card_product.handle
+-%}
+
+<product-linked class='product-linked'>
+  {%- assign products_linked_handle = products_linked | split: '|' -%}
+  <div class='product-linked--desktop'>
+    <div class='swiper swiper--product-linked js-swiper-linked'>
+      <div class='swiper-wrapper'>
+        {%- for handle in products_linked_handle -%}
+          {%- assign product = all_products[handle] -%}
+          <div class='swiper-slide'>
+            <a
+              href='{{ product.url }}'
+              class='product-linked__item {% if forloop.first %}product-linked__item--active{% endif %}'
+            >
+              {%- for tag in product.tags -%}
+                {%- if tag contains 'Colour:' or tag contains 'colour:' -%}
+                  {%- assign _color = tag | split: ':' | last -%}
+                {%- endif -%}
+              {%- endfor -%}
+              <span
+                class='product-linked__color'
+                style='background-color: {{ _color }};'
+              ></span>
+            </a>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class='swiper-button-prev'>
+      {%- render 'icon' with 'chevron-back' -%}
+    </div>
+    <div class='swiper-button-next'>
+      {%- render 'icon' with 'chevron-forward-thin' -%}
+    </div>
+  </div>
+  <div class='product-linked--mobile'>
+    <div class='product-linked__inner'>
+      <div class='product-linked__items'>
+        {%- for handle in products_linked_handle limit: 5 -%}
+          {%- assign product = all_products[handle] -%}
+          <a
+            href='{{ product.url }}'
+            class='product-linked__item {% if forloop.first %}product-linked__item--active{% endif %}'
+          >
+            {%- for tag in product.tags -%}
+              {%- if tag contains 'Colour:' or tag contains 'colour:' -%}
+                {%- assign _color = tag | split: ':' | last -%}
+              {%- endif -%}
+            {%- endfor -%}
+            <span
+              class='product-linked__color'
+              style='background-color: {{ _color }};'
+            ></span>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+    {%- if products_linked_handle.size > 5 -%}
+      <a class='product-linked__link-more' href='{{ card_product.url }}'>
+        {%- render 'icon' with 'plus',
+          class: 'product-linked__link-more-icon'
+        -%}
+      </a>
+    {%- endif -%}
+  </div>
+</product-linked>

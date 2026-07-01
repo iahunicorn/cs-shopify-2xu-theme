@@ -1,0 +1,14 @@
+<script>
+  // on load
+  gtag('event', 'zipy_event', {
+    'zipy_session_url': window.zipy.getCurrentSessionURL()
+  });
+
+  // on error
+  window.onerror = (error) => {
+    gtag('event', 'zipy_event', {
+      'error': error,
+      'zipy_session_url': window.zipy.getCurrentSessionURL()
+    });
+  };
+</script>

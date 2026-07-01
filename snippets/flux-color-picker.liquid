@@ -1,0 +1,164 @@
+{%- liquid
+  assign stitched_products = null
+  for collection in product.collections
+    assign collection_handle_parts = collection.handle | split: '-'
+    if collection_handle_parts[0] == 'stitch'
+      assign stitched_products = collection.products
+      break
+    endif
+  endfor
+  assign single = single | default: false
+  if stitched_products and single == false
+    assign current_product_arr = stitched_products | where: 'handle', product.handle
+    assign current_product = current_product_arr[0]
+  endif
+  if settings.show_default_heading_first
+    assign headings_string = settings.default_heading | append: ','
+  else
+    assign headings_string = ''
+  endif
+  assign product_color_assignments = ''
+  assign product_color_heading = product.metafields.custom.swatches_heading | default: settings.default_heading
+-%}
+{% for stitched_product in stitched_products %}
+  {%- capture heading -%}
+    {%- if stitched_product.metafields.custom.swatches_heading -%}
+      {{- stitched_product.metafields.custom.swatches_heading -}}
+    {%- else -%}
+      {{- settings.default_heading -}}
+    {%- endif -%}
+  {%- endcapture -%}
+  {%- assign headings_string = headings_string
+    | append: stitched_product.metafields.custom.swatches_heading
+    | append: ','
+  -%}
+
+  {%- assign color_hex = '' -%}
+  {%- if stitched_product.metafields.custom.colour_codes -%}
+    {%- assign color_hex = stitched_product.metafields.custom.colour_codes.value
+      | join: '|'
+    -%}
+  {% else %}
+    {%- for tag in stitched_product.tags -%}
+      {%- if tag contains 'Colour:' or tag contains 'colour:' -%}
+        {%- assign color_hex = tag
+          | remove: 'Colour:'
+          | remove: 'colour:'
+          | replace: '&nbsp;', ''
+          | remove: '&nbsp;'
+          | remove: '\0026nbsp;'
+          | remove: ' '
+        -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {% endif %}
+  {%- capture link_title -%}
+    {%- for option in stitched_product.options_with_values -%}
+      {%- if option.name == 'Color' or option.name == 'Colour' -%}
+      {{- option.values[0] -}}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- endcapture -%}
+  {%- assign product_color_assignments = product_color_assignments
+    | append: stitched_product.id
+    | append: ';'
+    | append: heading
+    | append: ';'
+    | append: color_hex
+    | append: ';'
+    | append: stitched_product.url
+    | append: ';'
+    | append: link_title
+  -%}
+  {% unless forloop.last -%}
+    {%- assign product_color_assignments = product_color_assignments
+      | append: ','
+    -%}
+  {%- endunless %}
+{% endfor %}
+
+{% unless settings.show_default_heading_first %}
+  {% assign headings_string = headings_string
+    | append: ','
+    | append: settings.default_heading
+  %}
+{% endunless %}
+
+{%- assign assignments = product_color_assignments | split: ',' -%}
+
+{% assign headings = headings_string | split: ',' | uniq %}
+{%- for option in product.options_with_values -%}
+  {%- if option.name == 'Color' or option.name == 'Colour' -%}
+    {% for heading in headings %}
+      {% unless heading == blank %}
+        <fieldset class='{% unless forloop.last %}tw-pb-4 lg:tw-pb-5{% endunless %}'>
+          <legend class='tw-uppercase tw-text-base tw-leading-6 tw-text-2xu-black tw-font-normal !tw-font-euclid'>
+            {{ heading -}}
+            :
+            {%- if heading == product_color_heading -%}
+              <span class='tw-capitalize'>
+                {{ option.values[0] | escape -}}
+              </span>
+            {% endif %}
+          </legend>
+          <div
+            class='tw-my-3 tw-flex tw-items-center tw-gap-3 tw-ml-[5px] tw-flex-wrap'
+          >
+            {% for assignment in assignments %}
+              {% assign parts = assignment | split: ';' %}
+              {%- assign product_id = parts[0] -%}
+              {% assign group_heading = parts[1] %}
+              {% assign color_hex = parts[2] %}
+              {% assign stitched_product_url = parts[3] %}
+              {% assign link_title = parts[4] %}
+              {% assign active_product = false %}
+              {% if product_id contains current_product.id %}
+                {% assign active_product = true %}
+              {% endif %}
+              {% if color_hex contains '|' %}
+                {% assign color_two = color_hex | split: '|' | last %}
+                {% assign color_hex = color_hex | split: '|' | first %}
+              {% else %}
+                {% assign color_two = null %}
+              {% endif %}
+              {% if group_heading == heading %}
+                <a
+                  class='tw-cursor-pointer'
+                  href='{{ stitched_product_url }}'
+                  title='{{ linkTitle }}'
+                  data-tooltip='{{ linkTitle }}'
+                >
+                  <span
+                    aria-label='{{ link_title }}'
+                    class='{% if active_product %}tw-ring-2 tw-ring-offset-1 {% endif %}{% if color_two %} tw-flex tw-min-w-8 tw-min-h-8 {% endif %}tw-relative tw-overflow-hidden -tw-m-0.5 tw-flex tw-cursor-pointer tw-items-center tw-justify-center tw-rounded-full tw-p-0.5 tw-ring-current focus:tw-outline-none'
+                  >
+                    {% if color_two %}
+                      <span class='tw-rounded-full tw-rotate-45 tw-overflow-hidden tw-border tw-border-black tw-border-opacity-10 tw-flex tw-min-w-8 tw-min-h-8'>
+                        <span
+                          style='background-color: {{ color_hex }};'
+                          aria-hidden='true'
+                          class='tw-h-8 tw-w-4 tw-bg-current'
+                        ></span>
+                        <span
+                          style='background-color: {{ color_two }};'
+                          aria-hidden='true'
+                          class='tw-h-8 tw-w-4 tw-bg-current'
+                        ></span>
+                      </span>
+                    {% else %}
+                      <span
+                        style='background-color: {{ color_hex }};'
+                        aria-hidden='true'
+                        class='tw-h-8 tw-w-8 tw-border tw-rounded-full tw-border-black tw-border-opacity-10 tw-bg-current'
+                      ></span>
+                    {% endif %}
+                  </span>
+                </a>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </fieldset>
+      {% endunless %}
+    {% endfor %}
+  {%- endif -%}
+{%- endfor -%}

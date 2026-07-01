@@ -1,0 +1,14 @@
+{%- assign merch_tiles = collection.metafields.custom.merch_tiles.value -%}
+
+<div class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-2'>
+  {%- for product in collection.products -%}
+    {% assign product_loop_index = forloop.index %}
+    {% for merch_tile in merch_tiles %}
+      {% if merch_tile.position == product_loop_index %}
+        {% render 'html-merch-tile', merch_tile: merch_tile %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+    {%- render 'html-product-skeleton', product: product -%}
+  {%- endfor -%}
+</div>

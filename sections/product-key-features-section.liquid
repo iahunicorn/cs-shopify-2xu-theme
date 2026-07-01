@@ -1,0 +1,66 @@
+{%- liquid
+  assign product = section.settings.product
+  assign key_features = product.metafields.custom.pdp_key_features_section.value
+  assign should_show = false
+  if key_features.heading_1 or key_features.body_1 or key_features.image_1
+    assign should_show = true
+  endif
+  if key_features.heading_2 or key_features.body_2 or key_features.image_2
+    assign should_show = true
+  endif
+  if key_features.heading_3 or key_features.body_3 or key_features.image_3
+    assign should_show = true
+  endif
+-%}
+{% if should_show %}
+  <section class='tw-bg-2xu-light-grey tw-w-full tw-pt-6 md:tw-pt-8 tw-pb-6 lg:tw-pb-12 tw-overflow-x-hidden'>
+    <h2 class='tw-text-base lg:tw-text-lg tw-font-normal tw-leading-6 tw-uppercase tw-px-4 md:tw-px-12 tw-pb-6 md:tw-pb-10'>
+      {{ section.settings.heading }}
+    </h2>
+    <div
+      class='tw-flex lg:tw-justify-between tw-px-4 tw-pb-6 lg:tw-pb-4 md:tw-px-12 tw-overflow-x-scroll tw-h-auto lg:tw-overflow-hidden tw-gap-2'
+    >
+      {%- render 'fa-product-key-feature',
+        heading: key_features.heading_1,
+        body: key_features.body_1,
+        image: key_features.image_1
+      -%}
+      {%- render 'fa-product-key-feature',
+        heading: key_features.heading_2,
+        body: key_features.body_2,
+        image: key_features.image_2
+      -%}
+      {%- render 'fa-product-key-feature',
+        heading: key_features.heading_3,
+        body: key_features.body_3,
+        image: key_features.image_3
+      -%}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "F.A. Key Features Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Key Features"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "Select a product to display its key features"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Product",
+      "name": "F.A. Key Features Section"
+    }
+  ]
+}
+{% endschema %}

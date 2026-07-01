@@ -1,0 +1,76 @@
+
+{%- liquid
+  assign title = section.settings.heading
+-%}
+<tagalys-recommendations
+  x-title='{{ title | escape }}'
+  tagalys-product-recommendation-id='{{ settings.tagalys_product_recommendation_id }}'
+  tagalys-smart-widget-id='{{ settings.tagalys_smart_widget_id }}'
+  product-id='{{ product.id }}'
+  widget-id='{{ section.settings.widget_id }}'
+  product-list='{{ section.settings.product_list | map: "id" | join: "," }}'
+>
+  <section class='tw-w-full tw-pt-4 tw-overflow-x-hidden'>
+    <div class='tw-flex tw-items-center tw-justify-between tw-mb-5 lg:tw-mb-8 tw-px-4 md:tw-px-12'>
+      <h2 class='tw-text-base lg:tw-text-lg tw-font-normal tw-leading-6 tw-uppercase'>
+        {{ title }}
+      </h2>
+    </div>
+    <div class='tw-grid tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-2 tw-px-2 md:tw-px-12'>
+      {% for i in (1..4) %}
+        {% render 'html-product-skeleton' %}
+      {% endfor %}
+    </div>
+  </section>
+</tagalys-recommendations>
+
+{% schema %}
+{
+  "name": "F.A. Tagalys Recs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Recommendations"
+    },
+    {
+      "type": "select",
+      "id": "widget_id",
+      "label": "Tagalys Smart Widget",
+      "info": "Please note: Tagalys does not always return products. The section will remain hidden if no products are returned.",
+      "options": [
+        {
+          "value": "bought_also_bought",
+          "label": "Products that were also bought"
+        },
+        {
+          "value": "viewed_also_viewed",
+          "label": "Products that were also viewed"
+        },
+        {
+          "value": "smart_widget",
+          "label": "Cross Selling Widget"
+        },
+        {
+          "value": "product_recommendation",
+          "label": "Similar Products Widget"
+        }
+      ]
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Products",
+      "limit": 12,
+      "info": "Select products to filter the tagalys recommendations. This setting is not used on the product page, but must be used if the section is used on the homepage or elsewhere."
+    }
+  ],
+  "presets": [
+    {
+      "category": "Product",
+      "name": "F.A. Tagalys Recommendations"
+    }
+  ]
+}
+{% endschema %}

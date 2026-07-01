@@ -1,0 +1,72 @@
+
+{% if landscape %}
+  <a
+    href="{{ url }}"
+    class="tw-block tw-w-[443px]"
+    draggable="false"
+    {{ attributes }}
+  >
+    <div class="tw-relative tw-rounded-xl tw-block tw-overflow-hidden w-full tw-h-[250px] tw-mb-4">
+      {% if image %}
+        <img
+          loading="lazy"
+          src="{{ image | image_url: width: 1200 }}"
+          alt="{{ title }}"
+          class="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover tw-object-center"
+          width="{{ image.width }}"
+          height="{{ image.height }}"
+        />
+      {% else %}
+        <div class="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-bg-2xu-grey show-empty"></div>
+      {% endif %}
+    </div>
+    <div class="tw-font-input-mono tw-whitespace-nowrap tw-uppercase show-empty">
+      {{ title }}
+    </div>
+  </a>
+{% else %}
+  {% if view == 'grid' %}
+    {% if count > 2 %}
+      {% assign font_class = 'tw-text-lg lg:tw-text-2xl' %}
+    {% else %}
+      {% assign font_class = 'tw-text-xl lg:tw-text-5xl' %}
+    {% endif %}
+  {% else %}
+    {% assign font_class = 'tw-text-base lg:tw-text-lg md:tw-text-2xl' %}
+  {% endif %}
+  <a
+    href="{{ url }}"
+    class="tw-relative tw-rounded-lg md:tw-rounded-2xl tw-block tw-overflow-hidden {{ class_name }}"
+    draggable="false"
+    {{ attributes }}
+  >
+    {% if image %}
+      <img
+        src="{{ image | image_url: width: 1200 }}"
+        alt="{{ title }}"
+        class="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover tw-object-center {% if mobile_image %} tw-hidden lg:tw-block{% endif %}"
+        width="{{ image.width }}"
+        height="{{ image.height }}"
+      />
+      {% if mobile_image %}
+        <img
+          src="{{ mobile_image | image_url: width: 600 }}"
+          alt="{{ title }}"
+          class="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover tw-object-center lg:tw-hidden"
+          width="{{ mobile_image.width }}"
+          height="{{ mobile_image.height }}"
+        />
+      {% endif %}
+    {% else %}
+      <div class="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-bg-2xu-grey show-empty"></div>
+    {% endif %}
+    <div class="tw-absolute tw-inset-0 tw-p-6 md:tw-px-8 md:tw-pb-8 md:tw-pt-7 tw-flex tw-flex-col tw-justify-between">
+      <p class="{{ font_class }} tw-text-2xu-white tw-font-sweet-sans show-empty" style="color: {{ text_color }};">{{ title }}</p>
+      <div>
+        <div class="tw-bg-2xu-white/50 tw-text-2xu-white tw-px-4 tw-py-2 md:tw-px-8 md:tw-py-4 tw-rounded lg:tw-font-medium tw-text-xs lg:tw-text-sm tw-font-euclid tw-whitespace-nowrap hover:tw-bg-2xu-black tw-transition-colors tw-inline-block">
+          {{ button_text }}
+        </div>
+      </div>
+    </div>
+  </a>
+{% endif %}

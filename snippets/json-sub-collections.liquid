@@ -1,0 +1,22 @@
+{%- liquid
+  assign formatted_items = ''
+  assign current_collection = collection
+  assign sub_collections = current_collection.metafields.custom.sub_collections.value
+  for sub_collection in sub_collections
+    assign title = sub_collection.title | default: sub_collection.metafields.custom.breadcrumb_label
+    capture current_item
+      echo '{"count":' | append: sub_collection.products_count | append: ','
+      echo '"title":"' | append: title | append: '",'
+      echo '"url":"' | append: sub_collection.url | append: '"}'
+    endcapture
+    if formatted_items == ''
+      assign formatted_items = current_item
+    else
+      assign formatted_items = formatted_items | append: ',' | append: current_item
+    endif
+  endfor
+
+  echo '['
+  echo formatted_items
+  echo ']'
+-%}

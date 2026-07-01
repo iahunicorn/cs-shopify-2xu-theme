@@ -1,0 +1,58 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "order": [
+    "banner",
+    "product-grid",
+    "56d11d9f-04d1-49f9-a57d-e27557ca2277",
+    "ss_custom_liquid_U3cbNb",
+    "pf-9a30a755"
+  ],
+  "sections": {
+    "56d11d9f-04d1-49f9-a57d-e27557ca2277": {
+      "settings": {},
+      "type": "main-collection-description"
+    },
+    "banner": {
+      "custom_css": [],
+      "settings": {},
+      "type": "main-collection-banner"
+    },
+    "product-grid": {
+      "settings": {
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "enable_filtering": true,
+        "enable_quick_add": false,
+        "enable_sorting": true,
+        "filter_type": "vertical",
+        "image_ratio": "adapt",
+        "padding_bottom": 36,
+        "padding_top": 36,
+        "products_per_page": 16,
+        "show_rating": false,
+        "show_secondary_image": false,
+        "show_vendor": false
+      },
+      "type": "main-collection-product-grid"
+    },
+    "ss_custom_liquid_U3cbNb": {
+      "settings": {
+        "liquid": "<script type=\"searchspring/personalized-recommendations\" profile=\"recently-viewed-snap-plp\">\n</script>",
+        "title": "SS Recently Viewed"
+      },
+      "type": "ss-custom-liquid"
+    },
+    "pf-9a30a755": {
+      "type": "pf-9a30a755",
+      "settings": {}
+    }
+  }
+}

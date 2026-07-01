@@ -1,0 +1,103 @@
+<div class='desktop-dashboard'>
+  <div class='image-grid'>
+    {% if section.settings.top_link != blank %}
+      <a href='{{ section.settings.top_link }}'>
+    {% endif %}
+    <div
+      class='img-container text-banner'
+      style='background: {{ section.settings.top_color }}'
+    >
+      {{
+        'customer.account.greeting'
+        | t
+        | replace: '$customerFirstName', customer.first_name
+      }}
+      {{ section.settings.top_text }}
+    </div>
+    {% if section.settings.top_link != blank %}
+      </a>
+    {% endif %}
+    {% if section.settings.image_one != blank %}
+      <div class='img-container first-image'>
+        {% if section.settings.image_one_link != blank %}
+          <a href='{{ section.settings.image_one_link }}'>
+        {% endif %}
+        <picture>
+          <source
+            srcSet='{{ section.settings.image_one | img_url: 'master' }}'
+            media='(min-width: 1000px)'
+          >
+          <img
+            {% if section.settings.image_one.presentation.focal_point %}
+              style='object-position:{{ section.settings.image_one.presentation.focal_point }};'
+            {% endif %}
+            src='{{ section.settings.image_one | img_url: '750x', scale: 2 }}'
+            loading='lazy'
+          >
+        </picture>
+        {% if section.settings.image_one_link != blank %}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class='bottom-wrapper'>
+      <div class='img-bottom'>
+        <a href='{{ section.settings.image_two_link }}'>
+          <img
+            {% if section.settings.image_two.presentation.focal_point %}
+              style='object-position:{{ section.settings.image_two.presentation.focal_point }};'
+            {% endif %}
+            src='{{ section.settings.image_two | img_url: '750x', scale: 2 }}'
+            loading='lazy'
+          >
+        </a>
+      </div>
+      <div class='img-bottom'>
+        <a href='{{ section.settings.image_three_link }}'>
+          <img
+            {% if section.settings.image_three.presentation.focal_point %}
+              style='object-position:{{ section.settings.image_three.presentation.focal_point }};'
+            {% endif %}
+            src='{{ section.settings.image_three | img_url: '750x', scale: 2 }}'
+            loading='lazy'
+          >
+        </a>
+      </div>
+      <div class='img-bottom'>
+        <a href='{{ section.settings.image_four_link }}'>
+          <img
+            {% if section.settings.image_four.presentation.focal_point %}
+              style='object-position:{{ section.settings.image_four.presentation.focal_point }};'
+            {% endif %}
+            src='{{ section.settings.image_four | img_url: '750x', scale: 2 }}'
+            loading='lazy'
+          >
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='mobile-dashboard'>
+  <h1 class='Heading u-h1'>My Account</h1>
+  {% if section.settings.top_link != blank %}
+    <a href='{{ section.settings.top_link }}'>
+  {% endif %}
+  <div
+    class='img-container text-banner'
+    style='background: {{ section.settings.top_color }}'
+  >
+    {{
+      'customer.account.greeting'
+      | t
+      | replace: '$customerFirstName', customer.first_name
+    }}
+    {{ section.settings.top_text }}
+  </div>
+  {% if section.settings.top_link != blank %}
+    </a>
+  {% endif %}
+
+  {% render 'mobile-account-dashboard' %}
+</div>

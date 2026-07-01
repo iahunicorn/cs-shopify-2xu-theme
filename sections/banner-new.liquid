@@ -1,0 +1,406 @@
+{{ "section-banner-new.css" | asset_url | stylesheet_tag }}
+
+<div class="banner-section {{ section.settings.class_name }}" id="{{ section.id }}">
+  {%- if section.blocks.size > 1 -%}
+    <div class="swiper banner-swiper">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%} {%- if block.type == 'banner_item' -%}
+          <div
+              class="swiper-slide {% if block.settings.content_box_show %} has-content-box {% endif %} {% if block.settings.content_box_background_show %} has-bg-content-box {% endif %} {% if block.settings.image_item_mobile != blank %} has-image-mobile {% endif %} one-item">
+            {%- if block.settings.image_item != blank -%}
+
+
+            <img class="image" {% if block.settings.image_item.presentation.focal_point %}style="object-position:{{ block.settings.image_item.presentation.focal_point }};"{% endif %}
+              srcset="{{ block.settings.image_item | image_url }} {{ block.settings.image_item.width }}w,
+                      {%- if block.settings.image_item.width >= 1420 -%}
+                        {{ block.settings.image_item | image_url: width: 2600 }} 2600w,
+                        {{ block.settings.image_item | image_url: width: 2400 }} 2400w,
+                        {{ block.settings.image_item | image_url: width: 2200 }} 2200w,
+                        {{ block.settings.image_item | image_url: width: 1920 }} 1920w,
+                        {{ block.settings.image_item | image_url: width: 1792 }} 1792w,
+                        {{ block.settings.image_item | image_url: width: 1420 }} 1420w,
+                        {{ block.settings.image_item | image_url: width: 1366 }} 1366w,
+                        {{ block.settings.image_item | image_url: width: 1280 }} 1280w,
+                        {{ block.settings.image_item | image_url: width: 1024 }} 1024w,
+                        {{ block.settings.image_item | image_url: width: 1024 }} 1024w,
+                        {{ block.settings.image_item | image_url: width: 980 }} 980w,
+                        {{ block.settings.image_item | image_url: width: 768 }} 768w,
+                    {%- endif -%}"
+                    sizes="100vw"
+                   src="{{ block.settings.image_item | image_url: width: 1420 }}" sizes="(min-width: 990px),
+                        calc(100vw - 30px)" alt="{{ block.settings.image.alt }}"
+                   height="{{ block.settings.image_item.height }}" width="{{ block.settings.image_item.width }}"
+                   loading="lazy">
+
+              {% if block.settings.image_item_mobile != blank %}
+                <img class="image"
+                    {% if block.settings.image_item_mobile.presentation.focal_point %}style="object-position:{{ block.settings.image_item_mobile.presentation.focal_point }};"{% endif %}
+                     srcset="{{ block.settings.image_item_mobile | image_url }} {{ block.settings.image_item_mobile.width }}w,
+                            {%- if block.settings.image_item_mobile.width >= 165 -%}{{ block.settings.image_item_mobile | image_url: width: 165 }} 165w,{%- endif -%}
+                            {%- if block.settings.image_item_mobile.width >= 360 -%}{{ block.settings.image_item_mobile | image_url: width: 360 }} 360w,{%- endif -%}
+                            {%- if block.settings.image_item_mobile.width >= 535 -%}{{ block.settings.image_item_mobile | image_url: width: 535 }} 535w,{%- endif -%}
+                            {%- if block.settings.image_item_mobile.width >= 750 -%}{{ block.settings.image_item_mobile | image_url: width: 750 }} 750w,{%- endif -%}
+                            {%- if block.settings.image_item_mobile.width >= 1070 -%}{{ block.settings.image_item_mobile | image_url: width: 1070 }} 1070w,{%- endif -%}
+                            {%- if block.settings.image_item_mobile.width >= 1500 -%}{{ block.settings.image_item_mobile | image_url: width: 1500 }} 1500w,{%- endif -%}"
+                     src="{{ block.settings.image_item_mobile | image_url: width: 1500 }}"
+                     sizes="100vw"
+                     alt="{{ block.settings.image_item_mobile.alt | escape }}" loading="lazy"
+                     width="{{ block.settings.image_item_mobile.width }}"
+                     height="{{ block.settings.image_item_mobile.height }}"/>
+              {% endif %} {%- elsif block.settings.image_item == blank -%}
+              <div class="banner__media media ">
+                {{ "lifestyle-2" | placeholder_svg_tag: "placeholder-svg" }}
+              </div>
+            {%- endif -%}
+            {% if block.settings.content_box_show %}
+              {% if block.settings.content_box_background_show %}
+                <div class="content-box {{ block.settings.position_box }}" style="text-align: {{ block.settings.align_content }}; background-color: {{ block.settings.background_content }};">
+                  <div class="content">
+                    {% if block.settings.heading != blank %}
+                      <h1 class="title" style="color: {{ block.settings.color_title }}">{{ block.settings.heading }}</h1>
+                    {% endif %} {% if block.settings.subheading %}
+                      <div class="sub-title">{{ block.settings.subheading }}</div>
+                    {% endif %}
+                    <div class="button-box">
+                      {% if block.settings.link_text_first != blank %}
+                        <a href="{{ block.settings.link_first }}" class="hero__slide-link" aria-hidden="true"
+                           style="background: {{ block.settings.background_first_button }}; color: {{ block.settings.color_text_first_button }}">
+                          {{ block.settings.link_text_first }}
+                          <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+                        </a>
+                      {% endif %} {% if block.settings.link_text_second != blank %}
+                        <a href="{{ block.settings.link_second }}" class="hero__slide-link" aria-hidden="true"
+                           style="background: {{ block.settings.background_first_button }}; color: {{ block.settings.color_text_first_button }}">
+                          {{ block.settings.link_text_second }}
+                          <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+                        </a>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              {% else %}
+                <div class="content-box no-box" style="left: {{ block.settings.vertical_position }}%; top: {{ block.settings.horizontal_position }}%">
+                  <div class="content">
+                    {% if block.settings.heading != blank %}
+                      <h1 class="title" style="color: {{ block.settings.color_title }}">{{ block.settings.heading }}</h1>
+                    {% endif %} {% if block.settings.subheading %}
+                      <div class="sub-title">{{ block.settings.subheading }}</div>
+                    {% endif %}
+                    <div class="button-box">
+                      {% if block.settings.link_text_first != blank %}
+                        <a href="{{ block.settings.link_first }}" class="hero__slide-link" aria-hidden="true"
+                           style="background: {{ block.settings.background_first_button }}; color: {{ block.settings.color_text_first_button }}">
+                          {{ block.settings.link_text_first }}
+                          <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+                        </a>
+                      {% endif %} {% if block.settings.link_text_second != blank %}
+                        <a href="{{ block.settings.link_second }}" class="hero__slide-link" aria-hidden="true"
+                           style="background: {{ block.settings.background_first_button }}; color: {{ block.settings.color_text_first_button }}">
+                          {{ block.settings.link_text_second }}
+                          <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+                        </a>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+            {% endif %}
+          </div>
+        {% endif %} {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  {% else %}
+    {% for block in section.blocks %} {%- if block.settings.image_item != blank
+    -%}
+      <div class="without-slide one-item {% if block.settings.content_box_show %} has-content-box {% endif %} {% if block.settings.content_box_background_show %} has-bg-content-box {% endif %} {% if block.settings.image_item_mobile != blank %} has-image-mobile {% endif %}">
+
+      <img class="image"
+          {% if block.settings.image_item.presentation.focal_point %}style="object-position:{{ block.settings.image_item.presentation.focal_point }};"{% endif %}
+           srcset=" {{ block.settings.image_item | image_url }} {{ block.settings.image_item.width }}w,
+                    {%- if block.settings.image_item.width >= 1420 -%}
+                      {{ block.settings.image_item | image_url: width: 2600 }} 2600w,
+                      {{ block.settings.image_item | image_url: width: 2400 }} 2400w,
+                      {{ block.settings.image_item | image_url: width: 2200 }} 2200w,
+                      {{ block.settings.image_item | image_url: width: 1920 }} 1920w,
+                      {{ block.settings.image_item | image_url: width: 1792 }} 1792w,
+                      {{ block.settings.image_item | image_url: width: 1420 }} 1420w,
+                      {{ block.settings.image_item | image_url: width: 1366 }} 1366w,
+                      {{ block.settings.image_item | image_url: width: 1280 }} 1280w,
+                      {{ block.settings.image_item | image_url: width: 1024 }} 1024w,
+                      {{ block.settings.image_item | image_url: width: 1024 }} 1024w,
+                      {{ block.settings.image_item | image_url: width: 980 }} 980w,
+                      {{ block.settings.image_item | image_url: width: 768 }} 768w,
+                  {%- endif -%}"
+          sizes="100vw"
+           src="{{ block.settings.image_item | image_url: width: 550 }}"
+           alt="{{ block.settings.image_item.alt }}"
+           height="{{ block.settings.image_item.height }}" width="{{ block.settings.image_item.width }}"
+           loading="lazy">
+      {% if block.settings.image_item_mobile != blank %}
+        <img class="image"
+            {% if block.settings.image_item_mobile.presentation.focal_point %}style="object-position:{{ block.settings.image_item_mobile.presentation.focal_point }};"{% endif %}
+             srcset="{{ block.settings.image_item_mobile | image_url }} {{ block.settings.image_item_mobile.width }}w,
+                {%- if block.settings.image_item_mobile.width >= 165 -%}{{ block.settings.image_item_mobile | image_url: width: 165 }} 165w,{%- endif -%}
+                {%- if block.settings.image_item_mobile.width >= 360 -%}{{ block.settings.image_item_mobile | image_url: width: 360 }} 360w,{%- endif -%}
+                {%- if block.settings.image_item_mobile.width >= 535 -%}{{ block.settings.image_item_mobile | image_url: width: 535 }} 535w,{%- endif -%}
+                {%- if block.settings.image_item_mobile.width >= 750 -%}{{ block.settings.image_item_mobile | image_url: width: 750 }} 750w,{%- endif -%}
+                {%- if block.settings.image_item_mobile.width >= 1070 -%}{{ block.settings.image_item_mobile | image_url: width: 1070 }} 1070w,{%- endif -%}
+                {%- if block.settings.image_item_mobile.width >= 1500 -%}{{ block.settings.image_item_mobile | image_url: width: 1500 }} 1500w,{%- endif -%}"
+             src="{{ block.settings.image_item_mobile | image_url: width: 1500 }}"
+             sizes="100vw"
+             alt="{{ block.settings.image_item_mobile.alt | escape }}" loading="lazy"
+             width="{{ block.settings.image_item_mobile.width }}" height="{{ block.settings.image_item.height }}"/>
+      {% endif %} {%- elsif block.settings.image_item_mobile == blank -%}
+      <div class="banner__media media">
+        {{ "lifestyle-2" | placeholder_svg_tag: "placeholder-svg" }}
+      </div>
+    {%- endif -%}
+      {% if block.settings.content_box_show %}
+        {% if block.settings.content_box_background_show %}
+          <div class="content-box {{ block.settings.position_box }}" style="text-align: {{ block.settings.align_content }};background-color: {{ block.settings.background_content }};">
+            <div class="content">
+              {% if block.settings.heading != blank %}
+                <h1 class="title" style="color: {{ block.settings.color_title }}">{{ block.settings.heading }}</h1>
+              {% endif %} {% if block.settings.subheading %}
+                <div class="sub-title">{{ block.settings.subheading }}</div>
+              {% endif %}
+              <div class="button-box">
+                {% if block.settings.link_text_first != blank %}
+                  <a href="{{ block.settings.link_first }}" class="hero__slide-link" aria-hidden="true"
+                     style="background: {{ block.settings.background_first_button }}; color: {{ block.settings.color_text_first_button }}">
+                    {{ block.settings.link_text_first }}
+                    <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+                  </a>
+                {% endif %} {% if block.settings.link_text_second != blank %}
+                  <a href="{{ block.settings.link_second }}" class="hero__slide-link" aria-hidden="true"
+                     style="background: {{ block.settings.background_first_button }}; color: {{ block.settings.color_text_first_button }}">
+                    {{ block.settings.link_text_second }}
+                    <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% else %}
+          <div class="content-box no-box" style="left: {{ block.settings.vertical_position }}%; top: {{ block.settings.horizontal_position }}%">
+            <div class="content">
+              {% if block.settings.heading != blank %}
+                <h1 class="title" style="color: {{ block.settings.color_title }}">{{ block.settings.heading }}</h1>
+              {% endif %} {% if block.settings.subheading %}
+                <div class="sub-title">{{ block.settings.subheading }}</div>
+              {% endif %}
+              <div class="button-box">
+                {% if block.settings.link_text_first != blank %}
+                  <a href="{{ block.settings.link_first }}" class="hero__slide-link" aria-hidden="true"
+                     style="background: {{ block.settings.background_first_button }}; color: {{ block.settings.color_text_first_button }}">
+                    {{ block.settings.link_text_first }}
+                    <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+                  </a>
+                {% endif %} {% if block.settings.link_text_second != blank %}
+                  <a href="{{ block.settings.link_second }}" class="hero__slide-link" aria-hidden="true"
+                     style="background: {{ block.settings.background_first_button }}; color: {{ block.settings.color_text_first_button }}">
+                    {{ block.settings.link_text_second }}
+                    <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+<script src="{{ 'section-banner-new.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Banner New",
+  "class": "section-banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "class_name",
+      "label": "Custom Class name for dev",
+      "default": "banner"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner_item",
+      "name": "Banner Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_item",
+          "label": "Image Desktop"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_item_mobile",
+          "label": "Image Mobile"
+        },
+        {
+          "type": "header",
+          "content": "Content box with background"
+        },
+        {
+          "type": "select",
+          "id": "position_box",
+          "options": [
+            {
+              "value": "left",
+              "label": "left"
+            },
+            {
+              "value": "right",
+              "label": "right"
+            }
+          ],
+          "default": "left",
+          "label": "Set position content box"
+        },
+        {
+          "type": "select",
+          "id": "align_content",
+          "options": [
+            {
+              "value": "left",
+              "label": "left"
+            },
+            {
+              "value": "center",
+              "label": "center"
+            },
+            {
+              "value": "right",
+              "label": "right"
+            }
+          ],
+          "default": "center",
+          "label": "Set align content"
+        },
+        {
+          "type": "color",
+          "id": "background_content",
+          "label": "Background Content Box",
+          "default": "#1C1714"
+        },
+        {
+          "type": "header",
+          "content": "Content box without background"
+        },
+        {
+          "type": "checkbox",
+          "id": "content_box_background_show",
+          "label": "Enable Background Content Box",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "horizontal_position",
+          "label": "Horizontal position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "vertical_position",
+          "label": "Vertical position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "default": 15
+        },
+        {
+          "type": "header",
+          "content": "Content box"
+        },
+        {
+          "type": "checkbox",
+          "id": "content_box_show",
+          "label": "Enable Content Box",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Arrive in style"
+        },
+        {
+          "type": "color",
+          "id": "color_title",
+          "label": "Select title color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "textarea",
+          "id": "subheading",
+          "label": "Sub Title",
+          "default": "New women’s jackets & vests"
+        },
+        {
+          "type": "url",
+          "id": "link_first",
+          "label": "First Button Link"
+        },
+        {
+          "type": "text",
+          "id": "link_text_first",
+          "label": "First Button Text",
+          "default": "Shop the collection"
+        },
+        {
+          "type": "color",
+          "id": "background_first_button",
+          "label": "Select background first button",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "color_text_first_button",
+          "label": "Select color text first button",
+          "default": "#1C1714"
+        },
+        {
+          "type": "url",
+          "id": "link_second",
+          "label": "Second Button Link"
+        },
+        {
+          "type": "text",
+          "id": "link_text_second",
+          "label": "Second Button Text",
+          "default": "Secondary CTA"
+        },
+        {
+          "type": "color",
+          "id": "background_second_button",
+          "label": "Select background first button",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "color_text_second_button",
+          "label": "Select color text first button",
+          "default": "#1C1714"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner New"
+    }
+  ]
+}
+{% endschema %}

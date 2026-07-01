@@ -1,0 +1,220 @@
+{% assign featured_image = product.featured_image | image_url: width: 600 %}
+{% liquid
+  # Sale percentage badge
+  if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price
+    assign percent_sale = 0
+    assign sale_price = product.selected_or_first_available_variant.compare_at_price
+    assign old_price = product.selected_or_first_available_variant.price
+    assign percent_sale = sale_price | minus: old_price | times: 100 | divided_by: sale_price
+    assign percent_sale_custom = percent_sale | modulo: 5
+    assign percent_sale_final = percent_sale | minus: percent_sale_custom
+
+    if percent_sale_final >= 5
+      assign sale_percentage_text = "-" | append: percent_sale_final | append: '%'
+      assign sale_percentage_variant = 'dark'
+    endif
+  endif
+
+  # Custom sale badges
+  if product.metafields.custom.sale_badge != blank
+    assign sale_badge = product.metafields.custom.sale_badge.value
+    assign sale_custom_text = sale_badge.text
+    assign sale_custom_variant = sale_badge.variant | downcase
+  endif
+  if product.metafields.custom.secondary_sale_badge != blank
+    assign secondary_sale_badge = product.metafields.custom.secondary_sale_badge.value
+    assign secondary_sale_text = secondary_sale_badge.text
+    assign secondary_sale_variant = secondary_sale_badge.variant | downcase
+  endif
+
+  if sale_percentage_text != blank
+    assign top_sale_badge = sale_percentage_text
+    assign top_sale_variant = sale_percentage_variant
+  elsif sale_custom_text != blank
+    assign top_sale_badge = sale_custom_text
+    assign top_sale_variant = sale_custom_variant
+  endif
+
+  if sale_custom_text != blank
+    assign bottom_sale_badge = sale_custom_text
+    assign bottom_sale_variant = sale_custom_variant
+  elsif secondary_sale_text != blank
+    assign bottom_sale_badge = secondary_sale_text
+    assign bottom_sale_variant = secondary_sale_variant
+  endif
+-%}
+
+{% comment %} Swatches {% endcomment %}
+ {%- liquid
+  assign stitched_products = null
+  for collection in product.collections
+    assign collection_handle_parts = collection.handle | split: '-'
+    if collection_handle_parts[0] == 'stitch'
+      assign stitched_products = collection.products
+      break
+    endif
+  endfor
+  assign single = single | default: false
+  if stitched_products and single == false
+    assign current_product_arr = stitched_products | where: 'handle', product.handle
+    assign current_product = current_product_arr[0]
+  endif
+-%}
+
+
+
+
+<a href="{{ product.url }}" class="tw-block tw-group tw-select-none">
+  {% comment %} Image {% endcomment %}
+  <div
+    class='tw-w-full tw-aspect-[330/410] tw-relative tw-select-none'
+  >
+    <img
+      src="{{ featured_image }}"
+      alt="{{ product.title }}"
+      class="tw-w-full tw-h-full tw-object-cover tw-absolute tw-inset-0"
+      width="auto"
+      height="auto"
+    />
+    {% comment %} Badges {% endcomment %}
+    {% if top_sale_badge != blank %}
+      <div class="tw-absolute tw-top-0 tw-left-0 tw-p-4">
+        <span class="tw-text-2xs tw-font-input-mono tw-px-2 tw-py-1 tw-rounded-full tw-font-bold tw-uppercase {% if top_sale_variant == 'dark' %}tw-bg-2xu-white tw-text-black{% else %}tw-bg-2xu-black tw-text-white{% endif %}">
+          {{ top_sale_badge }}
+        </span>
+      </div>
+    {% endif %}
+    {% if bottom_sale_badge != blank %}
+      <div class="tw-absolute tw-bottom-0 tw-left-0 tw-p-4 tw-opacity-100 group-hover:tw-opacity-0 tw-transition-opacity">
+        <span class="tw-text-2xs tw-font-input-mono tw-px-2 tw-py-1 tw-rounded-full tw-font-bold tw-uppercase {% if bottom_sale_variant == 'dark' %}tw-bg-2xu-white tw-text-black{% else %}tw-bg-2xu-black tw-text-white{% endif %}">
+          {{ bottom_sale_badge }}
+        </span>
+      </div>
+    {% endif %}
+  </div>
+
+
+  {% comment %} Body {% endcomment %}
+  <div class='tw-p-2 tw-pt-3 tw-flex tw-flex-col tw-gap-[10px]'>
+    <div class="tw-flex tw-justify-between tw-items-center">
+      <div class="show-empty tw-flex tw-items-center tw-gap-2">
+        {%- for option in product.options_with_values -%}
+          {% assign downcase_name = option.name | downcase %}
+          {%- if downcase_name == 'color' or downcase_name == 'colour' -%}
+
+            {%- comment -%} Process each stitched product and build JSON immediately {%- endcomment -%}
+            {% for stitched_product in stitched_products %}
+              {%- capture link_title -%}
+                {%- for option in stitched_product.options_with_values -%}
+                  {%- if option.name == 'Color' or option.name == 'Colour' -%}
+                  {{- option.values[0] -}}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endcapture -%}
+
+              {%- assign color_hex = '' -%}
+              {%- if stitched_product.metafields.custom.colour_codes -%}
+                {%- assign color_hex = stitched_product.metafields.custom.colour_codes.value
+                  | join: '|'
+                -%}
+              {% else %}
+                {%- for tag in stitched_product.tags -%}
+                  {%- if tag contains 'Colour:' or tag contains 'colour:' -%}
+                    {%- assign color_hex = tag
+                      | remove: 'Colour:'
+                      | remove: 'colour:'
+                      | replace: '&nbsp;', ''
+                      | remove: '&nbsp;'
+                      | remove: '\0026nbsp;'
+                      | remove: ' '
+                    -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {% endif %}
+
+              {%- assign active_product = false -%}
+              {%- if stitched_product.id == current_product.id -%}
+                {%- assign active_product = true -%}
+              {%- endif -%}
+
+              {%- if color_hex contains '|' -%}
+                {%- assign color_two = color_hex | split: '|' | last -%}
+                {%- assign color_one = color_hex | split: '|' | first -%}
+              {%- else -%}
+                {%- assign color_one = color_hex -%}
+                {%- assign color_two = null -%}
+              {%- endif -%}
+              <button
+                type="button"
+                title="{{ link_title }}"
+                class="{% if active_product %}tw-ring-1 tw-ring-2xu-black{% endif %} show-empty tw-block tw-w-4 tw-h-4 lg:tw-w-5 lg:tw-h-5 tw-rounded-full tw-border-2"
+                style="background: {% if color_two %}linear-gradient(135deg, {{ color_one }} 50%, {{ color_two }} 50%){% else %}{{ color_one }}{% endif %};"
+              >
+                
+              </button>
+
+              {% if forloop.index > 5 %}
+                  <span className="tw-inline-block font-input-mono tw-text-xs">
+                    +{{ stitched_products.size | minus: 5 }}
+                  </span>
+                {% break %}
+              {% endif %}
+            {% endfor %}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {% comment %} Rating {% endcomment %}
+      {% if product.metafields.reviews.rating.value %}
+        <span class="tw-hidden lg:tw-flex tw-items-center tw-text-xs tw-font-euclid tw-gap-0.5">
+          <svg
+            width="11"
+            height="10"
+            viewBox="0 0 11 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M2.09811 10L3.00053 6.30168L0 3.81526L3.95243 3.4881L5.50036 0L7.0483 3.4874L11 3.81456L7.99947 6.30099L8.90261 9.9993L5.50036 8.03633L2.09811 10Z"
+              fill="black"
+            />
+          </svg>
+          {{ product.metafields.reviews.rating.value }}
+        </span>
+      {% endif %}
+    </div>
+    {% comment %} Title {% endcomment %}
+     <p class="tw-font-euclid tw-font-normal lg:tw-font-medium">
+      {{ product.title }}
+     </p>
+    {% comment %} Short Description {% endcomment %}
+     <p class="tw-text-xs tw-font-euclid tw-line-clamp-2 tw-max-h-[3.2em]">
+      {{ product.metafields.custom.short_description.value }}
+     </p>
+    {% comment %} Price {% endcomment %}
+    <p class="tw-font-input-mono tw-text-xs">
+      <span class="tw-font-input-mono">{{ product.price | money }}</span>
+      {% if compare_at_price %}
+        <span class="tw-line-through tw-text-2xu-mid-grey tw-ml-2">
+          {{ product.compare_at_price | money }}
+        </span>
+      {% endif %}
+    </p>
+  </div>
+</a>
+
+{% comment %} 
+            {%- assign group_swatches = '' -%}
+            {%- assign swatch_count = 0 -%}
+
+
+
+
+
+
+              {%- if swatch_count > 0 -%}
+                {%- assign group_swatches = group_swatches | append: ',' -%}
+              {%- endif -%}
+
+              {%- assign swatch_count = swatch_count | plus: 1 -%}
+
+{% endcomment %}

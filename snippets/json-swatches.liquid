@@ -1,0 +1,130 @@
+[{%- liquid
+  assign stitched_products = null
+  for collection in product.collections
+    assign collection_handle_parts = collection.handle | split: '-'
+    if collection_handle_parts[0] == 'stitch'
+      assign stitched_products = collection.products
+      break
+    endif
+  endfor
+  assign single = single | default: false
+  if stitched_products and single == false
+    assign current_product_arr = stitched_products | where: 'handle', product.handle
+    assign current_product = current_product_arr[0]
+  endif
+-%}
+
+{%- comment -%} Build JSON structure directly {%- endcomment -%}
+{%- for option in product.options_with_values -%}
+  {% assign downcase_name = option.name | downcase %}
+  {%- if downcase_name == 'color' or downcase_name == 'colour' -%}
+    {%- assign group_swatches = '' -%}
+    {%- assign swatch_count = 0 -%}
+
+    {%- comment -%} Process each stitched product and build JSON immediately {%- endcomment -%}
+    {% for stitched_product in stitched_products %}
+      {%- assign color_hex = '' -%}
+      {%- if stitched_product.metafields.custom.colour_codes -%}
+        {%- assign color_hex = stitched_product.metafields.custom.colour_codes.value
+          | join: '|'
+        -%}
+      {% else %}
+        {%- for tag in stitched_product.tags -%}
+          {%- if tag contains 'Colour:' or tag contains 'colour:' -%}
+            {%- assign color_hex = tag
+              | remove: 'Colour:'
+              | remove: 'colour:'
+              | replace: '&nbsp;', ''
+              | remove: '&nbsp;'
+              | remove: '\0026nbsp;'
+              | remove: ' '
+            -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {% endif %}
+
+      {%- capture link_title -%}
+        {%- for option in stitched_product.options_with_values -%}
+          {%- if option.name == 'Color' or option.name == 'Colour' -%}
+          {{- option.values[0] -}}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+
+      {%- capture primary_image -%}
+        {%- if stitched_product.featured_image -%}{{ stitched_product.featured_image | image_url: width: 600 | json }}{%- else -%}null{%- endif -%}
+      {%- endcapture -%}
+
+      {%- capture secondary_image -%}
+        {%-if stitched_product.images.size > 1 -%}{{ stitched_product.images[1] | image_url: width: 600 | json }}{% else %}null{% endif %}
+      {%- endcapture -%}
+
+      {%- capture product_video -%}
+        {%- assign product_video_obj = stitched_product.media | where: "media_type", "video" | first -%}
+        {%- if product_video_obj -%}
+          {
+            "imageUrl": {{ product_video_obj.preview_image | image_url: width: 600 | json }},
+            "sources": [
+              {%- for video_source in product_video_obj.sources -%}
+                {
+                  "url": {{ video_source.url | json }},
+                  
+                  "format": {{ video_source.format | json }},
+                  "height": {{ video_source.height | json }},
+                  "width": {{ video_source.width | json }}
+                }{%- unless forloop.last -%},{%- endunless -%}
+              {%- endfor -%}
+            ]
+          }
+        {%- else -%}
+          null
+        {%- endif -%}
+      {%- endcapture -%}
+
+      {%- assign active_product = false -%}
+      {%- if stitched_product.id == current_product.id -%}
+        {%- assign active_product = true -%}
+      {%- endif -%}
+
+      {%- if color_hex contains '|' -%}
+        {%- assign color_two = color_hex | split: '|' | last -%}
+        {%- assign color_one = color_hex | split: '|' | first -%}
+      {%- else -%}
+        {%- assign color_one = color_hex -%}
+        {%- assign color_two = null -%}
+      {%- endif -%}
+
+      {%- if swatch_count > 0 -%}
+        {%- assign group_swatches = group_swatches | append: ',' -%}
+      {%- endif -%}
+
+      {%- capture swatch_json -%}
+    {
+      "productId": "{{ stitched_product.id }}",
+      "title": "{{ link_title | escape }}",
+      "url": "{{ stitched_product.url }}",
+      "active": {{ active_product }},
+      "image": {{ primary_image }},
+      "secondaryImage": {{ secondary_image }},
+      "productVideo": {{ product_video }},
+      "price": {{ stitched_product.price | money | json }},
+      {%- if stitched_product.compare_at_price > 0 -%}
+      "compareAtPrice": {{ stitched_product.compare_at_price | money | json }},
+      {%- endif -%}
+      "sizes": {%- render 'json-sizes', product: stitched_product -%},
+      "colors": {
+        "primary": "{{ color_one }}"{%- if color_two -%},
+        "secondary": "{{ color_two }}"
+        {%- endif -%}
+      },
+      "badges": {% render 'json-product-badges', product: stitched_product %}
+    }
+      {%- endcapture -%}
+
+      {%- assign group_swatches = group_swatches | append: swatch_json -%}
+      {%- assign swatch_count = swatch_count | plus: 1 -%}
+    {% endfor %}
+
+    {{ group_swatches }}
+  {%- endif -%}
+{%- endfor -%}]

@@ -1,0 +1,65 @@
+{{ 'section-topbar.css' | asset_url | stylesheet_tag }}
+{%- render 'topbar',
+  settings: section.settings,
+  blocks: section.blocks
+-%}
+
+<script src="{{ 'section-topbar.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "t:sections.topbar.name",
+  "settings": [
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:sections.topbar.settings.text_color.label",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:sections.topbar.settings.background_color.label",
+      "default": "#1C1714"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "topbar",
+      "name": "t:sections.topbar.blocks.topbar.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "t:sections.topbar.blocks.topbar.settings.icon.label"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Welcome to our store",
+          "label": "t:sections.topbar.blocks.topbar.settings.text.label"
+        },
+        {
+          "type": "url",
+          "id": "url_block",
+          "label": "t:sections.topbar.blocks.topbar.settings.url.label"
+        },
+        {
+          "type": "text",
+          "id": "klaviyo_event",
+          "label": "Klaviyo Event",
+          "info": "Enter Klaviyo event code here to trigger popup"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "topbar"
+      }
+    ]
+  }
+}
+{% endschema %}

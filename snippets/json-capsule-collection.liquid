@@ -1,0 +1,28 @@
+{%- liquid
+  assign formatted_items = ''
+  assign current_collection = collection
+  assign capsule_items = current_collection.metafields.custom.capsule_collections_items.value
+  for item in capsule_items
+    assign capsule_collection = collections[item.collection]
+
+    capture current_item
+      assign additional_content = item.additional_content | append: '' | json
+      echo '{"title":"' | append: item.title | append: '",'
+      echo '"additionalContent":' | append: additional_content | append: ','
+      if item.image != blank
+        assign image = item.image | image_url
+        echo '"imageUrl":"' | append: image | append: '",'
+      endif
+      echo '"collectionUrl":"' | append: capsule_collection.url | append: '"}'
+    endcapture
+    if formatted_items == ''
+      assign formatted_items = current_item
+    else
+      assign formatted_items = formatted_items | append: ',' | append: current_item
+    endif
+  endfor
+
+  echo '['
+  echo formatted_items
+  echo ']'
+-%}

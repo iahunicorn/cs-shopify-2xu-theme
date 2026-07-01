@@ -1,0 +1,45 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "account-promotion-banner": {
+      "type": "account-promotion-banner",
+      "settings": {
+        "visible": true,
+        "title": "",
+        "subttitle": "",
+        "color_title": "",
+        "image_desktop": "shopify:\/\/shop_images\/WK27-account_banners_update_5b3ee87d-d82c-4b62-abe1-4db126a962d7.jpg",
+        "image_mobile": "shopify:\/\/shop_images\/2XU-Crew-Desktop-NEW-01_750x_2x_37397f27-209c-45df-99c0-b61e014c6f67.jpg",
+        "link_banner": "",
+        "color_background": ""
+      }
+    },
+    "main": {
+      "type": "page-main-account",
+      "settings": {
+        "top_text": "",
+        "top_color": "",
+        "top_link": "",
+        "image_one_link": "",
+        "image_two": "shopify:\/\/shop_images\/WK27-account_banners_update5_750x_2x_1.jpg",
+        "image_two_link": "shopify:\/\/collections\/triathlon",
+        "image_three": "shopify:\/\/shop_images\/WK27-account_banners_update3_750x_2x_ac90c424-92dc-4f92-9305-359b2fe1024c.jpg",
+        "image_three_link": "shopify:\/\/pages\/our-story-3",
+        "image_four": "shopify:\/\/shop_images\/MicrosoftTeams-image_2_750x_2x_54409e2a-b584-4fc8-adaa-c88057768ba4.jpg",
+        "image_four_link": "shopify:\/\/pages\/changesaysyes"
+      }
+    }
+  },
+  "order": [
+    "account-promotion-banner",
+    "main"
+  ]
+}

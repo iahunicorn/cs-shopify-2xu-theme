@@ -1,0 +1,123 @@
+{% assign product_limit = section.settings.product_limit %}
+{% assign mens_count = product_limit | default: section.settings.mens_collection.products_count %}
+{% assign womens_count = product_limit | default: section.settings.womens_collection.products_count %}
+{%- capture mens_collection -%}
+  {
+    "count": {{  mens_count }},
+    "products": {% render 'json-products', collection: section.settings.mens_collection, exclude: 'pagination', limit: product_limit %}
+  }
+{%- endcapture -%}
+{%- capture womens_collection -%}
+  {
+    "count": {{ womens_count }},
+    "products": {% render 'json-products', collection: section.settings.womens_collection, exclude: 'pagination', limit: product_limit %}
+  }
+{%- endcapture -%}
+
+<section>
+  <flux-product-reel
+    title='{{ section.settings.title | escape }}'
+    mens-collection='{{ mens_collection | escape }}'
+    mens-collection-label='{{ section.settings.mens_collection_label | escape }}'
+    womens-collection='{{ womens_collection | escape }}'
+    womens-collection-label='{{ section.settings.womens_collection_label | escape }}'
+    sectionId='{{ section.id }}'
+  >
+    <div class="tw-py-8 lg:tw-py-20" id="{{ section.id }}">
+      <header class="tw-mb-5 lg:tw-mb-10 tw-text-center tw-flex tw-flex-col-reverse md:tw-flex-row-reverse lg:tw-flex-row tw-justify-center md:tw-justify-between tw-items-start md:tw-items-center tw-gap-4 tw-px-3 md:tw-px-12">
+        <div class="tw-flex tw-gap-1 tw-bg-2xu-light-grey tw-p-1 tw-rounded -tw-ml-1">
+          {% if section.settings.mens_collection != blank and section.settings.womens_collection != blank %}
+            <button class="tw-z-10 tw-px-4 tw-py-3 tw-rounded md:tw-font-medium tw-text-sm tw-font-euclid tw-whitespace-nowrap">
+              {{ section.settings.mens_collection_label }}<sup class="tw-font-euclid">{{ mens_count }}</sup>
+            </button>
+            <button class="tw-z-10 tw-px-4 tw-py-3 tw-rounded md:tw-font-medium tw-text-sm tw-font-euclid tw-whitespace-nowrap">
+              {{ section.settings.womens_collection_label }}<sup class="tw-font-euclid">{{ womens_count }}</sup>
+            </button>
+          {% endif %}
+        </div>
+        <p class="tw-font-input-mono tw-text-sm md:tw-text-xl tw-uppercase lg:text-center show-empty">
+          {{ section.settings.title }}
+        </p>
+        <div class="tw-flex tw-gap-1">
+          <button class="tw-bg-2xu-light-grey tw-w-10 tw-h-8 tw-rounded-sm tw-flex tw-items-center tw-justify-center">
+            {% render 'icon-left-chevron' %}
+          </button>
+          <button class="tw-bg-2xu-light-grey tw-w-10 tw-h-8 tw-rounded-sm tw-flex tw-items-center tw-justify-center">
+            {% render 'icon-right-chevron' %}
+          </button>
+        </div>
+      </header>
+      <div class="tw-overflow-x-auto tw-scrollbar-hide tw-pb-4">
+        <div class="tw-flex tw-flex-nowrap tw-w-max">
+          {% comment %} Spacer for the start {% endcomment %}
+
+          <div class="show-empty tw-w-3 md:tw-w-12 tw-h-full tw-flex"></div>
+            {%- for i in (1..mens_count) -%}
+              <div class="tw-w-[255px] md:tw-w-[330px]{% if forloop.last == false %} tw-mr-2{% endif %}">
+                {%- render 'html-product-skeleton' -%}
+              </div>
+            {%- endfor -%}
+          {% comment %} Spacer for the end {% endcomment %}
+          <div class="show-empty tw-w-3 md:tw-w-12 tw-h-full tw-flex"></div>
+        </div>
+      </div>
+    </div>
+  </flux-product-reel>
+</section>
+
+
+{% schema %}
+{
+  "name": "F.A. Product Reel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "info": "Optional"
+    },
+    {
+      "type": "header",
+      "content": "Collection 1"
+    },
+    {
+      "type": "collection",
+      "id": "mens_collection",
+      "label": "Collection 1"
+    },
+    {
+      "type": "text",
+      "id": "mens_collection_label",
+      "label": "Collection 1 Label",
+      "default": "Mens"
+    },
+    {
+      "type": "header",
+      "content": "Collection 2"
+    },
+    {
+      "type": "collection",
+      "id": "womens_collection",
+      "label": "Collection 2"
+    },
+    {
+      "type": "text",
+      "id": "womens_collection_label",
+      "label": "Collection 2 Label",
+      "default": "Womens"
+    },
+    {
+      "type": "number",
+      "id": "product_limit",
+      "label": "Product limit",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "category": "Homepage Section",
+      "name": "F.A. Product Reel"
+    }
+  ]
+}
+{% endschema %}

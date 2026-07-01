@@ -1,0 +1,137 @@
+<section data-section-type="faq" data-section-id="{{ section.id }}">
+    <div class="Container">
+      <div class="PageContent">
+       
+          <div class="PageLayout">
+            <div class="PageLayout__Section PageLayout__Section--secondary PageLayout__Section--sticky hidden-phone">
+              <ul class="Linklist Linklist--spacingLoose">
+              {%- for link in linklists[section.settings.sidebar_menu].links -%}
+                <li class="Linklist__Item">
+                  {% if link.levels > 0 %}
+                    <h4 class="Heading u-h5">{{ link.title }}</h4>
+                    <ul class="Linklist">
+                      {% for sublink in link.links %}
+                      <li>
+                      {% if sublink.current %}
+                        {{ sublink.title }}
+                      {% else %}
+                        <a href="{{ sublink.url }}" class="Link--underline">{{ sublink.title }}</a>
+                      {% endif %}
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  {% else %}
+                    {% if link.current %}
+                        {{ link.title }}
+                      {% else %}
+                        <a href="{{ link.url }}" class="Link--underline">{{ link.title }}</a>
+                      {% endif %}
+                  {% endif %}
+                </li>
+              {%- endfor -%}
+              </ul>
+            </div>
+  
+            <div class="PageLayout__Section Rte">
+            
+              <div class="SectionHeader SectionHeader--left">
+                <h1 class="SectionHeader__Heading Heading u-h1">{{ page.title }}</h1>
+              </div>
+            
+              {{ page.content }}
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+  
+  {% schema %}
+  {
+    "name": "Sidebar page",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "sidebar_menu",
+        "label": "Menu",
+        "info": "If two levels are used the top level becomes a title only."
+      }
+    ]
+  }
+  {% endschema %}
+
+  <style>
+    /*! CSS Used from: https://cdn.shopify.com/s/files/1/0518/4087/6699/t/231/assets/theme.css?v=162209299165979781391664237723 */
+*,*:before,*:after{box-sizing:border-box!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+:active{outline:none;}
+a{color:inherit;background-color:transparent;text-decoration:none;cursor:pointer;}
+a:active,a:hover{outline:0;}
+strong{font-weight:700;}
+p,h1,h4{margin-top:0;font-size:inherit;font-weight:inherit;}
+p:last-child,h1:last-child{margin-bottom:0;}
+ul{margin:0;padding:0;list-style-position:inside;}
+@media screen and (max-width: 640px){
+.hidden-phone{display:none!important;}
+}
+.Container{margin:0 auto;padding:0 24px;}
+@media screen and (min-width: 641px){
+.Container{padding:0 50px;}
+}
+@media screen and (min-width: 1140px){
+.Container{padding:0 80px;}
+}
+.Link--underline{position:relative;display:inline-block;color:var(--link-color);}
+.Link--underline:before{content:"";position:absolute;width:100%;height:1px;left:0;bottom:0;background:currentColor;transform:scale(1);transform-origin:left center;transition:transform .2s ease-in-out;}
+@media (-moz-touch-enabled: 0),(hover: hover){
+.Link--underline:hover:before{transform:scaleX(0);}
+}
+.Heading{font-family:var(--heading-font-family);font-weight:var(--heading-font-weight);font-style:var(--heading-font-style);color:var(--heading-color);transition:color .2s ease-in-out;}
+.features--heading-large .u-h1,.features--heading-large .Rte h1{font-size:24px;}
+.features--heading-large .u-h5{font-size:16px;}
+@media screen and (min-width: 641px){
+.features--heading-large .u-h1,.features--heading-large .Rte h1{font-size:24px;}
+.features--heading-large .u-h5{font-size:16px;}
+}
+.Linklist{list-style:none;padding:0;}
+.Linklist__Item{position:relative;display:block;margin-bottom:12px;width:100%;line-height:1.5;text-align:left;transition:all .2s ease-in-out;}
+.Linklist__Item:last-child{margin-bottom:0!important;}
+.Linklist__Item:before{position:absolute;content:"";display:inline-block;width:6px;height:6px;top:calc(50% - 3px);left:0;border-radius:100%;background:var(--text-color);opacity:0;transition:opacity .1s ease-in-out;}
+.Linklist--spacingLoose .Linklist__Item{margin-bottom:18px;}
+.PageLayout__Section:first-child{margin-bottom:60px;}
+.PageLayout__Section--sticky{position:-webkit-sticky;position:sticky;top:75px;align-self:flex-start;}
+.PageLayout__Section--secondary .u-h5{margin:0;font-weight:600;}
+@media screen and (min-width: 641px){
+.PageLayout{display:flex;flex-wrap:nowrap;}
+.PageLayout__Section{flex:1 0 0;}
+.PageLayout__Section:first-child{margin-bottom:0;}
+.PageLayout__Section--secondary{flex:1 1 200px;max-width:200px;min-width:200px;}
+.PageLayout__Section--secondary a:not(.Button){color:var(--link-color);}
+.PageLayout__Section+.PageLayout__Section{margin-left:50px;}
+}
+@media screen and (min-width: 1008px){
+.PageLayout__Section--secondary{flex-basis:235px;max-width:235px;}
+}
+@media screen and (min-width: 1140px){
+.PageLayout__Section+.PageLayout__Section{margin-left:80px;}
+.PageLayout__Section--secondary{flex-basis:290px;max-width:290px;}
+}
+.PageContent{max-width:1000px;margin:35px auto;}
+@media screen and (min-width: 641px){
+.PageContent{margin-bottom:80px;margin-top:80px;}
+}
+.Rte{word-break:break-word;}
+.Rte p:empty,.Rte h1:empty{display:none;}
+.Rte *{font-family:var(--text-font-family)!important;}
+.Rte:after{content:"";display:block;clear:both;}
+.Rte p:not(:last-child),.Rte ul:not(:last-child){margin-bottom:1.6em;}
+.Rte ul{margin-left:30px;padding-left:0;list-style-position:outside;}
+.Rte li{padding:5px 0;}
+.Rte h1{font-family:var(--heading-font-family);font-weight:var(--heading-font-weight);font-style:var(--heading-font-style);color:var(--heading-color);transition:color .2s ease-in-out;}
+.Rte h1{margin:2.2em 0 .8em;}
+.Rte p:last-child,.Rte h1:last-child{margin-bottom:0;}
+.SectionHeader:not(:only-child){margin-bottom:40px;}
+.SectionHeader__Heading.SectionHeader__Heading{margin-bottom:.5em;}
+@media screen and (min-width: 1008px){
+.SectionHeader:not(:only-child){margin-bottom:70px;}
+}
+  </style>

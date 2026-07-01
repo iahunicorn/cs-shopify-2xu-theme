@@ -1,0 +1,18 @@
+{%- liquid
+  assign current_collection = collection
+  assign sub_collections = current_collection.metafields.custom.sub_collections.value
+-%}
+<nav class='tw-px-4 lg:tw-px-12 tw-py-4 tw-flex tw-flew-nowrap tw-gap-6 tw-overflow-x-auto tw-scrollbar-hide'>
+  {%- for sub_collection in sub_collections -%}
+    {%- assign title = sub_collection.title
+      | default: sub_collection.metafields.custom.breadcrumb_label
+    -%}
+    <a
+      href='{{ sub_collection.url }}'
+      class='tw-block tw-whitespace-nowrap lg:tw-text-2xl text-base tw-font-euclid tw-text-2xu-mid-grey lg:tw-font-normal hover:tw-text-2xu-black tw-transition-colors tw-duration-300'
+    >
+      {{ title }}
+      <sup>{{ sub_collection.products_count }}</sup>
+    </a>
+  {%- endfor -%}
+</nav>

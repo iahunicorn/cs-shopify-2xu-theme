@@ -1,0 +1,28 @@
+
+<section class="tw-px-12 lg:tw-px-24 tw-pb-14 tw-py-10">
+  <div class="tw-max-w-7xl tw-mx-auto">
+    <div class="tailwind-rte tw-font-input-mono tw-text-sm lg:tw-text-xl tw-leading-loose lg:tw-leading-normal tw-uppercase tw-max-w-4xl">
+      {{ section.settings.text }}
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "F.A. Text Banner",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Homepage Section",
+      "name": "F.A. Text Banner"
+    }
+  ]
+}
+{% endschema %}

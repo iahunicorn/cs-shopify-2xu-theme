@@ -1,0 +1,215 @@
+{%- assign class_name = class | append: ' icon icon-' | append: icon | strip -%}
+
+{%- capture icon_class -%}icon-{{ icon }}{%- endcapture -%}
+
+{%- case icon -%}
+  {%- when 'cart' -%}
+    <svg viewBox="0 0 24 24" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 8C3.55109 8 3.36032 8.08194 3.21967 8.22781C3.07902 8.37367 3 8.5715 3 8.77778V19.2778C3 20.7478 4.2075 22 5.625 22H18.375C19.7925 22 21 20.8085 21 19.3385V8.77778C21 8.5715 20.921 8.37367 20.7803 8.22781C20.6397 8.08194 20.4489 8 20.25 8H3.75Z" stroke="#353332" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M8 8V6.5C8 5.30653 8.42143 4.16193 9.17157 3.31802C9.92172 2.47411 10.9391 2 12 2V2C13.0609 2 14.0783 2.47411 14.8284 3.31802C15.5786 4.16193 16 5.30653 16 6.5V8" stroke="#353332" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+  {%- when 'arrow-forward' -%}
+    <svg viewBox="0 0 16 16" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-forward" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'minus' -%}
+    <svg viewBox="0 0 24 24" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/2000/xlink" xlink:href="#icon-minus" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'plus' -%}
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="icon icon-plus" fill="none" viewBox="0 0 10 10">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M1 4.51a.5.5 0 000 1h3.5l.01 3.5a.5.5 0 001-.01V5.5l3.5-.01a.5.5 0 00-.01-1H5.5L5.49.99a.5.5 0 00-1 .01v3.5l-3.5.01H1z" fill="currentColor">
+  </svg>
+
+  {%- when 'chevron-back' -%}
+    <svg viewBox="0 0 20 20" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-chevron-back" x="0" y="0"></use>
+    </svg>
+
+    {%- when 'chevron-back-thin' -%}
+    <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.375 1.25L0.625 8L7.375 14.75" stroke="#1C1714" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+  {%- when 'chevron-forward' -%}
+    <svg viewBox="0 0 20 20" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-chevron-forward" x="0" y="0"></use>
+    </svg>
+
+    {%- when 'chevron-forward-thin' -%}
+    <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.46875 1.4375L6.53125 6.5L1.46875 11.5625" stroke="#242424" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+  {%- when 'chevron-forward-outline' -%}
+    <svg viewBox="0 0 22 22" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-chevron-forward-outline" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'chevron-down' -%}
+    <svg viewBox="0 0 16 16" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-chevron-down" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'chevron-down-outline' -%}
+    <svg viewBox="0 0 24 24" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-chevron-down-outline" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'close-outline' -%}
+    <svg viewBox="0 0 24 24" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close-outline" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'menu' -%}
+    <svg viewBox="0 0 24 24" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-menu" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'close' -%}
+    <svg viewBox="0 0 24 24" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'search' -%}
+    <svg viewBox="0 0 18 18" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-search" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'person' -%}
+    <svg viewBox="0 0 24 24" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-person" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'facebook' -%}
+    <svg viewBox="0 0 20 20" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-facebook" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'instagram' -%}
+    <svg viewBox="0 0 16 16" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-instagram" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'afterpay' -%}
+    <svg viewBox="0 0 166 31" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-afterpay" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'call' -%}
+    <svg viewBox="0 0 16 16" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <path id="icon-call" fill="none" stroke="currentColor" stroke-miterlimit="10" d="M14.094 11.688c-.496-.5-1.698-1.23-2.281-1.524-.76-.383-.822-.414-1.42.03-.397.295-.662.56-1.128.46-.466-.099-1.478-.66-2.365-1.543-.887-.884-1.48-1.926-1.579-2.39-.1-.464.17-.726.462-1.125.413-.563.382-.656.029-1.416-.275-.59-1.026-1.78-1.528-2.275-.537-.53-.537-.436-.883-.292a5.006 5.006 0 0 0-.807.43c-.5.332-.778.608-.972 1.023-.194.414-.281 1.386.721 3.207 1.002 1.82 1.705 2.752 3.16 4.203 1.456 1.451 2.575 2.231 4.211 3.149 2.024 1.133 2.8.912 3.216.719.416-.194.693-.469 1.026-.969.168-.255.313-.525.431-.806.144-.345.238-.345-.293-.882Z"/>
+    </svg>
+
+  {%- when 'location' -%}
+    <svg viewBox="0 0 24 24" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-location" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'location-outline' -%}
+    <svg viewBox="0 0 24 24" fill="none" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-location-outline" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'arrow-right' -%}
+    <svg viewBox="0 0 14 10" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-right" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'heart-outline' -%}
+    <svg viewBox="0 0 24 24" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart-outline" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'arrow-back-outline' -%}
+    <svg viewBox="0 0 22 22" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-back-outline" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'map' -%}
+    <svg viewBox="0 0 20 20" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-map" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'filter' -%}
+    <svg viewBox="0 0 20 20" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-filter" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'help-circle' -%}
+    <svg viewBox="0 0 24 24" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-help-circle" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'information-outline' -%}
+    <svg viewBox="0 0 14 14" fill="none" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-information-outline" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'afterpay-bg' -%}
+    <svg fill="none" viewBox="0 0 91 32" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-afterpay-bg" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'klarna-bg' -%}
+    <svg fill="none" viewBox="0 0 70 28" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-klarna-bg" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'klarna' -%}
+    <svg fill="none" viewBox="0 0 47 10" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-klarna" x="0" y="0"></use>
+    </svg>
+
+  {%- when 'wallet' -%}
+    <svg viewBox="0 0 16 16" fill="none" {%- if class_name != blank -%} class="{{- class_name -}}"{%- endif -%}>
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-wallet" x="0" y="0"></use>
+    </svg>
+  
+  {%- when 'select-arrow' -%}
+    <svg class="{{ icon_class }}" viewBox="0 0 19 12">
+      <polyline fill="none" stroke="currentColor" points="17 2 9.5 10 2 2" fill-rule="evenodd" stroke-width="2" stroke-linecap="square"></polyline>
+    </svg>
+
+  {%- when 'select-arrow-right' -%}
+    <svg class="{{ icon_class }}" viewBox="0 0 11 18">
+      <path d="M1.5 1.5l8 7.5-8 7.5" stroke-width="2" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="square"></path>
+    </svg>
+
+  {%- when 'select-arrow-left' -%}
+    <svg class="{{ icon_class }}" viewBox="0 0 11 18">
+      <path d="M9.5 1.5L1.5 9l8 7.5" stroke-width="2" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="square"></path>
+    </svg>
+
+  {%- when 'arrow-bottom' -%}
+    <svg class="{{ icon_class }}" viewBox="0 0 21 11">
+      <polyline fill="none" stroke="currentColor" points="0.5 0.5 10.5 10.5 20.5 0.5" stroke-width="1.25"></polyline>
+    </svg>
+
+  {%- when 'arrow-top' -%}
+    <svg class="{{ icon_class }}" viewBox="0 0 21 11">
+      <polyline fill="none" stroke="currentColor" points="20.5 10.5 10.5 0.5 0.5 10.5" stroke-width="1.25"></polyline>
+    </svg>
+
+  {%- when 'arrow-left' -%}
+    <svg class="{{ icon_class }}" viewBox="0 0 11 21">
+      <polyline fill="none" stroke="currentColor" points="10.5 0.5 0.5 10.5 10.5 20.5" stroke-width="1.25"></polyline>
+    </svg>
+  
+  {%- when 'store' -%}
+    <svg class="{{ icon_class }}" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2.25C8.27344 2.25 5.25 5.12766 5.25 8.67188C5.25 12.75 9.75 19.2127 11.4023 21.4448C11.4709 21.5391 11.5608 21.6157 11.6647 21.6686C11.7686 21.7215 11.8835 21.749 12 21.749C12.1165 21.749 12.2314 21.7215 12.3353 21.6686C12.4392 21.6157 12.5291 21.5391 12.5977 21.4448C14.25 19.2136 18.75 12.7533 18.75 8.67188C18.75 5.12766 15.7266 2.25 12 2.25Z" stroke="#242424" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 11.25C13.2426 11.25 14.25 10.2426 14.25 9C14.25 7.75736 13.2426 6.75 12 6.75C10.7574 6.75 9.75 7.75736 9.75 9C9.75 10.2426 10.7574 11.25 12 11.25Z" stroke="#242424" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  {%- when 'contact' -%}
+    <svg class="{{ icon_class }}" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M11.9999 3.75C10.3682 3.75 8.77319 4.23385 7.41649 5.14038C6.05978 6.0469 5.00236 7.33537 4.37794 8.84286C3.75351 10.3504 3.59014 12.0092 3.90846 13.6095C4.22679 15.2098 5.01253 16.6798 6.16631 17.8336C7.3201 18.9874 8.7901 19.7732 10.3904 20.0915C11.9908 20.4098 13.6496 20.2464 15.1571 19.622C16.6646 18.9976 17.953 17.9402 18.8596 16.5835C19.7661 15.2268 20.2499 13.6317 20.2499 12C20.2499 9.81196 19.3807 7.71354 17.8336 6.16637C16.2864 4.61919 14.188 3.75 11.9999 3.75Z" stroke="#242424" stroke-miterlimit="10"/>
+      <path d="M9.375 9.48257C9.375 9.48257 9.41438 8.66225 10.2923 7.95584C10.8131 7.53631 11.4375 7.41491 12 7.40647C12.5123 7.39991 12.9698 7.48475 13.2436 7.61506C13.7123 7.83819 14.625 8.38288 14.625 9.54116C14.625 10.7599 13.8281 11.3135 12.9202 11.9224C12.0122 12.5313 11.7656 13.1923 11.7656 13.8752" stroke="#242424" stroke-miterlimit="10" stroke-linecap="round"/>
+      <path d="M11.7188 17.25C12.2365 17.25 12.6562 16.8303 12.6562 16.3125C12.6562 15.7947 12.2365 15.375 11.7188 15.375C11.201 15.375 10.7812 15.7947 10.7812 16.3125C10.7812 16.8303 11.201 17.25 11.7188 17.25Z" fill="#242424"/>
+    </svg>
+       
+      
+{%- endcase -%}

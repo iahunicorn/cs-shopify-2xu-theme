@@ -1,0 +1,41 @@
+<div class='PageLayout PageLayout--sidebar account-sidebar'>
+  <div class='account-navigation'>
+    <a
+      href='{{ routes.account_url }}'
+      class='account-navigation-link Heading u-h6 {% if request.path == "/account" %}active-nav {% endif %}'
+    >
+      {{- 'customer.account.navigation.account' | t -}}
+    </a>
+    <a
+      href='/pages/orders'
+      class='account-navigation-link Heading u-h6 {% if request.path == "/pages/orders" %}active-nav {% endif %}'
+    >
+      {{- 'customer.account.navigation.orders' | t -}}
+    </a>
+    <a
+      href='{{ routes.account_addresses_url }}'
+      class='account-navigation-link Heading u-h6 {% if request.path == "/account/addresses" %}active-nav {% endif %}'
+    >
+      {{- 'customer.account.navigation.addresses' | t -}}
+    </a>
+    {% comment %} <a href="/pages/wishlist" class="account-navigation-link Heading u-h6 {% if request.path == "/pages/wishlist" %}active-nav {% endif %}">Wishlist</a> {% endcomment %}
+    <a
+      href='/pages/preferences'
+      class='account-navigation-link Heading u-h6 {% if request.path == "/pages/preferences" %}active-nav {% endif %}'
+    >
+      {{- 'customer.account.navigation.preferences' | t -}}
+    </a>
+    <a
+      href='/pages/reset-password'
+      class='account-navigation-link last Heading u-h6 {% if request.path == "/pages/reset-password" %}active-nav {% endif %}'
+    >
+      {{- 'customer.account.navigation.password' | t -}}
+    </a>
+    <a
+      href='{{ routes.account_logout_url }}'
+      class='account-navigation-link Heading u-h6'
+    >
+      {{- 'customer.account.logout' | t -}}
+    </a>
+  </div>
+</div>

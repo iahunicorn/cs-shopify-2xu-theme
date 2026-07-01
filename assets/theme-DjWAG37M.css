@@ -1,0 +1,1 @@
+@tailwind base;@tailwind components;@tailwind utilities;@layer base{.revert-list ul,.revert-list ol{list-style:revert!important;margin:revert!important;padding-left:16px!important}.revert-list li{margin:revert;padding:revert}.revert-text p{all:revert!important;margin-bottom:2rem!important}}

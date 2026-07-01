@@ -1,0 +1,116 @@
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/css-loader@6.11.0_webpack@5.95.0/node_modules/css-loader/dist/cjs.js?importLoaders=1!./node_modules/.pnpm/postcss-loader@8.1.1_postcss@8.4.47_webpack@5.95.0/node_modules/postcss-loader/dist/cjs.js!./node_modules/.pnpm/style-resources-loader@1.5.0_webpack@5.95.0/node_modules/style-resources-loader/lib/index.js??ruleSet[1].rules[1].use[3]!./src/styles/overrides/section/card.css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.product-linked__item.two-color {
+  display: flex;
+  /* margin: 1.5px; */
+  min-width: 18px;
+  min-height: 18px;
+}
+
+.product-linked__item.two-color > span {
+  width: 50%;
+  border-radius: 0;
+}
+
+.product-linked__item.product-linked__item--active.two-color {
+  padding: 1px;
+  border-color: #fff;
+  outline: 1px solid #353332;
+}
+
+.product-linked__item {
+}
+
+.tw-scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.tw-scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.tw-aspect-landscape {
+  aspect-ratio: 1.772;
+}
+
+.tw-aspect-portrait {
+  aspect-ratio: 0.80097087;
+}
+
+.capsule-collections-landscape {
+  width: 292px;
+}
+
+@media (min-width: 768px) {
+
+  .capsule-collections-landscape {
+    width: 445px;
+  }
+}
+
+.capsule-collections-portrait {
+  width: 176px;
+}
+
+@media (min-width: 768px) {
+
+  .capsule-collections-portrait {
+    width: 330px;
+  }
+}
+
+.capsule-collections-aspect-landscape {
+  aspect-ratio: 1.772;
+}
+
+.capsule-collections-aspect-portrait {
+  aspect-ratio: 0.80097087;
+}
+
+.card__information .product-colors__item img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #353332;
+}
+
+.card__information .product-colors__item.product-colors__item--selected img {
+  width: 26px;
+  height: 26px;
+}
+
+.card__information .swiper-button-prev, .card__information .swiper-button-next {
+  top: calc(50% - 3px);
+}
+
+.card__information .swiper--product-linked {
+  margin-right: 34px;
+}
+
+.card__information .product-linked {
+  width: 100%;
+}
+
+.card__information .product-linked--mobile .product-colors__item {
+  margin-right: 10px;
+}
+
+.card__information .product-linked--mobile .product-colors__item.product-colors__item--selected img {
+  width: 20px;
+  height: 20px;
+}
+
+.card__information .product-linked--mobile .product-colors__item img {
+  width: 18px;
+  height: 18px;
+}
+
+.card__information .product-linked__link-more {
+  width: 18px;
+  height: 18px;
+  position: relative;
+  top: -2px;
+  margin: 0;
+}

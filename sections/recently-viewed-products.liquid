@@ -1,0 +1,125 @@
+{% if section.settings.show and settings.ss_enable == false %}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+  <div id="recently-viewed" class="product-recently">
+    <div class="container-full">
+      <div class="recently-title">
+        <h2 class="text-center title">{{ section.settings.recently_title }}</h2>
+        <div class="swiper-button-prev">
+          <svg width="8" height="16" viewBox="0 0 8 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.375 1.25L0.625 8L7.375 14.75" stroke="#1C1714" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="swiper-button-next">
+          <svg width="8" height="16" viewBox="0 0 8 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.625 1.25L7.375 8L0.625 14.75" stroke="#1C1714" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <ul id="recently-viewed-products" class="swiper grid product-grid contains-card contains-card--standard grid--5-col-desktop grid--2-col-tablet-down">
+        <div class="swiper-wrapper"></div>
+      </ul>
+    </div>
+  </div>
+{% endif %}
+<script>
+  var itemHandleList = []
+  var itemHandle = sessionStorage.getItem('Recently Viewed')
+  if (itemHandle == null) {
+    itemHandleList.push('{{product.handle}}')
+    sessionStorage.setItem('Recently Viewed', JSON.stringify(itemHandleList))
+    document.querySelector('.product-recently')?.classList.add('no-product');
+  } else {
+    var hasProduct = false;
+    var newItemHandleList = JSON.parse(sessionStorage.getItem('Recently Viewed'))
+    var requests = newItemHandleList.map(function (handle) {
+      if(handle != '{{ product.handle }}') {
+        hasProduct = true;
+        var productTileTemplateUrl = '/products/' + handle + '?view=recently';
+        return fetch(productTileTemplateUrl).then(function (res) {
+          if (res.status == 404) {
+            return ''
+          }
+          return res.text();
+        });
+      }
+    });
+
+    if(hasProduct == false) {
+     document.querySelector('.product-recently')?.classList.add('no-product');
+    } else {
+      Promise.all(requests).then(function (responses) {
+        var wishlistProductCards = responses.join('')
+        document.querySelector('#recently-viewed-products .swiper-wrapper').innerHTML = wishlistProductCards
+      }).catch(function(error) {
+        console.log('Error occurred!', error);
+      }).then(function(){
+        if(document.querySelectorAll('#recently-viewed-products .swiper-wrapper .swiper-slide')) {
+          const selectors = {
+            TOPBAR_SWIPER_SELECTOR: '#recently-viewed-products'
+          }
+          // eslint-disable-next-line no-new
+          new Swiper(selectors.TOPBAR_SWIPER_SELECTOR, {
+            navigation: {
+              nextEl: '.product-recently .recently-title .swiper-button-next',
+              prevEl: '.product-recently .recently-title .swiper-button-prev'
+            },
+            spaceBetween: 24,
+            breakpoints: {
+              1024: {
+                slidesPerView: 5
+              },
+              320: {
+                slidesPerView: 2.26,
+                spaceBetween: 16,
+                spaceBetweenSlides: 16
+              }
+            }
+          })
+          let linkedP = document.querySelectorAll('#recently-viewed-products .swiper-slide')
+          linkedP.forEach( el => {
+            let item = el.querySelector('.product-linked--desktop .swiper')
+            new Swiper(item, {
+              navigation: {
+                prevEl: el.querySelector('.swiper-button-prev'),
+                nextEl: el.querySelector('.swiper-button-next')
+              },
+              slidesPerView: 'auto',
+              spaceBetween: 10
+            })
+          });
+
+        }
+      })
+    }
+    if (newItemHandleList.includes('{{product.handle}}') != true) {
+      newItemHandleList.unshift("{{product.handle}}")
+      sessionStorage.setItem('Recently Viewed', JSON.stringify(newItemHandleList))
+    }
+  }
+</script>
+{% schema %}
+{
+  "name": "RECENTLY VIEWED",
+  "class": "product-recently-viewed",
+  "settings": [
+    {
+      "id": "show",
+      "label": "Show recently viewed",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "recently_title",
+      "label": "Title",
+      "type": "text",
+      "default": "Recently viewed"
+    }
+  ],
+  "presets": [
+    {
+      "name": "RECENTLY VIEWED"
+    }
+  ]
+}
+{% endschema %}

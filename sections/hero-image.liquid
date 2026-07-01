@@ -1,0 +1,90 @@
+{{ 'section-banner-new.css' | asset_url | stylesheet_tag }}
+
+<div class="hero-image-section" id="{{ section.id }}">
+  <div class="hero-image-box">
+    <div class=" {% if section.settings.image_item_mobile != blank %} has-image-mobile {% endif %}">
+      {%- if section.settings.image_item != blank -%}
+        <a href="{{ section.settings.link_hero_image }}" class="">
+        <img class="image check {% if section.settings.image_item.presentation.focal_point != '50.0% 50.0%' %}has-focal-point{% endif %}"
+        {% if section.settings.image_item.presentation.focal_point %}style="object-position:{{ section.settings.image_item.presentation.focal_point }};"{% endif %}
+             {% unless section.settings.image_item_mobile.presentation.focal_point %}
+             srcset="{%- if section.settings.image_item.width >= 1500 -%}{{ section.settings.image_item | image_url: width: 1500 }} 1500w,{%- endif -%}
+      {{ section.settings.image_item | image_url }} {{ section.settings.image_item.width }}w"
+             src="{{ section.settings.image_item | image_url: width: 1500 }}"
+             sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+             {% endunless %}
+            {% if section.settings.image_item_mobile.presentation.focal_point %}
+                src="{{ section.settings.image_item | image_url }}"
+            {% endif %}
+             alt="{{ section.settings.image_item.alt | escape }}"
+             loading="lazy"
+             width="{{ section.settings.image_item.width }}"
+             height="{{ section.settings.image_item.height }}"
+        >
+
+        {% if section.settings.image_item_mobile != blank %}
+          <img class="image  {% if section.settings.image_item.presentation.focal_point != '50.0% 50.0%' %}has-focal-point{% endif %}"
+          {% if section.settings.image_item_mobile.presentation.focal_point %}style="object-position:{{ section.settings.image_item_mobile.presentation.focal_point }};"{% endif %}
+             {% unless section.settings.image_item_mobile.presentation.focal_point %}
+             srcset="{%- if section.settings.image_item_mobile.width >= 165 -%}{{ section.settings.image_item | image_url: width: 165 }} 165w,{%- endif -%}
+      {%- if section.settings.image_item_mobile.width >= 360 -%}{{ section.settings.image_item_mobile | image_url: width: 360 }} 360w,{%- endif -%}
+      {%- if section.settings.image_item_mobile.width >= 535 -%}{{ section.settings.image_item_mobile | image_url: width: 535 }} 535w,{%- endif -%}
+      {%- if section.settings.image_item_mobile.width >= 750 -%}{{ section.settings.image_item_mobile | image_url: width: 750 }} 750w,{%- endif -%}
+      {%- if section.settings.image_item_mobile.width >= 1070 -%}{{ section.settings.image_item_mobile | image_url: width: 1070 }} 1070w,{%- endif -%}
+      {%- if section.settings.image_item_mobile.width >= 1500 -%}{{ section.settings.image_item_mobile | image_url: width: 1500 }} 1500w,{%- endif -%}
+      {{ section.settings.image_item_mobile | image_url }} {{ section.settings.image_item_mobile.width }}w"
+             src="{{ section.settings.image_item_mobile | image_url: width: 1500 }}"
+             sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+             {% endunless %}
+            {% if section.settings.image_item_mobile.presentation.focal_point %}
+                src="{{ section.settings.image_item_mobile | image_url }}"
+            {% endif %}
+             alt="{{ section.settings.image_item_mobile.alt | escape }}"
+             loading="lazy"
+             width="{{ section.settings.image_item_mobile.width }}"
+             height="{{ section.settings.image_item_mobile.height }}"
+        >
+        {% endif %}
+        </a>
+      {%- elsif section.settings.image_item == blank -%}
+        <div class="banner__media media">
+          <a href="{{ section.settings.link_hero_image }}" class="">
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+</div>
+
+<script src="{{ 'section-banner-new.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Hero image",
+  "class": "section-hero-image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_item",
+      "label": "Image Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_item_mobile",
+      "label": "Image Mobile"
+    },
+    {
+      "type": "url",
+      "id": "link_hero_image",
+      "label": "Hero image link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "hero image"
+    }
+  ]
+}
+{% endschema %}

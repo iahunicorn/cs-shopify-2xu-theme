@@ -1,0 +1,93 @@
+<div class='Container Container--narrow Container--account-dashboard'>
+  <div class='PageLayout PageLayout--sidebar account-sidebar'>
+    {% render 'account-navigation' %}
+  </div>
+
+  <div class='PageLayout--dashboard'>
+    <h1 class='account-title'>{{ 'customer.account.title' | t }}</h1>
+    {% render 'image-grid' %}
+  </div>
+</div>
+
+{% if shop.permanent_domain == '2xu-australia.myshopify.com'
+  or shop.permanent_domain == '2xu-nz.myshopify.com'
+  or shop.permanent_domain == '2xu-ca.myshopify.com'
+  or shop.permanent_domain == '2xu-us.myshopify.com'
+%}
+  <script>
+    function fbq_track() {
+      if (sessionStorage.getItem('fbq_track')) {
+        let c_email = '{{ customer.email }}';
+        s_email = sessionStorage.getItem('fbq_track');
+        if (c_email == s_email) {
+          fbq('track', 'Lead');
+          sessionStorage.removeItem('fbq_track');
+        }
+      }
+    }
+    document.addEventListener('DOMContentLoaded', fbq_track);
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Image Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "top_text",
+      "label": "Promo Text"
+    },
+    {
+      "type": "color",
+      "id": "top_color",
+      "label": "Promo Background Colour"
+    },
+    {
+      "type": "url",
+      "id": "top_link",
+      "label": "Promo Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_one",
+      "label": "Image One"
+    },
+    {
+      "type": "url",
+      "id": "image_one_link",
+      "label": "Image One Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_two",
+      "label": "Image Two"
+    },
+    {
+      "type": "url",
+      "id": "image_two_link",
+      "label": "Image Two Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_three",
+      "label": "Image Three"
+    },
+    {
+      "type": "url",
+      "id": "image_three_link",
+      "label": "Image Three Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_four",
+      "label": "Image Four"
+    },
+    {
+      "type": "url",
+      "id": "image_four_link",
+      "label": "Image Four Link"
+    }
+  ]
+}
+{% endschema %}

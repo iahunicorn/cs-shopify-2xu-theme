@@ -1,0 +1,200 @@
+{%- liquid
+  assign image = section.settings.image
+  assign mobile_image = section.settings.mobile_image | default: image
+  assign banner_link = section.settings.link
+  assign onClick = section.settings.onClick -%}
+
+{%- style -%}
+.section-{{ section.id }}-padding {
+  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+}
+
+@media screen and (min-width: 750px) {
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+}
+{%- endstyle -%}
+
+<section class="Section Section--spacingNormal section-{{ section.id }}-padding" id="section-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="banner">
+  {% if banner_link != blank or onClick != blank %}
+  <a {% if banner_link != blank %}href="{{ banner_link }}"{% endif %} {% if onClick != blank %}onClick="{{ onClick }}"{% endif %}>
+  {% endif %}
+
+    {%- if mobile_image -%}
+      <div class="Banner__ImageContainer hidden-tablet-and-up"
+           style="background-image: url({{ mobile_image | img_url: '1x1' }})">
+
+        <img class="image"
+        {% if section.settings.mobile_image.presentation.focal_point %}style="object-position:{{ section.settings.mobile_image.presentation.focal_point }};"{% endif %}
+             srcset="{%- if mobile_image.width >= 165 -%}{{ mobile_image | image_url: width: 165 }} 165w,{%- endif -%}
+              {%- if mobile_image.width >= 360 -%}{{ mobile_image | image_url: width: 360 }} 360w,{%- endif -%}
+              {%- if mobile_image.width >= 535 -%}{{ mobile_image | image_url: width: 535 }} 535w,{%- endif -%}
+              {{ mobile_image | image_url }} {{ mobile_image.width }}w"
+             src="{{ mobile_image | image_url: width: 1500 }}"
+             sizes="(min-width: {{ settings.page_width }}px) {{
+             settings.page_width | minus: 100 | divided_by: 2
+             }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+             alt="{{ mobile_image.alt | escape }}" loading="lazy"
+             width="{{ mobile_image.width }}"
+             height="{{ mobile_image.height }}"/>
+
+        <noscript>
+          <img class="Banner__Image" src="{{ mobile_image | img_url: '800x' }}" alt="{{ mobile_image.alt | escape }}">
+        </noscript>
+      </div>
+    {%- endif -%}
+
+    {% if image != blank %}
+      <div class="Banner__ImageContainer hidden-phone"
+           style="background-image: url({{ image | img_url: '1x1' }})">
+
+        <img class="image" style="width: 100%;"
+        {% if section.settings.image.presentation.focal_point %}style="object-position:{{ section.settings.image.presentation.focal_point }};"{% endif %}
+             srcset="{%- if image.width >= 1420 -%}{{ image | image_url: width: 1420 }} 1420w,{%- endif -%} {{ image | image_url }} {{ image.width }}w"
+             src="{{ image | image_url: width: 1420 }}" sizes="(min-width: 990px),calc(100vw - 30px)"
+             alt="{{ image.alt }}"
+             height="{{ image.height }}" width="{{ image.width }}"
+             loading="lazy">
+        <noscript>
+          <img class="Banner__Image" src="{{ image | img_url: '1600x' }}" alt="{{ image.alt | escape }}">
+        </noscript>
+      </div>
+    {% endif %}
+
+  {% if banner_link != blank or onClick != blank %}
+  </a>
+  {% endif %}
+  {% if section.settings.custom_liquid != blank %}
+      {{ section.settings.custom_liquid }}
+  {% endif %}
+</section>
+{% schema %}
+{
+  "name": "Banner with custom liquid",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image",
+      "info": "If none is set, desktop image will be displayed."
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "onClick",
+      "label": "onClick function"
+    },
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "Liquid content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "category": "Image",
+      "name": "Banner with custom liquid",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  /*! CSS Used from: https://cdn.shopify.com/s/files/1/0518/4087/6699/t/239/assets/theme.css?v=162209299165979781391665024738 */
+*,*:before,
+*:after{
+  box-sizing:border-box!important;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+section {
+  display:block;
+}
+
+:active {
+  outline:none;
+}
+
+a {
+  color:inherit;
+  background-color:transparent;
+  text-decoration:none;cursor:pointer;
+}
+
+a:active,a:hover {
+  outline:0;
+}
+
+img {
+  max-width:100%;
+  height:auto;
+  border-style:none;
+  vertical-align:top;
+  --aspect-ratio:attr(width) / attr(height);
+}
+
+@media screen and (max-width: 640px){
+.hidden-phone {
+  display:none!important;
+  }
+}
+
+@media screen and (min-width: 641px){
+  .hidden-tablet-and-up {
+      display:none!important;
+  }
+}
+
+body:not(.is-tabbing) [tabindex]:focus {
+  outline:none;
+}
+
+.Banner__Image {
+  display:block;
+  height:100%;
+  width:100%;
+  -o-object-fit:cover;
+  object-fit:cover;
+  -o-object-position:center;
+  object-position:center;
+  font-family:"object-fit: cover; object-position: center;";
+}
+
+.Banner__ImageContainer {
+cursor: pointer;
+}
+</style>

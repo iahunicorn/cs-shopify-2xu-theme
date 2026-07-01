@@ -1,0 +1,40 @@
+{% if settings.use_back_in_stock == true
+  and settings.klaviyo_public_api_key != blank
+%}
+  {%- capture additionalStyles -%}@font-face{font-family: "Fira Sans";font-weight: 400;font-style: normal;font-display: swap;src: url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700;900&display=swap") format("woff2"),url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700;900&display=swap") format("woff");}.btn{border-radius: 0;text-transform: uppercase;letter-spacing:0.1em;font-size:14px;}.modal-title{text-transform:uppercase;}{%- endcapture -%}
+  <script src='https://a.klaviyo.com/media/js/onsite/onsite.js'></script>
+  <script>
+    var klaviyo = klaviyo || [];
+    klaviyo.init({account: "{{ settings.klaviyo_public_api_key }}",{% if settings.include_subscribe_bis == true and settings.newsletter_subscription_list_id != blank %}list : "{{ settings.newsletter_subscription_list_id }}",{% endif %}platform: "shopify"});
+    klaviyo.enable("backinstock", {
+      trigger: {
+        product_page_text: "{{ 'klaviyo.product_page_text' | t }}",
+        product_page_class: "tw-text-2xs lg:tw-text-xs tw-text-2xu-black tw-leading-4",
+        product_page_text_align: "center",
+        product_page_margin: "0px",
+        alternate_anchor: 'BIS_trigger',
+        replace_anchor: true
+      },
+      modal: {
+        headline: "{product_name}",
+        body_content: "{{ 'klaviyo.modal.body_content' | t }}",
+        email_field_label: "{{ 'klaviyo.modal.email_field_label' | t }}",
+        newsletter_subscribe_label: "{{ 'klaviyo.modal.newsletter_subscribe_label_html' | t }}",
+        button_label:  "{{ 'klaviyo.modal.button_label' | t }}",
+        subscription_success_label: "{{ 'klaviyo.modal.subscription_success_label' | t  }}",
+        footer_content: '',
+        additional_styles: "@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700;900&display=swap');",
+        drop_background_color: "#1C1714",
+        background_color: "#fff",
+        text_color: "#1C1714",
+        button_text_color: "#fff",
+        button_background_color: "#1C1714",
+        close_button_color: "#353332",
+        error_background_color: "#DC2626",
+        error_text_color: "#ffffff",
+        success_background_color: "#22946B",
+        success_text_color: "#ffffff"
+      }
+    });
+  </script>
+{% endif %}

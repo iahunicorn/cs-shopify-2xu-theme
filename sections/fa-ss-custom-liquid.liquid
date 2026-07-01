@@ -1,0 +1,37 @@
+{% if section.settings.liquid != blank %}
+  {{ 'component-fa-ss-custom-liquid.css' | asset_url | stylesheet_tag }}
+  <div class='fa-ss-custom-liquid lg:tw-px-16 tw-pt-5 lg:tw-pt-20'>
+    {% assign SKU = product.selected_or_first_available_variant.sku %}
+    {% capture SKUText %}"{{ SKU }}"{% endcapture %}
+    {{ section.settings.liquid | replace: '"SKU"', SKUText }}
+  </div>
+{% endif %}
+{% schema %}
+{
+  "name": "F.A. SS Custom Liquid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Widget Search Spring Only"
+    },
+    {
+      "label": "Widget Name",
+      "id": "title",
+      "type": "text",
+      "info": "This is an ID, this only appears within the customiser"
+    },
+    {
+      "label": "Liquid Code",
+      "id": "liquid",
+      "type": "liquid",
+      "info": "Enter Integration Code here"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Homepage Section",
+      "name": "F.A. SS Custom Liquid"
+    }
+  ]
+}
+{% endschema %}

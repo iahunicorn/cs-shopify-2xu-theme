@@ -1,0 +1,62 @@
+
+<section class="tw-px-12 lg:tw-px-24 tw-pb-14 tw-py-10 tw-bg-2xu-light-grey">
+  <div class="tw-max-w-7xl tw-mx-auto">
+    <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-8 lg:tw-gap-16">
+      {% for block in section.blocks %}
+        <div class="tw-flex tw-items-center tw-gap-2">
+          {% if block.settings.badge_image %}
+            <div class="tw-flex tw-flex-col tw-items-center">
+              <img src="{{ block.settings.badge_image | image_url: width: 47, height: 47 }}" width="47" height="47" alt="{{ block.settings.text }}" />
+            </div>
+          {% endif %}
+          <div>
+            <div class="tw-font-input-mono tw-text-xs tw-font-semibold">
+              {{ block.settings.text }}
+            </div>
+            <div class="tailwind-rte tw-font-input-mono tw-font-light tw-text-xs tw-text-2xu-mid-grey" style="--color-link: #888888;">
+              {{ block.settings.subtitle }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "F.A. Trust Badges",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "badge_image",
+          "label": "Badge Image",
+          "info": "Recommended size: 47 x 47 pixels"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "richtext",
+          "id": "subtitle",
+          "label": "Subtitle"
+        }
+      ]
+    },
+  ],
+  "presets": [
+    {
+      "category": "Homepage Section",
+      "name": "F.A. Trust Badges"
+    }
+  ]
+}
+{% endschema %}

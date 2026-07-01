@@ -1,0 +1,40 @@
+
+{%- liquid
+  assign seo_columns = collection.metafields.custom.seo_content_columns.value
+  assign formatted_columns = ''
+  
+  if seo_columns
+    for column in seo_columns
+      capture current_column
+        echo '{'
+        echo '"heading":'
+        if column.heading
+          echo column.heading | json
+        else
+          echo 'null'
+        endif
+        echo ','
+        echo '"body":'
+        if column.body
+          assign body_html = column.body | metafield_tag
+          echo body_html | json
+        else
+          echo 'null'
+        endif
+        echo '}'
+      endcapture
+      
+      if formatted_columns == blank
+        assign formatted_columns = current_column
+      else
+        assign formatted_columns = formatted_columns | append: ',' | append: current_column
+      endif
+    endfor
+    
+    echo '['
+    echo formatted_columns
+    echo ']'
+  else
+    echo '[]'
+  endif
+-%}

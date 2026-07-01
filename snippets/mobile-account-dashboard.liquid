@@ -1,0 +1,25 @@
+<div class='mobile-dashboard-links'>
+  <a class='Heading u-h6' href='/pages/orders'>
+    {{- 'customer.account.navigation.orders' | t }}
+    {% render 'icon' with 'select-arrow-right' -%}
+  </a>
+  <a class='Heading u-h6' href='{{ routes.account_addresses_url }}'>
+    {{- 'customer.account.navigation.addresses' | t }}
+    {% render 'icon' with 'select-arrow-right' -%}
+  </a>
+  <a class='Heading u-h6' href='/pages/wishlist'>
+    {{- 'customer.account.navigation.wishlist' | t }}
+    {% render 'icon' with 'select-arrow-right' -%}
+  </a>
+  <a class='Heading u-h6' href='/pages/preferences'>
+    {{- 'customer.account.navigation.preferences' | t }}
+    {% render 'icon' with 'select-arrow-right' -%}
+  </a>
+  <a class='Heading u-h6' href='/pages/reset-password' class='mobile-last'>
+    {{- 'customer.account.navigation.password' | t }}
+    {% render 'icon' with 'select-arrow-right' -%}
+  </a>
+</div>
+<a href='{{ routes.account_logout_url }}' class='mobile-logout-button'>
+  {{- 'customer.account.logout' | t -}}
+</a>

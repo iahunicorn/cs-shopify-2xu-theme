@@ -1,0 +1,39 @@
+<!-- TODO: Safe to delete? -->
+{{ 'component-recommendations.css' | asset_url | stylesheet_tag }}
+{% if section.settings.liquid != blank %}
+  <div class="searchspring-custom__container">
+    {% assign SKU = product.selected_or_first_available_variant.sku %}
+    {% capture SKUText %}"{{ SKU }}"{% endcapture %}
+    {{ section.settings.liquid | replace: '"SKU"', SKUText }}
+  </div>
+{% endif %}
+{% schema %}
+{
+  "name": "SS Custom Liquid",
+  "class": "searchspring-custom-liquid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Widget Search Spring Only"
+    },
+    {
+      "label": "Widget Name",
+      "id": "title",
+      "type": "text",
+      "info": "This is an ID, this only appears within the customiser"
+    },
+    {
+      "label": "Liquid Code",
+      "id": "liquid",
+      "type": "liquid",
+      "info": "Enter Integration Code here"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Homepage Section",
+      "name": "SS Custom Liquid"
+    }
+  ]
+}
+{% endschema %}

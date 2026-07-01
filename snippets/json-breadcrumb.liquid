@@ -1,0 +1,77 @@
+{%- liquid
+  # Initialize variables
+  assign breadcrumb_items = ''
+  assign current_collection = collection
+  assign max_depth = 10
+  assign depth = 0
+
+  # Build breadcrumbs from current collection up to root
+  for i in (1..max_depth)
+    assign depth = depth | plus: 1
+
+    if current_collection.metafields.custom.breadcrumb_parent_collection
+      assign parent_handle = current_collection.metafields.custom.breadcrumb_parent_collection
+      assign parent_collection = collections[parent_handle]
+      assign breadcrumb_label = parent_collection.metafields.custom.breadcrumb_label.value | default: parent_collection.title
+
+      if parent_collection
+        # Build parent item JSON
+        capture parent_item
+          echo '{"handle":"'
+          echo parent_handle
+          echo '","label":'
+          echo breadcrumb_label | json
+          echo ',"url":"'
+          echo parent_collection.url
+          echo '"}'
+        endcapture
+
+        # Prepend parent to breadcrumbs (since we're going backwards)
+        if breadcrumb_items == blank
+          assign breadcrumb_items = parent_item
+        else
+          assign breadcrumb_items = parent_item | append: ',' | append: breadcrumb_items
+        endif
+
+        # Move up to the parent for next iteration
+        assign current_collection = parent_collection
+      else
+        # Parent handle exists but collection not found, break loop
+        break
+      endif
+    else
+      # No more parents, break loop
+      break
+    endif
+
+    # Safety check to prevent infinite loops
+    if depth >= max_depth
+      break
+    endif
+  endfor
+
+  assign breadcrumb_label = collection.metafields.custom.breadcrumb_label.value | default: collection.title
+
+  # Add current collection to end of breadcrumbs
+  capture current_item
+    echo '{"handle":"'
+    echo collection.handle
+    echo '","label":'
+    echo breadcrumb_label | json
+    echo ',"url":"'
+    echo collection.url
+    echo '","current":true}'
+  endcapture
+
+  # Combine breadcrumbs
+  if breadcrumb_items != blank
+    assign breadcrumb_items = breadcrumb_items | append: ',' | append: current_item
+  else
+    assign breadcrumb_items = current_item
+  endif
+
+  # Output final JSON array
+  echo '['
+  echo breadcrumb_items
+  echo ']'
+-%}

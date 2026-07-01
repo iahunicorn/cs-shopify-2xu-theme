@@ -1,0 +1,29 @@
+{% if image and heading and body %}
+  <div class='tw-w-[200px] sm:tw-w-[270px] md:tw-w-[362px] lg:tw-w-[540px] tw-flex tw-flex-col tw-items-start tw-min-w-[164px] sm:tw-min-w-[270px] md:tw-min-w-[362px] lg:tw-min-w-[164px] tw-text-2xu-black tw-font-normal tw-flex-1'>
+    <img
+      src='{{ image | image_url: width: 362 }}'
+      srcset='
+        {{ image | image_url: width: 400, height: 500 }} 300w,
+        {{ image | image_url: width: 540, height: 675 }} 640w,
+        {{ image | image_url: width: 724, height: 906 }} 768w,
+        {{ image | image_url: width: 1080, height: 1350 }} 1024w,
+        {{ image | image_url: width: 1400, height: 1750 }} 1536w,
+        {{ image | image_url: width: 2200, height: 2750 }} 1792w
+      '
+      sizes='(max-width: 640px) 300px, (max-width: 768px) 640px, (max-width: 1024px) 768px, (max-width: 1536px) 1024px, (max-width: 1792px) 1536px, 1792px'
+      alt='{{ heading }}'
+      class='tw-w-[200px] sm:tw-w-[270px] md:tw-w-[362px] lg:tw-w-[540px] 2xl:tw-w-[900px] 3xl:tw-w-[1100px] tw-flex'
+      width='540'
+      height='auto'
+      loading='lazy'
+    >
+    <div class='tw-w-full tw-px-1 lg:tw-px-4 tw-flex-1 tw-flex tw-flex-col'>
+      <h4 class='tw-uppercase tw-text-sm lg:tw-text-xl tw-leading-5 lg:tw-leading-8 tw-pt-6 tw-pb-4 tw-max-w-[184px] lg:tw-max-w-[500px]'>
+        {{ heading }}
+      </h4>
+      <div class='tw-text-xs lg:tw-text-base tw-leading-5 tw-text-2xu-dark-grey lg:tw-leading-6 tw-max-w-[184px] lg:tw-max-w-[500px] !tw-font-euclid'>
+        {{ body }}
+      </div>
+    </div>
+  </div>
+{% endif %}

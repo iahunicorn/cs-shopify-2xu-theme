@@ -1,0 +1,66 @@
+<section class='style-guide__section'>
+  <div class='style-guide__section-header'>
+    <div class='container'>
+      <h3 class='style-guide__section-header-title'>
+        {{ 'style_guide.buttons' | t }}
+      </h3>
+    </div>
+  </div>
+  <div class='style-guide__section-content style-guide__section-content--responsive style-guide__section-table'>
+    <div class='container'>
+      <table class='table style-guide__table'>
+        <tbody>
+          <tr>
+            <td></td>
+            <td>{{ 'style_guide.primary' | t }}</td>
+            <td>{{ 'style_guide.secondary' | t }}</td>
+          </tr>
+          <tr>
+            <td>{{ 'style_guide.standard' | t }}</td>
+            <td>
+              <button class='button button--min-width'>
+                {{ 'style_guide.button' | t }}
+              </button>
+            </td>
+            <td>
+              <button class='button button--secondary button--min-width'>
+                {{ 'style_guide.button' | t }}
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>{{ 'style_guide.with_icon' | t }}</td>
+            <td>
+              <button class='button button--icon button--min-width'>
+                {% render 'icon' with 'cart', class: 'button__icon' %}
+                {{ 'style_guide.button' | t }}
+              </button>
+            </td>
+            <td>
+              <button class='button button--secondary button--icon button--min-width'>
+                {% render 'icon' with 'cart', class: 'button__icon' %}
+                {{ 'style_guide.button' | t }}
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>{{ 'style_guide.inactive' | t }}</td>
+            <td>
+              <button class='button button--min-width' disabled=''>
+                {{ 'style_guide.button' | t }}
+              </button>
+            </td>
+            <td>
+              <button
+                class='button button--secondary button--min-width'
+                disabled=''
+              >
+                {{ 'style_guide.button' | t }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

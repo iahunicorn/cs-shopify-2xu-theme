@@ -1,0 +1,17 @@
+<!-- TODO: safe to delete? -->
+{{ 'component-recommendations.css' | asset_url | stylesheet_tag }}
+<div class="container-full recommended-list">
+	<script type="searchspring/personalized-recommendations" profile="recommended-for-you-new"></script>
+</div>
+{% schema %}
+{
+	"name": "SS Recommendations",
+	"class": "searchspring-recommendations-home",
+	"presets": [
+		{
+			"category": "Homepage Section",
+			"name": "SS Recommendations"
+		}
+	]
+}
+{% endschema %}

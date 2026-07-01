@@ -1,0 +1,408 @@
+<style>
+  .bp-hero { padding: 40px 24px 36px 24px; text-align: left; border-bottom: 1px solid #e0e0e0; }
+  .bp-hero__eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #888; margin-bottom: 8px; }
+  .bp-hero__title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; font-weight: 400; color: #111; letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 12px; line-height: 1; }
+  .bp-hero__copy { font-size: 13px; color: #555; max-width: 480px; margin: 0 0 16px 0; line-height: 1.7; }
+  .bp-hero__badge { display: inline-block; background: #111; color: #fff; font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; padding: 8px 18px; border-radius: 2px; }
+  @media (max-width: 700px) { .bp-hero { padding: 28px 16px; } .bp-hero__title { font-size: 32px; } }
+
+  .bp-header { padding: 20px 24px; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; gap: 16px; font-size: 15px; color: #111; }
+  .bp-header__title { font-weight: 500; margin-right: 4px; }
+  .bp-gender-btn { font-size: 15px; font-family: inherit; border: none; background: none; cursor: pointer; color: #bbb; padding: 0; text-decoration: underline; }
+  .bp-gender-btn.is-active { color: #111; font-weight: 500; }
+
+  .bp-panel { display: none; }
+  .bp-panel.is-active { display: block; }
+
+  .bp-wrapper { display: grid; grid-template-columns: 380px 1fr 320px; align-items: start; border-top: 1px solid #e0e0e0; }
+
+  .bp-left { border-right: 1px solid #e0e0e0; padding: 20px 16px; overflow-y: auto; max-height: 600px; position: sticky; top: 0; }
+  .bp-tabs { display: flex; gap: 24px; border-bottom: 1px solid #e0e0e0; margin-bottom: 16px; }
+  .bp-tab { font-size: 13px; font-family: inherit; padding-bottom: 12px; border: none; background: none; border-bottom: 2px solid transparent; cursor: pointer; color: #999; margin-bottom: -1px; }
+  .bp-tab.is-active { color: #111; border-bottom-color: #111; font-weight: 500; }
+  .bp-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .bp-grid.is-hidden { display: none; }
+  .bp-thumb { aspect-ratio: 1 / 1; border-radius: 3px; overflow: hidden; cursor: pointer; border: 2px solid transparent; background: #f5f5f5; transition: border-color 0.12s; }
+  .bp-thumb:hover { border-color: #888; }
+  .bp-thumb.is-selected { border-color: #111; }
+  .bp-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .bp-preview { background: #ebebeb; position: relative; }
+  .bp-preview-img { width: 100%; height: auto; max-height: 600px; object-fit: contain; display: block; }
+  .bp-counter { position: absolute; bottom: 14px; left: 18px; font-size: 12px; color: #555; }
+
+  .bp-info { padding: 28px 24px; border-left: 1px solid #e0e0e0; display: flex; flex-direction: column; gap: 16px; overflow-y: auto; max-height: 600px; position: sticky; top: 0; }
+  .bp-info__name { font-size: 14px; font-weight: 400; color: #111; line-height: 1.4; }
+  .bp-info__colour { font-size: 12px; color: #888; }
+  .bp-info__link { font-size: 13px; color: #111; text-decoration: underline; }
+  .bp-divider { border: none; border-top: 1px solid #e0e0e0; margin: 0; }
+  .bp-info__price { font-size: 14px; color: #111; }
+  .bp-info__label { font-size: 12px; color: #888; margin-bottom: 8px; }
+  .bp-sizes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .bp-size { height: 42px; border: 1px solid #d0d0d0; border-radius: 3px; font-size: 12px; font-family: inherit; background: #fff; cursor: pointer; color: #111; transition: background 0.1s; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 0 6px; }
+  .bp-size:hover:not(.is-sold-out) { background: #f5f5f5; }
+  .bp-size.is-active { background: #111; color: #fff; border-color: #111; }
+  .bp-size.is-sold-out { color: #ccc; cursor: not-allowed; text-decoration: line-through; }
+  .bp-info__stock { font-size: 12px; color: #888; }
+  .bp-select-btn { width: 100%; height: 52px; border: 1px solid #d0d0d0; border-radius: 3px; font-size: 11px; font-family: inherit; font-weight: 500; letter-spacing: 0.12em; background: #fff; cursor: pointer; color: #111; transition: background 0.1s, color 0.1s; }
+  .bp-select-btn:hover { background: #f5f5f5; }
+  .bp-select-btn.is-confirmed { background: #111; color: #fff; border-color: #111; }
+
+  .bp-summary { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+  .bp-summary__label { font-size: 11px; color: #bbb; font-style: italic; margin-bottom: 2px; }
+  .bp-summary-item { display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #e0e0e0; border-radius: 3px; background: #fafafa; transition: opacity 0.2s; }
+  .bp-summary-item.is-pending { opacity: 0.4; }
+  .bp-summary-item__img-placeholder { width: 48px; height: 48px; border-radius: 2px; background: #ebebeb; flex-shrink: 0; }
+  .bp-summary-item__img { width: 48px; height: 48px; object-fit: cover; border-radius: 2px; flex-shrink: 0; display: none; }
+  .bp-summary-item__text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+  .bp-summary-item__name { font-size: 12px; color: #111; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bp-summary-item__size { font-size: 11px; color: #888; }
+  .bp-summary-item__check { font-size: 14px; color: #111; flex-shrink: 0; }
+
+  .bp-atc-btn { width: 100%; height: 54px; border: none; border-radius: 3px; font-size: 12px; font-family: inherit; font-weight: 500; letter-spacing: 0.12em; background: #111; cursor: pointer; color: #fff; transition: background 0.15s; display: none; }
+  .bp-atc-btn.is-visible { display: block; }
+  .bp-atc-btn:hover { background: #333; }
+  .bp-atc-btn:disabled { background: #999; cursor: not-allowed; }
+  .bp-atc-error { font-size: 11px; color: #c00; display: none; }
+  .bp-atc-error.is-visible { display: block; }
+
+  @media (max-width: 1100px) {
+    .bp-wrapper { grid-template-columns: 1fr 1fr; }
+    .bp-preview { grid-column: 1 / 3; }
+    .bp-left { max-height: none; position: static; }
+    .bp-info { max-height: none; position: static; }
+    .bp-preview-img { max-height: none; }
+  }
+  @media (max-width: 700px) {
+    .bp-wrapper { grid-template-columns: 1fr; }
+    .bp-preview { grid-column: 1; }
+    .bp-left { padding: 12px; }
+    .bp-grid { display: flex; flex-direction: row; overflow-x: auto; gap: 6px; padding-bottom: 8px; scrollbar-width: none; -ms-overflow-style: none; }
+    .bp-grid::-webkit-scrollbar { display: none; }
+    .bp-thumb { flex: 0 0 72px; width: 72px; height: 72px; aspect-ratio: unset; }
+  }
+</style>
+
+<!-- ── Hero ── -->
+<div class="bp-hero">
+  <p class="bp-hero__eyebrow">2XU Core Compression</p>
+  <h2 class="bp-hero__title">Build Your Base. Save 20%.</h2>
+  <p class="bp-hero__copy">
+    Built to support every muscle group from start to finish. Select your Core Compression top and bottoms to complete your kit — engineered for performance, designed to recover. Enjoy 20% off when you complete the bundle.
+  </p>
+  <span class="bp-hero__badge">20% Off When You Bundle</span>
+</div>
+
+{%- assign man_tab1_col   = collections['mens-core-compression-bundle-top'] -%}
+{%- assign man_tab2_col   = collections['mens-core-compression-bundle-bottoms'] -%}
+{%- assign woman_tab1_col = collections['womens-core-compression-bundle-top'] -%}
+{%- assign woman_tab2_col = collections['womens-core-compression-bundle-bottoms'] -%}
+{%- assign man_first1     = man_tab1_col.products.first -%}
+{%- assign woman_first1   = woman_tab1_col.products.first -%}
+
+<div class="bp-header">
+  <span class="bp-header__title">{{ section.settings.bundle_title | default: 'Core Compression Bundle' }}:</span>
+  <button class="bp-gender-btn is-active" data-gender="man">{{ section.settings.man_label | default: 'Mens' }}</button>
+  <button class="bp-gender-btn" data-gender="woman">{{ section.settings.woman_label | default: 'Womens' }}</button>
+</div>
+
+<!-- ══════════════ MENS PANEL ══════════════ -->
+<div class="bp-panel is-active" id="bp-panel-man">
+  <div class="bp-wrapper">
+    <div class="bp-left">
+      <div class="bp-tabs">
+        <button class="bp-tab is-active" data-tab="man-tab1">{{ section.settings.man_tab1_label | default: 'Top' }}</button>
+        <button class="bp-tab" data-tab="man-tab2">{{ section.settings.man_tab2_label | default: 'Bottoms' }}</button>
+      </div>
+      <div class="bp-grid" id="bp-grid-man-tab1">
+        {%- for product in man_tab1_col.products -%}
+          <div class="bp-thumb" data-handle="{{ product.handle }}" data-title="{{ product.title | escape }}" data-price="{{ product.price | money }}" data-image="{{ product.featured_image | image_url: width: 900 }}" data-thumb="{{ product.featured_image | image_url: width: 400, height: 400, crop: 'center' }}" data-count="{{ product.images.size }}" data-available="{{ product.available }}">
+            <img src="{{ product.featured_image | image_url: width: 400, height: 400, crop: 'center' }}" alt="{{ product.title | escape }}" loading="lazy" width="400" height="400">
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="bp-grid is-hidden" id="bp-grid-man-tab2">
+        {%- for product in man_tab2_col.products -%}
+          <div class="bp-thumb" data-handle="{{ product.handle }}" data-title="{{ product.title | escape }}" data-price="{{ product.price | money }}" data-image="{{ product.featured_image | image_url: width: 900 }}" data-thumb="{{ product.featured_image | image_url: width: 400, height: 400, crop: 'center' }}" data-count="{{ product.images.size }}" data-available="{{ product.available }}">
+            <img src="{{ product.featured_image | image_url: width: 400, height: 400, crop: 'center' }}" alt="{{ product.title | escape }}" loading="lazy" width="400" height="400">
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="bp-preview">
+      <img class="bp-preview-img" id="bp-preview-img-man" src="{{ man_first1.featured_image | image_url: width: 900 }}" alt="{{ man_first1.title | escape }}">
+      <span class="bp-counter" id="bp-counter-man">1 / {{ man_first1.images.size }}</span>
+    </div>
+    <div class="bp-info">
+      <p class="bp-info__name" id="bp-name-man">{{ man_first1.title }}</p>
+      <p class="bp-info__colour" id="bp-colour-man"></p>
+      <a class="bp-info__link" id="bp-link-man" href="/products/{{ man_first1.handle }}">View product</a>
+      <hr class="bp-divider">
+      <p class="bp-info__price" id="bp-price-man">{{ man_first1.price | money }} AUD</p>
+      <div>
+        <p class="bp-info__label">Size</p>
+        <div class="bp-sizes" id="bp-sizes-man">
+          {%- for variant in man_first1.variants -%}
+            <button class="bp-size{% if forloop.first %} is-active{% endif %}{% unless variant.available %} is-sold-out{% endunless %}" data-variant-id="{{ variant.id }}" data-label="{{ variant.title | split: ' / ' | last }}" {% unless variant.available %}disabled{% endunless %}>{{ variant.title | split: ' / ' | last }}</button>
+          {%- endfor -%}
+        </div>
+      </div>
+      <p class="bp-info__stock" id="bp-stock-man">{%- if man_first1.available -%}In Stock{%- else -%}Out of Stock{%- endif -%}</p>
+      <button class="bp-select-btn" id="bp-select-man">SELECT</button>
+      <div class="bp-summary">
+        <p class="bp-summary__label">Bundle and Save 20%</p>
+        <div class="bp-summary-item is-pending" id="bp-summary-man-tab1">
+          <div class="bp-summary-item__img-placeholder" id="bp-summary-man-tab1-placeholder"></div>
+          <img class="bp-summary-item__img" id="bp-summary-man-tab1-img" src="" alt="">
+          <div class="bp-summary-item__text"><span class="bp-summary-item__name" id="bp-summary-man-tab1-name">{{ section.settings.man_tab1_label | default: 'Top' }}</span><span class="bp-summary-item__size" id="bp-summary-man-tab1-size">Not yet selected</span></div>
+          <span class="bp-summary-item__check" id="bp-summary-man-tab1-check"></span>
+        </div>
+        <div class="bp-summary-item is-pending" id="bp-summary-man-tab2">
+          <div class="bp-summary-item__img-placeholder" id="bp-summary-man-tab2-placeholder"></div>
+          <img class="bp-summary-item__img" id="bp-summary-man-tab2-img" src="" alt="">
+          <div class="bp-summary-item__text"><span class="bp-summary-item__name" id="bp-summary-man-tab2-name">{{ section.settings.man_tab2_label | default: 'Bottoms' }}</span><span class="bp-summary-item__size" id="bp-summary-man-tab2-size">Not yet selected</span></div>
+          <span class="bp-summary-item__check" id="bp-summary-man-tab2-check"></span>
+        </div>
+      </div>
+      <button class="bp-atc-btn" id="bp-atc-man">ADD BUNDLE TO CART</button>
+      <p class="bp-atc-error" id="bp-atc-error-man">Something went wrong. Please try again.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ WOMENS PANEL ══════════════ -->
+<div class="bp-panel" id="bp-panel-woman">
+  <div class="bp-wrapper">
+    <div class="bp-left">
+      <div class="bp-tabs">
+        <button class="bp-tab is-active" data-tab="woman-tab1">{{ section.settings.woman_tab1_label | default: 'Top' }}</button>
+        <button class="bp-tab" data-tab="woman-tab2">{{ section.settings.woman_tab2_label | default: 'Bottoms' }}</button>
+      </div>
+      <div class="bp-grid" id="bp-grid-woman-tab1">
+        {%- for product in woman_tab1_col.products -%}
+          <div class="bp-thumb" data-handle="{{ product.handle }}" data-title="{{ product.title | escape }}" data-price="{{ product.price | money }}" data-image="{{ product.featured_image | image_url: width: 900 }}" data-thumb="{{ product.featured_image | image_url: width: 400, height: 400, crop: 'center' }}" data-count="{{ product.images.size }}" data-available="{{ product.available }}">
+            <img src="{{ product.featured_image | image_url: width: 400, height: 400, crop: 'center' }}" alt="{{ product.title | escape }}" loading="lazy" width="400" height="400">
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="bp-grid is-hidden" id="bp-grid-woman-tab2">
+        {%- for product in woman_tab2_col.products -%}
+          <div class="bp-thumb" data-handle="{{ product.handle }}" data-title="{{ product.title | escape }}" data-price="{{ product.price | money }}" data-image="{{ product.featured_image | image_url: width: 900 }}" data-thumb="{{ product.featured_image | image_url: width: 400, height: 400, crop: 'center' }}" data-count="{{ product.images.size }}" data-available="{{ product.available }}">
+            <img src="{{ product.featured_image | image_url: width: 400, height: 400, crop: 'center' }}" alt="{{ product.title | escape }}" loading="lazy" width="400" height="400">
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="bp-preview">
+      <img class="bp-preview-img" id="bp-preview-img-woman" src="{{ woman_first1.featured_image | image_url: width: 900 }}" alt="{{ woman_first1.title | escape }}">
+      <span class="bp-counter" id="bp-counter-woman">1 / {{ woman_first1.images.size }}</span>
+    </div>
+    <div class="bp-info">
+      <p class="bp-info__name" id="bp-name-woman">{{ woman_first1.title }}</p>
+      <p class="bp-info__colour" id="bp-colour-woman"></p>
+      <a class="bp-info__link" id="bp-link-woman" href="/products/{{ woman_first1.handle }}">View product</a>
+      <hr class="bp-divider">
+      <p class="bp-info__price" id="bp-price-woman">{{ woman_first1.price | money }} AUD</p>
+      <div>
+        <p class="bp-info__label">Size</p>
+        <div class="bp-sizes" id="bp-sizes-woman">
+          {%- for variant in woman_first1.variants -%}
+            <button class="bp-size{% if forloop.first %} is-active{% endif %}{% unless variant.available %} is-sold-out{% endunless %}" data-variant-id="{{ variant.id }}" data-label="{{ variant.title | split: ' / ' | last }}" {% unless variant.available %}disabled{% endunless %}>{{ variant.title | split: ' / ' | last }}</button>
+          {%- endfor -%}
+        </div>
+      </div>
+      <p class="bp-info__stock" id="bp-stock-woman">{%- if woman_first1.available -%}In Stock{%- else -%}Out of Stock{%- endif -%}</p>
+      <button class="bp-select-btn" id="bp-select-woman">SELECT</button>
+      <div class="bp-summary">
+        <p class="bp-summary__label">Bundle and Save 20%</p>
+        <div class="bp-summary-item is-pending" id="bp-summary-woman-tab1">
+          <div class="bp-summary-item__img-placeholder" id="bp-summary-woman-tab1-placeholder"></div>
+          <img class="bp-summary-item__img" id="bp-summary-woman-tab1-img" src="" alt="">
+          <div class="bp-summary-item__text"><span class="bp-summary-item__name" id="bp-summary-woman-tab1-name">{{ section.settings.woman_tab1_label | default: 'Top' }}</span><span class="bp-summary-item__size" id="bp-summary-woman-tab1-size">Not yet selected</span></div>
+          <span class="bp-summary-item__check" id="bp-summary-woman-tab1-check"></span>
+        </div>
+        <div class="bp-summary-item is-pending" id="bp-summary-woman-tab2">
+          <div class="bp-summary-item__img-placeholder" id="bp-summary-woman-tab2-placeholder"></div>
+          <img class="bp-summary-item__img" id="bp-summary-woman-tab2-img" src="" alt="">
+          <div class="bp-summary-item__text"><span class="bp-summary-item__name" id="bp-summary-woman-tab2-name">{{ section.settings.woman_tab2_label | default: 'Bottoms' }}</span><span class="bp-summary-item__size" id="bp-summary-woman-tab2-size">Not yet selected</span></div>
+          <span class="bp-summary-item__check" id="bp-summary-woman-tab2-check"></span>
+        </div>
+      </div>
+      <button class="bp-atc-btn" id="bp-atc-woman">ADD BUNDLE TO CART</button>
+      <p class="bp-atc-error" id="bp-atc-error-woman">Something went wrong. Please try again.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+
+  document.querySelectorAll('.bp-gender-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.bp-gender-btn').forEach(function(b) { b.classList.remove('is-active'); });
+      document.querySelectorAll('.bp-panel').forEach(function(p) { p.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      document.getElementById('bp-panel-' + btn.dataset.gender).classList.add('is-active');
+    });
+  });
+
+  function initPicker(gender, tabOrder) {
+    var panel      = document.getElementById('bp-panel-' + gender);
+    var previewImg = document.getElementById('bp-preview-img-' + gender);
+    var counter    = document.getElementById('bp-counter-' + gender);
+    var nameEl     = document.getElementById('bp-name-' + gender);
+    var colourEl   = document.getElementById('bp-colour-' + gender);
+    var linkEl     = document.getElementById('bp-link-' + gender);
+    var priceEl    = document.getElementById('bp-price-' + gender);
+    var sizesEl    = document.getElementById('bp-sizes-' + gender);
+    var stockEl    = document.getElementById('bp-stock-' + gender);
+    var selectBtn  = document.getElementById('bp-select-' + gender);
+    var atcBtn     = document.getElementById('bp-atc-' + gender);
+    var atcError   = document.getElementById('bp-atc-error-' + gender);
+    var selectedVariantId = null;
+    var selections = {};
+    tabOrder.forEach(function(t) { selections[t] = null; });
+
+    function currentTab() { var active = panel.querySelector('.bp-tab.is-active'); return active ? active.dataset.tab : tabOrder[0]; }
+    function checkAllSelected() {
+      var allDone = tabOrder.every(function(t) { return selections[t] && selections[t].confirmed; });
+      if (allDone) { atcBtn.classList.add('is-visible'); } else { atcBtn.classList.remove('is-visible'); atcError.classList.remove('is-visible'); }
+    }
+    function markSummary(tab, confirmed) {
+      var row = document.getElementById('bp-summary-' + tab);
+      var check = document.getElementById('bp-summary-' + tab + '-check');
+      if (!row) return;
+      if (confirmed) { row.classList.remove('is-pending'); if (check) check.textContent = '\u2713'; }
+      else { row.classList.add('is-pending'); if (check) check.textContent = ''; }
+    }
+    function resetSelect() { selectBtn.textContent = 'SELECT'; selectBtn.classList.remove('is-confirmed'); }
+    function showSummaryImage(tab, src, title) {
+      var placeholder = document.getElementById('bp-summary-' + tab + '-placeholder');
+      var img = document.getElementById('bp-summary-' + tab + '-img');
+      if (placeholder) placeholder.style.display = 'none';
+      if (img) { img.src = src; img.alt = title; img.style.display = 'block'; }
+    }
+    function updateColour(data) {
+      if (!colourEl || !data.options) return;
+      var opt = data.options.find(function(o) { return o.name.toLowerCase() === 'color' || o.name.toLowerCase() === 'colour'; });
+      colourEl.textContent = opt ? opt.values[0] : (data.options[0] ? data.options[0].values[0] : '');
+    }
+
+    panel.querySelectorAll('.bp-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        panel.querySelectorAll('.bp-tab').forEach(function(t) { t.classList.remove('is-active'); });
+        panel.querySelectorAll('.bp-grid').forEach(function(g) { g.classList.add('is-hidden'); });
+        tab.classList.add('is-active');
+        document.getElementById('bp-grid-' + tab.dataset.tab).classList.remove('is-hidden');
+        var sel = selections[tab.dataset.tab];
+        if (sel && sel.confirmed) { selectBtn.textContent = 'SELECTED \u2713'; selectBtn.classList.add('is-confirmed'); } else { resetSelect(); }
+      });
+    });
+
+    panel.addEventListener('click', function(e) {
+      var thumb = e.target.closest('.bp-thumb');
+      if (!thumb) return;
+      thumb.closest('.bp-grid').querySelectorAll('.bp-thumb').forEach(function(t) { t.classList.remove('is-selected'); });
+      thumb.classList.add('is-selected');
+      previewImg.src = thumb.dataset.image;
+      nameEl.textContent = thumb.dataset.title;
+      priceEl.textContent = thumb.dataset.price + ' AUD';
+      linkEl.href = '/products/' + thumb.dataset.handle;
+      counter.textContent = '1 / ' + thumb.dataset.count;
+      stockEl.textContent = thumb.dataset.available === 'true' ? 'In Stock' : 'Out of Stock';
+      var tab = currentTab();
+      var summaryName = document.getElementById('bp-summary-' + tab + '-name');
+      if (summaryName) summaryName.textContent = thumb.dataset.title;
+      showSummaryImage(tab, thumb.dataset.thumb, thumb.dataset.title);
+      if (selections[tab] && selections[tab].confirmed) { selections[tab].confirmed = false; markSummary(tab, false); checkAllSelected(); }
+      resetSelect();
+      fetch('/products/' + thumb.dataset.handle + '.js')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          sizesEl.innerHTML = data.variants.map(function(v, i) {
+            var label = v.title.split(' / ').pop();
+            return '<button class="bp-size' + (i === 0 ? ' is-active' : '') + (!v.available ? ' is-sold-out' : '') + '" data-variant-id="' + v.id + '" data-label="' + label + '"' + (!v.available ? ' disabled' : '') + '>' + label + '</button>';
+          }).join('');
+          var first = data.variants.find(function(v) { return v.available; }) || data.variants[0];
+          selectedVariantId = first ? String(first.id) : null;
+          updateColour(data);
+        })
+        .catch(function(err) { console.error('Bundle picker:', err); });
+    });
+
+    sizesEl.addEventListener('click', function(e) {
+      var btn = e.target.closest('.bp-size');
+      if (!btn || btn.disabled) return;
+      sizesEl.querySelectorAll('.bp-size').forEach(function(b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      selectedVariantId = btn.dataset.variantId;
+      var tab = currentTab();
+      if (selections[tab] && selections[tab].confirmed) { selections[tab].confirmed = false; markSummary(tab, false); resetSelect(); checkAllSelected(); }
+    });
+
+    selectBtn.addEventListener('click', function() {
+      if (!selectedVariantId) { alert('Please choose a size first.'); return; }
+      var tab = currentTab();
+      var activeSize = sizesEl.querySelector('.bp-size.is-active');
+      var sizeLabel = activeSize ? activeSize.textContent.trim() : '';
+      var tabLabel = panel.querySelector('.bp-tab.is-active').textContent.trim();
+      selections[tab] = { variantId: selectedVariantId, size: sizeLabel, confirmed: true };
+      var summarySize = document.getElementById('bp-summary-' + tab + '-size');
+      if (summarySize) summarySize.textContent = tabLabel + ' \u2014 ' + sizeLabel;
+      markSummary(tab, true);
+      selectBtn.textContent = 'SELECTED \u2713';
+      selectBtn.classList.add('is-confirmed');
+      checkAllSelected();
+      var currentIndex = tabOrder.indexOf(tab);
+      var nextIndex = currentIndex + 1;
+      while (nextIndex < tabOrder.length && selections[tabOrder[nextIndex]] && selections[tabOrder[nextIndex]].confirmed) { nextIndex++; }
+      if (nextIndex < tabOrder.length) {
+        setTimeout(function() {
+          var nextTabBtn = panel.querySelector('.bp-tab[data-tab="' + tabOrder[nextIndex] + '"]');
+          if (nextTabBtn) nextTabBtn.click();
+          var nextGrid = document.getElementById('bp-grid-' + tabOrder[nextIndex]);
+          if (nextGrid) { var firstThumb = nextGrid.querySelector('.bp-thumb'); if (firstThumb) firstThumb.click(); }
+        }, 400);
+      }
+    });
+
+    atcBtn.addEventListener('click', function() {
+      var allConfirmed = tabOrder.every(function(t) { return selections[t] && selections[t].confirmed; });
+      if (!allConfirmed) return;
+      atcBtn.disabled = true; atcBtn.textContent = 'ADDING...'; atcError.classList.remove('is-visible');
+      var items = tabOrder.map(function(t) { return { id: Number(selections[t].variantId), quantity: 1 }; });
+      fetch('/cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ items: items }) })
+        .then(function(r) { if (!r.ok) throw new Error('Cart error'); return r.json(); })
+        .then(function() { atcBtn.textContent = 'ADDED \u2713'; setTimeout(function() { window.location.href = '/cart'; }, 600); })
+        .catch(function(err) { console.error('ATC error:', err); atcBtn.disabled = false; atcBtn.textContent = 'ADD BUNDLE TO CART'; atcError.classList.add('is-visible'); });
+    });
+
+    var firstSize = sizesEl.querySelector('.bp-size:not([disabled])');
+    if (firstSize) selectedVariantId = firstSize.dataset.variantId;
+  }
+
+  initPicker('man',   ['man-tab1', 'man-tab2']);
+  initPicker('woman', ['woman-tab1', 'woman-tab2']);
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Bundle Picker — Comp",
+  "settings": [
+    { "type": "text", "id": "bundle_title", "label": "Bundle title", "default": "Core Compression Bundle" },
+    { "type": "text", "id": "man_label", "label": "Mens toggle label", "default": "Mens" },
+    { "type": "text", "id": "woman_label", "label": "Womens toggle label", "default": "Womens" },
+    { "type": "header", "content": "Mens — Tab 1" },
+    { "type": "text", "id": "man_tab1_label", "label": "Tab label", "default": "Top" },
+    { "type": "header", "content": "Mens — Tab 2" },
+    { "type": "text", "id": "man_tab2_label", "label": "Tab label", "default": "Bottoms" },
+    { "type": "header", "content": "Womens — Tab 1" },
+    { "type": "text", "id": "woman_tab1_label", "label": "Tab label", "default": "Top" },
+    { "type": "header", "content": "Womens — Tab 2" },
+    { "type": "text", "id": "woman_tab2_label", "label": "Tab label", "default": "Bottoms" }
+  ],
+  "presets": [{ "name": "Bundle Picker — Compression" }]
+}
+{% endschema %}

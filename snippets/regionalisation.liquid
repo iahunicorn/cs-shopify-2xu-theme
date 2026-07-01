@@ -1,0 +1,405 @@
+{%- if settings.enable_hreflangs or settings.enable_autoredirects or settings.enable_region_selector -%}
+  {%- comment -%}Retrieve region information from Theme Settings{%- endcomment -%}
+  {%- assign allRegionCodes = '' -%}
+  {%- assign allRegionNames = '' -%}
+  {%- assign allRegionDomains = '' -%}
+  {%- assign allRegionCountries = '' -%}
+  {%- assign allRegionDefaults = '' -%}
+  {%- assign allRegionCurrents = '' -%}
+  {%- for index in (1..34) -%}
+    {%- assign regionCodeIndexSettings = index | append: '_region_code' -%}
+    {%- assign regionCode = settings[regionCodeIndexSettings] | downcase -%}
+    {%- assign regionNameIndexSettings = index | append: '_region_name' -%}
+    {%- assign regionName = settings[regionNameIndexSettings] -%}
+    {%- assign regionDomainIndexSettings = index | append: '_region_domain' -%}
+    {%- assign regionDomain = settings[regionDomainIndexSettings] | downcase -%}
+    {%- assign regionCountryListIndexSetting = index | append: '_region_country_list' -%}
+    {%- assign regionCountryList = settings[regionCountryListIndexSetting] | downcase -%}
+    {%- assign regionDefaultIndexSetting = index | append: '_region_default' -%}
+    {%- assign regionDefault = settings[regionDefaultIndexSetting] -%}
+    {%- assign regionCurrentIndexSetting = index | append: '_region_current' -%}
+    {%- assign regionCurrent = settings[regionCurrentIndexSetting] -%}
+    {%- if regionCode != blank -%}
+      {%- assign allRegionCodes = allRegionCodes | append: '|' | append: regionCode -%}
+      {%- assign allRegionNames = allRegionNames | append: '|' | append: regionName -%}
+      {%- assign allRegionDomains = allRegionDomains | append: '|' | append: regionDomain -%}
+      {%- assign allRegionCountries = allRegionCountries | append: '|' | append: regionCountryList -%}
+      {%- assign allRegionDefaults = allRegionDefaults | append: '|' | append: regionDefault -%}
+      {%- assign allRegionCurrents = allRegionCurrents | append: '|' | append: regionCurrent -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- assign allRegionCodes = allRegionCodes | remove_first: '|' | split: '|' -%}
+  {%- assign allRegionNames = allRegionNames | remove_first: '|' | split: '|' -%}
+  {%- assign allRegionDomains = allRegionDomains | remove_first: '|' | split: '|' -%}
+  {%- assign allRegionCountries = allRegionCountries | remove_first: '|' | split: '|' -%}
+  {%- assign allRegionDefaults = allRegionDefaults | remove_first: '|' | split: '|' -%}
+  {%- assign allRegionCurrents = allRegionCurrents | remove_first: '|' | split: '|' -%}
+  {%- assign regionZeroIndexSize = allRegionCodes.size | minus: 1 -%}
+
+  {%- comment -%}Removes shop domain from the canonical URL{%- endcomment -%}
+  {%- assign canonical_path = canonical_url | remove: shop.url -%}
+
+  {%- comment -%}If enabled in settings, output hreflang links{%- endcomment -%}
+  {%- if settings.enable_hreflangs -%}
+    {%- if request.path == canonical_path -%}
+      {%- render 'hreflang',
+          regionZeroIndexSize: regionZeroIndexSize,
+          allRegionDomains: allRegionDomains,
+          allRegionCountries: allRegionCountries,
+          canonical_path: canonical_path,
+          allRegionDefaults: allRegionDefaults
+      -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- comment -%}
+    Conditionally load MaxMind if auto-redirects are enabled
+    Polyfills are loaded with nomodule so that they only load in older browsers (IE11)
+  {%- endcomment -%}
+  {%- if settings.enable_autoredirects -%}
+    <script defer src="https://geoip-js.com/js/apis/geoip2/v2.1/geoip2.js"></script>
+    <script defer src="{{ 'polyfill-array-find.js' | asset_url }}" nomodule></script>
+  {%- endif -%}
+    <script defer src="{{ 'url-polyfill.min.js' | asset_url }}" nomodule></script>
+
+  {%- if settings.enable_autoredirects or settings.enable_region_selector -%}
+    <script>
+      let hasAdminBar = false;
+      {% if isAdmin == true %}
+      hasAdminBar = true;
+      {% endif %}
+      document.addEventListener("DOMContentLoaded", function(event) {
+        {%- comment -%}
+          /*
+          * Create a js array from the region data.
+          */
+        {%- endcomment -%}
+        {%- assign default_region_code = '' -%}
+        {%- assign current_region_code = '' -%}
+        const regionArray = [
+          {%- for index in (0..regionZeroIndexSize) -%}
+            {%- assign regionCode = allRegionCodes[index] -%}
+            {%- assign regionName = allRegionNames[index] -%}
+            {%- assign regionDomain = allRegionDomains[index] -%}
+            {%- assign regionCountryList = allRegionCountries[index] -%}
+            {%- assign regionDefault = allRegionDefaults[index] -%}
+            {%- assign regionCurrent = allRegionCurrents[index] -%}
+            {%- if regionDefault == 'true' -%}
+              {%- assign default_region_code = regionCode -%}
+            {%- endif -%}
+            {%- if regionCurrent == 'true' -%}
+              {%- assign current_region_code = regionCode -%}
+            {%- endif -%}
+            {
+              name: {{ regionName | json }},
+              code: {{ regionCode | json }},
+              domain: {{ regionDomain | json }},
+              countryList: {{ regionCountryList | json }}
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ];
+
+        {%- comment -%}
+          /*
+          * Assign js variables with region information relating to the current store.
+          */
+        {%- endcomment -%}
+        const defaultRegionCode = {%- if default_region_code != blank -%}{{ default_region_code | json }}{%- else -%}null{%- endif -%};
+        const currentRegionCode = {{ current_region_code | json }};
+        const canonicalPath = {{ canonical_path | json }};
+        {%- if settings.prevent_redirect_param -%}
+        const preventRedirectParam = {{ settings.prevent_redirect_param | json }};
+        {%- endif -%}
+
+        {%- if settings.enable_autoredirects -%}
+          const findRegionMatch = function(value, regions) {
+            if (!value) { return null };
+            
+            const codeMatch = regions.find(function(region) {
+              return region.code === value;
+            });
+
+            if (codeMatch) { return codeMatch };
+
+            const countryMatch = regions.find(function(region) {
+              if (!region.countryList) { return };
+              return region.countryList.indexOf(value) >= 0;
+            });
+
+            if (countryMatch) { return countryMatch };
+
+            return null;
+          };
+
+          const redirectToTargetRegion = function(targetRegion, manualMode) {
+            const currentPathName = window.location.pathname
+            const subdomain = window.location.host.split('.')[0]
+            // if current pathname includes blog, and is au store, don't redirect people. To not cause an infinite loop
+            if (currentPathName.includes('blog') && subdomain == '2xu') {
+              return
+            }
+            const targetDomain = targetRegion.domain;
+            const targetDomainUrlObject = new URL(targetDomain);
+            if (targetDomainUrlObject.host === window.location.host) {
+              return false;
+            };
+            let targetURL = new URL(location.pathname, targetDomain);
+            if (manualMode) {
+              const targetRegionCode = targetRegion.code;
+              targetURL.searchParams.set("region", targetRegionCode);
+            };
+            window.location = targetURL.href;
+          };
+
+          const initAutoRedirect = function() {
+            // If the current region is AU - but a customer is on another country website e.g. us (us.2xu.com)
+            // And they are on the blog redirect them to AU 
+            const currentPathName = window.location.pathname
+            if (currentPathName.includes('blog')) {
+              if (currentRegionCode == 'au') {
+                const subdomain = window.location.host.split('.')[0]
+                if (subdomain == 'nz' || subdomain == 'us' || subdomain == 'ca') {
+                  localStorage.setItem("region", 'au')
+                  window.location = 'https://2xu.com/blogs/all'
+                  return
+                }
+              }
+            }
+              /*
+              * If we're in the Theme Editor, or the userAgent is a known bot,
+              * exit.
+              */
+            if (window.top.ThemeEditor || window.top.ThemeEditorAPI || window.Shopify.designMode || hasAdminBar) { 
+              return 
+            };
+
+            const isRobot = function() {
+              const robotList = '(360spider|a6-indexer|aboundex|acoonbot|addthis|adidxbot|admantx|adsbot-google|adsbot-google-mobile|advbot|ahrefsbot|aihitbot|aisearchbot|antibot|apis-google|applebot|arabot|archive.org_bot|backlinkcrawler|baiduspider|bibnum.bnf|biglotron|bingbot|binlar|blekkobot|blexbot|bnf.fr_bot|brainobot|bubing|buzzbot|careerbot|cc metadata scaper|ccbot|changedetection|chrome-lighthouse|citeseerxbot|coccoc|commons-httpclient|content crawler spider|convera|crawler4j|crystalsemanticsbot|curl|cxensebot|cyberpatrol|discobot|domain re-animator bot|domaincrawler|dotbot|drupact|duckduckbot|duplexweb-google|ec2linkfinder|edisterbot|elisabot|europarchive.org|exabot|ezooms|facebookexternalhit|facebot|fast enterprise crawler|fast-webcrawler|feedfetcher-google|findlink|findthatfile|findxbot|fluffy|fr-crawler|g00g1e.net|gigablast|gingercrawler|gnam gnam spider|google favicon|google-read-aloud|googlebot|googlebot-image|googlebot-mobile|googlebot-news|googlebot-video|googleweblight|grapeshotcrawler|grub.org|gslfbot|heritrix|httpunit|httrack|ia_archiver|ichiro|integromedb|intelium_bot|interfaxscanbot|ioi|ip-web-crawler.com|ips-agent|it2media-domain-crawler|java|jyxobot|lb-spider|libwww|linguee bot|linkdex|lipperhey|lipperhey seo service|livelapbot|lssbot|lssrocketcrawler|ltx71|mail.ru_bot|mediapartners-google|megaindex|memorybot|mj12bot|mlbot|msnbot|msrbot|nerdbynature.bot|nerdybot|netresearchserver|ngbot|niki-bot|nutch|openindexspider|orangebot|page2rss|panscient|phpcrawl|postrank|proximic|psbot|purebot|python-urllib|qwantify|retrevopageanalyzer|rogerbot|scribdbot|seekbot|semanticscholarbot|semrushbot|seokicks-robot|seznambot|simplecrawler|sistrix crawler|sitebot|siteexplorer.info|slurp|smtbot|sogou|spbot|speedy|summify|tagoobot|teoma|toplistbot|turnitinbot|tweetmemebot|twengabot|twitterbot|urlappendbot|usinenouvellecrawler|voilabot|voyager|wbsearchbot|web-archive-net.com.bot|webcompanycrawler|webcrawler|webmon|wesee:search|wget|wocbot|woriobot|wotbox|xovibot|y!j-asr|yacybot|yandexbot|yanga|yeti|yoozbot)';
+              const regex = new RegExp(robotList, 'i');
+              const userAgent = navigator.userAgent;
+              return (regex.test(userAgent)) ? true : false;
+            };
+            if (isRobot()) {
+              return
+            };
+
+              /*
+              * If a 'prevent redirect param' has been provided in settings,
+              * check if the parameter exists in the URL. If so, return.
+              */
+            const searchParams = new URLSearchParams(window.location.search);
+            if (preventRedirectParam && searchParams.get(preventRedirectParam)) {
+              return
+            };
+
+              /*
+              * Check for a manual region parameter in the URL. Most commonly,
+              * this is due to region switches using the region selector.
+              */
+            const manualRegionParam = searchParams.get("region") ? (searchParams.get("region")).toLowerCase() : null;
+            
+            if (manualRegionParam) {
+                /*
+                * If the manual region param matches the current store region,
+                * save the preference in localStorage and exit.
+                */
+              if (currentRegionCode === manualRegionParam) {
+                localStorage.setItem("region", currentRegionCode);
+                return;
+              };
+
+                /*
+                * Otherwise, we need to redirect to the correct region.
+                * 1. Find a match with a store region. If there's no match using
+                * the region code, check for a match with a country code instead.
+                *
+                * 2. Retrieve the target region's domain.
+                *
+                * 3. If there's no match with anything, exit.
+                */
+
+              const targetRegion = findRegionMatch(manualRegionParam, regionArray);
+              if (!targetRegion) { return };
+
+
+                /*
+                * 1. Save the target region as the preferred region in localStorage.
+                * 2. Check if the target domain is equal to the current domain.
+                * 3. If so, exit. If not, redirect the user to the target domain.
+                */
+
+              localStorage.setItem("region", targetRegion.code);
+              
+              if(redirectToTargetRegion(targetRegion, true) === false) { return };
+            };
+              /*
+              * If there's no manual region set, check if there's a saved
+              * region preference in localStorage.
+              */
+            const localStorageRegionCode = localStorage.getItem("region") ? localStorage.getItem("region").toLowerCase() : null;
+            
+            if (localStorageRegionCode) {
+
+                /*
+                * If the saved region code matches the current store region,
+                * do nothing.
+                */
+
+              if (currentRegionCode === localStorageRegionCode) { 
+                return 
+              };
+
+                /*
+                * Otherwise, we need to redirect to the correct region.
+                * 1. Find a match with a store region. If there's no match using
+                * the region code, check for a match with a country code instead.
+                *
+                * 2. Retrieve the target region's domain.
+                *
+                * 3. If there's no match, do nothing.
+                */
+              const targetRegion = findRegionMatch(localStorageRegionCode, regionArray);
+              if (targetRegion) {
+                  /*
+                  * 1. Save the target region as the preferred region in localStorage.
+                  * 2. Check if the target domain is equal to the current domain.
+                  * 3. If so, exit. If not, redirect the user to the target domain.
+                  */
+                localStorage.setItem("region", targetRegion.code);
+                
+                if(redirectToTargetRegion(targetRegion) === false) { return };
+              };
+            };
+
+              /*
+              * If there's no valid region parameter, and no valid saved
+              * preference in local storage, we need to look up the user's
+              * location with MaxMind.
+              *
+              * 1. Retrieve the user's location in ISO country code format
+              *
+              * 2. Find a match with a store region. If there's no match using
+              * the region code, check for a match with a country code instead.
+              *
+              * 3. If there's no match, assign the Default Store as the target.
+              *
+              * 4. Retrieve the target region's domain.
+              */
+            const onGeoIpSuccess = function(response) {
+              const geoIpCountryCode = (response.country.iso_code).toLowerCase();
+
+              const targetRegion = findRegionMatch(geoIpCountryCode, regionArray) ?
+                findRegionMatch(geoIpCountryCode, regionArray) : findRegionMatch(defaultRegionCode, regionArray);
+              if (targetRegion) {
+                localStorage.setItem("region", targetRegion.code);
+                if(redirectToTargetRegion(targetRegion) === false) { return };
+              };
+            };
+
+            const onGeoIpError = function(error) {
+              console.error('Error retrieving user location', error);
+            };
+
+            geoip2.country(onGeoIpSuccess, onGeoIpError);
+          };
+          initAutoRedirect();
+        {%- endif -%}
+
+        {%- if settings.enable_region_selector -%}
+        {%- comment -%}
+          /*
+          * 1. Use Liquid to create the region selector options
+          * 2. Select the region selector from the DOM -- exit if it doesn't exist.
+          * 3. Add the options to the region selector element.
+          * 4. Add an event listener to handle user selections.
+          */
+        {%- endcomment -%}
+          {%- assign regionUs = '' -%}
+          {%- assign regionAsia = '' -%}
+          {%- assign regionEu = '' -%}
+          {%- assign regionAfrica = '' -%}
+          {%- for index in (0..regionZeroIndexSize) -%}
+            {%- assign regionCode = allRegionCodes[index] -%}
+            {%- assign regionName = allRegionNames[index] -%}
+            {%- assign regionDomain = allRegionDomains[index] -%}
+            {%- assign regionCountryList = allRegionCountries[index] | split: ',' -%}
+            {%- assign regionNameArray = regionName | split: ',' -%}
+            {% for splitRegion in regionNameArray %}
+              {%- capture option -%}<li class="Linklist__Item"><a href="{{ regionDomain | append: '?region=' | append: regionCode }}" data-code="{{ regionCode }}" class="Link region-anchor {% if regionCode == current_region_code %}is-current{% endif %}"><img src="{{ regionCountryList[forloop.index0] | upcase | append: '.svg' | asset_url }}" alt="" loading="lazy" />{{ splitRegion }}</a></li>{%- endcapture -%}
+              {%- if regionCode == 'us' or regionCode == 'ca' -%}
+                {%- assign regionUs = regionUs | append: option -%}
+              {%- elsif regionCode == 'au' or regionCode == 'nz' or regionCode == 'jp' or regionCode == 'sg' or regionCode == 'my' or regionCode == 'hk' or regionCode == 'kr' -%}
+                {%- assign regionAsia = regionAsia | append: option -%}
+              {%- elsif regionCode == 'za' -%}
+                {%- assign regionAfrica = regionAfrica | append: option -%}
+              {%- else -%}
+                {%- assign regionEu = regionEu | append: option -%}
+              {%- endif -%}
+            {% endfor %}
+          {%- endfor -%}
+
+          const initRegionSelector = function() {
+            // const regionSelector = document.querySelector(".region-selector");
+
+            // const regionSelectorOptions = '{{ region_selector_options }}';
+            // regionSelector.innerHTML = regionSelectorOptions;
+            const regionSelectorUs = document.querySelector(".region-selector .region-group-us ul");
+            const regionSelectorOptionsUs = '{{ regionUs }}';
+            regionSelectorUs.innerHTML = regionSelectorOptionsUs;
+
+            const regionSelectorAsia = document.querySelector(".region-selector .region-group-asia ul");
+            const regionSelectorOptionsAsia = '{{ regionAsia }}';
+            regionSelectorAsia.innerHTML = regionSelectorOptionsAsia;
+
+            const regionSelectorEu = document.querySelector(".region-selector .region-group-eu ul");
+            const regionSelectorOptionsEu = '{{ regionEu }}';
+            regionSelectorEu.innerHTML = regionSelectorOptionsEu;
+
+            const regionSelectorAfrica = document.querySelector(".region-selector .region-group-africa ul");
+            const regionSelectorOptionsAfrica = '{{ regionAfrica }}';
+            regionSelectorAfrica.innerHTML = regionSelectorOptionsAfrica;
+
+            console.log(document.querySelectorAll('.region-modal-popup h5').length)
+            document.querySelectorAll('.region-modal-popup h5').forEach(function(element) {
+              element.addEventListener('click', function() {
+                this.classList.toggle('active')
+              })
+            });
+
+            const regionAnchors = document.querySelectorAll(".region-anchor");
+            if (regionAnchors.length == 0) {
+              console.log("Region selector not found.");
+              return;
+            };
+
+            {%- comment -%}
+              /*
+              * 1. If the selected region is the current region, exit.
+              * 2. Set the selected region and send the user to the chosen region with the region appended as a query parameter.
+              */
+            {%- endcomment -%}
+            const handleRegionSelection = function(evt) {
+              const selectedOption = evt.target;
+              const targetDomain = selectedOption.href;
+              const targetRegionCode = selectedOption.dataset.code;
+
+              if (targetRegionCode === currentRegionCode) { return };
+              if (window.swymCleanDevice) {
+                window.swymCleanDevice();
+              }              
+              localStorage.setItem("region", targetRegionCode);
+              let targetURL = new URL(location.pathname, targetDomain);
+              targetURL.searchParams.set("region", targetRegionCode);
+              window.location = targetURL.href;
+            };
+
+            regionAnchors.forEach(function(selector) {
+              selector.addEventListener("click", handleRegionSelection);
+            })
+          };
+          initRegionSelector();
+        {%- endif -%}
+      });
+    </script>
+  {%- endif -%}
+{%- endif -%}

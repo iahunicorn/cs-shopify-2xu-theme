@@ -1,0 +1,45 @@
+{% liquid
+  assign badges = ''
+  assign badge_count = 0
+
+  # Sale percentage badge
+  if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price
+    assign percent_sale = 0
+    assign sale_price = product.selected_or_first_available_variant.compare_at_price
+    assign old_price = product.selected_or_first_available_variant.price
+    assign percent_sale = sale_price | minus: old_price | times: 100 | divided_by: sale_price
+    assign percent_sale_custom = percent_sale | modulo: 5
+    assign percent_sale_final = percent_sale | minus: percent_sale_custom
+
+    if percent_sale_final >= 5
+      if badge_count > 0
+        assign badges = badges | append: ','
+      endif
+      assign badge_json = '{"type":"sale_percentage","text":"-' | append: percent_sale_final | append: '%", "variant": "dark"}'
+      assign badges = badges | append: badge_json
+      assign badge_count = badge_count | plus: 1
+    endif
+  endif
+
+  # Custom sale badges
+  if product.metafields.custom.sale_badge != blank
+    assign sale_badge = product.metafields.custom.sale_badge.value
+    if badge_count > 0
+      assign badges = badges | append: ','
+    endif
+    assign badge_json = '{"type":"sale_custom","text":"' | append: sale_badge.text | append: '", "variant":"' | append: sale_badge.variant | downcase | append: '"}'
+    assign badges = badges | append: badge_json
+    assign badge_count = badge_count | plus: 1
+  endif
+  if product.metafields.custom.secondary_sale_badge != blank
+    assign secondary_sale_badge = product.metafields.custom.secondary_sale_badge.value
+    if badge_count > 0
+      assign badges = badges | append: ','
+    endif
+    assign badge_json = '{"type":"sale_secondary","text":"' | append: secondary_sale_badge.text | append: '", "variant":"' | append: secondary_sale_badge.variant | downcase | append: '"}'
+    assign badges = badges | append: badge_json
+    assign badge_count = badge_count | plus: 1
+  endif
+-%}
+
+[{{ badges }}]

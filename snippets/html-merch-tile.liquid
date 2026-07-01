@@ -1,0 +1,35 @@
+<div class="tw-block tw-relative tw-rounded-lg tw-overflow-hidden">
+  <img
+    src="{{ merch_tile.image | image_url: width: 500, height: 800 }}"
+    alt="{{ merch_tile.title }}"
+    class="tw-object-cover tw-w-full tw-h-full"
+    width="auto"
+    height="auto"
+  />
+  <div class="tw-absolute tw-inset-0 tw-flex tw-flex-col tw-justify-between tw-p-4">
+    <div class="tw-flex tw-flex-col tw-gap-4">
+      <p class="tw-text-2xl tw-font-sweet-sans tw-uppercase tw-text-white">
+        {{ merch_tile.title }}
+      </p>
+      <p class="tw-text-xs tw-font-euclid tw-text-white">
+        {{ merch_tile.content }}
+      </p>
+    </div>
+    <div class="tw-flex tw-flex-col md:tw-flex-row tw-gap-2 tw-mt-2">
+      <a
+        href="{{ merch_tile.cta_1_link.url }}"
+        class="tw-bg-2xu-white tw-text-2xu-black tw-px-2 tw-py-3 tw-w-full tw-font-euclid tw-text-center tw-font-medium tw-rounded hover:tw-bg-2xu-mid-grey tw-transition-colors tw-duration-300"
+      >
+        {{ merch_tile.cta_1_label }}
+      </a>
+      {% if merch_tile.cta_2_link.url %}
+        <a
+          href="{{ merch_tile.cta_2_link.url }}"
+          class="tw-bg-2xu-black tw-text-white tw-px-2 tw-py-3 tw-w-full tw-font-euclid tw-text-center tw-font-medium tw-rounded hover:tw-bg-2xu-mid-grey tw-transition-colors tw-duration-300"
+        >
+          {{ merch_tile.cta_2_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>

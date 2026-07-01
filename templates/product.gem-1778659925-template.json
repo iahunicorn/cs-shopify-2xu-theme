@@ -1,0 +1,764 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "70e12c49-5b0d-4d50-a328-b1df2d1f207e": {
+          "type": "shopify:\/\/apps\/okendo\/blocks\/star-rating\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "caption": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "{{ product.metafields.descriptors.subtitle.value }}",
+            "text_style": "subtitle"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_bnpl_payments": false,
+            "bnpl_payments_divisor": 4,
+            "bnpl_payments_text": "or $divisor payments of $bnpl_price with"
+          }
+        },
+        "divider_mdBxiM": {
+          "type": "divider",
+          "settings": {
+            "show_divider_mobile": true,
+            "show_divider_desktop": false
+          }
+        },
+        "color_picker_tXyTCf": {
+          "type": "color_picker",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "disabled": true,
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "callout": "Free shipping on orders over $120",
+            "show_size_selector": true,
+            "size_selector_label": "Pick a size",
+            "size_selector_size_label": "Size",
+            "size_selector_modal_heading": "Select a size",
+            "size_selector_size_guide_label": "Size Guide",
+            "size_selector_low_inventory_message": "Only $quantity left",
+            "model_wears_size_text": "$model_name wears size $model_size"
+          }
+        },
+        "usp_block_mxHm6k": {
+          "type": "usp_block",
+          "settings": {}
+        },
+        "a1c6b88a-d709-41d7-9354-946c7b370ef0": {
+          "type": "list_icon",
+          "settings": {
+            "list_text_1": "Reflective Highlight",
+            "list_text_2": "Supportive",
+            "list_text_3": "Quick-Drying",
+            "list_text_4": "Pockets",
+            "list_text_5": "Reduced Water Resistance",
+            "list_text_6": "Anti-Odour Technology",
+            "list_text_7": "Keeps You Cool",
+            "list_text_8": "Keeps You Dry",
+            "list_text_9": "Keeps You Warm",
+            "list_text_10": "UV Protection",
+            "list_text_11": "Flexible",
+            "list_text_12": "Lightweight",
+            "list_text_13": "Compression Extra Firm",
+            "list_text_14": "Compression Firm",
+            "list_text_15": "Compression Sculpting",
+            "list_text_16": "Try For 30 Days",
+            "list_text_17": "",
+            "list_text_18": "",
+            "list_text_19": "",
+            "list_text_20": "",
+            "list_text_21": "",
+            "list_text_22": "",
+            "list_text_23": "",
+            "list_text_24": "",
+            "list_text_25": "",
+            "list_text_26": "",
+            "list_text_27": "",
+            "list_text_28": "",
+            "list_text_29": "",
+            "list_text_30": "",
+            "list_text_31": "",
+            "list_text_32": "",
+            "list_text_33": "",
+            "list_text_34": "",
+            "list_text_35": ""
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "a1ad36ac-006b-47a1-8cdf-b6d4aea832ee": {
+          "type": "sku",
+          "settings": {}
+        },
+        "2653ac36-7cad-4055-8846-96aeac8ef564": {
+          "type": "extended_description",
+          "settings": {}
+        },
+        "collapsible-row-1": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Delivery & returns",
+            "icon": "none",
+            "content": "",
+            "page": "product-tab-delivery-returns"
+          }
+        },
+        "968d664e-c431-4eb0-9481-5bf5b80d8a98": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Care instructions",
+            "icon": "none",
+            "content": "",
+            "page": "product-tab-care-instructions"
+          }
+        },
+        "c86410e2-ad56-4e56-9706-8400d9d70ac1": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Compression Shorts,Core Compression Tights",
+            "size_guide_page": "size-guide-mens-compression-tights",
+            "size_guide_gender": "mens",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "c9f78581-6037-4926-9288-7b3d30820fea": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Top - Long Sleeve,Top - Long Sleeve H125,Top - Short Sleeve H125,Top - Sleeveless H125,Top - Sleeveless,Outerwear H125,Polo",
+            "size_guide_page": "size-guide-mens-apparel-and-triathlon-h125",
+            "size_guide_gender": "mens",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "size_guide_99BUVP": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Top - Long Sleeve H125,Long Sleeve Top,Top - Short Sleeve H125",
+            "size_guide_page": "size-guide-mens-apparel-and-triathlon-h125",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "size_guide_LQVPzM": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Bottom - Shorts,Bottom - Trackpants,Top - Short Sleeve,Tri - Bottoms,Tri - Tops,Trisuit.Swim",
+            "size_guide_page": "size-guide-men-apparel-and-triathlon",
+            "size_guide_gender": "mens",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "size_guide_GpBgYy": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Compression Tops",
+            "size_guide_page": "size-guide-mens-compression-tops",
+            "size_guide_gender": "mens",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "1ec62622-d0c4-4451-9b7f-a17bcd8f02ba": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "",
+            "size_guide_page": "size-guide-mens-compression-tops",
+            "size_guide_gender": "mens",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "size_guide_bjkzcG": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Core Trisuit",
+            "size_guide_page": "size-guide-mens-core-trisuit",
+            "size_guide_gender": "mens",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "size_guide_VwyfR6": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Light Speed Trisuit",
+            "size_guide_page": "size-guide-mens-lsr-trisuit",
+            "size_guide_gender": "mens",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "size_guide_CrW9zz": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Aero Trisuit",
+            "size_guide_page": "size-guide-mens-aero-hex-trisuit",
+            "size_guide_gender": "mens",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "size_guide_tbcbUC": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Arm Guard",
+            "size_guide_page": "size-guide-arm-guards",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "size_guide_Twk3zk": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Calf Guard,Calf Sleeve",
+            "size_guide_page": "size-guide-calf-guards-v2",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "size_guide_8Pp4qP": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Crop",
+            "size_guide_page": "size-guide-crops-v2",
+            "size_guide_gender": "womens",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "75f02ee9-1939-4e30-8bc1-2ec3e0ba7d9b": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Compression Socks",
+            "size_guide_page": "size-guide-full-length-compression-socks",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "type-2"
+          }
+        },
+        "36ba918e-2172-4d04-82f9-523b5faba393": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Gloves",
+            "size_guide_page": "size-guide-gloves",
+            "size_guide_gender": "mens",
+            "size_guide_popup_type": "type-2"
+          }
+        },
+        "4561a80a-33f9-4a40-8121-54f7b1b346aa": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Leg Sleeve",
+            "size_guide_page": "size-guide-leg-sleeves-1",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "a2910ac4-770b-410d-b847-42c9a345a644": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Neoprene Swim Cap",
+            "size_guide_page": "size-guide-neoprene-swim-cap",
+            "size_guide_gender": "mens",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "f7053c89-ece4-43f4-8b1b-3784962e1094": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Socks, Booties",
+            "size_guide_page": "size-guide-vectr-crew-socks",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "c0ef6804-aeff-4234-a9d9-798083c159f9": {
+          "type": "size-guide",
+          "disabled": true,
+          "settings": {
+            "product_type": "Bottom - Tights",
+            "size_guide_page": "flex-and-tights-size-guide",
+            "size_guide_gender": "womens",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "a96b0a62-86d9-4f89-9c96-11445983ebf7": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Wetsuit Shorts",
+            "size_guide_page": "size-guide-wetsuit-shorts",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "0dd3fa88-7fae-44dd-8151-f613baa8bdea": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Top - Long Sleeve,Top - Short Sleeve,Fluid - Top - Sleeveless,Flex - Top - Long Sleeve H125,Outerwear H125,Top - Long Sleeve H125,Top - Short Sleeve H125,Top - Sleeveless H125,Top - Sleeveless",
+            "size_guide_page": "size-guide-women-apparel-and-triathlon-h125",
+            "size_guide_gender": "womens",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "size_guide_x9N3ac": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Bottom - Shorts,Bottom - Trackpants,Tri - Tops,Tri - Bottoms,Flex - Top - Long Sleeves,Bottom - Tights,Flex - Top - Sleeveless,Fluid - Crop,One Piece",
+            "size_guide_page": "size-guide-women-apparel-and-triathlon",
+            "size_guide_gender": "womens",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "size_guide_kWWzrP": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Compression Tops",
+            "size_guide_page": "size-guide-womens-compression-tops",
+            "size_guide_gender": "womens",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "b771d5b1-2e94-4da3-b8e4-26ee372a8fb6": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "size-guide-women-apparel-and-triathlon",
+            "size_guide_page": "size-guide-womens-freedom-top",
+            "size_guide_gender": "womens",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "a6c88d33-76fd-41e2-8ebc-64090834fa2a": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Sports Bra",
+            "size_guide_page": "size-guide-women-bra",
+            "size_guide_gender": "womens",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "8c7b4f8f-a28f-4d5e-933e-17826e533ad4": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Compression Shorts,Compression Tights",
+            "size_guide_page": "size-guide-womens-compression-bottom-v3",
+            "size_guide_gender": "womens",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "size_guide_Pqz6KV": {
+          "type": "size-guide",
+          "disabled": true,
+          "settings": {
+            "product_type": "Tri - Tops",
+            "size_guide_page": "size-guide-womens-core-trisuit",
+            "size_guide_gender": "womens",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "364d2c8e-c96a-486e-94dd-b92a195e2bba": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Light Speed Trisuit",
+            "size_guide_page": "size-guide-womens-lsr-trisuit",
+            "size_guide_gender": "womens",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "size_guide_7VkPta": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Core Trisuit",
+            "size_guide_page": "size-guide-womens-core-trisuit-1",
+            "size_guide_gender": "womens",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "size_guide_LebR8h": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Aero Trisuit",
+            "size_guide_page": "size-guide-womens-aero-hex-trisuit",
+            "size_guide_gender": "womens",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "68f8ebae-9249-4fc5-92df-3fe96bd06502": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Youth Compression Tops",
+            "size_guide_page": "size-guide-youth-apparel-and-triathlon",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "8778cc5c-ac99-407d-89f5-b4651d44cce9": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Youth Compression Bottoms",
+            "size_guide_page": "size-guide-youth-compression-bottoms",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "type-1"
+          }
+        },
+        "01b3da7f-1adc-4907-baf7-f85c89a252f6": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Crop",
+            "size_guide_page": "size-guide-crops-v2",
+            "size_guide_gender": "womens",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "c1c82c7e-cc95-4306-997f-d32a6e4dd82a": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Gloves",
+            "size_guide_page": "size-guide-gloves",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "3148ddcf-c736-4f63-98b4-a258efee7a2d": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Hydration Vest",
+            "size_guide_page": "size-guide-hydration-vest",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "999697e7-29da-4d77-820e-cff1c19cd8be": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "",
+            "size_guide_page": "size-guide-wetsuit-shorts",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "1335c331-1f44-4931-b412-92a73ca3c7e1": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Men's Perf Compression Socks",
+            "size_guide_page": "copy-of-size-guide-womens-perf-run-compression-socks",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "a50b7d66-62d0-445c-a21f-19ead733e8ea": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "Women's Perf Compression Socks, Women's Perf Compression Socks",
+            "size_guide_page": "copy-of-size-guide-full-length-compression-socks",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "size_guide_WnTTAD": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "",
+            "size_guide_page": "size-guide-neoprene-swim-cap",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "simple"
+          }
+        },
+        "size_guide_J6cLxJ": {
+          "type": "size-guide",
+          "settings": {
+            "product_type": "",
+            "size_guide_page": "unisex-tops-size-chart",
+            "size_guide_gender": "unisex",
+            "size_guide_popup_type": "type-1"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "70e12c49-5b0d-4d50-a328-b1df2d1f207e",
+        "title",
+        "caption",
+        "price",
+        "divider_mdBxiM",
+        "color_picker_tXyTCf",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "usp_block_mxHm6k",
+        "a1c6b88a-d709-41d7-9354-946c7b370ef0",
+        "description",
+        "a1ad36ac-006b-47a1-8cdf-b6d4aea832ee",
+        "2653ac36-7cad-4055-8846-96aeac8ef564",
+        "collapsible-row-1",
+        "968d664e-c431-4eb0-9481-5bf5b80d8a98",
+        "c86410e2-ad56-4e56-9706-8400d9d70ac1",
+        "c9f78581-6037-4926-9288-7b3d30820fea",
+        "size_guide_99BUVP",
+        "size_guide_LQVPzM",
+        "size_guide_GpBgYy",
+        "1ec62622-d0c4-4451-9b7f-a17bcd8f02ba",
+        "size_guide_bjkzcG",
+        "size_guide_VwyfR6",
+        "size_guide_CrW9zz",
+        "size_guide_tbcbUC",
+        "size_guide_Twk3zk",
+        "size_guide_8Pp4qP",
+        "75f02ee9-1939-4e30-8bc1-2ec3e0ba7d9b",
+        "36ba918e-2172-4d04-82f9-523b5faba393",
+        "4561a80a-33f9-4a40-8121-54f7b1b346aa",
+        "a2910ac4-770b-410d-b847-42c9a345a644",
+        "f7053c89-ece4-43f4-8b1b-3784962e1094",
+        "c0ef6804-aeff-4234-a9d9-798083c159f9",
+        "a96b0a62-86d9-4f89-9c96-11445983ebf7",
+        "0dd3fa88-7fae-44dd-8151-f613baa8bdea",
+        "size_guide_x9N3ac",
+        "size_guide_kWWzrP",
+        "b771d5b1-2e94-4da3-b8e4-26ee372a8fb6",
+        "a6c88d33-76fd-41e2-8ebc-64090834fa2a",
+        "8c7b4f8f-a28f-4d5e-933e-17826e533ad4",
+        "size_guide_Pqz6KV",
+        "364d2c8e-c96a-486e-94dd-b92a195e2bba",
+        "size_guide_7VkPta",
+        "size_guide_LebR8h",
+        "68f8ebae-9249-4fc5-92df-3fe96bd06502",
+        "8778cc5c-ac99-407d-89f5-b4651d44cce9",
+        "01b3da7f-1adc-4907-baf7-f85c89a252f6",
+        "c1c82c7e-cc95-4306-997f-d32a6e4dd82a",
+        "3148ddcf-c736-4f63-98b4-a258efee7a2d",
+        "999697e7-29da-4d77-820e-cff1c19cd8be",
+        "1335c331-1f44-4931-b412-92a73ca3c7e1",
+        "a50b7d66-62d0-445c-a21f-19ead733e8ea",
+        "size_guide_WnTTAD",
+        "size_guide_J6cLxJ"
+      ],
+      "settings": {
+        "enable_sticky_info": false,
+        "media_position": "left",
+        "gallery_layout": "stacked",
+        "media_size": "large",
+        "mobile_thumbnails": "hide",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "show_pickup_availability": true,
+        "disclaimer": "This product is final sale and not eligible for return or exchange unless faulty."
+      }
+    },
+    "product_key_features_section_BTayKY": {
+      "type": "product-key-features-section",
+      "settings": {
+        "heading": "Key Features",
+        "product": "{{ product }}"
+      }
+    },
+    "ss_custom_liquid_aKjCrJ": {
+      "type": "ss-custom-liquid",
+      "disabled": true,
+      "settings": {
+        "title": "Similar SS Widget",
+        "liquid": "<script type=\"searchspring\/personalized-recommendations\" profile=\"customers-also-viewed-snap\">\n\n  \/\/ Replace SKU with the SKU of the current product being viewed.\n  seed = \"SKU\";\n\n<\/script>"
+      }
+    },
+    "fa_accordion_FPPGFd": {
+      "type": "fa-accordion",
+      "blocks": {
+        "metafield_row_YgjCEr": {
+          "type": "metafield_row",
+          "settings": {
+            "heading": "Product Details",
+            "metafield": "pdp_accordians_product_details"
+          }
+        },
+        "size_chart_awR3cr": {
+          "type": "size_chart",
+          "settings": {
+            "heading": "Size Guide",
+            "content": "<p>{{ section.settings.product.metafields.custom.pdp_accordians_size_fit.value.body | metafield_tag }}<\/p>"
+          }
+        },
+        "metafield_row_LNLej6": {
+          "type": "metafield_row",
+          "settings": {
+            "heading": "Fabric Details",
+            "metafield": "pdp_accordians_fabric_details"
+          }
+        },
+        "script_hBeHbV": {
+          "type": "script",
+          "disabled": true,
+          "settings": {
+            "heading": "See it in the wild",
+            "script": "<div id=\"foursixty-hideable-container\" style=\"display:none\">\n<h3>See it styled<\/h3>\n<script src=\"\/\/foursixty.com\/media\/scripts\/fs.slider.v2.5.js\" data-feed-id=\"2xu_1\" data-theme=\"slider_v2_5\" data-open-links-in-same-page=\"true\" data-connector-filter=\"53528,53529\" data-show-okendo-stars=\"true\" data-cell-size=\"20%\" data-has-posts-selector=\"#foursixty-hideable-container\" data-for-url=\"true\"><\/script>\n<\/div>\n<style>.fs-has-links::after { padding:5px 7.5px;background-color:#ffffff;color:rgba(0, 0, 0, 0.8);content:\"SHOP IT\"; } .fs-wrapper { height:auto; } .fs-slider_v2_5  .fs-entry-container { height:0 !important;width:20%!important;padding-top:20%!important; } .fs-wrapper div.fs-text-container .fs-entry-title, div.fs-detail-title { font-family:Times New Roman, serif;font-style:normal;font-weight:normal;font-size:14px; } div.fs-text-container .fs-entry-date, div.fs-detail-container .fs-post-info, div.fs-wrapper div.fs-has-links::after, .fs-text-product, .fs-overlink-text { font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-style:normal;font-weight:normal;font-size:14px; } .fs-wrapper div.fs-text-container * { color:#ffffff; } .fs-wrapper div.fs-text-container { background-color:rgba(0, 0, 0, 0.8);margin:0px; } div.fs-entry-date { display:none; } div.fs-entry-title { display:none; } .fs-slider_v2_5 .fs-wrapper div.fs-timeline-entry { margin:1px; } <\/style>"
+          }
+        },
+        "reviews_WCUVre": {
+          "type": "reviews",
+          "settings": {
+            "heading": "Product Reviews"
+          }
+        },
+        "okendo_reviews_widget_yfMfRQ": {
+          "type": "shopify:\/\/apps\/okendo\/blocks\/reviews-widget\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": {
+            "product": "{{section.settings.product}}",
+            "widget_type": "combined_widget"
+          }
+        },
+        "two_column_row_tNQDin": {
+          "type": "two_column_row",
+          "settings": {
+            "heading": "Shipping & Returns",
+            "column_one": "<h4><strong>STANDARD SHIPPING<\/strong><\/h4><p>1-3 business days after dispatch. Upon dispatch you will receive an email confirmation containing the Tracking details and estimated time of delivery of your order.<\/p>",
+            "column_two": "<h4><strong>REFUND POLICY<\/strong><\/h4><p>WE WILL ALLOW A CHANGE OF MIND RETURN FOR REFUND OR EXCHANGE, PROVIDED THAT THE ITEM IN QUESTION IS:<\/p><ul><li>Purchased at sg.2xu.com;<\/li><li>Returned within 30 days of purchase from sg.2xu.com;<\/li><li>In original purchased condition with tags attached;<\/li><li>In original & undamaged packaging;<\/li><li>Has not been worn;<\/li><li>Not underwear or socks; and<\/li><li>Not damaged in any way<\/li><\/ul><p><\/p><p><strong>*Outlet items are final sale<\/strong><br\/>You can find our full return policy <a href=\"\/pages\/returns-and-exchanges\" target=\"_blank\" title=\"Returns Policy\">here<br\/><\/a>You can make a return <a href=\"https:\/\/shopify.com\/56281563331\/account\" target=\"_blank\" title=\"https:\/\/shopify.com\/56281563331\/account\">here<\/a><\/p>"
+          }
+        },
+        "two_column_row_hXkAdA": {
+          "type": "two_column_row",
+          "settings": {
+            "heading": "Care Instructions",
+            "column_one": "<h4><strong>To best care for 2XU garments:<\/strong><\/h4><ul><li>Machine wash in cold water with like colours.<\/li><li>Do NOT Tumble dry.<\/li><li>Hang to dry in a cool shady area away from sun.<\/li><li>Do not use bleach, fabric softeners or dryer sheets.<\/li><li>Do not iron.<\/li><\/ul>",
+            "column_two": "<h4><strong>For Wetsuit care instructions:<\/strong><\/h4><p><a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0518\/4087\/6699\/files\/250117_Wetsuit_Care_A4.pdf?v=1738039982\" target=\"_blank\" title=\"Wetsuit Care Guide\">Click Here<\/a><\/p><h4><strong>For Trisuit care instructions:<\/strong><\/h4><p><a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0518\/4087\/6699\/files\/250117_Trisuit_Care_A4.pdf?v=1738039982\" target=\"_blank\" title=\"Trisuit Care Guide\">Click Here<\/a><\/p><h4><strong>For Light Speed React Singlet care instructions:<\/strong><\/h4><p><a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0518\/4087\/6699\/files\/241216_LSR_AFTERCARD_CARD.pdf?v=1740521994\" target=\"_blank\" title=\"LSR Singlet Care\">Click Here<\/a><\/p>"
+          }
+        },
+        "script_rDTHnU": {
+          "type": "script",
+          "disabled": true,
+          "settings": {
+            "heading": "Find A Store",
+            "script": ""
+          }
+        }
+      },
+      "block_order": [
+        "metafield_row_YgjCEr",
+        "size_chart_awR3cr",
+        "metafield_row_LNLej6",
+        "script_hBeHbV",
+        "reviews_WCUVre",
+        "okendo_reviews_widget_yfMfRQ",
+        "two_column_row_tNQDin",
+        "two_column_row_hXkAdA",
+        "script_rDTHnU"
+      ],
+      "settings": {
+        "product": "{{ product }}"
+      }
+    },
+    "fa_ss_custom_liquid_tidpg4": {
+      "type": "fa-ss-custom-liquid",
+      "settings": {
+        "title": "SS Bundled Recommendations",
+        "liquid": "<script type=\"searchspring\/personalized-recommendations\" profile=\"bundle\">\n\n  \/\/ Replace SKU with the SKU of the current product being viewed.\n  seed = \"SKU\";\n\n<\/script>"
+      }
+    },
+    "fa_ss_custom_liquid_mHKfRK": {
+      "type": "fa-ss-custom-liquid",
+      "disabled": true,
+      "settings": {
+        "title": "Similar SS Widget",
+        "liquid": "<script type=\"searchspring\/personalized-recommendations\" profile=\"customers-also-viewed-snap\">\n\n  \/\/ Replace SKU with the SKU of the current product being viewed.\n  seed = \"SKU\";\n\n<\/script>"
+      }
+    },
+    "fa_ss_custom_liquid_ATVYJx": {
+      "type": "fa-ss-custom-liquid",
+      "disabled": true,
+      "settings": {
+        "title": "customers-also-bought SS Widget",
+        "liquid": "<script type=\"searchspring\/personalized-recommendations\" profile=\"customers-also-bought-snap\">\n\n  \/\/ Replace SKU with the SKU of the current product being viewed.\n  seed = \"SKU\";\n\n<\/script>"
+      }
+    },
+    "ss_custom_liquid_8DjKC6": {
+      "type": "ss-custom-liquid",
+      "disabled": true,
+      "settings": {
+        "title": "customers-also-bought SS Widget",
+        "liquid": "<script type=\"searchspring\/personalized-recommendations\" profile=\"customers-also-bought-snap\">\n\n  \/\/ Replace SKU with the SKU of the current product being viewed.\n  seed = \"SKU\";\n\n<\/script>"
+      }
+    },
+    "fa_wear_it_with_GKzyMK": {
+      "type": "fa-wear-it-with",
+      "settings": {
+        "heading": "Wear It With",
+        "product": "{{ product }}"
+      }
+    },
+    "166383302143d44c01": {
+      "type": "apps",
+      "blocks": {
+        "27be1fb7-556e-4923-bc06-a2a7bbe15910": {
+          "type": "shopify:\/\/apps\/okendo\/blocks\/reviews-widget\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": {
+            "product": "{{product}}",
+            "widget_type": "combined_widget"
+          }
+        }
+      },
+      "block_order": [
+        "27be1fb7-556e-4923-bc06-a2a7bbe15910"
+      ],
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "background-1",
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product_key_features_section_BTayKY",
+    "ss_custom_liquid_aKjCrJ",
+    "fa_accordion_FPPGFd",
+    "fa_ss_custom_liquid_tidpg4",
+    "fa_ss_custom_liquid_mHKfRK",
+    "fa_ss_custom_liquid_ATVYJx",
+    "ss_custom_liquid_8DjKC6",
+    "fa_wear_it_with_GKzyMK",
+    "166383302143d44c01",
+    "product-recommendations"
+  ]
+}

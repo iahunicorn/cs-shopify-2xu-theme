@@ -1,0 +1,333 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+
+<link
+  rel='stylesheet'
+  href='{{ 'component-slider.css' | asset_url }}'
+  media='print'
+  onload="this.media='all'"
+>
+<link
+  rel='stylesheet'
+  href='{{ 'template-collection.css' | asset_url }}'
+  media='print'
+  onload="this.media='all'"
+>
+{%- if section.settings.enable_quick_add -%}
+  <link
+    rel='stylesheet'
+    href='{{ 'quick-add.css' | asset_url }}'
+    media='print'
+    onload="this.media='all'"
+  >
+  <script src='{{ 'quick-add.js' | asset_url }}' defer='defer'></script>
+  <script src='{{ 'product-form.js' | asset_url }}' defer='defer'></script>
+{%- endif -%}
+<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>
+  {{- 'template-collection.css' | asset_url | stylesheet_tag -}}
+</noscript>
+
+{{ 'section-collection-tabs.css' | asset_url | stylesheet_tag }}
+
+<section
+  class='feature-collection-tabs Section'
+  data-section-id='{{ section.id }}'
+  data-section-type='featured-collections'
+  data-settings='{{ }}'
+>
+  <div class='page-width'>
+    <header class='SectionHeader SectionHeader--center'>
+      <div class='Container'>
+        {%- if section.settings.title != blank -%}
+          <h3 class='SectionHeader__SubHeading Heading u-h6'>
+            {{ section.settings.title | escape }}
+          </h3>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 1 -%}
+          <div class='SectionHeader__TabList TabList' role='tablist'>
+            {%- for block in section.blocks -%}
+              {%- assign collection = collections[block.settings.collection] -%}
+
+              <button
+                data-slider-id='{{ section.id }}'
+                data-tab-target='#block-{{ block.id }}'
+                class='Heading u-h1 TabList__Item {% if forloop.first %}active{% endif %}'
+                data-action='toggle-tab'
+                aria-controls='block-{{ block.id }}'
+                aria-selected='{% if forloop.first %}true{% else %}false{% endif %}'
+                role='tab'
+              >
+                {%- if collection != empty -%}
+                  {{- block.settings.title | default: collection.title -}}
+                {%- else -%}
+                  {{- 'Colltection Title' -}}
+                {%- endif -%}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          {%- assign collection = collections[section.blocks.first.settings.collection] -%}
+
+          {%- if collection != empty -%}
+            <h2 class='SectionHeader__Heading Heading u-h1'>
+              {{
+                section.blocks.first.settings.title
+                | default: collection.title
+              }}
+            </h2>
+          {%- else -%}
+            <h2 class='SectionHeader__Heading Heading u-h1'>
+              {{ 'Collection Title' }}
+            </h2>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </header>
+
+    {%- for block in section.blocks -%}
+      {%- assign collection = collections[block.settings.collection] -%}
+
+      {%- liquid
+        assign products_to_display = block.settings.collection.all_products_count
+
+        if block.settings.collection.all_products_count > block.settings.products_to_show
+          assign products_to_display = block.settings.products_to_show
+        endif
+
+        assign columns_mobile_int = block.settings.columns_mobile | plus: 0
+        assign show_mobile_slider = false
+        if block.settings.swipe_on_mobile and products_to_display > columns_mobile_int
+          assign show_mobile_slider = true
+        endif
+
+        assign show_desktop_slider = false
+        if block.settings.enable_desktop_slider and block.settings.products_to_show > block.settings.columns_desktop
+          assign show_desktop_slider = true
+        endif
+      -%}
+      <div
+        class='TabPanel{% if forloop.first == true %} active{% endif %}'
+        id='block-{{ block.id }}'
+        data-slider-id='{{ section.id }}'
+        data-tab-content
+        {{ block.shopify_attributes }}
+      >
+        <div class='ProductListWrapper'>
+          <div class='color-{{ block.settings.color_scheme }} isolate gradient'>
+            <div class='collection section-{{ section.id }}-padding{% if block.settings.full_width %} collection--full-width{% endif %}'>
+              <slider-component class='slider-mobile-gutter{% if block.settings.full_width %} slider-component-full-width{% endif %}{% if show_mobile_slider == false %} page-width{% endif %}{% if show_desktop_slider == false and block.settings.full_width == false %} page-width-desktop{% endif %}{% if show_desktop_slider %} slider-component-desktop{% endif %}'>
+                <ul
+                  id='Slider-{{ block.id }}'
+                  class='grid product-grid contains-card{% if settings.card_style == 'standard' %} contains-card--standard{% endif %} grid--{{ block.settings.columns_desktop }}-col-desktop{% if block.settings.collection == blank %} grid--2-col-tablet-down{% else %} grid--{{ block.settings.columns_mobile }}-col-tablet-down{% endif %}{% if show_mobile_slider or show_desktop_slider %} slider{% if show_desktop_slider %} slider--desktop{% endif %}{% if show_mobile_slider %} slider--tablet grid--peek{% endif %}{% endif %}'
+                  role='list'
+                  aria-label='{{ 'sections.featured_collection.slider' | t }}'
+                >
+                  {%- for product in block.settings.collection.products
+                    limit: block.settings.products_to_show
+                  -%}
+                    <li
+                      id='Slide-{{ block.id }}-{{ forloop.index }}'
+                      class='grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide{% endif %}'
+                    >
+                      {% render 'card-product',
+                        card_product: product,
+                        media_aspect_ratio: section.settings.image_ratio,
+                        show_vendor: section.settings.show_vendor,
+                        show_secondary_image: block.settings.show_secondary_image,
+                        show_rating: section.settings.show_rating,
+                        show_quick_add: section.settings.enable_quick_add,
+                        section_id: block.id
+                      %}
+                    </li>
+                  {%- else -%}
+                    {%- for i in (1..4) -%}
+                      <li class='grid__item'>
+                        {% render 'card-product',
+                          show_vendor: block.settings.show_vendor
+                        %}
+                      </li>
+                    {%- endfor -%}
+                  {%- endfor -%}
+                </ul>
+
+                {%- if show_mobile_slider or show_desktop_slider -%}
+                  <div class='slider-buttons no-js-hidden'>
+                    <button
+                      type='button'
+                      class='slider-button slider-button--prev'
+                      name='previous'
+                      aria-label='{{ 'general.slider.previous_slide' | t }}'
+                      aria-controls='Slider-{{ section.id }}'
+                    >
+                      {% render 'icon-caret' %}
+                    </button>
+                    <div class='slider-counter caption'>
+                      <span class='slider-counter--current'>1</span>
+                      <span aria-hidden='true'> / </span>
+                      <span class='visually-hidden'>
+                        {{- 'general.slider.of' | t -}}
+                      </span>
+                      <span class='slider-counter--total'>
+                        {{- products_to_display -}}
+                      </span>
+                    </div>
+                    <button
+                      type='button'
+                      class='slider-button slider-button--next'
+                      name='next'
+                      aria-label='{{ 'general.slider.next_slide' | t }}'
+                      aria-controls='Slider-{{ section.id }}'
+                    >
+                      {% render 'icon-caret' %}
+                    </button>
+                  </div>
+                {%- endif -%}
+              </slider-component>
+            </div>
+          </div>
+        </div>
+
+        {%- if block.settings.button_text != blank -%}
+          <div class='Container'>
+            <div class='SectionFooter'>
+              <a href='{{ collection.url }}' class='Button Button--primary'>
+                {{- block.settings.button_text | escape -}}
+              </a>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{%- capture hack -%}
+  {%- comment -%}This is just an ugly hack to make those variables appear as part of the theme editor in the General Settings{%- endcomment -%}
+  {% if block.settings.layout_mode == 'grid' %}{{ block.product_list_horizontal_spacing }},{{ block.product_list_vertical_spacing }}{% endif %}
+{%- endcapture -%}
+
+<script src='{{ 'section-collection-tabs.js' | asset_url }}' defer></script>
+
+{% schema %}
+{
+  "name": "Featured collections tabs",
+  "class": "shopify-section--bordered",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Best of compression"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_vendor",
+          "default": false,
+          "label": "t:sections.featured-collection.settings.show_vendor.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_rating",
+          "default": false,
+          "label": "t:sections.featured-collection.settings.show_rating.label",
+          "info": "t:sections.featured-collection.settings.show_rating.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_secondary_image",
+          "default": false,
+          "label": "t:sections.featured-collection.settings.show_secondary_image.label"
+        },
+        {
+          "type": "range",
+          "id": "products_to_show",
+          "min": 2,
+          "max": 12,
+          "step": 1,
+          "default": 4,
+          "label": "t:sections.featured-collection.settings.products_to_show.label"
+        },
+        {
+          "type": "range",
+          "id": "columns_desktop",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 4,
+          "label": "t:sections.featured-collection.settings.columns_desktop.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "full_width",
+          "label": "t:sections.featured-collection.settings.full_width.label",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "columns_mobile",
+          "default": "2",
+          "label": "t:sections.featured-collection.settings.columns_mobile.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "t:sections.featured-collection.settings.columns_mobile.options__1.label"
+            },
+            {
+              "value": "2",
+              "label": "t:sections.featured-collection.settings.columns_mobile.options__2.label"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "swipe_on_mobile",
+          "default": false,
+          "label": "t:sections.featured-collection.settings.swipe_on_mobile.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_desktop_slider",
+          "label": "t:sections.featured-collection.settings.enable_desktop_slider.label",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_view_all",
+          "default": true,
+          "label": "t:sections.featured-collection.settings.show_view_all.label"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "View all products"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Collection",
+      "name": "Feature Collection Tabs",
+      "settings": {},
+      "blocks": [
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1 @@
+import{u as r}from"./cart-DKxWLRSb.js";function o(){return r("svg",{xmlns:"http://www.w3.org/2000/svg",width:"16",height:"13",viewBox:"0 0 16 13",fill:"none",children:r("path",{d:"M7.75117e-08 6.5L6.66667 13L7.60667 12.0835L2.55333 7.15L16 7.15L16 5.85L2.55333 5.85L7.60667 0.9165L6.66667 7.94992e-08L7.75117e-08 6.5Z",fill:"currentColor"})})}export{o as A};

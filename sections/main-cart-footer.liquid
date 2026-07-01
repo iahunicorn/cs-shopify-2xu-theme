@@ -1,0 +1,337 @@
+{{ 'component-cart.css' | asset_url | stylesheet_tag }}
+{{ 'component-totals.css' | asset_url | stylesheet_tag }}
+{{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+
+{% assign cart_total = cart.total_price %}
+{% assign cart_shipping_fee = settings.cart_shipping_fee | times: 100 %}
+{% assign cart_shipping_percent = settings.cart_shipping_fee | times: 1.0 %}
+{% assign cart_express_shipping_fee = settings.cart_express_shipping_fee
+  | times: 100
+%}
+{% assign cart_express_shipping_percent = settings.cart_express_shipping_fee
+  | times: 1.0
+%}
+{% assign disable_delivery = true %}
+{% assign total_saving = 0 %}
+{%- for item in cart.items -%}
+  {% assign item_url = item.product.url
+    | remove: '/products/'
+    | replace: '&-', ''
+    | replace: "'", ''
+    | replace: '--', '-'
+  %}
+  {%- assign product = all_products[item_url] -%}
+  {% if product.template_suffix == blank %}
+    {% assign disable_delivery = false %}
+  {% endif %}
+  {% if item.variant.compare_at_price > item.variant.price %}
+    {% if item.variant.price != item.final_price %}
+      {% assign saving = item.variant.compare_at_price
+        | times: item.quantity
+        | minus: item.final_line_price
+      %}
+      {% assign total_saving = saving | plus: total_saving %}
+    {% else %}
+      {% assign saving = item.variant.compare_at_price
+        | minus: item.variant.price
+        | times: item.quantity
+      %}
+      {% assign total_saving = saving | plus: total_saving %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+<div
+  class='page-width{% if cart == empty %} is-empty{% endif %}'
+  id='main-cart-footer'
+  data-id='{{ section.id }}'
+>
+  <div>
+    <div class='cart__footer'>
+      <div class='cart__footer-check-shipping'>
+        {% unless disable_delivery %}
+          {% assign cost = cart_shipping_fee | minus: cart_total %}
+          {% assign formatted_cost = cost | money %}
+          {% assign cost_percent = cart_total
+            | divided_by: cart_shipping_percent
+          %}
+          {% assign express_cost = cart_express_shipping_fee
+            | minus: cart_total
+          %}
+          {% assign express_cost_percent = cart_total
+            | divided_by: cart_express_shipping_percent
+          %}
+          {% assign formatted_express_cost_percent = express_cost | money %}
+
+          {% if shop.permanent_domain == '2xu-australia.myshopify.com'
+            or shop.permanent_domain == '2xu-us.myshopify.com'
+          %}
+            {% if cart_total < cart_express_shipping_fee %}
+              {% if cart_total > cart_shipping_fee %}
+                <div class='check-shipping standard-shipping done'>
+                  <p>
+                    {{ 'general.cart.drawer.congratulations_message' | t }}
+                    <span class='shipping-cost'>
+                      {{- 'general.cart.drawer.free_standard_shipping' | t -}}
+                    </span>
+                  </p>
+                  <div class='processing '>
+                    <div class='processing-bar' style='width:100%;'></div>
+                  </div>
+                </div>
+              {% else %}
+                <div class='check-shipping standard-shipping'>
+                  <p>
+                    <span class='shipping-text'>
+                      {{ 'general.cart.drawer.free_shipping' | t }}
+                    </span>
+                    <span class='shipping-cost'>
+                      {{
+                        'general.cart.drawer.free_shipping_next_level'
+                        | t
+                        | replace: '$cost', formatted_cost
+                      }}
+                    </span>
+                  </p>
+                  <div class='processing '>
+                    <div
+                      class='processing-bar'
+                      style='width:{{ cost_percent }}%'
+                    ></div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endif %}
+
+            {% if cart_total > cart_express_shipping_fee %}
+              <div class='check-shipping {% if cart_total < cart_express_shipping_fee %}express-shipping{% endif %} done'>
+                <p>
+                  {{ 'general.cart.drawer.congratulations_message' | t }}
+                  <span class='shipping-cost'>
+                    {{- 'general.cart.drawer.free_express_shipping' | t -}}
+                  </span>
+                </p>
+                <div class='processing '>
+                  <div class='processing-bar' style='width:100%;'></div>
+                </div>
+              </div>
+            {% else %}
+              <div class='check-shipping {% if cart_total < cart_express_shipping_fee %}express-shipping{% endif %}'>
+                <p>
+                  <span class='shipping-text'>
+                    {{ 'general.cart.drawer.express_shipping' | t }}
+                  </span>
+                  <span class='shipping-cost'>
+                    {{
+                      'general.cart.drawer.free_shipping_next_level'
+                      | t
+                      | replace: '$cost', formatted_express_cost_percent
+                    }}
+                  </span>
+                </p>
+                <div class='processing '>
+                  <div
+                    class='processing-bar'
+                    style='width:{{ express_cost_percent }}%'
+                  ></div>
+                </div>
+              </div>
+            {% endif %}
+          {% else %}
+            {% if cart_total > cart_shipping_fee %}
+              <div class='check-shipping standard-shipping done'>
+                <p>
+                  {{ 'general.cart.drawer.congratulations_message' | t }}
+                  <span class='shipping-cost'>
+                    {{- 'general.cart.drawer.free_standard_shipping' | t -}}
+                  </span>
+                </p>
+                <div class='processing '>
+                  <div class='processing-bar' style='width:100%;'></div>
+                </div>
+              </div>
+            {% else %}
+              <div class='check-shipping standard-shipping'>
+                <p>
+                  <span class='shipping-text'>
+                    {{ 'general.cart.drawer.free_shipping' | t }}
+                  </span>
+                  <span class='shipping-cost'>
+                    {{
+                      'general.cart.drawer.free_shipping_next_level'
+                      | t
+                      | replace: '$cost', formatted_cost
+                    }}
+                  </span>
+                </p>
+                <div class='processing '>
+                  <div
+                    class='processing-bar'
+                    style='width:{{ cost_percent }}%'
+                  ></div>
+                </div>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endunless %}
+      </div>
+      {%- if settings.show_cart_note -%}
+        <cart-note class='cart__note field'>
+          <label for='Cart-note'>{{ 'sections.cart.note' | t }}</label>
+          <textarea
+            class='text-area field__input'
+            name='note'
+            form='cart'
+            id='Cart-note'
+            placeholder='{{ 'sections.cart.note' | t }}'
+          >{{ cart.note }}</textarea>
+        </cart-note>
+      {%- endif -%}
+
+      <div class='cart__blocks'>
+        {% if total_saving > 0 %}
+          <div class='totals_saving'>
+            <h2 class='total'>{{ 'sections.cart.total_savings' | t }}</h2>
+            <p class='value'>- {{ total_saving | money }}</p>
+          </div>
+        {% endif %}
+        {% for block in section.blocks %}
+          {%- case block.type -%}
+            {%- when '@app' -%}
+              {% render block %}
+            {%- when 'subtotal' -%}
+              <div class='js-contents' {{ block.shopify_attributes }}>
+                <div class='totals'>
+                  <h2 class='totals__subtotal'>
+                    {{ 'sections.cart.subtotal' | t }}
+                  </h2>
+                  <p class='totals__subtotal-value'>
+                    {{ cart.total_price | money }}
+                  </p>
+                </div>
+
+                <div>
+                  {%- if cart.cart_level_discount_applications.size > 0 -%}
+                    <ul
+                      class='discounts list-unstyled'
+                      role='list'
+                      aria-label='{{ 'customer.order.discount' | t }}'
+                    >
+                      {%- for discount in cart.cart_level_discount_applications -%}
+                        <li class='discounts__discount discounts__discount--position'>
+                          {%- render 'icon-discount' -%}
+                          {{ discount.title }}
+                          (-{{ discount.total_allocated_amount | money }})
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </div>
+
+                <small class='tax-note caption-large rte'>
+                  {%- if cart.taxes_included
+                    and shop.shipping_policy.body != blank
+                  -%}
+                    {{
+                      'sections.cart.taxes_included_and_shipping_policy_html'
+                      | t: link: shop.shipping_policy.url
+                    }}
+                  {%- elsif cart.taxes_included -%}
+                    {{
+                      'sections.cart.taxes_included_but_shipping_at_checkout'
+                      | t
+                    }}
+                  {%- elsif shop.shipping_policy.body != blank -%}
+                    {{
+                      'sections.cart.taxes_and_shipping_policy_at_checkout_html'
+                      | t: link: shop.shipping_policy.url
+                    }}
+                  {%- else -%}
+                    {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+                  {%- endif -%}
+                </small>
+              </div>
+            {%- else -%}
+              <div class='cart__ctas' {{ block.shopify_attributes }}>
+                <noscript>
+                  <button
+                    type='submit'
+                    class='cart__update-button button button--secondary'
+                    form='cart'
+                  >
+                    {{ 'sections.cart.update' | t }}
+                  </button>
+                </noscript>
+
+                <button
+                  type='submit'
+                  id='checkout'
+                  class='cart__checkout-button button'
+                  name='checkout'
+                  {% if cart == empty %}
+                    disabled
+                  {% endif %}
+                  form='cart'
+                >
+                  {{ 'sections.cart.checkout' | t }}
+                </button>
+              </div>
+
+              {%- if additional_checkout_buttons -%}
+                <div class='cart__dynamic-checkout-buttons additional-checkout-buttons'>
+                  {{ content_for_additional_checkout_buttons }}
+                </div>
+              {%- endif -%}
+          {%- endcase -%}
+        {% endfor %}
+
+        <div id='cart-errors'></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function isIE() {
+      const ua = window.navigator.userAgent;
+      const msie = ua.indexOf('MSIE ');
+      const trident = ua.indexOf('Trident/');
+
+      return msie > 0 || trident > 0;
+    }
+
+    if (!isIE()) return;
+    const cartSubmitInput = document.createElement('input');
+    cartSubmitInput.setAttribute('name', 'checkout');
+    cartSubmitInput.setAttribute('type', 'hidden');
+    document.querySelector('#cart').appendChild(cartSubmitInput);
+    document
+      .querySelector('#checkout')
+      .addEventListener('click', function (event) {
+        document.querySelector('#cart').submit();
+      });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-cart-footer.name",
+  "class": "cart__footer-wrapper",
+  "blocks": [
+    {
+      "type": "subtotal",
+      "name": "t:sections.main-cart-footer.blocks.subtotal.name",
+      "limit": 1
+    },
+    {
+      "type": "buttons",
+      "name": "t:sections.main-cart-footer.blocks.buttons.name",
+      "limit": 1
+    },
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}

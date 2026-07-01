@@ -1,0 +1,23 @@
+<div class="Container">
+
+    <div class="PageContent PageContent--narrow Rte">
+      {{ page.content }}
+    </div>
+   <div id="react-app"> </div>
+   <script src="{{ 'react-micro.js' | asset_url }}"></script>
+  </div>
+  
+  <style>
+  #main .Container {
+      padding: 0;
+  }
+  .PageContent {
+       margin: 0; 
+  }
+  .Footer--withMargin {
+       margin-top: 0; 
+  }
+  .shopify-section--header {
+       z-index: 10001;
+  }
+  </style>

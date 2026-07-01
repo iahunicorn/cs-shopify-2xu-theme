@@ -1,0 +1,17 @@
+{% comment %}
+	accept values for margin_bottom:
+
+	'banner-wishlist'
+	'banner-preferences'
+	'banner-password'
+	'banner-addresses'
+	'banner-orders'
+
+{% endcomment %}
+
+<div class="account-mobile-top {{ margin_bottom }}" >
+	<a class="account-arrow" href="{{ routes.account_url }}">
+	  <img src=""/>
+	</a>
+	<h1 class="account-title-mobile">{{ account_header_title }}</h1>
+</div>

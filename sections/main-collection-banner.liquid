@@ -1,0 +1,60 @@
+{% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+{{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
+{{ 'section-collection-hero.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign enable = collection.metafields.collection_banner.enable
+  assign image_desktop = collection.metafields.collection_banner.image_desktop | map: 'src' | first
+  assign image_mobile = collection.metafields.collection_banner.image_mobile | map: 'src' | first
+  assign title = collection.metafields.collection_banner.title
+  assign description = collection.metafields.collection_banner.description
+  assign style = collection.metafields.collection_banner.style
+  assign color_text = collection.metafields.collection_banner.color_text
+  assign color_background = collection.metafields.collection_banner.color_background
+%}
+{% render 'breadcrumb' %}
+
+<div class="collection-hero{% if enable == 'true' and image_desktop != blank or image_mobile != blank %} collection-hero--with-image{% endif %} collection-hero--style-{{ style | default: 'full-width' | downcase }}" {% if enable == 'true' and image_desktop != blank %}style="--background-color: {{ color_background }};"{% endif %}>
+  <div class="collection-hero__inner">
+    {%- if enable == 'true' and image_desktop != blank -%}
+      <div class="collection-hero__image-container image-desktop">
+        {%- render 'image-acf',
+          sources: image_desktop,
+          lazy: false,
+          sizes: '100vw',
+          class: 'collection-hero__image collection-hero__image--desktop'
+        -%}
+      </div>
+    {%- endif -%}
+    {%- if enable == 'true' and image_mobile != blank -%}
+      <div class="collection-hero__image-container image-mobile">
+        {%- render 'image-acf',
+          sources: image_mobile,
+          lazy: false,
+          sizes: '100vw',
+          class: 'collection-hero__image collection-hero__image--mobile'
+        -%}
+      </div>
+    {%- endif -%}
+    <div class="collection-hero__text-wrapper" {% if enable == 'true' and image_desktop != blank %}style="color: {{ color_text }};"{% endif %}>
+      <div class="container">
+        <div class="collection-hero__text-inner">
+          <h1 class="collection-hero__title">
+            <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
+            {{- title | default: collection.title | escape -}}
+            <div class="collection-hero__products-count">({{ collection.products_count }})</div>
+          </h1>
+
+          <div class="collection-hero__description rte">{{ description | default: collection.description }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection-banner.name",
+  "class": "section"
+}
+{% endschema %}

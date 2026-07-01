@@ -1,0 +1,84 @@
+{%- liquid
+  
+  assign formatted_items = ''
+  assign current_collection = collection
+  assign filters = current_collection.filters
+  
+  for filter in filters
+    capture current_item
+      echo '{'
+      echo '"id":'
+      assign safe_id = filter.param_name | replace: '\', '\\' | replace: '"', '\"'
+      echo '"' | append: safe_id | append: '",'
+      
+      echo '"label":'
+      assign safe_label = filter.label | replace: '\', '\\' | replace: '"', '\"'
+      echo '"' | append: safe_label | append: '",'
+      
+      echo '"type":"' | append: filter.type | append: '",'
+      echo '"values":['
+      
+      assign value_items = ''
+      for filter_value in filter.values
+        capture value_item
+          echo '{'
+          
+          echo '"value":'
+          assign safe_value = filter_value.value | replace: '\', '\\' | replace: '"', '\"'
+          echo '"' | append: safe_value | append: '",'
+          
+          echo '"label":'
+          assign safe_value_label = filter_value.label | replace: '\', '\\' | replace: '"', '\"'
+          echo '"' | append: safe_value_label | append: '"'
+          
+          echo '}'
+        endcapture
+        
+        if value_items == ''
+          assign value_items = value_item
+        else
+          assign value_items = value_items | append: ',' | append: value_item
+        endif
+      endfor
+      
+      echo value_items
+      echo ']'
+      
+      if filter.type == 'price_range'
+        echo ','
+        echo '"min_value":{'
+        if filter.min_value.value
+          echo '"value":"' | append: filter.min_value.value | append: '",'
+        else
+          echo '"value":null,'
+        endif
+        echo '"param_name":"' | append: filter.min_value.param_name | append: '"'
+        echo '},'
+        echo '"max_value":{'
+        if filter.max_value.value
+          echo '"value":"' | append: filter.max_value.value | append: '",'
+        else
+          echo '"value":null,'
+        endif
+        echo '"param_name":"' | append: filter.max_value.param_name | append: '"'
+        echo '},'
+        assign min = filter.range_min | default: 0 | divided_by: 100.00
+        assign max = filter.range_max | default: 0 | plus: 1 | divided_by: 100.00
+        echo '"range_min":' | append: min | append: ','
+        echo '"range_max":' | append: max
+      endif
+      
+      echo '}'
+    endcapture
+    
+    if formatted_items == ''
+      assign formatted_items = current_item
+    else
+      assign formatted_items = formatted_items | append: ',' | append: current_item
+    endif
+  endfor
+
+  echo '['
+  echo formatted_items
+  echo ']'
+-%}

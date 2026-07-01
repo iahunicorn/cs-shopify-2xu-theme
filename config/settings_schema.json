@@ -1,0 +1,3482 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Dawn",
+    "theme_version": "6.0.2",
+    "theme_author": "Shopify",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://support.shopify.com/"
+  },
+  {
+    "name": "Analytics",
+    "settings": [
+      {
+        "type": "text",
+        "id": "gtm_id",
+        "label": "Google Tag Manager ID",
+        "info": "Required for GTM. Should look like: GTM-XXXXX"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.colors.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.colors.settings.header__1.content"
+      },
+      {
+        "type": "color",
+        "id": "colors_solid_button_labels",
+        "default": "#FFFFFF",
+        "label": "t:settings_schema.colors.settings.colors_solid_button_labels.label",
+        "info": "t:settings_schema.colors.settings.colors_solid_button_labels.info"
+      },
+      {
+        "type": "color",
+        "id": "colors_accent_1",
+        "default": "#121212",
+        "label": "t:settings_schema.colors.settings.colors_accent_1.label",
+        "info": "t:settings_schema.colors.settings.colors_accent_1.info"
+      },
+      {
+        "id": "gradient_accent_1",
+        "type": "color_background",
+        "label": "t:settings_schema.colors.settings.gradient_accent_1.label"
+      },
+      {
+        "type": "color",
+        "id": "colors_accent_2",
+        "default": "#334FB4",
+        "label": "t:settings_schema.colors.settings.colors_accent_2.label"
+      },
+      {
+        "id": "gradient_accent_2",
+        "type": "color_background",
+        "label": "t:settings_schema.colors.settings.gradient_accent_2.label"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.colors.settings.header__2.content"
+      },
+      {
+        "type": "color",
+        "id": "colors_text",
+        "default": "#121212",
+        "label": "t:settings_schema.colors.settings.colors_text.label",
+        "info": "t:settings_schema.colors.settings.colors_text.info"
+      },
+      {
+        "type": "color",
+        "id": "colors_outline_button_labels",
+        "default": "#121212",
+        "label": "t:settings_schema.colors.settings.colors_outline_button_labels.label",
+        "info": "t:settings_schema.colors.settings.colors_outline_button_labels.info"
+      },
+      {
+        "type": "color",
+        "id": "colors_background_1",
+        "default": "#FFFFFF",
+        "label": "t:settings_schema.colors.settings.colors_background_1.label"
+      },
+      {
+        "id": "gradient_background_1",
+        "type": "color_background",
+        "label": "t:settings_schema.colors.settings.gradient_background_1.label"
+      },
+      {
+        "type": "color",
+        "id": "colors_background_2",
+        "default": "#F3F3F3",
+        "label": "t:settings_schema.colors.settings.colors_background_2.label"
+      },
+      {
+        "id": "gradient_background_2",
+        "type": "color_background",
+        "label": "t:settings_schema.colors.settings.gradient_background_2.label"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.typography.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__1.content"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "default": "assistant_n4",
+        "label": "t:settings_schema.typography.settings.type_header_font.label",
+        "info": "t:settings_schema.typography.settings.type_header_font.info"
+      },
+      {
+        "type": "checkbox",
+        "id": "type_header_font_custom_enable",
+        "label": "t:settings_schema.typography.settings.type_header_font_custom_enable.label"
+      },
+      {
+        "type": "text",
+        "id": "type_header_font_custom",
+        "label": "t:settings_schema.typography.settings.type_header_font_custom.label"
+      },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "min": 100,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.typography.settings.heading_scale.label",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__2.content"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "default": "fira_sans_n3",
+        "label": "t:settings_schema.typography.settings.type_body_font.label",
+        "info": "t:settings_schema.typography.settings.type_body_font.info"
+      },
+      {
+        "type": "range",
+        "id": "body_scale",
+        "min": 100,
+        "max": 130,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.typography.settings.body_scale.label",
+        "default": 100
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.layout.name",
+    "settings": [
+      {
+        "type": "number",
+        "id": "page_width",
+        "default": 1288,
+        "label": "t:settings_schema.layout.settings.page_width.label"
+      },
+      {
+        "type": "range",
+        "id": "spacing_sections",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:settings_schema.layout.settings.spacing_sections.label",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.layout.settings.header__grid.content"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.layout.settings.paragraph__grid.content"
+      },
+      {
+        "type": "range",
+        "id": "spacing_grid_horizontal",
+        "min": 4,
+        "max": 40,
+        "step": 4,
+        "default": 24,
+        "unit": "px",
+        "label": "t:settings_schema.layout.settings.spacing_grid_horizontal.label"
+      },
+      {
+        "type": "range",
+        "id": "spacing_grid_vertical",
+        "min": 4,
+        "max": 40,
+        "step": 4,
+        "default": 24,
+        "unit": "px",
+        "label": "t:settings_schema.layout.settings.spacing_grid_vertical.label"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.variant_pills.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.variant_pills.paragraph"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "variant_pills_border_thickness",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "variant_pills_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 55
+      },
+      {
+        "type": "range",
+        "id": "variant_pills_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 40
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__shadow.content"
+      },
+      {
+        "type": "range",
+        "id": "variant_pills_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "variant_pills_shadow_horizontal_offset",
+        "min": -12,
+        "max": 12,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "variant_pills_shadow_vertical_offset",
+        "min": -12,
+        "max": 12,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "variant_pills_shadow_blur",
+        "min": 0,
+        "max": 20,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur.label",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.inputs.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "inputs_border_thickness",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "inputs_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 55
+      },
+      {
+        "type": "range",
+        "id": "inputs_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__shadow.content"
+      },
+      {
+        "type": "range",
+        "id": "inputs_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "inputs_shadow_horizontal_offset",
+        "min": -12,
+        "max": 12,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "inputs_shadow_vertical_offset",
+        "min": -12,
+        "max": 12,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "inputs_shadow_blur",
+        "min": 0,
+        "max": 20,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur.label",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "Cart Shipping Rule",
+    "settings": [
+      {
+        "type": "number",
+        "id": "cart_shipping_fee",
+        "label": "Shipping Cost"
+      },
+      {
+        "type": "number",
+        "id": "cart_express_shipping_fee",
+        "label": "Express Shipping Cost"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.cards.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "card_style",
+        "options": [
+          {
+            "value": "standard",
+            "label": "t:settings_schema.cards.settings.style.options__1.label"
+          },
+          {
+            "value": "card",
+            "label": "t:settings_schema.cards.settings.style.options__2.label"
+          }
+        ],
+        "default": "standard",
+        "label": "t:settings_schema.cards.settings.style.label"
+      },
+      {
+        "type": "range",
+        "id": "card_image_padding",
+        "min": 0,
+        "max": 20,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.image_padding.label",
+        "default": 0
+      },
+      {
+        "type": "select",
+        "id": "card_text_alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "t:settings_schema.global.settings.text_alignment.options__1.label"
+          },
+          {
+            "value": "center",
+            "label": "t:settings_schema.global.settings.text_alignment.options__2.label"
+          },
+          {
+            "value": "right",
+            "label": "t:settings_schema.global.settings.text_alignment.options__3.label"
+          }
+        ],
+        "default": "left",
+        "label": "t:settings_schema.global.settings.text_alignment.label"
+      },
+      {
+        "type": "select",
+        "id": "card_color_scheme",
+        "options": [
+          {
+            "value": "accent-1",
+            "label": "t:sections.all.colors.accent_1.label"
+          },
+          {
+            "value": "accent-2",
+            "label": "t:sections.all.colors.accent_2.label"
+          },
+          {
+            "value": "background-1",
+            "label": "t:sections.all.colors.background_1.label"
+          },
+          {
+            "value": "background-2",
+            "label": "t:sections.all.colors.background_2.label"
+          },
+          {
+            "value": "inverse",
+            "label": "t:sections.all.colors.inverse.label"
+          }
+        ],
+        "default": "background-2",
+        "label": "t:sections.all.colors.label"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "card_border_thickness",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "card_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "card_corner_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__shadow.content"
+      },
+      {
+        "type": "range",
+        "id": "card_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "card_shadow_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "card_shadow_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "card_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur.label",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.collection_cards.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "collection_card_style",
+        "options": [
+          {
+            "value": "standard",
+            "label": "t:settings_schema.collection_cards.settings.style.options__1.label"
+          },
+          {
+            "value": "card",
+            "label": "t:settings_schema.collection_cards.settings.style.options__2.label"
+          }
+        ],
+        "default": "standard",
+        "label": "t:settings_schema.collection_cards.settings.style.label"
+      },
+      {
+        "type": "range",
+        "id": "collection_card_image_padding",
+        "min": 0,
+        "max": 20,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.image_padding.label",
+        "default": 0
+      },
+      {
+        "type": "select",
+        "id": "collection_card_text_alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "t:settings_schema.global.settings.text_alignment.options__1.label"
+          },
+          {
+            "value": "center",
+            "label": "t:settings_schema.global.settings.text_alignment.options__2.label"
+          },
+          {
+            "value": "right",
+            "label": "t:settings_schema.global.settings.text_alignment.options__3.label"
+          }
+        ],
+        "default": "left",
+        "label": "t:settings_schema.global.settings.text_alignment.label"
+      },
+      {
+        "type": "select",
+        "id": "collection_card_color_scheme",
+        "options": [
+          {
+            "value": "accent-1",
+            "label": "t:sections.all.colors.accent_1.label"
+          },
+          {
+            "value": "accent-2",
+            "label": "t:sections.all.colors.accent_2.label"
+          },
+          {
+            "value": "background-1",
+            "label": "t:sections.all.colors.background_1.label"
+          },
+          {
+            "value": "background-2",
+            "label": "t:sections.all.colors.background_2.label"
+          },
+          {
+            "value": "inverse",
+            "label": "t:sections.all.colors.inverse.label"
+          }
+        ],
+        "default": "background-2",
+        "label": "t:sections.all.colors.label"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "collection_card_border_thickness",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "collection_card_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "collection_card_corner_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__shadow.content"
+      },
+      {
+        "type": "range",
+        "id": "collection_card_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "collection_card_shadow_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "collection_card_shadow_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "collection_card_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur.label",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.blog_cards.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "blog_card_style",
+        "options": [
+          {
+            "value": "standard",
+            "label": "t:settings_schema.blog_cards.settings.style.options__1.label"
+          },
+          {
+            "value": "card",
+            "label": "t:settings_schema.blog_cards.settings.style.options__2.label"
+          }
+        ],
+        "default": "standard",
+        "label": "t:settings_schema.blog_cards.settings.style.label"
+      },
+      {
+        "type": "range",
+        "id": "blog_card_image_padding",
+        "min": 0,
+        "max": 20,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.image_padding.label",
+        "default": 0
+      },
+      {
+        "type": "select",
+        "id": "blog_card_text_alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "t:settings_schema.global.settings.text_alignment.options__1.label"
+          },
+          {
+            "value": "center",
+            "label": "t:settings_schema.global.settings.text_alignment.options__2.label"
+          },
+          {
+            "value": "right",
+            "label": "t:settings_schema.global.settings.text_alignment.options__3.label"
+          }
+        ],
+        "default": "left",
+        "label": "t:settings_schema.global.settings.text_alignment.label"
+      },
+      {
+        "type": "select",
+        "id": "blog_card_color_scheme",
+        "options": [
+          {
+            "value": "accent-1",
+            "label": "t:sections.all.colors.accent_1.label"
+          },
+          {
+            "value": "accent-2",
+            "label": "t:sections.all.colors.accent_2.label"
+          },
+          {
+            "value": "background-1",
+            "label": "t:sections.all.colors.background_1.label"
+          },
+          {
+            "value": "background-2",
+            "label": "t:sections.all.colors.background_2.label"
+          },
+          {
+            "value": "inverse",
+            "label": "t:sections.all.colors.inverse.label"
+          }
+        ],
+        "default": "background-2",
+        "label": "t:sections.all.colors.label"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "blog_card_border_thickness",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "blog_card_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "blog_card_corner_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__shadow.content"
+      },
+      {
+        "type": "range",
+        "id": "blog_card_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "blog_card_shadow_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "blog_card_shadow_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "blog_card_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur.label",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.content_containers.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "text_boxes_border_thickness",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "text_boxes_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "text_boxes_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__shadow.content"
+      },
+      {
+        "type": "range",
+        "id": "text_boxes_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "text_boxes_shadow_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "text_boxes_shadow_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "text_boxes_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur.label",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.media.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "media_border_thickness",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "media_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 5
+      },
+      {
+        "type": "range",
+        "id": "media_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__shadow.content"
+      },
+      {
+        "type": "range",
+        "id": "media_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "media_shadow_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "media_shadow_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "media_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur.label",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.popups.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.popups.paragraph"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "popup_border_thickness",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "popup_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "popup_corner_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__shadow.content"
+      },
+      {
+        "type": "range",
+        "id": "popup_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "popup_shadow_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "popup_shadow_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "popup_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur.label",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.drawers.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__border.content"
+      },
+      {
+        "type": "range",
+        "id": "drawer_border_thickness",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.thickness.label",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "drawer_border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 10
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.global.settings.header__shadow.content"
+      },
+      {
+        "type": "range",
+        "id": "drawer_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.global.settings.opacity.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "drawer_shadow_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.horizontal_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "drawer_shadow_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.vertical_offset.label",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "drawer_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.blur.label",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "Only X units remaining",
+    "settings": [
+      {
+        "type": "range",
+        "id": "only_x_units",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "X",
+        "label": "Only X units remaining",
+        "default": 3
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.badges.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "badge_position",
+        "options": [
+          {
+            "value": "bottom left",
+            "label": "t:settings_schema.badges.settings.position.options__1.label"
+          },
+          {
+            "value": "bottom right",
+            "label": "t:settings_schema.badges.settings.position.options__2.label"
+          },
+          {
+            "value": "top left",
+            "label": "t:settings_schema.badges.settings.position.options__3.label"
+          },
+          {
+            "value": "top right",
+            "label": "t:settings_schema.badges.settings.position.options__4.label"
+          }
+        ],
+        "default": "top left",
+        "label": "t:settings_schema.badges.settings.position.label"
+      },
+      {
+        "type": "range",
+        "id": "badge_corner_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:settings_schema.global.settings.corner_radius.label",
+        "default": 40
+      },
+      {
+        "type": "select",
+        "id": "sale_badge_color_scheme",
+        "options": [
+          {
+            "value": "accent-1",
+            "label": "t:sections.all.colors.accent_1.label"
+          },
+          {
+            "value": "accent-2",
+            "label": "t:sections.all.colors.accent_2.label"
+          },
+          {
+            "value": "background-2",
+            "label": "t:sections.all.colors.background_2.label"
+          }
+        ],
+        "default": "accent-2",
+        "label": "t:settings_schema.badges.settings.sale_badge_color_scheme.label"
+      },
+      {
+        "type": "select",
+        "id": "sold_out_badge_color_scheme",
+        "options": [
+          {
+            "value": "background-1",
+            "label": "t:sections.all.colors.background_1.label"
+          },
+          {
+            "value": "inverse",
+            "label": "t:sections.all.colors.inverse.label"
+          }
+        ],
+        "default": "inverse",
+        "label": "t:settings_schema.badges.settings.sold_out_badge_color_scheme.label"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.styles.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "accent_icons",
+        "options": [
+          {
+            "value": "accent-1",
+            "label": "t:sections.all.colors.accent_1.label"
+          },
+          {
+            "value": "accent-2",
+            "label": "t:sections.all.colors.accent_2.label"
+          },
+          {
+            "value": "outline-button",
+            "label": "t:settings_schema.styles.settings.accent_icons.options__3.label"
+          },
+          {
+            "value": "text",
+            "label": "t:settings_schema.styles.settings.accent_icons.options__4.label"
+          }
+        ],
+        "default": "text",
+        "label": "t:settings_schema.styles.settings.accent_icons.label"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.social-media.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.social-media.settings.header.content"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "t:settings_schema.social-media.settings.social_twitter_link.label",
+        "info": "t:settings_schema.social-media.settings.social_twitter_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "t:settings_schema.social-media.settings.social_facebook_link.label",
+        "info": "t:settings_schema.social-media.settings.social_facebook_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "t:settings_schema.social-media.settings.social_pinterest_link.label",
+        "info": "t:settings_schema.social-media.settings.social_pinterest_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "t:settings_schema.social-media.settings.social_instagram_link.label",
+        "info": "t:settings_schema.social-media.settings.social_instagram_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "t:settings_schema.social-media.settings.social_tiktok_link.label",
+        "info": "t:settings_schema.social-media.settings.social_tiktok_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr_link",
+        "label": "t:settings_schema.social-media.settings.social_tumblr_link.label",
+        "info": "t:settings_schema.social-media.settings.social_tumblr_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_snapchat_link",
+        "label": "t:settings_schema.social-media.settings.social_snapchat_link.label",
+        "info": "t:settings_schema.social-media.settings.social_snapchat_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "t:settings_schema.social-media.settings.social_youtube_link.label",
+        "info": "t:settings_schema.social-media.settings.social_youtube_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo_link",
+        "label": "t:settings_schema.social-media.settings.social_vimeo_link.label",
+        "info": "t:settings_schema.social-media.settings.social_vimeo_link.info"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.search_input.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.search_input.settings.header.content"
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_enabled",
+        "default": true,
+        "label": "t:settings_schema.search_input.settings.predictive_search_enabled.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_vendor",
+        "default": false,
+        "label": "t:settings_schema.search_input.settings.predictive_search_show_vendor.label",
+        "info": "t:settings_schema.search_input.settings.predictive_search_show_vendor.info"
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_price",
+        "default": false,
+        "label": "t:settings_schema.search_input.settings.predictive_search_show_price.label",
+        "info": "t:settings_schema.search_input.settings.predictive_search_show_price.info"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.favicon.name",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "t:settings_schema.favicon.settings.favicon.label",
+        "info": "t:settings_schema.favicon.settings.favicon.info"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.currency_format.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.currency_format.settings.content"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.currency_format.settings.paragraph"
+      },
+      {
+        "type": "checkbox",
+        "id": "currency_code_enabled",
+        "label": "t:settings_schema.currency_format.settings.currency_code_enabled.label",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.cart.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "options": [
+          {
+            "value": "drawer",
+            "label": "t:settings_schema.cart.settings.cart_type.drawer.label"
+          },
+          {
+            "value": "page",
+            "label": "t:settings_schema.cart.settings.cart_type.page.label"
+          },
+          {
+            "value": "notification",
+            "label": "t:settings_schema.cart.settings.cart_type.notification.label"
+          }
+        ],
+        "default": "notification",
+        "label": "t:settings_schema.cart.settings.cart_type.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "t:settings_schema.cart.settings.show_vendor.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cart_note",
+        "label": "t:settings_schema.cart.settings.show_cart_note.label",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.cart.settings.cart_drawer.header"
+      },
+      {
+        "type": "collection",
+        "id": "cart_drawer_collection",
+        "label": "t:settings_schema.cart.settings.cart_drawer.collection.label",
+        "info": "t:settings_schema.cart.settings.cart_drawer.collection.info"
+      },
+      {
+        "type": "header",
+        "content": "Cart labels"
+      },
+      {
+        "type": "text",
+        "id": "add_to_cart_label",
+        "label": "Add to cart label",
+        "default": "Add to bag"
+      },
+      {
+        "type": "text",
+        "id": "out_of_stock_label",
+        "label": "Out of stock label",
+        "default": "Out of stock"
+      }
+    ]
+  },
+  {
+    "name": "Klaviyo",
+    "settings": [
+      {
+        "type": "html",
+        "id": "klaviyo_signup_script",
+        "label": "Klaviyo signup form script"
+      },
+      {
+        "type": "text",
+        "id": "klaviyo_public_api_key",
+        "label": "Public API Key"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_back_in_stock",
+        "label": "Use back in stock",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "newsletter_subscription_list_id",
+        "label": "Newsletter subscribers list if"
+      },
+      {
+        "type": "checkbox",
+        "id": "include_subscribe_bis",
+        "label": "Include newsletter opt-in on Back in stock",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "klayvio_product",
+        "label": "Enable klayvio on product template",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Stock In Store",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "include_stock_in_store",
+        "label": "Include Stock in Store",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "sis_store_id",
+        "label": "Store ID",
+        "default": "10071",
+        "info": "eg. 10071"
+      },
+      {
+        "type": "text",
+        "id": "sis_widget_id",
+        "label": "Widget ID",
+        "default": "78",
+        "info": "eg. 78"
+      }
+    ]
+  },
+  {
+    "name": "Regionalisation",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Enable Regionalisation Features"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_hreflangs",
+        "label": "Enable hreflangs",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_region_selector",
+        "label": "Enable region selector",
+        "default": false,
+        "info": "Enable manual region selector in site footer. Must also be added in Footer settings."
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_autoredirects",
+        "label": "Enable auto-redirects",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "prevent_redirect_param",
+        "label": "Prevent redirect url parameter",
+        "placeholder": "currency",
+        "info": "OPTIONAL: Prevent auto-redirects if URL contains this query parameter. Can be useful to resolve Google Ads issues."
+      },
+      {
+        "type": "header",
+        "content": "Region Data"
+      },
+      {
+        "type": "paragraph",
+        "content": "Region data entered below should be duplicated across all stores. Enter data for every region, including this one."
+      },
+      {
+        "type": "header",
+        "content": "Region 1"
+      },
+      {
+        "type": "textarea",
+        "id": "1_region_name",
+        "label": "Region 1 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "1_region_code",
+        "label": "Region 1 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "1_region_domain",
+        "label": "Region 1 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "1_region_country_list",
+        "label": "Region 1 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "1_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "1_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 2"
+      },
+      {
+        "type": "textarea",
+        "id": "2_region_name",
+        "label": "Region 2 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "2_region_code",
+        "label": "Region 2 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "2_region_domain",
+        "label": "Region 2 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "2_region_country_list",
+        "label": "Region 2 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "2_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "2_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 3"
+      },
+      {
+        "type": "textarea",
+        "id": "3_region_name",
+        "label": "Region 3 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "3_region_code",
+        "label": "Region 3 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "3_region_domain",
+        "label": "Region 3 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "3_region_country_list",
+        "label": "Region 3 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "3_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "3_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 4"
+      },
+      {
+        "type": "textarea",
+        "id": "4_region_name",
+        "label": "Region 4 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "4_region_code",
+        "label": "Region 4 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "4_region_domain",
+        "label": "Region 4 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "4_region_country_list",
+        "label": "Region 4 Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "4_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "4_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 5"
+      },
+      {
+        "type": "textarea",
+        "id": "5_region_name",
+        "label": "Region 5 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "5_region_code",
+        "label": "Region 5 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "5_region_domain",
+        "label": "Region 5 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "5_region_country_list",
+        "label": "Region 5 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "5_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "5_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 6"
+      },
+      {
+        "type": "textarea",
+        "id": "6_region_name",
+        "label": "Region 6 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "6_region_code",
+        "label": "Region 6 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "6_region_domain",
+        "label": "Region 6 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "6_region_country_list",
+        "label": "Region 6 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "6_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "6_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 7"
+      },
+      {
+        "type": "textarea",
+        "id": "7_region_name",
+        "label": "Region 7 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "7_region_code",
+        "label": "Region 7 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "7_region_domain",
+        "label": "Region 7 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "7_region_country_list",
+        "label": "Region 7 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "7_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "7_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 8"
+      },
+      {
+        "type": "textarea",
+        "id": "8_region_name",
+        "label": "Region 8 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "8_region_code",
+        "label": "Region 8 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "8_region_domain",
+        "label": "Region 8 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "8_region_country_list",
+        "label": "Region 8 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "8_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "8_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 9"
+      },
+      {
+        "type": "textarea",
+        "id": "9_region_name",
+        "label": "Region 9 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "9_region_code",
+        "label": "Region 9 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "9_region_domain",
+        "label": "Region 9 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "9_region_country_list",
+        "label": "Region 9 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "9_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "9_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 10"
+      },
+      {
+        "type": "textarea",
+        "id": "10_region_name",
+        "label": "Region 10 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "10_region_code",
+        "label": "Region 10 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "10_region_domain",
+        "label": "Region 10 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "10_region_country_list",
+        "label": "Region 10 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "10_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "10_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 11"
+      },
+      {
+        "type": "textarea",
+        "id": "11_region_name",
+        "label": "Region 11 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "11_region_code",
+        "label": "Region 11 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "11_region_domain",
+        "label": "Region 11 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "11_region_country_list",
+        "label": "Region 11 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "11_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "11_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 12"
+      },
+      {
+        "type": "textarea",
+        "id": "12_region_name",
+        "label": "Region 12 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "12_region_code",
+        "label": "Region 12 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "12_region_domain",
+        "label": "Region 12 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "12_region_country_list",
+        "label": "Region 12 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "12_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "12_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 13"
+      },
+      {
+        "type": "textarea",
+        "id": "13_region_name",
+        "label": "Region 13 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "13_region_code",
+        "label": "Region 13 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "13_region_domain",
+        "label": "Region 13 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "13_region_country_list",
+        "label": "Region 13 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "13_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "13_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 14"
+      },
+      {
+        "type": "textarea",
+        "id": "14_region_name",
+        "label": "Region 14 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "14_region_code",
+        "label": "Region 14 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "14_region_domain",
+        "label": "Region 14 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "14_region_country_list",
+        "label": "Region 14 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 316-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "14_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "14_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 15"
+      },
+      {
+        "type": "textarea",
+        "id": "15_region_name",
+        "label": "Region 15 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "15_region_code",
+        "label": "Region 15 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "15_region_domain",
+        "label": "Region 15 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "15_region_country_list",
+        "label": "Region 15 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "15_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "15_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 16"
+      },
+      {
+        "type": "textarea",
+        "id": "16_region_name",
+        "label": "Region 16 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "16_region_code",
+        "label": "Region 16 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "16_region_domain",
+        "label": "Region 16 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "16_region_country_list",
+        "label": "Region 16 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "16_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "16_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 17"
+      },
+      {
+        "type": "textarea",
+        "id": "17_region_name",
+        "label": "Region 17 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "17_region_code",
+        "label": "Region 17 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "17_region_domain",
+        "label": "Region 17 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "17_region_country_list",
+        "label": "Region 17 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "17_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "17_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 18"
+      },
+      {
+        "type": "textarea",
+        "id": "18_region_name",
+        "label": "Region 18 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "18_region_code",
+        "label": "Region 18 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "18_region_domain",
+        "label": "Region 18 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "18_region_country_list",
+        "label": "Region 18 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "18_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "18_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 19"
+      },
+      {
+        "type": "textarea",
+        "id": "19_region_name",
+        "label": "Region 19 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "19_region_code",
+        "label": "Region 19 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "19_region_domain",
+        "label": "Region 19 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "19_region_country_list",
+        "label": "Region 19 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "19_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "19_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 20"
+      },
+      {
+        "type": "textarea",
+        "id": "20_region_name",
+        "label": "Region 20 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "20_region_code",
+        "label": "Region 20 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "20_region_domain",
+        "label": "Region 20 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "20_region_country_list",
+        "label": "Region 20 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "20_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "20_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 21"
+      },
+      {
+        "type": "textarea",
+        "id": "21_region_name",
+        "label": "Region 21 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "21_region_code",
+        "label": "Region 21 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "21_region_domain",
+        "label": "Region 21 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "21_region_country_list",
+        "label": "Region 21 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "21_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "21_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 22"
+      },
+      {
+        "type": "textarea",
+        "id": "22_region_name",
+        "label": "Region 22 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "22_region_code",
+        "label": "Region 22 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "22_region_domain",
+        "label": "Region 22 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "22_region_country_list",
+        "label": "Region 22 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "22_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "22_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 23"
+      },
+      {
+        "type": "textarea",
+        "id": "23_region_name",
+        "label": "Region 23 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "23_region_code",
+        "label": "Region 23 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "23_region_domain",
+        "label": "Region 23 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "23_region_country_list",
+        "label": "Region 23 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "23_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "23_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 24"
+      },
+      {
+        "type": "textarea",
+        "id": "24_region_name",
+        "label": "Region 24 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "24_region_code",
+        "label": "Region 24 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "24_region_domain",
+        "label": "Region 24 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "24_region_country_list",
+        "label": "Region 24 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "24_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "24_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 25"
+      },
+      {
+        "type": "textarea",
+        "id": "25_region_name",
+        "label": "Region 25 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "25_region_code",
+        "label": "Region 25 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "25_region_domain",
+        "label": "Region 25 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "25_region_country_list",
+        "label": "Region 25 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "25_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "25_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 26"
+      },
+      {
+        "type": "textarea",
+        "id": "26_region_name",
+        "label": "Region 26 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "26_region_code",
+        "label": "Region 26 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "26_region_domain",
+        "label": "Region 26 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "26_region_country_list",
+        "label": "Region 26 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "26_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "26_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 27"
+      },
+      {
+        "type": "textarea",
+        "id": "27_region_name",
+        "label": "Region 27 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "27_region_code",
+        "label": "Region 27 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "27_region_domain",
+        "label": "Region 27 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "27_region_country_list",
+        "label": "Region 27 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "27_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "27_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 28"
+      },
+      {
+        "type": "textarea",
+        "id": "28_region_name",
+        "label": "Region 28 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "28_region_code",
+        "label": "Region 28 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "28_region_domain",
+        "label": "Region 28 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "28_region_country_list",
+        "label": "Region 28 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "28_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "28_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 29"
+      },
+      {
+        "type": "textarea",
+        "id": "29_region_name",
+        "label": "Region 29 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "29_region_code",
+        "label": "Region 29 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "29_region_domain",
+        "label": "Region 29 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "29_region_country_list",
+        "label": "Region 29 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "29_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "29_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 30"
+      },
+      {
+        "type": "textarea",
+        "id": "30_region_name",
+        "label": "Region 30 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "30_region_code",
+        "label": "Region 30 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "30_region_domain",
+        "label": "Region 30 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "30_region_country_list",
+        "label": "Region 30 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "30_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "30_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 31"
+      },
+      {
+        "type": "textarea",
+        "id": "31_region_name",
+        "label": "Region 31 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "31_region_code",
+        "label": "Region 31 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "31_region_domain",
+        "label": "Region 31 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "31_region_country_list",
+        "label": "Region 31 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "31_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "31_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 32"
+      },
+      {
+        "type": "textarea",
+        "id": "32_region_name",
+        "label": "Region 32 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "32_region_code",
+        "label": "Region 32 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "32_region_domain",
+        "label": "Region 32 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "32_region_country_list",
+        "label": "Region 32 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "32_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "32_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 33"
+      },
+      {
+        "type": "textarea",
+        "id": "33_region_name",
+        "label": "Region 33 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "33_region_code",
+        "label": "Region 33 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "33_region_domain",
+        "label": "Region 33 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "33_region_country_list",
+        "label": "Region 33 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "33_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "33_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      },
+      {
+        "type": "header",
+        "content": "Region 34"
+      },
+      {
+        "type": "textarea",
+        "id": "34_region_name",
+        "label": "Region 34 Name",
+        "info": "Will be shown in region selector. Separate multiple countries with a comma. First item will be shown in the button"
+      },
+      {
+        "type": "text",
+        "id": "34_region_code",
+        "label": "Region 34 Code",
+        "info": "The internal code for this region e.g. aus or AU or asia-pacific."
+      },
+      {
+        "type": "text",
+        "id": "34_region_domain",
+        "label": "Region 34 Domain",
+        "info": "The full URL of the live store e.g. https://www.example.com.au"
+      },
+      {
+        "type": "textarea",
+        "id": "34_region_country_list",
+        "label": "Region 34 Country Codes",
+        "info": "Add a comma-separated list of country codes (in ISO 3166-1 alpha-2 format) that are assigned to the store. e.g. AU,NZ or US,CA or SG,MY,HK. This is used for hreflangs as well as redirect logic."
+      },
+      {
+        "type": "checkbox",
+        "id": "34_region_current",
+        "label": "Current region",
+        "default": false,
+        "info": "Check this box for the current store region being edited."
+      },
+      {
+        "type": "checkbox",
+        "id": "34_region_default",
+        "label": "Default region",
+        "default": false,
+        "info": "Check this box for the main/international region store ONLY."
+      }
+    ]
+  },
+  {
+    "name": "Searchspring",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "ss_enable",
+        "label": "Enable Searchspring",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "ss_site_id",
+        "label": "Site ID",
+        "default": "9o1l6x"
+      },
+      {
+        "type": "text",
+        "id": "ss_collection_handle",
+        "label": "Search collection handle",
+        "default": "shop"
+      }
+    ]
+  },
+  {
+    "name": "Forter",
+    "settings": [
+      {
+        "type": "html",
+        "id": "forter_script",
+        "label": "Forter script (html)"
+      }
+    ]
+  },
+  {
+    "name": "BNPL Settings",
+    "settings": [
+      {
+        "type": "metaobject_list",
+        "id": "bnpl_icons",
+        "label": "BNPL Icons",
+        "info": "Add BNPL icons to be displayed on the product page. The icons will be displayed in the order they are added.",
+        "metaobject_type": "bnpl_icon"
+      },
+      {
+        "type": "number",
+        "id": "bnpl_number_of_installments",
+        "label": "Number of installments",
+        "default": 4,
+        "info": "The number of installments to be displayed in the BNPL section on the product page."
+      }
+    ]
+  },
+  {
+    "name": "PDP Colour Swatch Settings",
+    "settings": [
+      {
+        "type": "text",
+        "id": "default_heading",
+        "label": "Default Heading",
+        "info": "This is the default heading for the colour swatch section on the product page. Used if the product isn't assigned a custom heading."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_default_heading_first",
+        "label": "Show default heading first",
+        "default": true,
+        "info": "If checked, the default heading will be shown before the custom heading(s)."
+      }
+    ]
+  },
+  {
+    "name": "Geo Location Settings",
+    "settings": [
+      {
+        "type": "metaobject_list",
+        "metaobject_type": "localisation_country",
+        "id": "countries",
+        "label": "Countries",
+        "info": "Add countries to be used for geo location. The countries will be displayed in alphabetical order."
+      },
+      {
+        "type": "metaobject",
+        "metaobject_type": "localisation_country",
+        "id": "default_localisation_country",
+        "label": "Default Country",
+        "info": "Select the default country to be used for geo location in case the visitor's country doesn't match any allocations."
+      },
+      {
+        "type": "header",
+        "content": "Hreflang Settings"
+      },
+      {
+        "type": "metaobject",
+        "metaobject_type": "localisation_country",
+        "id": "hreflang_default_country",
+        "label": "Default Hreflang Country",
+        "info": "Select the country to use for x-default hreflang tag"
+      },
+      {
+        "type": "text",
+        "id": "hreflang_excluded_paths",
+        "label": "Excluded Paths",
+        "info": "Comma-separated list of paths to exclude from hreflang",
+        "default": "/cart,/checkout,/account,/login,/register,/orders,/thank_you,/password"
+      },
+      {
+        "type": "header",
+        "content": "Geo Location Modal Text"
+      },
+      {
+        "type": "text",
+        "id": "localisation_current_label",
+        "label": "Current label",
+        "default": "Current"
+      },
+      {
+        "type": "text",
+        "id": "localisation_suggested_label",
+        "label": "Suggested label",
+        "default": "Suggested"
+      },
+      {
+        "type": "text",
+        "id": "localisation_current_location_heading",
+        "label": "Heading for the 'You're currently shopping in:' step",
+        "default": "You're currently shopping in:"
+      },
+      {
+        "type": "text",
+        "id": "localisation_select_country_heading",
+        "label": "Heading for the 'Select your country:' step",
+        "default": "Select your country:"
+      },
+      {
+        "type": "text",
+        "id": "localisation_choose_destination_button_text",
+        "label": "Button text for the 'Choose another destination' button",
+        "default": "Choose another destination"
+      }
+    ]
+  },
+  {
+    "name": "Tagalys",
+    "settings": [
+      {
+        "type": "text",
+        "id": "tagalys_api_key",
+        "label": "Tagalys API Key"
+      },
+      {
+        "type": "text",
+        "id": "tagalys_api_server",
+        "label": "Tagalys API Server"
+      },
+      {
+        "type": "text",
+        "id": "tagalys_storefront_access_token",
+        "label": "Tagalys Storefront Access Token"
+      },
+      {
+        "type": "text",
+        "id": "tagalys_my_shopify_domain",
+        "label": "Tagalys My Shopify Domain"
+      },
+      {
+        "type": "collection_list",
+        "id": "suggestion_collections",
+        "label": "Suggestion Collections",
+        "info": "Add collections to be used for suggestion in quick search. The collections will be displayed in the order they are added."
+      },
+      {
+        "type": "text",
+        "id": "tagalys_initial_suggestions_query",
+        "label": "Tagalys Initial Suggestions Query",
+        "info": "The initial query to be used for the search suggestions."
+      },
+      {
+        "type": "collection",
+        "id": "default_collection",
+        "label": "Default collection",
+        "info": "Used to show products when the search modal is opened"
+      },
+      {
+        "type": "text",
+        "id": "tagalys_no_results_recommendation_id",
+        "label": "Tagalys No Results Recommendation ID",
+        "info": "The ID of the no results recommendation to be used for the search results."
+      },
+      {
+        "type": "text",
+        "id": "tagalys_product_recommendation_id",
+        "label": "Tagalys Product Recommendation ID",
+        "info": "The ID of the Product recommendation to be used for the product page."
+      },
+      {
+        "type": "text",
+        "id": "tagalys_smart_widget_id",
+        "label": "Tagalys Smart Widget ID",
+        "info": "The ID of the Smart Widget to be used for the product page."
+      }
+    ]
+  },
+  {
+    "name": "Swym Wishlist Product Button",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Button Placement",
+        "info": "We recommend using the Admin App to configure these settings. [Open App](/admin/apps/swym-relay)"
+      },
+      {
+        "type": "select",
+        "id": "swym_button_position",
+        "label": "Select Position",
+        "info": "Choose where the wishlist button appears on your product page. Select 'Custom Placement' to manually specify a location using a CSS selector. [Help](https://help.getswym.com/en/articles/13249541-how-to-find-css-selectors-for-custom-button-placement)",
+        "default": "default",
+        "options": [
+          {
+            "value": "default",
+            "label": "Inline with Product Details"
+          },
+          {
+            "value": "product_image",
+            "label": "Overlay on Product Image"
+          },
+          {
+            "value": "product_title",
+            "label": "Near Product Title"
+          },
+          {
+            "value": "custom",
+            "label": "Custom Placement"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "swym_custom_selector",
+        "label": "Custom Placement Selector",
+        "info": "Enter a CSS selector of the parent element to anchor the button. Only used if Button Position is set to 'Custom' Placement. [Help](https://help.getswym.com/en/articles/13249541-how-to-find-css-selectors-for-custom-button-placement)",
+        "default": "#swym-custom-wishlist-button"
+      },
+      {
+        "type": "header",
+        "content": "Button Appearance",
+        "info": "We recommend using the Admin App to configure these settings. [Open App](/admin/apps/swym-relay)"
+      },
+      {
+        "type": "html",
+        "id": "swym_wishlist_custom_button_before_html",
+        "label": "Add to Wishlist HTML",
+        "info": "Customize the button's appearance for products not yet saved to the wishlist.",
+        "default": "<button class=\"swym-icon-text\" type=\"button\">\n\t<svg class=\"swym-icon\" width=\"20\" height=\"20\" viewbox=\"0 0 24 24\">\n\t\t<path d=\"M19.6706 5.4736C17.6806 3.8336 14.7206 4.1236 12.8906 5.9536L12.0006 6.8436L11.1106 5.9536C9.29063 4.1336 6.32064 3.8336 4.33064 5.4736C2.05064 7.3536 1.93063 10.7436 3.97063 12.7836L11.6406 20.4536C11.8406 20.6536 12.1506 20.6536 12.3506 20.4536L20.0206 12.7836C22.0706 10.7436 21.9506 7.3636 19.6706 5.4736Z\" stroke=\"currentColor\" stroke-width=\"1.75px\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n\t</svg>\n\t<span class=\"swym-custom-btn-txt\">{{WishlistAddCTA}}</span>\n</button>"
+      },
+      {
+        "type": "html",
+        "id": "swym_wishlist_custom_button_after_html",
+        "label": "Added to Wishlist HTML",
+        "info": "Customize the button's appearance for products already in the wishlist.",
+        "default": "<button class=\"swym-icon-text\" type=\"button\">\n\t<svg class=\"swym-icon\" width=\"20\" height=\"20\" viewbox=\"0 0 24 24\">\n\t\t<path d=\"M19.6706 5.4736C17.6806 3.8336 14.7206 4.1236 12.8906 5.9536L12.0006 6.8436L11.1106 5.9536C9.29063 4.1336 6.32064 3.8336 4.33064 5.4736C2.05064 7.3536 1.93063 10.7436 3.97063 12.7836L11.6406 20.4536C11.8406 20.6536 12.1506 20.6536 12.3506 20.4536L20.0206 12.7836C22.0706 10.7436 21.9506 7.3636 19.6706 5.4736Z\" stroke=\"currentColor\" stroke-width=\"1.75px\" fill=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n\t</svg>\n\t<span class=\"swym-custom-btn-txt\">{{WishlistAddedCTA}}</span>\n</button>"
+      },
+      {
+        "type": "textarea",
+        "id": "swym_wishlist_custom_button_css",
+        "label": "Custom Styling (CSS)",
+        "info": "Modify CSS here to fine-tune the button's design and ensure it matches your theme perfectly.",
+        "default": "/* Base button styles using CSS variables (set by JavaScript) */\n/* Loading state for user interactions */\n.swym-loading .swym-button-content button,\n.swym-loading .swym-button-content [role=\"button\"],\n.swym-loading .swym-button-content .btn,\n.swym-loading .swym-button-content a {\n  opacity: 0.6;\n  cursor: not-allowed;\n  pointer-events: none;\n}\n.swym-button-content > button,\n.swym-button-content > [role=\"button\"],\n.swym-button-content > span,\n.swym-button-content > a {\n  color: #fff;  \n  background: #000;\n  border: 1px solid #000;\n  font-family: inherit;\n  padding: 12px 16px;\n  font-size: 14px;\n  font-weight: normal;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n  transition: all 0.2s ease;\n  text-align: center;\n  pointer-events: auto;\n  min-height: 45px;\n  width: 100%;\n  letter-spacing: normal;\n}\n\n/* Focus styles for accessibility */\n.swym-button-content button:focus-visible,\n.swym-button-content [role=\"button\"]:focus-visible,\n.swym-button-content .btn:focus-visible,\n.swym-button-content a:focus-visible {\n  outline: 2px solid currentColor;\n  outline-offset: 2px;\n}\n/* Disabled state styles */\n.swym-button-content button:disabled,\n.swym-button-content [role=\"button\"][aria-disabled=\"true\"],\n.swym-button-content .btn:disabled,\n.swym-button-content a[aria-disabled=\"true\"] {\n  opacity: 0.5;\n  cursor: not-allowed;\n  pointer-events: none;\n}\n/* Product image position styling (top-left default) */\n.swym-atw-btn-wrapper-for-img.swym-btn-position-product-img {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  z-index: 10;\n  width: fit-content!important;\n}\n.swym-custom-pdp-button.swym-btn-position-product-title {\n  width: fit-content;\n}\n.swym-button-content.swym-btn-custom-position {\n  margin-top: 8px;\n} \n.swym-button-content button.swym-icon-text svg {\n  margin-right: 5px;\n}\n/* ACCESSIBILITY IMPROVEMENTS */\n@media (prefers-reduced-motion: reduce) {\n  .swym-button-content,\n  .swym-button-content button,\n  .swym-button-content [role=\"button\"],\n  .swym-button-content .btn,\n  .swym-button-content a {\n    transition: none;\n    animation: none;\n  }  \n  .swym-button-content.swym-initialized button:hover,\n  .swym-button-content.swym-initialized [role=\"button\"]:hover,\n  .swym-button-content.swym-initialized .btn:hover,\n  .swym-button-content.swym-initialized a:hover {\n    transform: none;\n  }\n}\n/* HIGH CONTRAST MODE SUPPORT */\n@media (prefers-contrast: high) {\n  .swym-atw-btn-wrapper-for-img .swym-button-content button,\n  .swym-atw-btn-wrapper-for-img .swym-button-content [role=\"button\"],\n  .swym-atw-btn-wrapper-for-img .swym-button-content .btn,\n  .swym-atw-btn-wrapper-for-img .swym-button-content a {\n    border: 2px solid;\n    background: #fff;\n  }\n}"
+      }
+    ]
+  },
+  {
+    "name": "Swym Wishlist Collections Button",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Configure the wishlist button that appears on collection pages. This button allows customers to add products to their wishlist directly from collection listings. [Help](https://help.getswym.com/en/articles/13712073-customizing-the-advanced-wishlist-button-on-collections-pages)",
+        "info": "We recommend using the Admin App to configure these settings. [Open App](/admin/apps/swym-relay)"
+      },
+      {
+        "type": "checkbox",
+        "id": "swym_advanced_collections_wishlist_enabled",
+        "label": "Enable Quick Save Button",
+        "default": false,
+        "info": "Enable Quick Save Button on Collections Pages"
+      },
+      {
+        "type": "checkbox",
+        "id": "swym_advanced_collections_wishlist_social_count",
+        "label": "Show Social Count",
+        "default": false,
+        "info": "Display the number of times a product has been wishlisted"
+      },
+      {
+        "type": "header",
+        "content": "Button HTML Templates"
+      },
+      {
+        "type": "html",
+        "id": "swym_advanced_collections_wishlist_button_before_html",
+        "label": "Button HTML (Before Adding)",
+        "default": "<button\n  type=\"button\"\n  class=\"swym-advanced-wishlist-collections\"\n  aria-label=\"{{ADD_TO_WISHLIST}}\"\n  aria-pressed=\"false\"\n  style=\"color:{{ICON_COLOR}}; transform:{{ICON_POSITION}};\"\n>\n  <div class=\"swym-advanced-wishlist-collections-social-count\">\n    {{SOCIAL_COUNT}}\n  </div>\n  <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M19.6706 5.4736C17.6806 3.8336 14.7206 4.1236 12.8906 5.9536L12.0006 6.8436L11.1106 5.9536C9.29063 4.1336 6.32064 3.8336 4.33064 5.4736C2.05064 7.3536 1.93063 10.7436 3.97063 12.7836L11.6406 20.4536C11.8406 20.6536 12.1506 20.6536 12.3506 20.4536L20.0206 12.7836C22.0706 10.7436 21.9506 7.3636 19.6706 5.4736Z\" stroke=\"{{ICON_COLOR}}\" stroke-width=\"{{ICON_WIDTH}}\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n  </svg>\n</button>",
+        "info": "Custom HTML for the wishlist button before a product is added. Leave empty to use default"
+      },
+      {
+        "type": "html",
+        "id": "swym_advanced_collections_wishlist_button_after_html",
+        "label": "Button HTML (After Adding)",
+        "default": "<button\n  type=\"button\"\n  class=\"swym-advanced-wishlist-collections\"\n  aria-label=\"{{ADDED_TO_WISHLIST}}\"\n  aria-pressed=\"true\"\n  style=\"color:{{ICON_COLOR}}; transform:{{ICON_POSITION}};\"\n>\n  <div class=\"swym-advanced-wishlist-collections-social-count\">\n    {{SOCIAL_COUNT}}\n  </div>\n  <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M19.6706 5.4736C17.6806 3.8336 14.7206 4.1236 12.8906 5.9536L12.0006 6.8436L11.1106 5.9536C9.29063 4.1336 6.32064 3.8336 4.33064 5.4736C2.05064 7.3536 1.93063 10.7436 3.97063 12.7836L11.6406 20.4536C11.8406 20.6536 12.1506 20.6536 12.3506 20.4536L20.0206 12.7836C22.0706 10.7436 21.9506 7.3636 19.6706 5.4736Z\" stroke=\"{{ICON_COLOR}}\" stroke-width=\"{{ICON_WIDTH}}\" fill=\"{{ICON_COLOR}}\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n  </svg>\n</button>",
+        "info": "Custom HTML for the wishlist button after a product is added. Leave empty to use default"
+      },
+      {
+        "type": "header",
+        "content": "Button Styling"
+      },
+      {
+        "type": "textarea",
+        "id": "swym_advanced_collections_wishlist_button_css",
+        "label": "Button CSS",
+        "default": ".swym-advanced-wishlist-collections-container {\n  position: absolute;\n  top: 0;\n  left: 0;\n  padding: 10px;\n  z-index: 5;\n  cursor: pointer;\n  width: 60px;\n  height: 40px;\n}\n\n.swym-advanced-wishlist-collections,\n.swym-advanced-wishlist-collections svg {\n  cursor: pointer;\n  background: unset;\n  border: unset;\n  display: flex;\n  align-items: center;\n  flex-direction: row-reverse;\n  gap: 5px;\n  color: currentColor;\n  min-width: 24px;\n  min-height: 24px;\n}\n\n.swym-advanced-wishlist-collections svg path {\n  stroke: currentColor;\n}\n\n.swym-advanced-wishlist-collections\n  .swym-advanced-wishlist-collections-social-count {\n  font-size: 14px;\n  font-weight: 500;\n  color: currentColor;\n}\n\n.swym-sr-only {\n  clip: rect(0 0 0 0);\n  clip-path: inset(50%);\n  height: 1px;\n  width: 1px;\n  overflow: hidden;\n  white-space: nowrap;\n  position: absolute;\n}\n",
+        "info": "CSS styles for the wishlist button. Leave empty to use default styles."
+      },
+      {
+        "type": "header",
+        "content": "Theme Integration (Advanced)"
+      },
+      {
+        "type": "text",
+        "id": "swym_advanced_collections_wishlist_product_url_selector",
+        "label": "Product URL Selector",
+        "default": ".card.card--standard a.full-unstyled-link, .card.card--standard a.full-unstyled-link",
+        "info": "CSS selector to find product links on collection pages. [Help](https://help.getswym.com/en/articles/13712096-finding-selectors-for-advanced-collections-quick-save)"
+      },
+      {
+        "type": "text",
+        "id": "swym_advanced_collections_wishlist_attach_button_selector",
+        "label": "Button Container Selector",
+        "default": "div#ProductGridContainer .card.card--standard, .product-grid .grid__item .card-wrapper.product-card-wrapper",
+        "info": "CSS selector for where to attach the wishlist button. [Help](https://help.getswym.com/en/articles/13712096-finding-selectors-for-advanced-collections-quick-save)"
+      },
+      {
+        "label": "Button Position on tile",
+        "id": "swym_advanced_collections_wishlist_icon_position",
+        "type": "select",
+        "default": "top-left",
+        "options": [
+          {
+            "value": "top-right",
+            "label": "Top right of the tile"
+          },
+          {
+            "value": "top-left",
+            "label": "Top left of the tile"
+          },
+          {
+            "value": "bottom-left",
+            "label": "Bottom left of the tile"
+          },
+          {
+            "value": "bottom-right",
+            "label": "Bottom right of the tile"
+          }
+        ]
+      },
+      {
+        "label": "Icon Color",
+        "id": "swym_advanced_collections_wishlist_icon_color",
+        "type": "color",
+        "default": "#000000"
+      },
+      {
+        "type": "range",
+        "label": "Icon Thickness",
+        "id": "swym_advanced_collections_wishlist_icon_width",
+        "min": 1,
+        "max": 2.5,
+        "step": 0.1,
+        "unit": "px",
+        "default": 1.7
+      }
+    ]
+  },
+  {
+    "name": "Swym Wishlist Launcher Button",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Configure the wishlist launcher icon that appears in your store header. This icon provides quick access to the wishlist page and can display the count of saved products.",
+        "info": "We recommend using the Admin App to configure these settings. [Open App](/admin/apps/swym-relay)"
+      },
+      {
+        "type": "header",
+        "content": "General Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "swym_header_icon_enabled",
+        "label": "Enable Header Icon",
+        "default": false,
+        "info": "Enable or disable the wishlist launcher icon in your store header"
+      },
+      {
+        "type": "checkbox",
+        "id": "swym_header_icon_show_count",
+        "label": "Show Wishlist Count",
+        "default": false,
+        "info": "Display the total number of products wishlisted by the customer"
+      },
+      {
+        "type": "header",
+        "content": "Icon HTML Templates"
+      },
+      {
+        "type": "html",
+        "id": "swym_header_icon_custom_html",
+        "label": "Icon HTML",
+        "default": "<svg xmlns='http://www.w3.org/2000/svg' width='24px' height='24px' viewBox='0 0 24 24' fill='none'><path d='M19.6706 5.4736C17.6806 3.8336 14.7206 4.1236 12.8906 5.9536L12.0006 6.8436L11.1106 5.9536C9.29063 4.1336 6.32064 3.8336 4.33064 5.4736C2.05064 7.3536 1.93063 10.7436 3.97063 12.7836L11.6406 20.4536C11.8406 20.6536 12.1506 20.6536 12.3506 20.4536L20.0206 12.7836C22.0706 10.7436 21.9506 7.3636 19.6706 5.4736Z' stroke='currentColor' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+        "info": "Custom HTML for the wishlist icon. Leave empty to use default"
+      },
+      {
+        "type": "html",
+        "id": "swym_header_icon_count_bubble_html",
+        "label": "Count Bubble HTML",
+        "default": "<span class='swym-header-icon-count' data-swym-count>{{WISHLIST_COUNT}}</span>",
+        "info": "Custom HTML for the count bubble that displays the number of wishlisted items"
+      },
+      {
+        "type": "header",
+        "content": "Icon Styling"
+      },
+      {
+        "type": "textarea",
+        "id": "swym_header_icon_custom_css",
+        "label": "Custom CSS",
+        "default": ".swym-advanced-header-icon { position: relative; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: inherit; cursor: pointer; transition: opacity 0.2s ease; } .swym-header-icon-html { position: relative; display: inline-flex; align-items: center; justify-content: center; } .swym-header-icon-svg { width: 24px; height: 24px; display: block; } .swym-header-icon-count-bubble { position: absolute; top: -7px; right: -7px; display: flex; align-items: center; justify-content: center; } .swym-header-icon-count { padding: 0 5px; font-size: 11px; font-weight: 600; line-height: 18px; text-align: center; color: #fff; background-color: #000; border-radius: 50%; } .swym-header-icon-count:empty, .swym-header-icon-count[data-count='0'] { display: none; } @media (prefers-reduced-motion: reduce) { .swym-advanced-header-icon { transition: none; } }",
+        "info": "CSS styles for the header icon. Leave empty to use default styles."
+      },
+      {
+        "type": "header",
+        "content": "Theme Integration (Advanced)"
+      },
+      {
+        "type": "text",
+        "id": "swym_header_icon_selector_desktop",
+        "label": "Desktop Placement Selector",
+        "default": "a[href='/cart'].header__icon--cart",
+        "info": "CSS selector for where to attach the icon on desktop view"
+      },
+      {
+        "type": "text",
+        "id": "swym_header_icon_selector_mobile",
+        "label": "Mobile Placement Selector",
+        "default": "a[href='/cart'].header__icon--cart",
+        "info": "CSS selector for where to attach the icon on mobile view"
+      }
+    ]
+  }
+]

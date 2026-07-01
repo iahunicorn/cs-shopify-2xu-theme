@@ -1,0 +1,54 @@
+{{ 'basic-form.css' | asset_url | stylesheet_tag }}
+{{ 'account.css' | asset_url | stylesheet_tag }}
+{{ 'accounts.css' | asset_url | stylesheet_tag }}
+
+{% render 'account-mobile-top',
+  account_header_title: 'Addresses',
+  margin_bottom: 'banner-addresses'
+%}
+<div
+  class='Container Container--narrow Container--account-dashboard Container--addresses'
+  data-section-type='addresses'
+  data-section-id='addresses'
+>
+  {% render 'account-navigation' %}
+
+  <div class='PageLayout--breakLap'>
+    <div class='address-home' id='address-home'>
+      <h1 class='account-title'>{{ 'customer.addresses.title' | t }}</h1>
+
+      <div class='container-address-actions'>
+        <div class='new-address-btn'>
+          <button type='button' onclick='addNewAddress()'>
+            {{ 'customer.addresses.add_address' | t }}
+          </button>
+        </div>
+        <div
+          data-address-container
+          id='ca-overview'
+          class='container-address-list d-block'
+        >
+          {%- if customer.addresses_count > 0 -%}
+            {%- paginate customer.addresses by 9 -%}
+              <div class='Grid Grid--l AddressList'>
+                {%- for address in customer.addresses -%}
+                  {% render 'account-address-item', address: address %}
+                {%- endfor -%}
+              </div>
+              {%- render 'pagination', paginate: paginate -%}
+            {%- endpaginate -%}
+          {%- endif -%}
+        </div>
+        <div data-address-container id='ca-add' class='container-address-add'>
+          {% render 'address-form-add' %}
+        </div>
+        <div data-address-container id='ca-edit' class='container-address-edit'>
+          {% render 'address-form-edit' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src='{{ 'customer.js' | asset_url }}' defer></script>
+<script src='{{ 'addresses-page.js' | asset_url }}' defer></script>

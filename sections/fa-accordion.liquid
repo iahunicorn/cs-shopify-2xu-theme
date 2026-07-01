@@ -1,0 +1,209 @@
+{%- liquid
+  assign product = section.settings.product
+  assign double_quote = '"'
+  assign escaped_double_quote = '\"'
+-%}
+
+{% for block in section.blocks %}
+  {% if block.type == '@app' %}
+    <div id='product-reviews' class='tw-hidden'>
+      {% render block %}
+    </div>
+  {% endif %}
+{% endfor %}
+<section class='tw-w-full tw-px-4 md:tw-px-12 tw-pb-4 md:tw-pb-12'>
+  <flux-accordion
+    x-blocks='
+      [
+        {% for block in section.blocks %}
+         {% unless block.type == '@app' %}
+         {%- capture content -%}
+          {% if block.type == 'metafield_row' %}
+           {% unless product.metafields.custom[block.settings.metafield].value == blank %}
+            {% if block.settings.metafield == 'pdp_accordians_fabric_details' %}
+                {
+                  "content": {{ product.metafields.custom[block.settings.metafield].value | json }},
+                  "image_desktop": "{{ product.metafields.custom.pdp_accordians_fabric_details.value.image | image_url: width: 1200 }}",
+                  "image_mobile": "{{ product.metafields.custom.pdp_accordians_fabric_details.value.mobile_image | image_url: width: 1000 }}"
+                }
+              {% else %}
+                {{ product.metafields.custom[block.settings.metafield].value | json | escape }}
+              {% endif %}
+            {% endunless %}
+          {% elsif block.type == 'reviews' %}
+           {% capture product_data_attribute %}shopify-{{ product.id }}{% endcapture %}
+            {
+              "product_data_attribute": "{{ product_data_attribute | replace: double_quote, escaped_double_quote }}"
+            }
+          {% elsif block.type == 'script' %}
+            {{ block.settings.script | json }}
+          {% elsif block.type == 'size_chart' %}
+            {
+              "content": {{ block.settings.content | json }},
+              "unit_system": "{{ localization.country.unit_system }}"
+            }
+
+          {% elsif block.type == 'two_column_row' %}
+           {
+              "column_one": {{ block.settings.column_one | json }},
+              "column_two": {{ block.settings.column_two | json }}
+            }
+          {% else %}
+            "{{ block.settings.row_content }}"
+          {% endif %}
+          {%- endcapture -%}
+          {% unless block.type == 'metafield_row' and product.metafields.custom[block.settings.metafield].value == blank %}
+          {
+            "heading": "{{ block.settings.heading }}",
+            "content": {{ content }},
+            "blockType": "{{ block.type }}"
+            {% if block.type == 'metafield_row' %}
+              ,"metafield_name": "{{ block.settings.metafield }}"
+            {% endif %}
+          }{% unless forloop.last %},{% endunless %}
+          {% endunless %}
+          {% endunless %}
+        {% endfor %}
+      ]
+    '
+  >
+  </flux-accordion>
+</section>
+
+{% schema %}
+{
+  "name": "F.A. Accordion",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "Select a product to display its metafields"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "metafield_row",
+      "name": "Metafield Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "select",
+          "id": "metafield",
+          "label": "Product metafield",
+          "info": "Select a product metafield to display",
+          "options": [
+            {
+              "value": "pdp_accordians_product_details",
+              "label": "Product Details"
+            },
+            {
+              "value": "pdp_accordians_fabric_details",
+              "label": "Fabric Details"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "script",
+      "name": "Script",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "html",
+          "id": "script",
+          "label": "Script"
+        }
+      ]
+    },
+    {
+      "type": "two_column_row",
+      "name": "Two column row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "column_one",
+          "label": "Column one"
+        },
+        {
+          "type": "richtext",
+          "id": "column_two",
+          "label": "Column two"
+        }
+      ]
+    },
+    {
+      "type": "content_row",
+      "name": "Content row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    },
+    {
+      "type": "reviews",
+      "name": "Reviews",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Product Reviews",
+          "label": "Heading"
+        }
+      ]
+    },
+    {
+      "type": "size_chart",
+      "name": "Size Chart",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Size & Fit",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "F.A. Accordion",
+      "blocks": [
+        {
+          "type": "content_row"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

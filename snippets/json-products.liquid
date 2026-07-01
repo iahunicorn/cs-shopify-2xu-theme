@@ -1,0 +1,13 @@
+{% assign pagination = limit | default: 40 %}
+{%- paginate collection.products by pagination -%}
+  { {% unless exclude contains 'pagination' %}"pagination": {% render 'json-pagination', paginate: paginate %},
+  {% endunless %}"products": [
+  {%- for product in collection.products -%}
+    {%- render 'json-product', product: product -%}
+    {% if forloop.index == limit %}
+      {% break %}
+    {% endif %}
+    {%- unless forloop.last %},{% endunless %}
+  {%- endfor -%}
+  ] }
+{%- endpaginate -%}

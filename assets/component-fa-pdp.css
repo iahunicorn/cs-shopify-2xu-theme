@@ -1,0 +1,23 @@
+main {
+  & h1,
+  h2 {
+    font-family: 'Sweet Sans Pro', sans-serif;
+  }
+
+  & h3 {
+    font-family: 'Euclid Circular A', sans-serif !important;
+  }
+
+  & h4,
+  h5,
+  h6 {
+    font-family: 'Input Mono Regular', sans-serif !important;
+  }
+  & p,
+  a,
+  li,
+  span,
+  body {
+    font-family: 'Euclid Circular A', sans-serif !important;
+  }
+}

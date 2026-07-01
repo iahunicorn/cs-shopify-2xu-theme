@@ -1,0 +1,67 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page",
+      "settings": {}
+    },
+    "169267652712541993": {
+      "type": "apps",
+      "blocks": {
+        "b11bcb55-f2ea-4a7b-af30-68bf968e84e5": {
+          "type": "shopify://apps/okendo/blocks/referral-widget/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "b11bcb55-f2ea-4a7b-af30-68bf968e84e5"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "0bc24d33-a23a-413a-a4d1-7e17b7c4bd70": {
+      "type": "rich-text",
+      "blocks": {
+        "template--15917640614043__0bc24d33-a23a-413a-a4d1-7e17b7c4bd70-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Introduce your friends to 2XU!</p>",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "template--15917640614043__0bc24d33-a23a-413a-a4d1-7e17b7c4bd70-heading-1"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 36
+      }
+    },
+    "1692676548988e7dc9": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "169267652712541993",
+    "0bc24d33-a23a-413a-a4d1-7e17b7c4bd70",
+    "1692676548988e7dc9"
+  ]
+}

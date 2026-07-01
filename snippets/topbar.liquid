@@ -1,0 +1,67 @@
+{%- liquid
+  assign text_color = settings.text_color
+  assign background_color = settings.background_color
+  assign blocks = blocks
+-%}
+
+{%- capture styles -%}
+  {%- unless text_color == blank -%}
+    --c-topbar-text-color: {{ text_color }};
+  {%- endunless -%}
+  {%- unless background_color == blank -%}
+    --c-topbar-background-color: {{ background_color }};
+  {%- endunless -%}
+{%- endcapture -%}
+
+{%- if blocks.size > 0 -%}
+  <div class="topbar" style="{{ styles }}">
+    <div class="topbar__inner">
+      <div class="swiper swiper--topbar js-swiper-topbar">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          {%- for block in blocks -%}
+            {%- assign mod_icon = block.settings.icon -%}
+            {%- assign mod_text = block.settings.text -%}
+            {%- unless mod_text == blank -%}
+              <div class="swiper-slide">
+                <div
+                  class="topbar__item"
+                  {% if block.settings.klaviyo_event != blank %}
+                    onclick="event.preventDefault();{{ block.settings.klaviyo_event }}"
+                    style="cursor: pointer;"
+                  {% endif %}
+                  >
+                  {% if block.settings.url_block != blank %}
+                    <a href="{{ block.settings.url_block }}" style="text-decoration: none; display: flex; align-items: center;">
+                      {%- unless mod_icon == blank -%}
+                        <img src="{{ mod_icon | image_url }}" alt="{{ mod_text }}" width="{{ mod_icon.width }}" height="{{ mod_icon.height }}" class="topbar__icon" loading="lazy">
+                      {%- endunless -%}
+                      <p class="topbar__message">
+                        {{ mod_text }}
+                      </p>
+                    </a>
+                  {% else %}
+                    {%- unless mod_icon == blank -%}
+                      <img src="{{ mod_icon | image_url }}" alt="{{ mod_text }}" width="{{ mod_icon.width }}" height="{{ mod_icon.height }}" class="topbar__icon" loading="lazy">
+                    {%- endunless -%}
+                    <p class="topbar__message">
+                      {{ mod_text }}
+                    </p>
+                  {% endif %}
+
+                </div>
+              </div>
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+        <div class="swiper-button-prev">
+          {%- render 'icon' with 'chevron-back' -%}
+        </div>
+        <div class="swiper-button-next">
+          {%- render 'icon' with 'chevron-forward' -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

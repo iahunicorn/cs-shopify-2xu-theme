@@ -1,0 +1,17 @@
+{%- if template contains 'product' and settings.include_stock_in_store == true -%}
+	{%- if product.type contains 'Teamwear' -%}
+		<div id="stockinstore-options" style="display:none!important;"> <span id="fis-hide">1</div></div>
+	{%- endif -%}
+	<script type="text/javascript">
+		var _stockinstore = _stockinstore || [];
+		_stockinstore.push({ "site":"{{ settings.sis_store_id }}","applicationurl": ("https:" == document.location.protocol ? "https://" : "http://") + "stockinstore.net"});
+		(function() {
+			var ma = document.createElement("script");
+			ma.type = "text/javascript"; ma.async = 1;
+			ma.src = _stockinstore[0].applicationurl + "/widgets/stockinstore-global.js";
+			var mas = document.getElementsByTagName("script")[0];
+			mas.parentNode.insertBefore(ma, mas);
+		})();
+	</script>
+	<div data-sis-widget-description="stockinstore" data-sis-widget-id="{{ settings.sis_widget_id }}"></div>
+{%- endif -%}

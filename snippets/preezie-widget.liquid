@@ -1,0 +1,53 @@
+{% assign spd = shop.permanent_domain %}
+<!-- AU & Dev store -->
+{% if spd contains '2xu-development' or spd contains '2xu-australia' %}
+<div id="preezie-widget-div-id-popup"></div>
+<script type="text/javascript">
+    PREEZIE_GUIDE.render([
+        {
+            guideKey: 'EPO-ca00515d-67d8-4cfd-3cc5-08da540dcfdb',
+            version: '1.0.0',
+            renderTo: 'preezie-widget-div-id-popup'
+        }
+    ]);
+</script>
+
+<!-- NZ store -->
+{% elsif spd contains '2xu-nz' %}
+<div id="preezie-widget-div-id-popup"></div>
+<script type="text/javascript">
+    PREEZIE_GUIDE.render([
+        {
+            guideKey: 'EPO-2cd97c23-08fa-4945-6826-08da65f08b39',
+            version: '1.0.0',
+            renderTo: 'preezie-widget-div-id-popup'
+        }
+    ]);
+</script>
+
+<!-- CA store -->
+{% elsif spd contains '2xu-ca' %}
+<div id="preezie-widget-div-id-popup"></div>
+<script type="text/javascript">
+    PREEZIE_GUIDE.render([
+        {
+            guideKey: 'EPO-29dcc278-97a1-49c5-6825-08da65f08b39',
+            version: '1.0.0',
+            renderTo: 'preezie-widget-div-id-popup'
+        }
+    ]);
+</script>
+
+<!-- CA store -->
+{% elsif spd contains '2xu-us' %}
+<div id="preezie-widget-div-id-popup"></div>
+<script type="text/javascript">
+    PREEZIE_GUIDE.render([
+        {
+            guideKey: 'EPO-79876921-a343-4ddf-6824-08da65f08b39',
+            version: '1.0.0',
+            renderTo: 'preezie-widget-div-id-popup'
+        }
+    ]);
+</script>
+{% endif %}

@@ -1,0 +1,221 @@
+{%- capture blocks -%}[
+  {%- for block in section.blocks -%}
+    {% if block.settings.content_link %}
+
+      {% assign url_arr = block.settings.content_link | split: '/' %}
+      {% assign resource_type = url_arr[1] %}
+      {% assign resource_handle = url_arr[2] %}
+
+      {% if resource_type == 'collections' %}
+        {% assign resource = collections[resource_handle] %}
+        {% assign image = block.settings.image | default: resource.featured_image %}
+      {% elsif resource_type == 'products' %}
+        {% assign resource = all_products[resource_handle] %}
+        {% assign image = block.settings.image | default: resource.featured_image %}
+      {% elsif resource_type == 'blogs' %}
+        {% assign resource = blogs[resource_handle] %}
+        {% assign image = block.settings.image %}
+      {% elsif resource_type == 'pages' %}
+        {% assign resource = pages[resource_handle] %}
+        {% assign image = block.settings.image %}
+      {% elsif resource_type == 'articles' %}
+        {% assign resource = articles[resource_handle] %}
+        {% assign image = block.settings.image | default: resource.image %}
+      {% endif %}
+      {% assign url = block.settings.content_link %}
+      {% assign type = 'resource' %}
+    {% elsif block.settings.collection %}
+      {% assign collection = block.settings.collection %}
+
+      {% assign image = block.settings.image | default: collection.featured_image %}
+      {% assign url = '/collections/' | append: collection.handle %}
+      {% assign type = 'collection' %}
+    {% endif %}
+    
+    {%- assign title = block.settings.title -%}
+    {%- assign button_text = block.settings.button_text | default: 'Shop Now' -%}
+    {
+      "id": {{ block.id | json }},
+      "image": {% if image %}{{ image | image_url: width: 2000 | json }}{% else %}null{% endif %},
+      "mobile_image": {% if block.settings.mobile_image %}{{ block.settings.mobile_image | image_url: width: 600 | json }}{% else %}null{% endif %},
+      "title": "{{ title | escape }}",
+      "button_text": "{{ button_text | escape }}",
+      "text_color": {{ block.settings.text_color | json }},
+      "url": {{ url | json }},
+      "attributes": {{ block.shopify_attributes | json }},
+      "type": "{{ type }}"
+    }{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+]{%- endcapture -%}
+<section>
+  
+  <flux-collection-reel
+    x-blocks='{{ blocks }}'
+    landscape='{{ section.settings.landscape }}'
+    title='{{ section.settings.title | default: 'Shop by Category' | escape }}'
+  >
+    <div class="tw-py-8 lg:tw-py-20 tw-relative">
+      <p class="tw-absolute tw-top-1/2 tw-left-10 lg:tw-left-12 -tw-translate-t-1/2 -tw-rotate-90 tw-origin-left tw-font-input-mono tw-text-xl tw-uppercase tw-whitespace-nowrap tw-hidden lg:tw-block tw-not-sr-only">
+        {{ section.settings.title | default: 'Shop by Category' }}
+      </p>
+      <p class="tw-px-4 md:tw-px-12 tw-font-input-mono tw-text-sm md:tw-text-lg tw-uppercase tw-whitespace-nowrap lg:tw-hidden tw-block tw-mb-6">
+        {{ section.settings.title | default: 'Shop by Category' }}
+      </p>
+      <div class="tw-overflow-x-auto tw-scrollbar-hide tw-pb-8">
+        <div class="tw-flex tw-flex-nowrap tw-w-max">
+          {% comment %} Spacer for the start {% endcomment %}
+          <div class="show-empty tw-w-4 md:tw-w-12 lg:tw-w-24 tw-h-full tw-flex"></div>
+          {% for block in section.blocks %}
+            {% if block.settings.content_link %}
+              {% assign url_arr = block.settings.content_link | split: '/' %}
+              {% assign resource_type = url_arr[1] %}
+              {% assign resource_handle = url_arr[2] %}
+
+              {% if resource_type == 'collections' %}
+                {% assign resource = collections[resource_handle] %}
+                {% assign image = block.settings.image | default: resource.featured_image %}
+              {% elsif resource_type == 'products' %}
+                {% assign resource = all_products[resource_handle] %}
+                {% assign image = block.settings.image | default: resource.featured_image %}
+              {% elsif resource_type == 'blogs' %}
+                {% assign article_handle = resource_handle | append: '/' | append: url_arr[3] %}
+                {% assign resource = articles[article_handle] %}
+                {% assign image = block.settings.image | default: resource.image %}
+              {% elsif resource_type == 'pages' %}
+                {% assign resource = pages[resource_handle] %}
+                {% assign image = block.settings.image %}
+              {% endif %}
+              {% assign url = block.settings.content_link %}
+            {% else %}
+              {% assign collection = block.settings.collection %}
+              {% assign image = block.settings.image | default: collection.featured_image %}
+              {% assign url = collection.url %}
+            {% endif %}
+            
+            {% assign title = block.settings.title %}
+            {% assign button_text = block.settings.button_text | default: 'Shop Now' %}
+
+            <div class="{% if forloop.index0 != 0 %}tw-pl-2{% endif %} tw-h-full">
+              {% render 'collection-card',
+                url: url,
+                image: image,
+                mobile_image: block.settings.mobile_image,
+                title: title,
+                button_text: button_text,
+                class_name: 'tw-w-[280px] tw-h-[280px] md:tw-w-[555px] md:tw-h-[576px]',
+                landscape: section.settings.landscape,
+                text_color: block.settings.text_color,
+                index: forloop.index0 %}
+            </div>
+          {% endfor %}
+          {% comment %} Spacer for the end {% endcomment %}
+          <div class="show-empty tw-w-4 md:tw-w-12 lg:tw-w-24 tw-h-full tw-flex"></div>
+        </div>
+      </div>
+      <div class="tw-px-4 md:tw-px-12 lg:tw-px-24 tw-flex tw-gap-8">
+        <div class="tw-hidden lg:tw-block">
+          <div class="tw-flex tw-items-center tw-gap-1">
+            <button class="tw-bg-2xu-light-grey tw-w-10 tw-h-8 tw-rounded-sm tw-flex tw-items-center tw-justify-center">
+              {% render 'icon-left-chevron' %}
+            </button>
+            <button class="tw-bg-2xu-light-grey tw-w-10 tw-h-8 tw-rounded-sm tw-flex tw-items-center tw-justify-center">
+              {% render 'icon-right-chevron' %}
+            </button>
+          </div>
+        </div>
+        <div class="tw-flex-1 tw-flex tw-items-center">
+          <div class="tw-h-[2px] tw-w-full tw-bg-2xu-grey tw-relative">
+            <div class="tw-bg-2xu-black tw-h-full tw-absolute">
+              <div class="tw-absolute -tw-top-10 -tw-bottom-10 tw-w-full show-empty"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>     
+  </flux-collection-reel>
+</section>
+
+
+{% schema %}
+{
+  "name": "F.A. Collection Reel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "checkbox",
+      "id": "landscape",
+      "label": "Landscape cards",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content source"
+        },
+        {
+          "type": "url",
+          "id": "content_link",
+          "label": "Resource"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "Deprecated: Use Resource field instead"
+        },
+        {
+          "type": "header",
+          "content": "Card Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Image",
+          "info": "Optional mobile-specific image, falls back to desktop image if not set"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Homepage Section",
+      "name": "F.A. Collection Reel"
+    }
+  ]
+}
+{% endschema %}

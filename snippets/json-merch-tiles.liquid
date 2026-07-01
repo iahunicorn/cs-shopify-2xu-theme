@@ -1,0 +1,20 @@
+{%- assign merch_tiles = collection.metafields.custom.merch_tiles.value -%}
+{
+  {%- for tile in merch_tiles -%}
+  "{{ tile.position | json | minus: 1 }}": {
+      "title": {{ tile.title | json }},
+      "image": {{ tile.image | image_url: width: 500, height: 800 | json }},
+      "content": "{{ tile.content }}",
+      "position": {{ tile.position | json }},
+      "placement": {{ tile.placement | json }},
+      "cta1": {
+        "label": {{ tile.cta_1_label | json}},
+        "link": {% if tile.cta_1_link != blank %}{{ tile.cta_1_link }}{% else %}null{% endif %}
+      },
+      "cta2": {
+        "label": {{ tile.cta_2_label | json}},
+        "link": {% if tile.cta_2_link != blank %}{{ tile.cta_2_link }}{% else %}null{% endif %}
+      }
+    }{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+}

@@ -1,0 +1,81 @@
+{%- comment -%}
+  Render image ACF
+
+  Accepts:
+  - sources: {String}
+  - lazy: {Boolean}
+  - class: {String}
+  - alt: {String}
+  - sizes: {String}
+  - width: {String}
+  - height: {String}
+{%- endcomment -%}
+{%- liquid
+  assign sources_arr = sources | split: '|'
+  assign lazy = lazy | default: true
+  for source in sources_arr
+    if source == blank
+      continue
+    endif
+    comment
+      Picture resizing
+    endcomment
+    if source contains '.svg'
+      assign image_large = source
+    else
+      assign accentuate_cdn = '//images.accentuate.io?c_options='
+      assign options = '&shop=' | append: shop.permanent_domain | append: '&image=' | append: source
+
+      if source contains 'cdn.accentuate.io'
+        assign image_large = accentuate_cdn | append: 'w_2160' | append: options
+        assign image_normal = accentuate_cdn | append: 'w_1080' | append: options
+        assign image_medium = accentuate_cdn | append: 'w_640' | append: options
+        assign image_small = accentuate_cdn | append: 'w_480' | append: options
+        assign image_xsmall = accentuate_cdn | append: 'w_320' | append: options
+        assign image_xxsmall = accentuate_cdn | append: 'w_180' | append: options
+      elsif source contains 'cdn.shopify.com/s/assets/no-image' and default_image != blank
+        assign image_large = default_image | image_url: '2160x'
+        assign image_normal = default_image | image_url: '1080x'
+        assign image_medium = default_image | image_url: '640x'
+        assign image_small = default_image | image_url: '480x'
+        assign image_xsmall = default_image | image_url: '320x'
+      elsif source contains '//'
+        assign image_large = source
+      else
+        if source.src != blank
+          assign image_obj = source
+        else
+          assign filename = source | split: '/' | last
+          assign image_obj = images[filename]
+          if image_obj == blank
+            assign image_obj = source
+          endif
+        endif
+        assign image_large = image_obj | image_url: '2160x'
+        assign image_normal = image_obj | image_url: '1080x'
+        assign image_medium = image_obj | image_url: '640x'
+        assign image_small = image_obj | image_url: '480x'
+        assign image_xsmall = image_obj | image_url: '320x'
+        assign image_xxsmall = image_obj | image_url: '180x'
+      endif
+      if image_normal != blank
+        assign srcset = image_large | append: ' 2160w' | append: image_normal | append: ' 1080w' | append: image_medium | append: ' 640w' | append: image_small | append: ' 480w' | append: image_xsmall | append: ' 320w' | append: image_xxsmall | append: ' 180w'
+      endif
+    endif
+  endfor
+-%}
+
+{% comment %}theme-check-disable{% endcomment %}
+<img
+  src="{{ image_large }}"
+  srcset="{{ srcset }}"
+  sizes="{{ sizes }}"
+  alt="{{ alt }}"
+  class="{{ class }}"
+  {%- if lazy -%}
+    loading="lazy"
+  {%- endif -%}
+  width="{{ width | default: '100' }}"
+  height="{{ height | default: '100'}}"
+>
+{% comment %}theme-check-enable{% endcomment %}

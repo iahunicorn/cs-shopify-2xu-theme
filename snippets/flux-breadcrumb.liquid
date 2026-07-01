@@ -1,0 +1,145 @@
+{% unless template == 'index'
+  or template == 'cart'
+  or template == 'list-collections'
+%}
+  <nav
+    class='[&>a]:!tw-font-input-mono tw-w-4/5 lg:tw-w-full [&>span]:!tw-font-input-mono tw-text-white tw-uppercase tw-text-2xs lg:tw-text-xs tw-font-normal [text-shadow:_0_0_20px_rgb(0_0_0_/_50%)]'
+    role='navigation'
+    aria-label='breadcrumbs'
+  >
+    {% if template contains 'page' %}
+      {% render 'breadcrumb-delimiter' %}
+      <span>{{ page.title }} </span>
+    {% elsif template contains 'product' %}
+      {% if collection.handle != blank %}
+        <a href='/' title='Home'>Home</a>
+        {% render 'breadcrumb-delimiter' %}
+        <a
+          href='{{ routes.collections_url }}/{{ collection.handle }}'
+          title='{{ collection.title | escape }}'
+        >
+          {% if collection.title != blank %}{{ collection.title }}{% endif %}
+        </a>
+        {% render 'breadcrumb-delimiter' %}
+        <span>{{ product.title }}</span>
+      {% else %}
+        <a href='/' title='Home'>Home</a>
+        {% if collection.url %}
+          {% render 'breadcrumb-delimiter' %}
+          {{ collection.title | link_to: collection.url }}
+        {% endif %}
+        {% render 'breadcrumb-delimiter' %}
+        <span>{{ product.title }} </span>
+      {% endif %}
+    {% elsif template contains 'collection' and collection.handle %}
+      {%- assign second_level_filter_list = '' -%}
+      {%- assign second_level_filter_url = '' -%}
+      {%- assign third_level_filter_list = '' -%}
+      {%- assign third_level_filter_url = '' -%}
+      {%- assign fourth_level_filter_list = '' -%}
+      {%- assign second_level_active = false -%}
+      {%- assign third_level_active = false -%}
+      {%- assign third_level_array = '' -%}
+      {%- assign fourth_level_array = '' -%}
+
+      {%- for first_level_link in linklists['main-menu'].links -%}
+        {%- assign second_level_list_handle = first_level_link.title
+          | handleize
+        -%}
+        {%- assign second_level_list_url = first_level_link.url -%}
+
+        {%- if first_level_link.active -%}
+          {%- assign second_level_filter_list = second_level_list_handle -%}
+          {%- assign second_level_filter_url = second_level_list_url -%}
+          {%- assign second_level_active = true -%}
+          {%- break -%}
+        {%- endif -%}
+
+        {%- if menus[second_level_list_handle].links != blank -%}
+          {%- for second_level_link in menus[second_level_list_handle].links -%}
+            {%- assign third_level_list_handle = second_level_link.title
+              | handleize
+            -%}
+            {%- assign third_level_list_url = second_level_link.url -%}
+
+            {%- if second_level_link.active -%}
+              {%- assign second_level_filter_list = second_level_list_handle -%}
+              {%- assign third_level_filter_list = third_level_list_handle -%}
+              {%- assign second_level_filter_url = second_level_list_url -%}
+              {%- assign third_level_filter_url = third_level_list_url -%}
+              {%- assign third_level_active = true -%}
+              {%- assign third_level_array = third_level_array
+                | append: third_level_list_handle
+                | append: ','
+              -%}
+              {%- break -%}
+            {%- endif -%}
+
+            {%- if menus[third_level_list_handle].links != blank -%}
+              {%- for third_level_link in menus[third_level_list_handle].links -%}
+                {%- assign fourth_level_list_handle = third_level_link.title
+                  | handleize
+                -%}
+
+                {%- if third_level_link.active -%}
+                  {%- assign second_level_filter_list = second_level_list_handle -%}
+                  {%- assign third_level_filter_list = third_level_list_handle -%}
+                  {%- assign fourth_level_filter_list = fourth_level_list_handle -%}
+                  {%- assign second_level_filter_url = second_level_list_url -%}
+                  {%- assign third_level_filter_url = third_level_list_url -%}
+                  {%- assign fourth_level_array = fourth_level_array
+                    | append: fourth_level_list_handle
+                    | append: ','
+                  -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- assign third_level_size = third_level_array | split: ',' | size -%}
+      {%- assign fourth_level_size = fourth_level_array | split: ',' | size -%}
+
+      {% if second_level_active %}
+        {%- assign third_level_filter_list = '' -%}
+        <span>{{ collection.title }}</span>
+      {% elsif third_level_size >= 2 or fourth_level_size >= 2 %}
+        <span>{{ collection.title }}</span>
+      {% else %}
+        <a href='{{ second_level_filter_url }}'>
+          {{ second_level_filter_list | replace: '-', ' ' | capitalize }}
+        </a>
+        {% if third_level_filter_list != blank and third_level_active %}
+          {% render 'breadcrumb-delimiter' %}
+          <span>{{ collection.title }}</span>
+        {% else %}
+          {% render 'breadcrumb-delimiter' %}
+          <a href='{{ third_level_filter_url }}'>
+            {{ third_level_filter_list | replace: '-', ' ' | capitalize }}
+          </a>
+          {% render 'breadcrumb-delimiter' %}
+          <span>{{ collection.title }}</span>
+        {% endif %}
+      {% endif %}
+    {% elsif template == 'blog' %}
+      {% render 'breadcrumb-delimiter' %}
+      {% if current_tags %}
+        {{ blog.title | link_to: blog.url }}
+        {% render 'breadcrumb-delimiter' %}
+        <span>{{ current_tags | join: ' + ' }} </span>
+      {% else %}
+        <span>{{ blog.title }} </span>
+      {% endif %}
+    {% elsif template == 'article' %}
+      {% render 'breadcrumb-delimiter' %}
+      {{ blog.title | link_to: blog.url }}
+      {% render 'breadcrumb-delimiter' %}
+      <span>{{ article.title }} </span>
+    {% else %}
+      {% render 'breadcrumb-delimiter' %}
+      <span>{{ page_title }} </span>
+    {% endif %}
+  </nav>
+{% endunless %}

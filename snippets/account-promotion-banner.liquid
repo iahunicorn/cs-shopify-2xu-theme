@@ -1,0 +1,65 @@
+
+
+{% comment %} 
+
+	Params:
+		settings; section.settings
+
+	Type:
+		title: string
+		image_desktop: image
+		image_mobile: image
+
+
+ {% endcomment %}
+
+<div class="account-promo-background">
+	{% comment %} {% if settings.image_mobile != blank %}
+		<a href="{{ section.settings.link_banner }}">
+
+		</a>
+	{% endif %} {% endcomment %}
+	{% if settings.image_desktop != blank %}
+			<a href="{{ section.settings.link_banner }}">
+				<picture>
+					<source
+						srcSet="{{ settings.image_desktop | img_url: 'master' }}"
+						media="(min-width: 1000px)"
+					>
+					<img {% if settings.image_mobile.presentation.focal_point %}style="object-position:{{ settings.image_mobile.presentation.focal_point }};"{% endif %} src="{{ settings.image_mobile | img_url: '750x', scale: 2 }}" />
+				</picture>
+
+			</a>
+	{% endif %}
+</div>
+
+
+{% comment %} Dev notes -- REMOVE THESE LATER {% endcomment %}
+
+
+{% comment %} All css variables are to be moved to a single variables.css.liquid file which is called in theme liquid. This file exists{% endcomment %}
+
+ {% comment %} 
+	Images
+	
+	Consider an image component for a reliable experience. use existing theme resources if available before building or adding a fallback. 
+
+	consider the example in text-with-image.liquid (below)
+
+
+
+
+	 <div class="FeatureText__ImageWrapper">
+        {%- capture supported_sizes -%}{%- render 'image-size', sizes: '400,600,700,800,900,1000,1200', image: section.settings.image -%}{%- endcapture -%}
+
+        <div class="AspectRatio" style="max-width: {{ section.settings.image.width }}px; --aspect-ratio: {{ section.settings.image.aspect_ratio }}">
+          {%- assign image_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          <img class="Image--lazyLoad Image--slide{{ section.settings.image_position | capitalize }}" data-src="{{ image_url }}" data-expand="-200" data-widths="[{{ supported_sizes }}]" data-sizes="auto" alt="{{ section.settings.image.alt | escape }}">
+
+          <noscript>
+            <img src="{{ section.settings.image | img_url: '800x' }}" alt="{{ section.settings.image.alt | escape }}">
+          </noscript>
+        </div>
+      </div>
+ 
+  {% endcomment %}

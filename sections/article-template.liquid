@@ -1,0 +1,461 @@
+{%- assign share_url = shop.url | append: article.url -%}
+{%- assign twitter_text = article.title -%}
+{%- assign pinterest_description = article.description | strip_html | truncatewords: 15 | url_param_escape -%}
+{%- assign pinterest_image = article.image | img_url: '750x' | prepend: 'https:' -%}
+
+<article class="Article" data-section-id="{{ section.id }}" data-section-type="article">
+  <aside class="ArticleToolbar hidden-phone">
+    <div class="ArticleToolbar__Left">
+      <span class="Heading Text--subdued u-h8 hidden-tablet">{{ 'blog.article.now_reading' | t }}</span>
+      <span class="ArticleToolbar__ArticleTitle Heading u-h7">{{ article.title }}</span>
+    </div>
+
+    <div class="ArticleToolbar__Right">
+      {%- if section.settings.show_share_buttons -%}
+        <div class="ArticleToolbar__ShareList">
+          <span class="ArticleToolbar__ShareLabel Heading Text--subdued u-h8">{{ 'blog.article.share' | t }}</span>
+
+          <div class="HorizontalList">
+            <a class="HorizontalList__Item Text--subdued Link" href="https://www.facebook.com/sharer.php?u={{ share_url }}" target="_blank" rel="noopener">{%- render 'icon' with 'facebook' -%}</a>
+            <a class="HorizontalList__Item Text--subdued Link" href="https://twitter.com/share?{% if twitter_text != blank %}text={{twitter_text}}&{% endif %}url={{ share_url }}" target="_blank" rel="noopener">{%- render 'icon' with 'twitter' -%}</a>
+            <a class="HorizontalList__Item Text--subdued Link" href="https://pinterest.com/pin/create/button/?url={{ share_url }}{% if pinterest_image != blank %}&media={{ pinterest_image }}{% endif %}&description={{ pinterest_description }}" target="_blank" rel="noopener">{%- render 'icon' with 'pinterest' -%}</a>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if blog.next_article or blog.previous_article -%}
+        <div class="ArticleToolbar__Nav">
+          {%- if blog.next_article -%}
+            <a href="{{ blog.next_article }}" class="ArticleToolbar__NavItem ArticleToolbar__NavItem--next Heading Text--subdued Link u-h8">{% render 'icon' with 'select-arrow-left' %} {{ 'blog.article.previous' | t }}</a>
+          {%- endif -%}
+
+          {%- if blog.previous_article and blog.next_article -%}
+            <span class="ArticleToolbar__NavItemSeparator"></span>
+          {%- endif -%}
+
+          {%- if blog.previous_article -%}
+            <a href="{{ blog.previous_article }}" class="ArticleToolbar__NavItem ArticleToolbar__NavItem--prev Heading Text--subdued Link u-h8">{{ 'blog.article.next' | t }} {% render 'icon' with 'select-arrow-right' %}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </aside>
+
+  {%- if article.image and section.settings.show_article_image -%}
+    <div class="Article__ImageWrapper" style="background-image: url({{ article.image | img_url: 'master' }})">
+      <div class="Article__Image Image--lazyLoad Image--fadeIn"
+           data-optimumx="1.4"
+           data-bgset="{{ article.image | img_url: '400x' }} 400w, {{ article.image | img_url: '600x' }} 600w, {{ article.image | img_url: '800x' }} 800w, {{ article.image | img_url: '1200x' }} 1200w, {{ article.image | img_url: '1400x' }} 1400w, {{ article.image | img_url: '1600x' }} 1600w">
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="Article__Wrapper">
+    <div class="Article__Content">
+      <header class="Article__Header">
+        {%- capture article_meta -%}
+          {%- if section.settings.show_date -%}
+            <span class="Article__MetaItem">{{ article.published_at | date: '%b %d, %Y' }}</span>
+          {%- endif -%}
+
+          {%- if section.settings.show_category and article.tags != empty -%}
+            <span class="Article__MetaItem">{{ article.tags.first }}</span>
+          {%- endif -%}
+        {%- endcapture -%}
+
+        {%- if article_meta != blank -%}
+          <div class="Article__Meta Heading Text--subdued u-h6">
+            {{- article_meta -}}
+          </div>
+        {%- endif -%}
+
+        <h1 class="Article__Title Heading u-h1">{{ article.title }}</h1>
+      </header>
+
+      <div class="Article__Body Rte">
+        {{ article.content }}
+      </div>
+
+      {%- capture article_footer -%}
+        {%- if section.settings.show_author -%}
+          <span class="Article__Author Heading Text--subdued u-h6">{{ 'blogs.article.written_by' | t: author: article.author }}</span>
+        {%- endif -%}
+
+        {%- if section.settings.show_share_buttons -%}
+          <div class="Article__ShareButtons ShareButtons">
+            <a class="ShareButtons__Item ShareButtons__Item--facebook" href="https://www.facebook.com/sharer.php?u={{ share_url }}" target="_blank" rel="noopener">{%- render 'icon' with 'facebook' -%}</a>
+            <a class="ShareButtons__Item ShareButtons__Item--twitter" href="https://twitter.com/share?{% if twitter_text != blank %}text={{twitter_text}}&{% endif %}url={{ share_url }}" target="_blank" rel="noopener">{%- render 'icon' with 'twitter' -%}</a>
+            <a class="ShareButtons__Item ShareButtons__Item--pinterest" href="https://pinterest.com/pin/create/button/?url={{ share_url }}{% if pinterest_image != blank %}&media={{ pinterest_image }}{% endif %}&description={{ pinterest_description }}" target="_blank" rel="noopener">{%- render 'icon' with 'pinterest' -%}</a>
+          </div>
+        {%- endif -%}
+      {%- endcapture -%}
+
+      {%- if article_footer != blank -%}
+        <footer class="Article__Footer">
+          {{ article_footer }}
+        </footer>
+      {%- endif -%}
+    </div>
+
+    {%- if blog.comments_enabled? -%}
+      {%- if article.comments_count > 0 -%}
+        <div class="Article__Comments">
+          <span class="Anchor" id="comments"></span>
+
+          <h2 class="Heading u-h1">{{ 'blogs.article.comments_count' | t: count: article.comments_count }}</h2>
+
+          <div class="Article__CommentList">
+            {%- paginate article.comments by 25 -%}
+              {%- for comment in article.comments -%}
+                <div class="ArticleComment">
+                  <div class="ArticleComment__Body Rte">
+                    {{ comment.content }}
+                  </div>
+
+                  <div class="ArticleComment__Meta Heading Text--subdued u-h8">
+                    <span class="ArticleComment__Author">{{ comment.author }}</span>
+                    <span class="ArticleComment__Date">{{ comment.created_at | date: format: 'month_day_year' }}</span>
+                  </div>
+                </div>
+              {%- endfor -%}
+
+              {% render 'pagination', paginate: paginate, hash: '#comments' %}
+            {%- endpaginate -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      <div class="Article__CommentFormWrapper">
+        {% if article.comments_count == 0 %}
+          <span class="Anchor" id="comments"></span>
+        {%- endif -%}
+
+        <span class="Anchor" id="comment_form"></span>
+
+        <h2 class="Heading u-h1">{{ 'blog.comments.form_title' | t }}</h2>
+
+        {%- form 'new_comment', article, class: 'Article__CommentForm Form', id: '' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="Form__Alert Alert Alert--success">
+              {%- if blog.moderated? -%}
+                {{- 'blog.comments.success_moderated' | t -}}
+              {%- else -%}
+                {{- 'blog.comments.success' | t -}}
+              {%- endif -%}
+            </p>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+            <div class="Form__Alert Alert Alert--error">
+              <ul class="Alert__ErrorList">
+                {%- for field in form.errors -%}
+                  {%- if field == 'form' -%}
+                    <li class="Alert__ErrorItem">{{ form.errors.messages[field] }}</li>
+                  {%- else -%}
+                    <li class="Alert__ErrorItem"><strong>{{ form.errors.translated_fields[field] }}</strong> {{ form.errors.messages[field] }}</li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div class="Form__Group">
+            <div class="Form__Item">
+              <input type="text" class="Form__Input" name="comment[author]" placeholder="{{ 'blog.comments.name_placeholder' | t }}" aria-label="{{ 'blog.comments.name_placeholder' | t }}" value="{{ form.author | escape | default: customer.name }}" required="required">
+              <label class="Form__FloatingLabel">{{ 'blog.comments.name_placeholder' | t }}</label>
+            </div>
+
+            <div class="Form__Item">
+              <input type="email" class="Form__Input" name="comment[email]" placeholder="{{ 'blog.comments.email_placeholder' | t }}" aria-label="{{ 'blog.comments.email_placeholder' | t }}" value="{{ form.email | escape | default: customer.email }}" required="required">
+              <label class="Form__FloatingLabel">{{ 'blog.comments.email_placeholder' | t }}</label>
+            </div>
+          </div>
+
+          <div class="Form__Item">
+            <textarea name="comment[body]" rows="6" class="Form__Textarea" placeholder="{{ 'blog.comments.comment_placeholder' | t }}" aria-label="{{ 'blog.comments.comment_placeholder' | t }}" required="required">
+              {{- form.body -}}
+            </textarea>
+
+            <label class="Form__FloatingLabel">{{ 'blog.comments.comment_placeholder' | t }}</label>
+          </div>
+
+          {%- if blog.moderated? -%}
+            <p class="Form__Hint">{{ 'blog.comments.approval_notice' | t }}</p>
+          {%- endif -%}
+
+          <button type="submit" class="Form__Submit Button Button--primary">{{ 'blog.comments.submit' | t }}</button>
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if blog.next_article or blog.previous_article -%}
+    <aside class="ArticleNav">
+      <div class="Container Container--narrow">
+        <div class="Grid Grid--m Grid--center">
+          {%- if blog.next_article -%}
+            <div class="Grid__Cell 1/2--tablet-and-up">
+              {%- render 'article-item', article: blog.next_article -%}
+            </div>
+          {%- elsif blog.articles_count > 3 -%}
+            <div class="Grid__Cell 1/2--tablet-and-up">
+              {%- render 'article-item', article: blog.articles.last -%}
+            </div>
+          {%- endif -%}
+
+          {%- if blog.previous_article -%}
+            <div class="Grid__Cell 1/2--tablet-and-up">
+              {%- render 'article-item', article: blog.previous_article -%}
+            </div>
+          {%- elsif blog.articles_count > 3 -%}
+            <div class="Grid__Cell 1/2--tablet-and-up">
+              {%- render 'article-item', article: blog.articles.first -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </aside>
+  {%- endif -%}
+</article>
+
+{% schema %}
+{
+  "name": "Blog post page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_article_image",
+      "label": "Show article image",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show article date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_category",
+      "label": "Show article category",
+      "info": "The first article's tag is used as the main category.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share_buttons",
+      "label": "Show share buttons",
+      "default": true
+    }
+  ],
+  "presets": [
+  {
+    "name": "shop-now"
+  }
+]
+}
+{% endschema %}
+
+<style>
+  /*! CSS Used from: https://cdn.shopify.com/s/files/1/0518/4087/6699/t/231/assets/theme.css?v=162209299165979781391664237723 */
+*,*:before,*:after{box-sizing:border-box!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+article,aside,footer,header{display:block;}
+:active{outline:none;}
+a{color:inherit;background-color:transparent;text-decoration:none;cursor:pointer;}
+a:active,a:hover{outline:0;}
+h1,h2,h3{margin-top:0;font-size:inherit;font-weight:inherit;}
+h1:last-child,h2:last-child{margin-bottom:0;}
+img{max-width:100%;height:auto;border-style:none;vertical-align:top;--aspect-ratio:attr(width) / attr(height);}
+svg:not(:root){overflow:hidden;}
+.Grid{display:block;list-style:none;padding:0;margin:0 0 0 -24px;font-size:0;}
+.Grid__Cell{box-sizing:border-box;display:inline-block;width:100%;margin:0;vertical-align:top;font-size:1rem;}
+.Grid--center{text-align:center;}
+.Grid--center>.Grid__Cell{text-align:left;}
+.Grid--m{margin-left:-30px;}
+.Grid--m>.Grid__Cell{padding-left:30px;}
+@media screen and (min-width: 1140px){
+.Grid--m{margin-left:-60px;}
+.Grid--m>.Grid__Cell{padding-left:60px;}
+}
+@media screen and (max-width: 640px){
+.hidden-phone{display:none!important;}
+}
+@media screen and (min-width: 641px) and (max-width: 1007px){
+.hidden-tablet{display:none!important;}
+}
+@media screen and (min-width: 641px){
+.\31\/2--tablet-and-up{width:50%;}
+}
+.Container{margin:0 auto;padding:0 24px;}
+.Container--narrow{max-width:1420px;}
+@media screen and (min-width: 641px){
+.Container{padding:0 50px;}
+}
+@media screen and (min-width: 1140px){
+.Container{padding:0 80px;}
+}
+.Link{transition:color .2s ease-in-out,opacity .2s ease-in-out;}
+.Heading{font-family:var(--heading-font-family);font-weight:var(--heading-font-weight);font-style:var(--heading-font-style);color:var(--heading-color);transition:color .2s ease-in-out;}
+.Text--subdued{color:var(--text-color-light);}
+.Icon{display:inline-block;height:1em;width:1em;fill:currentColor;vertical-align:middle;stroke-width:1px;background:none;pointer-events:none;}
+.features--heading-large .u-h1{font-size:24px;}
+.features--heading-large .u-h2{font-size:22px;}
+.features--heading-large .Rte h3{font-size:20px;}
+.features--heading-large .u-h7,.features--heading-large .u-h8{font-size:13px;}
+@media screen and (min-width: 641px){
+.features--heading-large .u-h1{font-size:24px;}
+.features--heading-large .u-h2{font-size:22px;}
+.features--heading-large .Rte h3{font-size:20px;}
+.features--heading-large .u-h7,.features--heading-large .u-h8{font-size:13px;}
+}
+.HorizontalList{list-style:none;margin:-6px -8px;}
+.HorizontalList__Item{display:inline-block;margin:6px 8px;}
+.Image--fadeIn{opacity:0;transition:opacity .3s ease;}
+.Image--lazyLoaded.Image--fadeIn{opacity:1;}
+.AspectRatio{position:relative;margin-left:auto;margin-right:auto;}
+.AspectRatio:before{content:"";display:block;}
+.AspectRatio>img{max-height:100%;max-width:100%;}
+.AspectRatio--withFallback>img{position:absolute;top:0;left:0;height:100%;width:100%;}
+.Image--lazyLoad[data-sizes=auto]{width:100%;}
+.VideoWrapper{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;}
+.VideoWrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;}
+
+.ShareButtons {
+  display: table;
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.ShareButtons__Item {
+  display: table-cell;
+  width: 60px;
+  height: 45px;
+  min-height: 45px;
+  color: var(--text-color-light);
+  text-align: center;
+  vertical-align: middle;
+  background: var(--background);
+  border: 1px solid var(--border-color);
+  outline: 1px solid transparent;
+  outline-offset: -1px;
+  transition: all 0.2s ease-in-out;
+}
+
+.ShareButtons__Item svg {
+  height: 18px;
+  width: 18px;
+  vertical-align: text-bottom;
+}
+
+.ShareButtons__Item--facebook:hover,
+.no-supports-hover .ShareButtons__Item--facebook {
+  background: #4469af;
+  color: #ffffff;
+  border-color: #4469af;
+  outline: 1.5px solid #4469af;
+}
+
+.ShareButtons__Item--pinterest:hover,
+.no-supports-hover .ShareButtons__Item--pinterest {
+  background: #c8232c;
+  color: #ffffff;
+  border-color: #c8232c;
+  outline: 1.5px solid #c8232c;
+}
+
+.ShareButtons__Item--twitter:hover,
+.no-supports-hover .ShareButtons__Item--twitter {
+  background: #00aced;
+  color: #ffffff;
+  border-color: #00aced;
+  outline: 1.5px solid #00aced;
+}
+
+@media screen and (min-width: 641px) {
+  .ShareButtons {
+    width: auto;
+  }
+}
+
+
+.Rte{word-break:break-word;}
+.Rte *{font-family:var(--text-font-family)!important;}
+.Rte:after{content:"";display:block;clear:both;}
+.Rte iframe{max-width:100%;}
+.Rte img{display:block;margin:0 auto;}
+.Rte img,.Rte blockquote,.Rte .VideoWrapper{margin-top:2.4em;margin-bottom:2.4em;}
+.Rte h3{font-family:var(--heading-font-family);font-weight:var(--heading-font-weight);font-style:var(--heading-font-style);color:var(--heading-color);transition:color .2s ease-in-out;}
+.Rte h3{margin:2.2em 0 1.2em;}
+.Rte blockquote{margin-left:0;padding:6px 0 6px 40px;font-size:1.15em;line-height:1.75;border-left:3px solid rgba(var(--border-color-rgb),.6);}
+br+br{display:none;}
+@media screen and (min-width: 1008px){
+.Rte img,.Rte .VideoWrapper{margin-top:3em;margin-bottom:3em;}
+.Rte blockquote{margin-left:40px;}
+}
+.Article__ImageWrapper{overflow:hidden;height:215px;}
+.Article__Image{position:relative;height:100%;width:100%;background-size:cover;background-position:center;}
+.Article__Wrapper{position:relative;max-width:620px;margin:0 auto 90px;padding:24px 24px 0;background:var(--background);}
+.Article__Header{margin-bottom:35px;}
+.Article__Footer{margin-top:45px;}
+.Article__ShareButtons{margin-top:42px;}
+@media screen and (min-width: 641px){
+.Article__Wrapper{margin-bottom:120px;padding:40px 50px 0;}
+.Article__ImageWrapper{height:335px;}
+.Article__Header{margin-bottom:45px;}
+.Article__Footer{display:flex;justify-content:space-between;align-items:center;margin-top:65px;}
+.Article__ShareButtons{margin-top:0;}
+}
+@media screen and (min-width: 1008px){
+.Article__Wrapper{max-width:780px;}
+.Article__ImageWrapper{height:450px;}
+}
+@media screen and (min-width: 1140px){
+.Article__ImageWrapper{height:600px;}
+}
+.ArticleToolbar{position:fixed;display:flex;top:0;width:100%;align-items:center;justify-content:space-between;padding:15px 30px 16px;background:var(--secondary-elements-background);color:var(--secondary-elements-text-color);z-index:2;pointer-events:none;transform:translateY(-100%);opacity:0;will-change:transform,opacity;transition:opacity .2s ease-in-out,transform .2s ease-in-out;}
+.ArticleToolbar .Link:hover{color:var(--secondary-elements-text-color);}
+.ArticleToolbar .Text--subdued{color:var(--secondary-elements-text-color-light);}
+.ArticleToolbar__ArticleTitle{position:relative;display:inline-flex;max-width:285px;width:285px;overflow:hidden;white-space:nowrap;text-overflow:clip;color:var(--secondary-elements-text-color);}
+.ArticleToolbar__ShareList{display:inline-block;}
+.ArticleToolbar__ShareList .HorizontalList{display:inline-block;margin-left:20px;}
+.ArticleToolbar__Nav{display:inline-block;margin-left:50px;}
+.ArticleToolbar__Nav svg{color:var(--secondary-elements-text-color);}
+.ArticleToolbar__NavItemSeparator{display:inline-block;position:relative;content:"";width:1px;height:12px;margin:0 18px;background:rgba(var(--secondary-elements-text-color-rgb),.8);vertical-align:middle;}
+.ArticleToolbar__NavItem svg{vertical-align:-1px;}
+.ArticleToolbar__NavItem--prev svg{margin-right:6px;}
+.ArticleToolbar__NavItem--next svg{margin-left:6px;}
+@media screen and (min-width: 1008px){
+.ArticleToolbar__ArticleTitle{max-width:400px;width:400px;}
+}
+@media screen and (min-width: 1140px){
+.ArticleToolbar{padding-left:50px;padding-right:50px;}
+.ArticleToolbar__ArticleTitle{max-width:550px;width:550px;}
+.ArticleToolbar__Nav{margin-left:100px;}
+}
+.ArticleNav{padding:75px 0;background:var(--secondary-elements-background);color:var(--secondary-elements-text-color);}
+.ArticleNav .Heading{color:inherit;}
+@media screen and (max-width: 640px){
+.ArticleNav .Grid__Cell+.Grid__Cell{margin-top:50px;}
+}
+@media screen and (min-width: 641px){
+.ArticleNav{padding:140px 0;}
+}
+.ArticleItem__ImageWrapper{display:block;margin-bottom:22px;background-size:cover;overflow:hidden;}
+.ArticleItem__Image{display:block;-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center;font-family:"object-fit: cover; object-position: center;";}
+.ArticleItem__Content{margin:0 8px;}
+@media screen and (min-width: 641px){
+.ArticleItem__Content{margin:0 18px;}
+}
+
+.u-h1 {
+  font-weight: 400;
+  font-size: 24px;
+}
+</style>

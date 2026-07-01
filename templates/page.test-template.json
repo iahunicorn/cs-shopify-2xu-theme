@@ -1,0 +1,155 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page",
+      "settings": {}
+    },
+    "rich_text_NUFMKG": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_LTc9wK": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Our affiliates program was designed to reward those who are inspiring their community.</p>",
+            "heading_size": "h1"
+          }
+        },
+        "heading_HAKNeK": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>At 2XU our mission is to create a fitter and healthier world. You can help us by sharing the 2XU gear you love with your audience.</p>",
+            "heading_size": "h1"
+          }
+        },
+        "heading_a46Arx": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>You will earn commission through your unique links. Sounds great? Click below to apply.</p>",
+            "heading_size": "h1"
+          }
+        },
+        "button_bBHBAW": {
+          "type": "button",
+          "settings": {
+            "button_label": "Join 2XU Affiliates Program",
+            "button_link": "https://www.surveymonkey.com/r/ZXDB3BY",
+            "button_style_secondary": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_LTc9wK",
+        "heading_HAKNeK",
+        "heading_a46Arx",
+        "button_bBHBAW"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 0,
+        "padding_bottom": 40
+      }
+    },
+    "image_banner_HzVxz4": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_qaPrwt": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "",
+            "heading_size": "h2"
+          }
+        },
+        "text_y4yatd": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text_style": "body"
+          }
+        },
+        "buttons_Kf3gHw": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "Button label",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Button label",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_qaPrwt",
+        "text_y4yatd",
+        "buttons_Kf3gHw"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/DSC06082.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": false
+      }
+    },
+    "rich_text_DTn7V6": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_kBdpHx": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Have a question? Reach out to us at:</p>",
+            "heading_size": "h1"
+          }
+        },
+        "text_C9rCKT": {
+          "type": "text",
+          "settings": {
+            "text": "<p><a href=\"mailto:affiliates@2xu.com\" title=\"mailto:affiliates@2xu.com\">affiliates@2xu.com</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_kBdpHx",
+        "text_C9rCKT"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_NUFMKG",
+    "image_banner_HzVxz4",
+    "rich_text_DTn7V6"
+  ]
+}

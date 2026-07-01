@@ -1,0 +1,98 @@
+{% comment %}
+  Hreflang Implementation using Localisation Country Metaobjects
+  Add this to your theme.liquid file in the <head> section
+{% endcomment %}
+
+{% if settings.countries != blank %}
+  {% assign path_parts = canonical_url
+    | remove: 'https://'
+    | remove: 'http://'
+    | split: '/'
+  %}
+  {% assign current_path = '' %}
+  {% for part in path_parts offset: 1 %}
+    {% unless forloop.first %}
+      {% assign current_path = current_path | append: '/' %}
+    {% endunless %}
+    {% assign current_path = current_path | append: part %}
+  {% endfor %}
+  {% if current_path != blank %}
+    {% assign current_path = '/' | append: current_path %}
+  {% endif %}
+  {% comment %} Check if current path should be excluded {% endcomment %}
+  {% assign include_hreflang = true %}
+  {% if settings.hreflang_excluded_paths != blank %}
+    {% assign excluded_paths = settings.hreflang_excluded_paths | split: ',' %}
+    {% for excluded_path in excluded_paths %}
+      {% assign excluded_path = excluded_path | strip %}
+      {% if current_path contains excluded_path %}
+        {% assign include_hreflang = false %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% if include_hreflang %}
+    {% comment %} Add x-default first {% endcomment %}
+    {% if settings.hreflang_default_country != blank %}
+      <link
+        rel='alternate'
+        href='{{ settings.hreflang_default_country.link }}{{ current_path }}'
+        hreflang='x-default'
+      >
+    {% endif %}
+    {% comment %} Add regional hreflang tags {% endcomment %}
+    {% for country in settings.countries %}
+      {% if country.include_in_hreflang == true
+        and country.language_iso_code != blank
+        and country.iso_code != blank
+        and country.link != blank
+      %}
+        {% assign hreflang_code = country.language_iso_code
+          | downcase
+          | append: '-'
+          | append: country.iso_code
+          | downcase
+        %}
+        <link
+          rel='alternate'
+          href='{{ country.link }}{{ current_path }}'
+          hreflang='{{ hreflang_code }}'
+        >
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endif %}
+{% comment %}
+  <script>
+    console.log('hreflang_countries', {{ hreflang_countries | json }});
+    console.log('hreflang current_path', {{ current_path }});
+    console.log('include_hreflang', {{ include_hreflang | json }});
+    console.log('hreflang settings.countries', {{ settings.countries | json }});
+    console.log('hreflang country_handle', {{ country_handle }});
+  </script>
+{% endcomment %}
+{% comment %}
+  {%- assign clean_canonical_path = '' -%}
+  {%- if canonical_path == '/' -%}
+    {%- assign clean_canonical_path = '' -%}
+  {%- else -%}
+    {%- assign clean_canonical_path = canonical_path -%}
+  {%- endif -%}
+
+  {%- assign default_domain = '' -%}
+  {%- for i in (0..regionZeroIndexSize) -%}
+    {%- assign region_domain = allRegionDomains[i] -%}
+    {%- assign region_countries = allRegionCountries[i] | split: ',' -%}
+    {%- assign hreflang_url = '' -%}
+    {%- assign hreflang_url = region_domain | append: clean_canonical_path -%}
+    {%- if allRegionDefaults[i] == 'true' -%}
+      {%- assign default_domain = region_domain -%}
+    {%- endif -%}
+    {%- for country in region_countries -%}
+      <link rel="alternate" hreflang="en-{{ country }}" href="{{ hreflang_url }}" />
+    {%- endfor -%}
+  {%- endfor -%}
+
+  <link rel="alternate" hreflang="en" href="{{ default_domain | append: canonical_path }}" />
+  <link rel="alternate" hreflang="x-default" href="{{ default_domain | append: canonical_path }}" />
+{% endcomment %}
