@@ -1,10 +1,6 @@
 <!doctype html>
 <html class='no-js' lang='{{ request.locale.iso_code }}'>
   <head>
-    {% if shop.permanent_domain == '2xu-australia.myshopify.com' %}
-      <script src="https://cdn.logr-in.com/LogRocket.min.js" crossorigin="anonymous"></script>
-      <script>window.LogRocket && window.LogRocket.init('m1ds3j/2xu');</script>
-    {% endif %}
     {% if shop.permanent_domain == 'uk-2xu.myshopify.com' %}
       {% render 'pandectes-rules' %}
     {% endif %}
@@ -15,15 +11,20 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta
       name='viewport'
-      content='width=device-width,initial-scale=1,maximum-scale=1'
+      content='width=device-width,initial-scale=1'
     >
     <meta name='theme-color' content=''>
-    <script
-      type='text/javascript'
-      src='https://preeziecdn.azureedge.net/production/preguide.min.js'
-    ></script>
+    {% if shop.permanent_domain == '2xu-australia.myshopify.com' or shop.permanent_domain == '2xu-nz.myshopify.com' %}
+        <script
+        type='text/javascript'
+        src='https://preeziecdn.azureedge.net/production/preguide.min.js'
+        ></script>
+    {% endif %}
+
     <link rel='canonical' href='{{ canonical_url }}'>
     <link rel='preconnect' href='https://cdn.shopify.com' crossorigin>
+    <link rel='preconnect' href='https://apilb.gotolstoy.com' crossorigin>
+    <link rel='preconnect' href='https://preeziecdn.azureedge.net' crossorigin>
     {%- if settings.favicon != blank -%}
       <link
         rel='icon'
@@ -55,12 +56,9 @@
 
     {% render 'meta-tags' %}
     {% if shop.permanent_domain == '2xu-australia.myshopify.com' %}
-      {% render 'VWO-script' %}
+
       {% comment %} Zipy g4a {% endcomment %}
       {% render 'zipy-script' %}
-    {% endif %}
-    {% if shop.permanent_domain == '2xu-us.myshopify.com' %}
-      {% render 'VWO-script-US' %}
     {% endif %}
 
     <script src='{{ 'global.js' | asset_url }}' defer='defer'></script>
@@ -74,12 +72,6 @@
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'template-index.css' | asset_url | stylesheet_tag }}
     {{ 'section-card.css' | asset_url | stylesheet_tag }}
-    {% if request.page_type == 'collection'
-      or request.page_type == 'product'
-      or request.page_type == 'index'
-    %}
-      <link rel='stylesheet' href='{{ 'swatches.scss.css' | asset_url }}'>
-    {% endif %}
 
     {%- render 'theme-settings' -%}
 
@@ -333,30 +325,21 @@
       {% render 'ss-intellisuggest' %}
     {% endif %}
 
-    <div id='preezie-widget-div-id-popup'></div>
-    <script type='text/javascript'>
-      PREEZIE_GUIDE.render([
-        {
-          guideKey: 'EPO-ca00515d-67d8-4cfd-3cc5-08da540dcfdb',
-          version: '1.0.0',
-          renderTo: 'preezie-widget-div-id-popup',
-        },
-      ]);
-    </script>
-
-    {% include 'swymSnippet' %}
-    {% render 'forter-script' %}
-    {% include 'gorgias' %}
-    {%- section 'popular-collection' -%}
-    
-    {% if shop.permanent_domain == '2xu-us.myshopify.com' %}
-      <div id='vsscript_139369_643127'></div>
-      <script
-        async
-        type='text/javascript'
-        src='https://app.viralsweep.com/vsa-lightbox-e036c1-139369.js?sid=139369_643127'
-      ></script>
+    {% if shop.permanent_domain == '2xu-australia.myshopify.com' or shop.permanent_domain == '2xu-nz.myshopify.com' %}
+        <div id='preezie-widget-div-id-popup'></div>
+        <script type='text/javascript'>
+        PREEZIE_GUIDE.render([
+            {
+            guideKey: 'EPO-ca00515d-67d8-4cfd-3cc5-08da540dcfdb',
+            version: '1.0.0',
+            renderTo: 'preezie-widget-div-id-popup',
+            },
+        ]);
+        </script>
     {% endif %}
+
+    {% render 'forter-script' %}
+    {%- section 'popular-collection' -%}
 
     
     {% if shop.permanent_domain == '2xu-us.myshopify.com' %}

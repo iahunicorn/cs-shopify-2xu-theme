@@ -1,0 +1,306 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "order": [
+    "fa_hero_EBCE8y",
+    "fa_product_reel_EhHJxr",
+    "fa_text_banner_rPwxta",
+    "rich_text_zUiNnU",
+    "fa_collection_grid_3JVyG6",
+    "fa_product_reel_XHB3hW",
+    "fa_hero_cP8PU3",
+    "fa_product_reel_EDgXfa",
+    "fa_text_banner_rUaU48",
+    "fa_collection_reel_HqwrEL",
+    "058c7247-17f8-444d-a937-4d1e734c128c",
+    "ss_custom_liquid_J8LpVD",
+    "hero_image_pgPRe9"
+  ],
+  "sections": {
+    "058c7247-17f8-444d-a937-4d1e734c128c": {
+      "disabled": true,
+      "settings": {
+        "custom_liquid": "<div id=\"preezie-widget-div-id-popup\"></div>\n    <script type=\"text/javascript\">\n        PREEZIE_GUIDE.render([\n                    {\n                        guideKey: 'EPO-ca00515d-67d8-4cfd-3cc5-08da540dcfdb',\n                        version: '1.0.0',\n                        renderTo: 'preezie-widget-div-id-popup'\n                    }\n                ]);\n    </script>",
+        "link": "",
+        "onClick": "PREEZIE_GUIDE.openPrzCtaGuide()",
+        "padding_bottom": 8,
+        "padding_top": 0
+      },
+      "type": "banner-liquid"
+    },
+    "fa_collection_grid_3JVyG6": {
+      "block_order": [
+        "collection_LTdn9d",
+        "collection_AN49Pz",
+        "collection_8cK8bt",
+        "collection_6PQApa"
+      ],
+      "blocks": {
+        "collection_6PQApa": {
+          "settings": {
+            "button_text": "Shop Now",
+            "collection": "compression",
+            "content_link": "shopify://collections/compression",
+            "image": "shopify://shop_images/2XU_SeasonalCampaign_Run_12_OUTFIT06_MENS_2115_77b8d1b7-b21c-4b04-bb3a-9433c2a36cab.webp",
+            "mobile_image": "shopify://shop_images/2XU_SeasonalCampaign_Run_12_OUTFIT06_MENS_2115_77b8d1b7-b21c-4b04-bb3a-9433c2a36cab.webp",
+            "title": "Compression Range"
+          },
+          "type": "collection"
+        },
+        "collection_8cK8bt": {
+          "settings": {
+            "button_text": "Shop Now",
+            "collection": "training",
+            "content_link": "shopify://collections/training",
+            "image": "shopify://shop_images/SeasonalCampaign_Digital_Website_HPTiles_670x314-1_3.webp",
+            "mobile_image": "shopify://shop_images/SeasonalCampaign_Digital_Website_HPTiles_670x314-1_3.webp",
+            "title": "Train Range"
+          },
+          "type": "collection"
+        },
+        "collection_AN49Pz": {
+          "settings": {
+            "button_text": "Shop Now",
+            "collection": "run",
+            "content_link": "shopify://collections/run",
+            "image": "shopify://shop_images/SeasonalCampaign_Digital_Website_HPTiles_670x314-1_7da15711-e3e7-4e55-98b1-0441718f72e4.webp",
+            "mobile_image": "shopify://shop_images/SeasonalCampaign_Digital_Website_HPTiles_670x314-1_7da15711-e3e7-4e55-98b1-0441718f72e4.webp",
+            "title": "Run Range"
+          },
+          "type": "collection"
+        },
+        "collection_LTdn9d": {
+          "settings": {
+            "button_text": "Shop Now",
+            "collection": "nature-bound-capsule",
+            "content_link": "shopify://collections/nature-bound-capsule",
+            "image": "shopify://shop_images/H1-26_Nature_Bound_Capsule_Desktop_Banner_2880x1606px_LaunchNo_Logo.jpg",
+            "mobile_image": "shopify://shop_images/H1-26_Nature_Bound_Capsule_Desktop_Banner_2880x1606px_LaunchNo_Logo.jpg",
+            "title": "New Run Collection"
+          },
+          "type": "collection"
+        }
+      },
+      "name": "F.A. Collection Grid",
+      "settings": {
+        "title": "Performance Gift Guide"
+      },
+      "type": "fa-collection-grid"
+    },
+    "fa_collection_reel_HqwrEL": {
+      "block_order": [
+        "collection_iY8DNN",
+        "collection_9FxzAJ",
+        "collection_MKmfbn"
+      ],
+      "blocks": {
+        "collection_9FxzAJ": {
+          "settings": {
+            "button_text": "",
+            "collection": "womens-aero",
+            "content_link": "",
+            "text_color": "#ffffff",
+            "title": ""
+          },
+          "type": "collection"
+        },
+        "collection_MKmfbn": {
+          "settings": {
+            "button_text": "",
+            "collection": "mens-aero-triathlon",
+            "content_link": "",
+            "text_color": "#ffffff",
+            "title": ""
+          },
+          "type": "collection"
+        },
+        "collection_iY8DNN": {
+          "settings": {
+            "button_text": "",
+            "collection": "",
+            "content_link": "shopify://collections/compression",
+            "text_color": "#ffffff",
+            "title": ""
+          },
+          "type": "collection"
+        }
+      },
+      "disabled": true,
+      "name": "F.A. Collection Reel",
+      "settings": {
+        "landscape": false,
+        "title": "Shop by Category"
+      },
+      "type": "fa-collection-reel"
+    },
+    "fa_hero_EBCE8y": {
+      "block_order": [
+        "slide_LRJdTc"
+      ],
+      "blocks": {
+        "slide_LRJdTc": {
+          "settings": {
+            "breadcrumb_text": "",
+            "button_1_link": "shopify://collections/destination-3000",
+            "button_1_text": "SHOP NOW",
+            "button_2_link": "",
+            "button_2_text": "",
+            "content_position": "left",
+            "heading": "",
+            "image": "shopify://shop_images/Destination3000_WebsiteAssets_WebHero_1440x803_ya1oui.jpg",
+            "mobile_image": "shopify://shop_images/Destination3000_WebsiteAssets_WebHeroMobile_391x540_872f6b65-57d7-4ad1-b6ba-721d6e22e4d4.jpg",
+            "mux_mobile_video": "",
+            "mux_video": "",
+            "subheading": ""
+          },
+          "type": "slide"
+        }
+      },
+      "name": "F.A. Hero",
+      "settings": {
+        "slide_duration": 0
+      },
+      "type": "fa-hero"
+    },
+    "fa_hero_cP8PU3": {
+      "block_order": [
+        "slide_TFVJpJ"
+      ],
+      "blocks": {
+        "slide_TFVJpJ": {
+          "settings": {
+            "breadcrumb_text": "",
+            "button_1_link": "shopify://collections/men-triathlon",
+            "button_1_text": "Shop Men's",
+            "button_2_link": "shopify://collections/women-triathlon",
+            "button_2_text": "Shop Women's",
+            "content_position": "centered",
+            "heading": "Triathlon Range",
+            "image": "shopify://shop_images/DESKTOP_BANNER_1440x803_71002805-c66e-44f2-867e-cafd62998587.webp",
+            "mobile_image": "shopify://shop_images/Mobile_Banner_397x424_1d5ef27b-5253-4ed5-baae-d401bd4c2b0a.jpg",
+            "mux_mobile_video": "",
+            "mux_video": "",
+            "subheading": ""
+          },
+          "type": "slide"
+        }
+      },
+      "name": "F.A. Hero",
+      "settings": {
+        "slide_duration": 5
+      },
+      "type": "fa-hero"
+    },
+    "fa_product_reel_EDgXfa": {
+      "name": "F.A. Product Reel",
+      "settings": {
+        "mens_collection": "men-triathlon",
+        "mens_collection_label": "Mens",
+        "product_limit": 20,
+        "title": "SHOP TRIATHLON",
+        "womens_collection": "women-triathlon",
+        "womens_collection_label": "Womens"
+      },
+      "type": "fa-product-reel"
+    },
+    "fa_product_reel_EhHJxr": {
+      "name": "F.A. Product Reel",
+      "settings": {
+        "mens_collection": "mens-destination-3000",
+        "mens_collection_label": "Men's New Arrival",
+        "product_limit": 8,
+        "title": "Just Landed: Destination 3000",
+        "womens_collection": "womens-destination-3000",
+        "womens_collection_label": "Women's New Arrival"
+      },
+      "type": "fa-product-reel"
+    },
+    "fa_product_reel_XHB3hW": {
+      "name": "F.A. Product Reel",
+      "settings": {
+        "mens_collection": "men-compression",
+        "mens_collection_label": "Mens",
+        "product_limit": 20,
+        "title": "SHOP BEST-SELLING COMPRESSION",
+        "womens_collection": "women-compression",
+        "womens_collection_label": "Womens"
+      },
+      "type": "fa-product-reel"
+    },
+    "fa_text_banner_rPwxta": {
+      "custom_css": [
+        "h2 {}"
+      ],
+      "disabled": true,
+      "name": "F.A. Text Banner",
+      "settings": {
+        "text": "<p>Performance Gift Guide</p>"
+      },
+      "type": "fa-text-banner"
+    },
+    "fa_text_banner_rUaU48": {
+      "name": "F.A. Text Banner",
+      "settings": {
+        "text": "<p>2xu is a world leading performance compression brand, built to perform at any level of fitness.</p><p>Australian founded and established in 2005. We are born from Tri and pronounced “Two times you”.</p><p>Prepare, Perform, Recover. This is 2XU. Human Performance. Multiplied.</p>"
+      },
+      "type": "fa-text-banner"
+    },
+    "hero_image_pgPRe9": {
+      "name": "hero image",
+      "settings": {
+        "link_hero_image": ""
+      },
+      "type": "hero-image"
+    },
+    "rich_text_zUiNnU": {
+      "block_order": [
+        "caption_6Pmtgk",
+        "caption_h8McDR"
+      ],
+      "blocks": {
+        "caption_6Pmtgk": {
+          "settings": {
+            "caption": "Performance Gift Guide",
+            "text_size": "large",
+            "text_style": "caption-with-letter-spacing"
+          },
+          "type": "caption"
+        },
+        "caption_h8McDR": {
+          "settings": {
+            "caption": "Up to 30% Off",
+            "text_size": "large",
+            "text_style": "caption-with-letter-spacing"
+          },
+          "type": "caption"
+        }
+      },
+      "disabled": true,
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "background-1",
+        "content_alignment": "center",
+        "desktop_content_position": "center",
+        "full_width": true,
+        "padding_bottom": 52,
+        "padding_top": 40
+      },
+      "type": "rich-text"
+    },
+    "ss_custom_liquid_J8LpVD": {
+      "disabled": true,
+      "settings": {
+        "liquid": "<script type=\"searchspring/personalized-recommendations\" profile=\"home-snap\">\n</script>",
+        "title": "SS Home"
+      },
+      "type": "ss-custom-liquid"
+    }
+  }
+}
