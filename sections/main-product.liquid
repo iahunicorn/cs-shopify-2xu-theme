@@ -286,7 +286,7 @@
                         <div id='stockinstore-wrapper'></div>
                       </div>
                     {% endif %}
-                    {% render 'flux-buy-buttons', block: block, product: product, show_size_guide_link: size_chart_page != empty %}
+                    {% render 'flux-buy-buttons', block: block, product: product, show_size_guide_link: size_chart_page %}
                   </div>
                   <div class='tw-flex lg:tw-px-2 tw-mt-0 lg:tw-w-5/6 lg:tw-max-w-lg lg:tw-self-end'>
                     <div class='tw-w-full tw-flex tw-justify-center tw-flex-col tw-gap-2'>
@@ -1518,3 +1518,15 @@
     width: 100%;
   }
 </style>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'flux-buy-buttons', block: block, product: product, show_size_guide_link:
+    size_chart_page != empty %}"
+  to: "{% render 'flux-buy-buttons', block: block, product: product, show_size_guide_link:
+    size_chart_page %}"
+  position: 11735..11837
+{% endcomment %}
